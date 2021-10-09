@@ -1,0 +1,210 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: consolas;
+}
+
+td {
+    padding-right: 100px;
+    padding-left: 100px;
+    padding-top: 50px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items:  center;
+    min-height: 100vh;
+
+}
+body .about1 {
+    position: relative !important;
+    border: 1px rgb(13, 17, 224);
+    padding: 12px;
+    height: 46px;
+    background-color: rgb(201, 37, 37);
+    color: #ccc;
+    border-radius: .3rem;
+    margin-left: -189px;
+    position: relative;
+    margin-right: 141px;
+    margin-bottom: -312px;
+}
+table {
+    position: relative;
+    
+}
+.img-bg {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: .7;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.circle {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    /* background: #ccc; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.logo1 {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: url(./../img/we/anh1.jpg);
+    background-size: cover;
+    border-radius: 50%;
+    filter: brightness(1.5) contrast(1.5); 
+}
+.logo2 {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: url(./../img/we/anh2.jpg);
+    background-size: cover;
+    border-radius: 50%;
+    filter: brightness(1.2) contrast(1.5); 
+}
+.logo3 {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: url(./../img/we/anh3.jpg);
+    background-size: cover;
+    border-radius: 50%;
+    filter: brightness(1.3) contrast(1.5); 
+}
+.logo4 {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: url(./../img/we/anh4.jpg);
+    background-size: cover;
+    border-radius: 50%;
+    filter: brightness(1.2) contrast(1.5); 
+}
+
+.text {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: rgb(13, 17, 224);
+    animation: rotateText 20s linear infinite;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0);
+}
+
+@keyframes rotateText
+{
+    0%
+    {
+        transform: rotate(360deg);
+    }
+    100%
+    {
+        transform: rotate(0deg);
+    }
+}
+
+.text span {
+    position: absolute;
+    left: 50%;
+    font-size: 1.2em;
+    transform-origin: 0 100px;
+
+}
+
+.text2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: rgb(13, 17, 224);
+    animation: rotateText2 20s linear infinite;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0);
+}
+
+@keyframes rotateText2
+{
+    0%
+    {
+        transform: rotate(360deg);
+    }
+    100%
+    {
+        transform: rotate(0deg);
+    }
+}
+
+.text2 span {
+    position: absolute;
+    left: 50%;
+    font-size: 1.2em;
+    transform-origin: 0 100px;
+
+}
+
+.text3 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: rgb(251, 6, 6);
+    animation: rotateText3 20s linear infinite;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0);
+}
+
+@keyframes rotateText3
+{
+    0%
+    {
+        transform: rotate(360deg);
+    }
+    100%
+    {
+        transform: rotate(0deg);
+    }
+}
+
+.text3 span {
+    position: absolute;
+    left: 50%;
+    font-size: 1.2em;
+    transform-origin: 0 100px;
+
+}
+
+/* 4 */
+.text4 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    color: rgb(251, 6, 6);
+    animation: rotateText4 20s linear infinite;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0);
+}
+
+@keyframes rotateText4
+{
+    0%
+    {
+        transform: rotate(360deg);
+    }
+    100%
+    {
+        transform: rotate(0deg);
+    }
+}
+
+.text4 span {
+    position: absolute;
+    left: 50%;
+    font-size: 1.2em;
+    transform-origin: 0 100px;
+
+}
