@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/we.css">
+</head>
+<body>
+    
+    <table>
+        <img class="img-bg" src="./img/we/phongcanh.jpg" alt="">
+        <tr>
+            <td>
+                <div class="circle">
+                    <div class="logo1">
+            
+                    </div>
+                    <div class="text">
+                        <p>Phan Thai - M Tam - Create UX/UI Designer - </p>
+                    </div>
+                </div>
+                <script>
+                    const text = document.querySelector('.text p');
+                    text.innerHTML = text.innerText.split("").map(
+                        (char, i) => 
+                        ` <span style="transform:rotate(${i * 8.8}deg)">${char}</span> `
+                    ).join("")
+                </script>
+            </td>
+            <td>
+                <div class="circle">
+                    <div class="logo2">
+            
+                    </div>
+                    <div class="text2">
+                        <p>Ba M ang - Programer - Functional - </p>
+                    </div>
+                </div>
+                <script>
+                    const text2 = document.querySelector('.text2 p');
+                    text2.innerHTML = text2.innerText.split("").map(
+                        (char, i) => 
+                        ` <span style="transform:rotate(${i * 10}deg)">${char}</span> `
+                    ).join("")
+                </script>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="circle">
+                    <div class="logo3">
+            
+                    </div>
+                    <div class="text3">
+                        <p>Yen Linh - Composer - Create The Creation - </p>
+                    </div>
+                </div>
+                <script>
+                    const text3 = document.querySelector('.text3 p');
+                    text3.innerHTML = text3.innerText.split("").map(
+                        (char, i) => 
+                        ` <span style="transform:rotate(${i * 8.6}deg)">${char}</span> `
+                    ).join("")
+                </script>
+            </td>
+            <td>
+                <div class="circle">
+                    <div class="logo4">
+            
+                    </div>
+                    <div class="text4">
+                        <p>M anh Tran - M ark - Build the CODE 10v - </p>
+                    </div>
+                </div>
+                <script>
+                    const text4 = document.querySelector('.text4 p');
+                    text4.innerHTML = text4.innerText.split("").map(
+                        (char, i) => 
+                        ` <span style="transform:rotate(${i * 8.6}deg)">${char}</span> `
+                    ).join("")
+                </script>
+            </td>
+        </tr>
+    </table>
+    
+    
+</body>
+</html>
