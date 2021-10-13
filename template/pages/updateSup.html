@@ -209,10 +209,17 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="post.html">
+            <a class="nav-link" data-toggle="collapse" href="#a" aria-expanded="false" aria-controls="auth">
               <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-              <span class="menu-title">User'Post Management</span>
+              <span class="menu-title" >User'Post Management</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="a">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/post.html"> View </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/tran_post.html"> transaction history </a></li>
+              </ul>
+            </div>
           </li>
         </ul>
       </nav>
