@@ -7,7 +7,7 @@
     <title>BTEC LAND | Post Details</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="img/iconbtec.png" type="image/x-icon">
 
 
     <!-- Font awesome -->
@@ -60,13 +60,8 @@
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-6">
                             <div class="aa-header-left">
-                                <div class="aa-telephone-no">
-                                    <span class="fa fa-phone"></span>
-                                    19006789
-                                </div>
-                                <div class="aa-email hidden-xs">
-                                    <span class="fa fa-envelope-o"></span> btecland@btec.com
-                                </div>
+                                <div class="aa-telephone-no"><span class="fa fa-phone"></span>19006789</div>
+                                <div class="aa-email hidden-xs"><span class="fa fa-envelope-o"></span> btecland@btec.com</div>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-6">
@@ -189,10 +184,30 @@
                     <!-- Start properties content body -->
                     <div class="aa-properties-details">
                         <div class="aa-properties-details-img">
-                            <img src="img/slider/1.jpg" alt="img">
-                            <img src="img/slider/2.jpg" alt="img">
-                            <img src="img/slider/3.jpg" alt="img">
+                            <img src="img/post-detail/1.jpg" alt="Oop something wrong with the image!!!" id="main-img">
+<!--                            <img src="img/post-detail/2.jpg" alt="Oop something wrong with the image!!!">-->
+<!--                            <img src="img/post-detail/3.jpg" alt="Oop something wrong with the image!!!">-->
                         </div>
+                        <p class="image-small-slider">
+                            <img src="img/post-detail/1.jpg" alt="Oop something wrong with the image!!!">
+                            <img src="img/post-detail/2.jpg" alt="Oop something wrong with the image!!!">
+                            <img src="img/post-detail/3.jpg" alt="Oop something wrong with the image!!!">
+                            <img src="img/post-detail/4.jpg" alt="Oop something wrong with the image!!!">
+                            <img src="img/post-detail/5.jpg" alt="Oop something wrong with the image!!!">
+                            <img src="img/post-detail/6.jpg" alt="Oop something wrong with the image!!!">
+                            <img src="img/post-detail/7.jpg" alt="Oop something wrong with the image!!!">
+                            <img src="img/post-detail/8.jpg" alt="Oop something wrong with the image!!!">
+                            <img src="img/post-detail/9.jpg" alt="Oop something wrong with the image!!!">
+                        </p>
+                        <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+                        <script>
+                            $(() => {
+                                $('p img').click(function(){
+                                    let imgPath = $(this).attr('src') ;
+                                    $('#main-img').attr('src', imgPath);
+                                    })
+                            })
+                        </script>
                         <div class="aa-properties-info">
                             <h2>Ciputra: Contemporary 114sqm 3-bedroom apartment at L5</h2>
                             <span class="aa-price">$1,100 /month</span>
@@ -219,6 +234,35 @@
                             <h4>Property Map</h4>
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7445.707964188539!2d105.7971114267224!3d21.078493404858968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135aac0896ba75b%3A0xd95db140eef64eec!2zS2h1IMSRw7QgdGjhu4sgQ2lwdXRyYSwgUGjDuiBUaMaw4bujbmcsIFTDonkgSOG7kywgSGFub2ksIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1634179379716!5m2!1sen!2s" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
                         </div>
+                        <div class="col-md-12">
+                            <div id="respond">
+                                <h3 class="reply-title">Leave a Comment</h3>
+                                <form id="commentform">
+                                    <p class="comment-notes">
+                                        Your information address will not be published. Required fields are marked <span class="required">*</span>
+                                    </p>
+                                    <p class="comment-form-author">
+                                        <label for="author">Name <span class="required">*</span></label>
+                                        <input type="text" required="required" size="30" value="" name="author">
+                                    </p>
+                                    <p class="comment-form-email">
+                                        <label for="email">Email <span class="required">*</span></label>
+                                        <input type="email" required="required" aria-required="true" value="" name="email">
+                                    </p>
+                                    <p class="comment-form-url">
+                                        <label for="number">Phone Number <span class="required">*</span></label>
+                                        <input type="number" value="" name="url">
+                                    </p>
+                                    <p class="comment-form-comment">
+                                        <label for="comment">Comment</label>
+                                        <textarea required="required" aria-required="true" rows="8" cols="45" name="comment"></textarea>
+                                    </p>
+                                    <p class="form-submit">
+                                        <input type="submit" value="Comment" class="aa-browse-btn" name="submit" style="background-color: #2a6e83; color: #fff">
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
                         <!-- Properties social share -->
                         <div class="aa-properties-social">
                             <ul>
@@ -239,12 +283,8 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <article class="aa-properties-item">
-                                            <a class="aa-properties-item-img" href="#">
-                                                <img alt="img" src="img/item/1.jpg">
-                                            </a>
-                                            <div class="aa-tag for-sale">
-                                                For Sale
-                                            </div>
+                                            <a class="aa-properties-item-img" href="#"><img alt="img" src="img/item/1.jpg"></a>
+                                            <div class="aa-tag for-sale">For Sale</div>
                                             <div class="aa-properties-item-content">
                                                 <div class="aa-properties-info">
                                                     <span>5 Rooms</span>
@@ -257,10 +297,7 @@
                                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam odit vitae.</p>
                                                 </div>
                                                 <div class="aa-properties-detial">
-                            <span class="aa-price">
-                              $35000
-                            </span>
-                                                    <a class="aa-secondary-btn" href="#">View Details</a>
+                                                   <span class="aa-price">$35000</span><a class="aa-secondary-btn" href="#">View Details</a>
                                                 </div>
                                             </div>
                                         </article>
@@ -285,10 +322,7 @@
                                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim molestiae vero ducimus quibusdam odit vitae.</p>
                                                 </div>
                                                 <div class="aa-properties-detial">
-                          <span class="aa-price">
-                            $35000
-                          </span>
-                                                    <a class="aa-secondary-btn" href="#">View Details</a>
+                                                    <span class="aa-price">$35000</span><a class="aa-secondary-btn" href="#">View Details</a>
                                                 </div>
                                             </div>
                                         </article>
@@ -305,6 +339,17 @@
             <div class="col-md-4">
                 <aside class="aa-properties-sidebar">
                     <!-- Start Single properties sidebar -->
+                    <div class="aa-properties-single-sidebar">
+                    <div class="aa-contact-top-right">
+                        <h2>Contact</h2>
+                        <p></p>
+                        <ul class="contact-info-list">
+                            <li> <i class="fa fa-phone"></i> +84868686868 </li>
+                            <li> <i class="fa fa-envelope-o"></i> vip@btec.com</li>
+                            <li> <i class="fa fa-map-marker"></i> 107  Nguyen Phong Sac, Cau Giay, HaNoi</li>
+                        </ul>
+                    </div>
+                    </div>
                     <div class="aa-properties-single-sidebar">
                         <h3>Properties Search</h3>
                         <form action="">
@@ -415,7 +460,8 @@
                     <div class="row">
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <div class="aa-footer-left">
-                                <p>Designed by <a rel="nofollow" href="http://www.markups.io/">MarkUps.io</a></p>
+                                <p>BTEC LAND</p>
+                                <p>REAL ESTATE E-COMMERCE SYSTEM</p>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6 col-xs-12">

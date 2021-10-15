@@ -938,7 +938,7 @@ img {
 #aa-property-header .aa-property-header-inner {
   display: inline;
   float: left;
-  padding: 0px 0 0px;
+  padding: 60px 0 0px;
   text-align: center;
   width: 100%;
 }
@@ -1956,7 +1956,7 @@ img {
 ====================*/
 
 #aa-footer {
-  background-color: #444;
+  background-color: #2a6e83;
   display: inline;
   float: left;
   padding: 30px 0;
@@ -2069,6 +2069,9 @@ img {
 
   .pulse {
     left: 46%;  
+  }
+  .image-small-slider{
+    width: 617px;
   }
 
 }
@@ -2193,11 +2196,11 @@ img {
   }
 
   #aa-property-header {
-    min-height: 320px;
+    min-height: 80px;
   }
 
   #aa-property-header .aa-property-header-inner {
-    padding: 100px 0 50px;
+    padding: 30px 0 0px;
   }
 
   #aa-properties .aa-properties-content .aa-properties-content-body .aa-properties-nav {
@@ -2689,4 +2692,26 @@ img {
   height: 350px;
   position: relative;
   direction: ltr;
+}
+ .aa-contact-top-right .contact-info-list li i {
+  border: 1px solid #ccc;
+  padding: 5px;
+  text-align: center;
+  width: 35px;
+}
+.image-small-slider{
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+.image-small-slider img{
+  width: 100px;
+  height: 80px;
+}
+.image-small-slider img:default{
+  border: 2px solid white;
+}
+.image-small-slider img:hover{
+  border: 2px solid red;
 }
