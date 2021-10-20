@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Manager Post</title>
-    <link rel="stylesheet" href="./style-form-user.css">
+    <link rel="stylesheet" href="./style-manage-post.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     
     <!-- Favicon -->
@@ -13,10 +14,10 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.css" rel="stylesheet">   
     <!-- slick slider -->
-    <link rel="stylesheet" type="text/css" href="css/slick.css">
-    <!-- price picker slider -->
-    <link rel="stylesheet" type="text/css" href="css/nouislider.css">
-    <!-- Fancybox slider -->
+<!--    <link rel="stylesheet" type="text/css" href="css/slick.css">-->
+<!--    &lt;!&ndash; price picker slider &ndash;&gt;-->
+<!--    <link rel="stylesheet" type="text/css" href="css/nouislider.css">-->
+<!--    &lt;!&ndash; Fancybox slider &ndash;&gt;-->
     <link rel="stylesheet" href="css/jquery.fancybox.css" type="text/css" media="screen" /> 
     <!-- Theme color -->
     <link id="switcher" href="css/theme-color/default-theme.css" rel="stylesheet">     
@@ -53,10 +54,10 @@
                 <div class="aa-header-left">
                   <div class="aa-telephone-no">
                     <span class="fa fa-phone"></span>
-                    1-900-523-3564
+                      19006789
                   </div>
                   <div class="aa-email hidden-xs">
-                    <span class="fa fa-envelope-o"></span> info@markups.com
+                    <span class="fa fa-envelope-o"></span> btecland@btec.com
                   </div>
                 </div>              
               </div>
@@ -68,13 +69,11 @@
                     <i class="fas fa-chevron-down"></i>
                   </div>
                   <ul class="options-menu">
-                    <li>1</li>
-                    <li>1</li>
-                    <li>1</li>
-                    <li>1</li>
-                    <li>1</li>
-                    <li>1</li>
-                    <li>1</li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+<!--                 -->
                   </ul>
                 </div>
               </div>
@@ -84,6 +83,21 @@
       </div>
     </div>
   </header>
+    <section id="aa-property-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="aa-property-header-inner">
+                        <h2> </h2>
+                        <ol class="breadcrumb">
+                            <li><a href="index.html">HOME</a></li>
+                            <li class="active">Manage Post</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
   <!-- End header section -->
 
   
@@ -223,7 +237,7 @@
             </div>
 
             <div class="content2">
-                <div class="content2-title"> <i class="fas fa-list-ol"></i> List of posts</div>
+                <div class="content2-title">  Manage Post</div>
                 <!-- Advance Search -->
                 <div id="aa-advance-search-list">
                     <div class="container">
@@ -270,6 +284,62 @@
                 </div>
 
                 <!-- / Advance Search -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col">POST ID</th>
+                                    <th scope="col">TITLE</th>
+                                    <th scope="col">Date created</th>
+                                    <th scope="col">Views</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Expiration date</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>12312</td>
+                                    <td>Ciputra: Industrial and modern s</td>
+                                    <td>1/10/2021</td>
+                                    <td>106,789</td>
+                                    <td>Expired</td>
+                                    <td>20/10/2021</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Bootstrap Grid 4 Tutorial and Examples</td>
+                                    <td>Cristina</td>
+                                    <td>3.417</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Bootstrap Flexbox Tutorial and Examples</td>
+                                    <td>Cristina</td>
+                                    <td>1.234</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                 <div class="menu">
                     <ul>
                         <table class="table">
@@ -278,8 +348,10 @@
                                 <th scope="col">#</th>
                                 <th scope="col">POST ID</th>
                                 <th scope="col">TITLE</th>
+                                <th scope="col">Date created</th>
+                                <th scope="col">Views</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Expiration date</th>
-                                <th scope="col"></th>
                                 <th scope="col">Feature</th>
                                 <th scope="col">Feature</th>
                             </tr>
@@ -288,42 +360,60 @@
                             <tr>
                                 <th scope="row">1</th>
                                 <td>12312</td>
-                                <td>Ciputra: Industrial and modern s</td>
-                                <td>25/10/2021</td>
-                                <td><button>Delete</button></td>
-                                <td><button>Update</button></td>
+                                <td>Ciputra: Industrial and modern </td>
+                                <td>1/10/2021</td>
+                                <td>106,789</td>
+                                <td>Expired</td>
+                                <td>20/10/2021</td>
+                                <td ><button class="delete-button"> <i class="fas fa-trash"></i> Delete </button></td>
+                                <td><button class="update-button"><i class="fas fa-pencil-square"></i> Update </button></td>
                             </tr>
                             <tr>
                                 <th scope="row">2</th>
                                 <td>123231</td>
                                 <td>Industrial and modern style 2-bedroom</td>
+                                <td>2/10/2021</td>
+                                <td>90,888</td>
+                                <td>Posted</td>
                                 <td>28/10/2021</td>
-                                <td><button>Delete</button></td>
-                                <td><button>Update</button></td>
+                                <td ><button class="delete-button"> <i class="fas fa-trash"></i> Delete </button></td>
+                                <td><button class="update-button"><i class="fas fa-pencil-square"></i> Update </button></td>
                             </tr>
                             <tr>
                                 <th scope="row">3</th>
                                 <td>1213312</td>
                                 <td>VINHOME: Industrial and modern style 4-bedrom</td>
-                                <td>20/11/2021</td>
-                                <td><button>Delete</button></td>
-                                <td><button>Update</button></td>
+                                <td>5/10/2021</td>
+                                <td>123,789</td>
+                                <td>Posted</td>
+                                <td>29/11/2021</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                    <button type="button" class="btn btn-success"><i class="far fa-edit"></i></button>
+                                    <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                </td>
                             </tr>
                             <tr>
                                 <th scope="row">4</th>
                                 <td>12567312</td>
                                 <td>VINHOME: Industrial and modern style 5-bedrom</td>
-                                <td>20/10/2021</td>
-                                <td><button>Delete</button></td>
-                                <td><button>Update</button></td>
+                                <td>6/10/2021</td>
+                                <td>70,567</td>
+                                <td>Posted</td>
+                                <td>12/11/2021</td>
+                                <td ><button class="delete-button"> <i class="fas fa-trash"></i> Delete </button></td>
+                                <td><button class="update-button"><i class="fas fa-pencil-square"></i> Update </button></td>
                             </tr>
                             <tr>
                                 <th scope="row">5</th>
                                 <td>12324312</td>
                                 <td>VINHOME: Industrial and modern style 3-bedrom</td>
-                                <td>15/10/2021</td>
-                                <td><button>Delete</button></td>
-                                <td><button>Update</button></td>
+                                <td>24/10/2021</td>
+                                <td>5000</td>
+                                <td>Posted</td>
+                                <td>15/11/2021</td>
+                                <td ><button class="delete-button"> <i class="fas fa-trash"></i> Delete </button></td>
+                                <td><button class="update-button"><i class="fas fa-pencil-square"></i> Update </button></td>
                             </tr>
                             </tbody>
                         </table>
