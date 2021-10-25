@@ -1443,7 +1443,8 @@ img {
 }
 #respond input[type="text"],
 #respond input[type="email"],
-#respond input[type="url"] {
+#respond input[type="url"],
+#respond input[type="number"]{
   border: none;
   border-bottom: 1px solid #ccc;
   color: #555;
@@ -3171,5 +3172,9 @@ input[type=number]::-webkit-outer-spin-button {
   width: 100%;
   margin-bottom: 20px;
 }
-
+.update-post-body3 .form-submit input{
+  width: 20%;
+  height: 40px;
+  margin: 10px 40%;
+}
 /* end style for update-post*/
