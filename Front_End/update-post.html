@@ -33,14 +33,27 @@
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<!--    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>-->
+<!--    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>-->
 
+    <!-- Format Images loader CSS -->
+    <link rel="stylesheet" href="../dist/image-uploader.min.css">
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,700|Montserrat:300,400,500,600,700|Source+Code+Pro&display=swap"
+          rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+    <!-- Images loader -->
+    <script src="./jquery.imagesloader-1.0.1.js"></script>
 </head>
 <body class="aa-price-range">
 <!-- Pre Loader -->
 <!--<div id="aa-preloader-area">-->
 <!--    <div class="pulse"></div>-->
+
 <!--</div>-->
 <!-- SCROLL TOP BUTTON -->
 <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
@@ -76,7 +89,8 @@
 <!-- End header section -->
 
 <!-- Start menu section -->
-<section id="aa-menu-area">
+<!-- Start menu section -->
+<section id="aa-menu-area-update-form">
     <nav class="navbar navbar-default main-navbar" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -91,7 +105,8 @@
                 <!-- LOGO -->
                 <!-- Text based logo -->
                 <a class="navbar-brand aa-logo" href="index.html"> BTEC <span>LAND</span></a>
-
+                <!-- Image based logo -->
+                <!-- <a class="navbar-brand aa-logo-img" href="index.html"><img src="img/logo.png" alt="logo"></a> -->
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul id="top-menu" class="nav navbar-nav navbar-right aa-main-nav">
@@ -159,10 +174,10 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="aa-property-header-inner">
-                    <h2></h2>
+                    <h2> </h2>
                     <ol class="breadcrumb">
                         <li><a href="index.html">HOME</a></li>
-                        <li class="active">Update Post</li>
+                        <li class="active">APARTMENTS IN CIPUTRA</li>
                     </ol>
                 </div>
             </div>
@@ -228,22 +243,28 @@
             <div class="post-information">
                 <div class="col-md-12">
                     <div id="update-post-form">
-                        <form>
                             <div class="post-type">
-                                <div>
-                                    <p> Choose Type of post: </p>
-                                    <input type="radio" name="check" value="sale">
-                                    <label for="">Sale</label>
-                                    <input type="radio" name="check" value="rent">
-                                    <label for="">Rent</label>
+
+                                <div class="select-post-type">
+                                    <p class="strong"> Choose Type Of Real Estate: <span class="required">*</span></p>
+                                    <div class="radio-toolbar">
+                                        <input type="radio" id="radioApple" name="radioFruit" value="apple" checked>
+                                        <label for="radioApple">For Sale</label>
+
+                                        <input type="radio" id="radioBanana" name="radioFruit" value="banana">
+                                        <label for="radioBanana">For Rent</label>
+                                    </div>
                                 </div>
-                                <select class="select-post-type">
+
+                                <div class="select-post-type">
+                                    <p class="strong"> Choose Type Of Post <span class="required">*</span></p>
+                                <select>
                                     <option value="0" selected>Post Type</option>
                                     <option value="1">FREE</option>
                                     <option value="2">GOLD</option>
                                     <option value="3">DIAMOND</option>
                                 </select>
-                                <select class="select-category-post">
+                                <select>
                                     <option value="0" selected>Category</option>
                                     <option value="1">APARTMENT</option>
                                     <option value="2">PRIVATE HOUSE, STREET HOUSE</option>
@@ -257,33 +278,35 @@
                                     <option value="10">WAREHOUSE, FACTORY, KIOT</option>
                                     <option value="11">OTHER HOUSE AND LAND</option>
                                 </select>
-                                <div>
+                                </div>
+
+                                <div class="select-post-type">
+                                    <p class="strong"> Address: <span class="required">*</span></p>
                                     <select name="calc_shipping_provinces" required="">
                                         <option value="">Province/City</option>
                                     </select>
-                                    <select name="calc_shipping_district" required="">
+                                    <select name="calc_shipping_district" required="" >
                                         <option value="">District</option>
                                     </select>
                                     <input class="billing_address_1" name="" type="hidden" value="">
                                     <input class="billing_address_2" name="" type="hidden" value="">
-                                </div>
+                                    </p>
                             </div>
-                            <p class="comment-form-author">
-                                <label for="address"> Specific address<span class="required">*</span></label>
+
+                            <div class="specific-address">
+                                <p class="strong"> Specific address: <span class="required">*</span></p>
                                 <input type="text" required="required" size="30" value="" name="author"
                                        placeholder="House number, street name...">
-                            </p>
-                            <p class="">
-                                <label for="address"> Position on map</label>
+                                <p class="strong"> Position on map:</p>
                                 <input type="text" size="30" value="" name="author"
                                        placeholder="E.g. https://www.google.com/maps/place/btec-land">
-                            </p>
-                        </form>
+                            </div>
                     </div>
                 </div>
             </div>
-            <div class="clear"></div>
+            </div>
         </div>
+
         <div class="update-post-body2">
             <div class="body-title"> Post Information</div>
             <div class="post-information">
@@ -292,7 +315,7 @@
                         <div class="post-type">
                             <form>
                                 <p class="comment-form-author">
-                                <div><label>Title<span class="required">*</span></label></div>
+                                <div><label>Title <span class="required">*</span></label></div>
                                 <input type="text" required="required" size="70" value="" name="author">
                                 </p>
                                 <p class="comment-form-comment">
@@ -314,42 +337,55 @@
                     <div id="update-post-form3">
 
                         <form>
-
-                            <p class="">
+                            <div class="estate-inf">
                             <div><label>Area<span class="required">*</span></label></div>
                             <input type="text" required="required" size="70" value="" name="area" placeholder="m²">
-                            </p>
+                            </div>
 
-                            <p class="">
-                            <div><label>Price<span class="required">*</span></label></div>
-                            <input type="text" required="required" size="70" value="" name="area">
-                            <select class="select-post-type">
-                                <option value="0" selected>USD</option>
-                                <option value="1">VND</option>
+                            <div class="estate-inf2">
 
-                            </select>
-                            </p>
+                                <div class="estate-inf-price">
+                                <div><label>Price<span class="required">*</span></label></div>
+                                <input type="text" required="required" size="70" value="" name="area" placeholder="Enter Price. E.g. 19006789 USD">
+                                    <select>
+                                        <option value="0" selected>USD</option>
+                                        <option value="1">VND</option>
+                                    </select>
+                                </div>
+                            </div>
 
-                            <p class="">
+                            <div class="estate-inf">
                             <div><label>Legal papers<span class="required">*</span></label></div>
                             <input type="text" required="required" size="70" value="" name="area"
                                    placeholder="Certificate of land use rights, Sale Contract,... ">
-                            </p>
+                            </div>
+                             <div  class="number-quantity">
+                                <label>Number Of Bedrooms:</label>
+                                 <div class="number-input">
+                                     <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                                     <input class="quantity" min="0" name="quantity" value="0" type="number">
+                                     <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                                 </div>
+                            </div>
 
-                            <p class="">
-                                <label>Number of bedrooms</label>
-                                <input type="number" name="." value="0" min="0">
-                            </p>
+                            <div class="number-quantity">
+                                <label>Number  Of  Bathrooms:</label>
+                               <div class="number-input">
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                                <input class="quantity" min="0" name="quantity" value="0" type="number">
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                                </div>
+                            </div>
 
-                            <p class="">
-                                <label>Number of bathrooms</label>
-                                <input type="number" name="." value="0" min="0">
-                            </p>
+                            <div  class="number-quantity">
+                             <label>Number  Of  Restrooms:</label>
+                                <div class="number-input">
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                                <input class="quantity" min="0" name="quantity" value="0" type="number">
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                               </div>
+                            </div>
 
-                            <p class="">
-                                <label>Number of restrooms</label>
-                                <input type="number" name="." value="0" min="0">
-                            </p>
                         </form>
                     </div>
                 </div>
@@ -359,80 +395,73 @@
         <div class="update-post-body3">
             <div class="body-title">Image and Video</div>
             <div class="post-information">
+
+                <div class="image-input">
+                    <form method="POST" name="form-example-1" id="form-example-1" enctype="multipart/form-data">
+                        <div class="input-field">
+                            <label class="active">Upload Images</label>
+                            <div class="input-images-1" style="padding-top: .5rem;"></div>
+                        </div>
+                    </form>
+                </div>
+
                 <div class="col-md-12">
                     <div id="update-post-form4">
-                        <div class="file-loading">
-                            <input id="input-b6" name="input-b6[]" type="file" multiple>
-                        </div>
                         <form>
                             <div class="post-type">
                                 <p class="">
                                 <div>
-                                    <label for="address"> Link video on youtobe</label>
+                                    <label> Link video on youtobe:</label>
                                 </div>
                                 <input type="text" size="30" value="" name="author"
-                                       placeholder="E.g. https://www.google.com/maps/place/btec-land">
+                                       placeholder="E.g. https://www.youtobe.com/channel/btec-land">
                                 </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="update-post-body3">
+            <div class="body-title"> Contact Information</div>
+            <div class="post-information">
+                <div class="col-md-12">
+                    <div id="update-post-form5">
+                        <form>
+                            <div class="contact-1">
+
+                            <div class="contact-name">
+                            <div><label>Contact Name<span class="required">*</span></label></div>
+                            <input type="text" required="required" size="100" value="" name="contact-name">
+                            </div>
+                            <div class="contact-phone">
+                            <div><label>Phone Number<span class="required">*</span></label></div>
+                            <input type="number" required="required" size="12" value="">
+                            </div>
+
+                            </div>
+
+                            <div class="contact-address">
+                            <div><label>Address</label></div>
+                            <input type="text" size="70" value="" name="area" placeholder="E.g. 107, Nguyen Phong Sac, Cau giay, Ha Noi.">
+                            </div>
+
+
+                            <div class="contact-email">
+                            <div><label>Email</label></div>
+                            <input type="email"  size="70" value="" name="area" placeholder="E.g. btecland@btec.vn">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="update-post-body3">
-            <div class="body-title"> Post Information</div>
-            <div class="post-information">
-                <div class="col-md-12">
-                    <div id="update-post-form5">
-
-                        <form>
-                            <div class="post-type">
-                                <select class="select-category-post">
-                                    <option value="0" selected>Category</option>
-                                    <option value="1">APARTMENT</option>
-                                    <option value="2">PRIVATE HOUSE, STREET HOUSE</option>
-                                    <option value="3">VILLA, ADJACENT HOUSES</option>
-                                    <option value="4">THE GROUND</option>
-                                    <option value="5">RESIDENTIAL LAND</option>
-                                    <option value="6">OFFICE BUILDING</option>
-                                    <option value="7">APARTMENT CONDOTEL</option>
-                                    <option value="8">OFFICETEL APARTMENT</option>
-                                    <option value="9">RESTAURANT</option>
-                                    <option value="10">WAREHOUSE, FACTORY, KIOT</option>
-                                    <option value="11">OTHER HOUSE AND LAND</option>
-                                </select>
-                                <p> Choose Type of post: </p>
-                                <input type="radio" name="check" value="sale">
-                                <label for="">Sale</label>
-                                <input type="radio" name="check" value="rent">
-                                <label for="">Rent</label>
-                            </div>
-                            <p class="comment-form-author">
-                                <label for="author">Name <span class="required">*</span></label>
-                                <input type="text" required="required" size="30" value="" name="author">
-                            </p>
-                            <p class="comment-form-email">
-                                <label for="email">Email <span class="required">*</span></label>
-                                <input type="email" required="required" aria-required="true" value="" name="email">
-                            </p>
-                            <p class="comment-form-number">
-                                <label for="number">Phone Number <span class="required">*</span></label>
-                                <input type="number" required="required" aria-required="true" value="" name="number">
-                            </p>
-                            <p class="comment-form-comment">
-                                <label for="comment">Comment</label>
-                                <textarea required="required" aria-required="true" rows="8" cols="45"
-                                          name="comment"></textarea>
-                            </p>
-                            <p class="form-submit">
-                                <input type="submit" value="Comment" class="aa-browse-btn" name="submit"
-                                       style="background-color: #2a6e83; color: #fff">
-                            </p>
-                        </form>
-                    </div>
-                </div>
-            </div>
+            <p class="form-submit">
+                <input type="submit" value="Update" class="aa-browse-btn" name="submit" style="background-color: #2a6e83; color: #fff">
+            </p>
         </div>
         <!-- End of container -->
 
@@ -493,16 +522,16 @@
 <!-- Custom js -->
 <script src="js/custom.js"></script>
 
-<!-- JS for picker date -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/picker.js"></script>
-<script src="js/picker.date.js"></script>
-<script src="js/main.js"></script>
-
+<!-- Js for pick address-->
 <script src="https://cdn.jsdelivr.net/gh/vietblogdao/js/districts.min.js"></script>
 <!-- Or using this link if done-have internet <script src="js/province.js"></script> -->
+<script>
+    var localpicker = new localpicker({
+        province: "ls_province",
+        district: "ls_district",
+        ward: "ls_ward"
+    });
+</script>
 <script>
     $(document).ready(function () {
         $("#input-b6").fileinput({
@@ -582,7 +611,202 @@ $('select[name="calc_shipping_provinces"]').each(function () {
         })
     })
 })
-//]]></script>
+</script>
+<!-- java script for upload image-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<!--<script type="text/javascript" src="dist/image-uploader.min.js"></script>-->
+
+<script>
+    $(function () {
+
+        $('.input-images-1').imageUploader();
+
+        $('form').on('submit', function (event) {
+
+            // Stop propagation
+            event.preventDefault();
+            event.stopPropagation();
+
+            // Get some vars
+            let $form = $(this),
+                $modal = $('.modal');
+
+            // Set name and description
+            $modal.find('#display-name span').text($form.find('input[id^="name"]').val());
+            $modal.find('#display-description span').text($form.find('input[id^="description"]').val());
+
+            // Get the input file
+            let $inputImages = $form.find('input[name^="images"]');
+            if (!$inputImages.length) {
+                $inputImages = $form.find('input[name^="photos"]')
+            }
+
+            // Get the new files names
+            let $fileNames = $('<ul>');
+            for (let file of $inputImages.prop('files')) {
+                $('<li>', {text: file.name}).appendTo($fileNames);
+            }
+
+            // Set the new files names
+            $modal.find('#display-new-images').html($fileNames.html());
+
+            // Get the preloaded inputs
+            let $inputPreloaded = $form.find('input[name^="old"]');
+            if ($inputPreloaded.length) {
+
+                // Get the ids
+                let $preloadedIds = $('<ul>');
+                for (let iP of $inputPreloaded) {
+                    $('<li>', {text: '#' + iP.value}).appendTo($preloadedIds);
+                }
+
+                // Show the preloadede info and set the list of ids
+                $modal.find('#display-preloaded-images').show().html($preloadedIds.html());
+
+            } else {
+
+                // Hide the preloaded info
+                $modal.find('#display-preloaded-images').hide();
+
+            }
+
+            // Show the modal
+            $modal.css('visibility', 'visible');
+        });
+
+        // Input and label handler
+        $('input').on('focus', function () {
+            $(this).parent().find('label').addClass('active')
+        }).on('blur', function () {
+            if ($(this).val() == '') {
+                $(this).parent().find('label').removeClass('active');
+            }
+        });
+
+
+    });
+</script>
+<script>
+    (function ($) {
+        $.fn.imageUploader = function (options) {
+            let defaults = {
+                preloaded: [],
+                imagesInputName: 'images',
+                preloadedInputName: 'preloaded',
+                label: 'Drag & Drop files here or click to browse'
+            };
+            let plugin = this;
+            plugin.settings = {};
+            plugin.init = function () {
+                plugin.settings = $.extend(plugin.settings, defaults, options);
+                plugin.each(function (i, wrapper) {
+                    let $container = createContainer();
+                    $(wrapper).append($container);
+                    $container.on("dragover", fileDragHover.bind($container));
+                    $container.on("dragleave", fileDragHover.bind($container));
+                    $container.on("drop", fileSelectHandler.bind($container));
+                    if (plugin.settings.preloaded.length) {
+                        $container.addClass('has-files');
+                        let $uploadedContainer = $container.find('.uploaded');
+                        for (let i = 0; i < plugin.settings.preloaded.length; i++) {
+                            $uploadedContainer.append(createImg(plugin.settings.preloaded[i].src, plugin.settings.preloaded[i].id, !0))
+                        }
+                    }
+                })
+            };
+            let dataTransfer = new DataTransfer();
+            let createContainer = function () {
+                let $container = $('<div>', {class: 'image-uploader'}), $input = $('<input>', {
+                        type: 'file',
+                        id: plugin.settings.imagesInputName + '-' + random(),
+                        name: plugin.settings.imagesInputName + '[]',
+                        multiple: ''
+                    }).appendTo($container), $uploadedContainer = $('<div>', {class: 'uploaded'}).appendTo($container),
+                    $textContainer = $('<div>', {class: 'upload-text'}).appendTo($container),
+                    $i = $('<i>', {class: 'material-icons', text: 'cloud_upload'}).appendTo($textContainer),
+                    $span = $('<span>', {text: plugin.settings.label}).appendTo($textContainer);
+                $container.on('click', function (e) {
+                    prevent(e);
+                    $input.trigger('click')
+                });
+                $input.on("click", function (e) {
+                    e.stopPropagation()
+                });
+                $input.on('change', fileSelectHandler.bind($container));
+                return $container
+            };
+            let prevent = function (e) {
+                e.preventDefault();
+                e.stopPropagation()
+            };
+            let createImg = function (src, id) {
+                let $container = $('<div>', {class: 'uploaded-image'}), $img = $('<img>', {src: src}).appendTo($container),
+                    $button = $('<button>', {class: 'delete-image'}).appendTo($container),
+                    $i = $('<i>', {class: 'material-icons', text: 'clear'}).appendTo($button);
+                if (plugin.settings.preloaded.length) {
+                    $container.attr('data-preloaded', !0);
+                    let $preloaded = $('<input>', {
+                        type: 'hidden',
+                        name: plugin.settings.preloadedInputName + '[]',
+                        value: id
+                    }).appendTo($container)
+                } else {
+                    $container.attr('data-index', id)
+                }
+                $container.on("click", function (e) {
+                    prevent(e)
+                });
+                $button.on("click", function (e) {
+                    prevent(e);
+                    if ($container.data('index')) {
+                        let index = parseInt($container.data('index'));
+                        $container.find('.uploaded-image[data-index]').each(function (i, cont) {
+                            if (i > index) {
+                                $(cont).attr('data-index', i - 1)
+                            }
+                        });
+                        dataTransfer.items.remove(index)
+                    }
+                    $container.remove();
+                    if (!$container.find('.uploaded-image').length) {
+                        $container.removeClass('has-files')
+                    }
+                });
+                return $container
+            };
+            let fileDragHover = function (e) {
+                prevent(e);
+                if (e.type === "dragover") {
+                    $(this).addClass('drag-over')
+                } else {
+                    $(this).removeClass('drag-over')
+                }
+            };
+            let fileSelectHandler = function (e) {
+                prevent(e);
+                let $container = $(this);
+                $container.removeClass('drag-over');
+                let files = e.target.files || e.originalEvent.dataTransfer.files;
+                setPreview($container, files)
+            };
+            let setPreview = function ($container, files) {
+                $container.addClass('has-files');
+                let $uploadedContainer = $container.find('.uploaded'), $input = $container.find('input[type="file"]');
+                $(files).each(function (i, file) {
+                    dataTransfer.items.add(file);
+                    $uploadedContainer.append(createImg(URL.createObjectURL(file), dataTransfer.items.length - 1))
+                });
+                $input.prop('files', dataTransfer.files)
+            };
+            let random = function () {
+                return Date.now() + Math.floor((Math.random() * 100) + 1)
+            };
+            this.init();
+            return this
+        }
+    }(jQuery))
+</script>
 
 
 </body>

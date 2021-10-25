@@ -329,6 +329,7 @@ img {
   margin-right: -30px;
 }
 #aa-menu-area .navbar-fixed-top {
+  /*margin-top: -60px;*/
   background-color: #2a6e83;
   padding: 15px 0;
   -webkit-transition: all 0.5s;
@@ -2561,6 +2562,8 @@ img {
   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
+
+/*style for update-post*/
 #update-post-form {
   display: inline;
   float: left;
@@ -2584,44 +2587,91 @@ img {
 }
 #update-post-form .required,
 #update-post-form2 .required,
-#update-post-form3 .required{
+#update-post-form3 .required,
+#update-post-form5 .required {
   color: red;
 }
 #update-post-form label {
   display: block;
 }
-#update-post-form input[type="text"],
 #update-post-form2 input[type="text"],
 #update-post-form2 input[type="url"],
-#update-post-form3 input[type="text"],
-#update-post-form3 input[type="number"],
-#update-post-form4 input[type="text"],
-#update-post-form4 input[type="number"]{
+#update-post-form3 input[type="text"]{
   border: 1px solid #ccc;
   color: #555;
-  margin-bottom: 10px;
   height: 35px;
   padding: 5px;
-  width: 65%;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   -ms-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
 }
-#update-post-form textarea,
+.contact-1{
+  width: 100%;
+  display: inline-block;
+  padding-top: 20px;
+}
+.contact-name{
+  width: 59%;
+  display: inline-block;
+}
+.contact-name input{
+  width:100%;
+}
+.contact-phone {
+  width: 39%;
+  float: right;
+  display: inline-block;
+}
+.contact-phone input{
+  width:100%;
+}
+.contact-address input,
+.contact-email input{
+  width: 100%;
+}
+#update-post-form5 input[type="text"],
+#update-post-form5 input[type="number"],
+#update-post-form5 input[type="email"]{
+  border: 1px solid #ccc;
+  color: #555;
+  height: 35px;
+  padding: 5px;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
 #update-post-form2 textarea {
   border: 1px solid #ccc;
   color: #555;
   margin-bottom: 5px;
   padding: 10px;
-  height: 100px;
+  height: 260px;
   width: 100%;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   -ms-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
+}
+#update-post-form3 input[type="number"]{
+  border: 1px solid #ccc;
+  color: #555;
+  background-color: rgb(242, 242, 242);
+  height: 35px;
+  padding: 5px;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+#update-post-form2 input[type="text"]{
+  width: 100%;
+  height: 60px;
 }
 #update-post-form .form-submit input,
 #update-post-form2 .form-submit input{
@@ -2660,3 +2710,466 @@ img {
   color: #0e4cfd;
 
 }
+#update-post-form4 label{
+  margin-left: 5px;
+}
+#update-post-form4 input[type="text"]{
+  border: 1px solid #ccc;
+  color: #555;
+  height: 35px;
+  width: 98.5%;
+  padding: 5px;
+  margin-left: 5px;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.image-input{
+  width: 95%;
+  /*max-width: 1200px;*/
+  margin: 0 auto;
+  margin-left: 20px;
+  position: relative;
+  padding-top: 20px;
+}
+
+
+#aa-menu-area-update-form{
+  left: 0;
+  padding-top: 20px;
+  position: absolute;
+  right: 0;
+  top: 35px;
+  width: 100%;
+  z-index: 99;
+}
+#aa-menu-area-update-form .main-navbar {
+  background-color: transparent;
+  border: medium none;
+  border-radius: 0;
+}
+#aa-menu-area-update-form .main-navbar .navbar-header .navbar-brand {
+  padding: 0;
+}
+#aa-menu-area-update-form .main-navbar .navbar-header .aa-logo {
+  background-color: rgba(31, 29, 29, 0.2);
+  border: 2px solid #fff;
+  color: #fff;
+  text-shadow: black 0.1em 0.1em 0.2em;
+  font-family: "Poppins", sans-serif;
+  font-size: 30px;
+  padding: 15px;
+  line-height: 13px;
+}
+#aa-menu-area .main-navbar .navbar-header .aa-logo-img {
+  border: none;
+  height: 50px;
+  width: 235px;
+}
+#aa-menu-area-update-form .main-navbar .navbar-header .aa-logo-img img {
+  width: 100%;
+  height: 100%;
+}
+#aa-menu-area-update-form .main-navbar .navbar-nav li a {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #fff;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+#aa-menu-area-update-form .main-navbar .navbar-nav .active a {
+  background-color: #FFF;
+  color: #59abe3;
+}
+#aa-menu-area-update-form .main-navbar .navbar-nav .open a {
+  background-color: #fff;
+}
+#aa-menu-area-update-form .main-navbar .navbar-nav .dropdown-menu {
+  border: none;
+  border-radius: 0;
+  margin-top: 5px;
+}
+#aa-menu-area-update-form .main-navbar .navbar-nav .dropdown-menu li a {
+  color: #555;
+  padding: 8px 10px;
+}
+#aa-menu-area-update-form .main-navbar .navbar-right {
+  margin-right: -30px;
+}
+#aa-menu-area-update-form .navbar-fixed-top {
+  background-color: #2a6e83;
+  padding: 15px 0;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+#aa-menu-area-update-form .navbar-fixed-top .navbar-header .aa-logo {
+  background-color: rgba(31, 29, 29, 0.2);
+  border: 2px solid #fff;
+  color: #fff;
+  text-shadow: black 0.1em 0.1em 0.2em;
+  font-family: "Poppins", sans-serif;
+  font-size: 30px;
+  padding: 15px;
+  line-height: 13px;
+}
+#aa-menu-area-update-form .navbar-fixed-top .navbar-nav li a {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #fff;
+
+}
+
+.wrapper  {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 5px;
+  width: 360px;
+  max-width: 100%;
+  margin: 50px auto;
+  align-self: center;
+  box-sizing: border-box;
+}
+
+.images {
+  display: flex;
+  flex-wrap:  wrap;
+  margin-top: 20px;
+}
+.images .img,
+.images .pic {
+  flex-basis: 31%;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+.images .img {
+  width: 112px;
+  height: 93px;
+  background-size: cover;
+  margin-right: 10px;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.images .img:nth-child(3n) {
+  margin-right: 0;
+}
+.images .img span {
+  display: none;
+  text-transform: capitalize;
+  z-index: 2;
+}
+.images .img::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  transition: opacity .1s ease-in;
+  border-radius: 4px;
+  opacity: 0;
+  position: absolute;
+}
+.images .img:hover::after {
+  display: block;
+  background-color: #000;
+  opacity: .5;
+}
+.images .img:hover span {
+  display: block;
+  color: #fff;
+}
+.images .pic {
+  background-color: #F5F7FA;
+  align-self: center;
+  text-align: center;
+  padding: 40px 0;
+  text-transform: uppercase;
+  color: #848EA1;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 400px) {
+  .wrapper {
+    margin-top: 0;
+  }
+  .ways li,
+  section input,
+  section textarea,
+  .select-option .head,
+  .select-option .option div {
+    font-size: 8px;
+  }
+  .images .img,
+  .images .pic {
+    flex-basis: 100%;
+    margin-right: 0;
+  }
+}
+
+.wrapper .button-footer ul {
+  margin: 0;
+  margin-top: 30px;
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+.wrapper .button-footer ul li {
+  flex: 1;
+}
+.wrapper .button-footer li span {
+  text-transform: capitalize;
+  cursor: pointer;
+}
+.wrapper .button-footer li:first-child {
+  color: #999;
+  text-align: left;
+  font-size: 12px;
+}
+.wrapper .button-footer li:first-child span {
+  display: inline-block;
+  border-bottom: 1px solid #ddd;
+}
+.wrapper .button-footer li:last-child {
+  text-align: right;
+}
+.wrapper .button-footer li:last-child span {
+  background-color: #22A4E6;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 3px;
+}
+
+.notification {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  top: auto;
+  right: auto;
+}
+
+.notification p {
+  margin: 0;
+  padding: 0;
+}
+.notification .btn {
+  padding: 16px 20px;
+  border-radius: 5px;
+  display: flex;
+  margin-bottom: 10px;
+  font-size: 12px;
+  align-items: center;
+  animation: fadeIn .4s ease-in;
+}
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+ /*Style for form update post - form number off ...*/
+input[type="number"] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+.number-quantity{
+  width: 100%;
+  display: inline-block;
+  padding: 5px;
+
+}
+.number-quantity label{
+  width: 50%;
+  display: inline-block;
+  float: left;
+  padding-top: 10px;
+}
+.number-input {
+  border: 1px solid rgb(204, 204, 204);
+  display: inline-flex;
+  float: right;
+  /*margin-right: 20%;*/
+
+}
+
+.number-input,
+.number-input * {
+  box-sizing: border-box;
+}
+
+.number-input button {
+  outline:none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 3rem;
+  cursor: pointer;
+  margin: 0;
+  position: relative;
+}
+
+.number-input button:before,
+.number-input button:after {
+  display: inline-block;
+  position: absolute;
+  content: '';
+  width: 1rem;
+  height: 2px;
+  background-color: #212121;
+  transform: translate(-50%, -50%);
+}
+.number-input button.plus:after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.number-input input[type=number] {
+  font-family: sans-serif;
+  max-width: 7rem;
+  padding: .5rem;
+  border: solid #ddd;
+  border-width: 0 2px;
+  font-size: 2rem;
+  height: 3rem;
+  font-weight: bold;
+  text-align: center;
+}
+ /*End Style for form update post_form number off...*/
+/*Style for radio button chooser rent or sale*/
+.radio-toolbar {
+  margin-left: 0px;
+  margin-bottom: 20px;
+}
+
+.radio-toolbar input[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+
+.radio-toolbar label {
+  display: inline-block;
+  background-color: #fff;
+  padding: 10px 20px;
+  font-family: sans-serif, Arial;
+  font-size: 16px;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 4px;
+  width: 49%;
+}
+
+.radio-toolbar label:hover {
+  background-color: rgb(242, 242, 242);
+}
+
+.radio-toolbar input[type="radio"]:focus + label {
+  border: 2px dashed #444;
+}
+
+.radio-toolbar input[type="radio"]:checked + label {
+  border: 2px solid rgb(204, 204, 204);
+  background-color: rgb(242, 242, 242) !important;
+}
+.strong{
+  display: block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: bold;
+
+}
+.select-post-type{
+  margin-top: 20px;
+  border-bottom: 0.5px solid rgb(238, 238, 238);
+}
+.select-post-type select{
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid rgb(204, 204, 204);
+  background-color: #fff;
+  padding: 10px 20px;
+  font-family: sans-serif, Arial;
+  font-size: 16px;
+  width: 49%;
+  margin-bottom: 20px;
+}
+.estate-inf input{
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid rgb(204, 204, 204);
+  background-color: #fff;
+  padding: 10px 20px;
+  font-family: sans-serif, Arial;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.estate-inf-price{
+  width: 100%;
+  float: left;
+}
+.estate-inf-price input{
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid rgb(204, 204, 204);
+  background-color: #fff;
+  padding: 10px 20px;
+  font-family: sans-serif, Arial;
+  font-size: 16px;
+  width: 80%;
+  margin-bottom: 20px;
+}
+.estate-inf-price select{
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 4px;
+  border: 1px solid rgb(204, 204, 204);
+  background-color: rgb(242, 242, 242);
+  width: 10%;
+  padding: 5px;
+  margin-left: 5%;
+}
+.estate-inf-currency{
+  width: 29%;
+  float: right;
+}
+.estate-inf-currency select{
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid rgb(204, 204, 204);
+  background-color: #fff;
+  padding: 10px 20px;
+  font-family: sans-serif, Arial;
+  font-size: 16px;
+  width: 40%;
+  margin-bottom: 20px;
+}
+
+.specific-address{
+  margin-top: 20px;
+}
+.specific-address input{
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid rgb(204, 204, 204);
+  background-color: #fff;
+  padding: 10px 20px;
+  font-family: sans-serif, Arial;
+  font-size: 16px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* end style for update-post*/
