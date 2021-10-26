@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="./style-manage-post.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
-    
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="img/iconbtec.png" type="image/x-icon">
     <!-- Font awesome -->
@@ -255,12 +255,12 @@
                                             <form action="#" class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control" id="input_from" placeholder="Start Date">
+                                                        <input type="text" class="form-control" id="input_from" placeholder=" Start Date">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <input type="text" class="form-control" id="input_to" placeholder="End Date">
+                                                        <input type="text" class="form-control" id="input_to" placeholder=" End Date">
                                                     </div>
                                                            </div>
                                             </form>
@@ -286,8 +286,8 @@
                 <!-- / Advance Search -->
                 <div class="container">
                     <div class="row">
-                        <div class="col-12">
-                            <table class="table table-bordered">
+                        <div class="col-12" id="a-hover">
+                            <table class="table table-bordered" id="table-update-form">
                                 <thead>
                                 <tr>
                                     <th scope="col">POST ID</th>
@@ -302,6 +302,59 @@
                                 <tbody>
                                 <tr>
                                     <td>12312</td>
+                                    <td><a href="post-detail.html">Ciputra: Industrial and modern s</a></td>
+                                    <td>1/10/2021</td>
+                                    <td>106,789</td>
+                                    <td>Expired</td>
+                                    <td>20/10/2021</td>
+                                    <td>
+                                       <a href="post-detail.html"><button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button></a>
+                                      <a href="update-post.html"><button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button></a>
+                                        <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>12324312</td>
+                                    <td>VINHOME: Industrial and modern style 3-bedrom</td>
+                                    <td>24/10/2021</td>
+                                    <td>5000</td>
+                                    <td>Posted</td>
+                                    <td>15/11/2021</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>12567312</td>
+                                    <td>VINHOME: Industrial and modern style 5-bedrom</td>
+                                    <td>6/10/2021</td>
+                                    <td>70,567</td>
+                                    <td>Posted</td>
+                                    <td>12/11/2021</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>1213312</td>
+                                    <td>VINHOME: Industrial and modern style 4-bedrom</td>
+                                    <td>5/10/2021</td>
+                                    <td>123,789</td>
+                                    <td>Posted</td>
+                                    <td>29/11/2021</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>12312</td>
                                     <td>Ciputra: Industrial and modern s</td>
                                     <td>1/10/2021</td>
                                     <td>106,789</td>
@@ -314,10 +367,12 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">2</th>
-                                    <td>Bootstrap Grid 4 Tutorial and Examples</td>
-                                    <td>Cristina</td>
-                                    <td>3.417</td>
+                                    <td>12324312</td>
+                                    <td>VINHOME: Industrial and modern style 3-bedrom</td>
+                                    <td>24/10/2021</td>
+                                    <td>5000</td>
+                                    <td>Posted</td>
+                                    <td>15/11/2021</td>
                                     <td>
                                         <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
                                         <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
@@ -325,104 +380,77 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">3</th>
-                                    <td>Bootstrap Flexbox Tutorial and Examples</td>
-                                    <td>Cristina</td>
-                                    <td>1.234</td>
+                                    <td>12567312</td>
+                                    <td>VINHOME: Industrial and modern style 5-bedrom</td>
+                                    <td>6/10/2021</td>
+                                    <td>70,567</td>
+                                    <td>Posted</td>
+                                    <td>12/11/2021</td>
                                     <td>
                                         <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
                                         <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
                                         <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>1213312</td>
+                                    <td>VINHOME: Industrial and modern style 4-bedrom</td>
+                                    <td>5/10/2021</td>
+                                    <td>123,789</td>
+                                    <td>Posted</td>
+                                    <td>29/11/2021</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>12312</td>
+                                    <td>Ciputra: Industrial and modern s</td>
+                                    <td>1/10/2021</td>
+                                    <td>106,789</td>
+                                    <td>Expired</td>
+                                    <td>20/10/2021</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>12324312</td>
+                                    <td>VINHOME: Industrial and modern style 3-bedrom</td>
+                                    <td>24/10/2021</td>
+                                    <td>5000</td>
+                                    <td>Posted</td>
+                                    <td>15/11/2021</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>12567312</td>
+                                    <td>VINHOME: Industrial and modern style 5-bedrom</td>
+                                    <td>6/10/2021</td>
+                                    <td>70,567</td>
+                                    <td>Posted</td>
+                                    <td>12/11/2021</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                        <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                                    </td>
+                                </tr>
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <div class="menu">
-                    <ul>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">POST ID</th>
-                                <th scope="col">TITLE</th>
-                                <th scope="col">Date created</th>
-                                <th scope="col">Views</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Expiration date</th>
-                                <th scope="col">Feature</th>
-                                <th scope="col">Feature</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>12312</td>
-                                <td>Ciputra: Industrial and modern </td>
-                                <td>1/10/2021</td>
-                                <td>106,789</td>
-                                <td>Expired</td>
-                                <td>20/10/2021</td>
-                                <td ><button class="delete-button"> <i class="fas fa-trash"></i> Delete </button></td>
-                                <td><button class="update-button"><i class="fas fa-pencil-square"></i> Update </button></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>123231</td>
-                                <td>Industrial and modern style 2-bedroom</td>
-                                <td>2/10/2021</td>
-                                <td>90,888</td>
-                                <td>Posted</td>
-                                <td>28/10/2021</td>
-                                <td ><button class="delete-button"> <i class="fas fa-trash"></i> Delete </button></td>
-                                <td><button class="update-button"><i class="fas fa-pencil-square"></i> Update </button></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>1213312</td>
-                                <td>VINHOME: Industrial and modern style 4-bedrom</td>
-                                <td>5/10/2021</td>
-                                <td>123,789</td>
-                                <td>Posted</td>
-                                <td>29/11/2021</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                                    <button type="button" class="btn btn-success"><i class="far fa-edit"></i></button>
-                                    <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>12567312</td>
-                                <td>VINHOME: Industrial and modern style 5-bedrom</td>
-                                <td>6/10/2021</td>
-                                <td>70,567</td>
-                                <td>Posted</td>
-                                <td>12/11/2021</td>
-                                <td ><button class="delete-button"> <i class="fas fa-trash"></i> Delete </button></td>
-                                <td><button class="update-button"><i class="fas fa-pencil-square"></i> Update </button></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">5</th>
-                                <td>12324312</td>
-                                <td>VINHOME: Industrial and modern style 3-bedrom</td>
-                                <td>24/10/2021</td>
-                                <td>5000</td>
-                                <td>Posted</td>
-                                <td>15/11/2021</td>
-                                <td ><button class="delete-button"> <i class="fas fa-trash"></i> Delete </button></td>
-                                <td><button class="update-button"><i class="fas fa-pencil-square"></i> Update </button></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </ul>
-
-                </div>
-
-
-            <div class="clear"></div>
         </div>
     </div>
     <!-- End of container -->

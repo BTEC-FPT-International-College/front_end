@@ -7,7 +7,7 @@
 
 
 body {
-    background-color: #f8f8f8 !important;
+    background-color: #d9d4d4 !important;
     font-family: "Open Sans", sans-serif;
 
 }
@@ -19,7 +19,7 @@ body {
 }
 
 .content {
-    width: 1048px;
+    /*width: 1048px;*/
     height: 100%;
     margin: auto;
     padding: 0px;
@@ -163,6 +163,7 @@ body {
     margin-top: 20px;
     border-radius: 4px;
     cursor: pointer;
+    margin-bottom: 47px;
 }
 /* End content1  */
 
@@ -216,4 +217,7 @@ body {
     border-bottom: 1px solid #59abe3;
     border-bottom-left-radius: 0ch;
     font-weight: 600;
+}
+#table-update-form a:hover {
+    color: #46b8da;
 }

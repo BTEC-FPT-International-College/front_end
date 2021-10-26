@@ -2464,7 +2464,8 @@ img {
   min-height: 100px;
   padding: 25px 20px;
   position: relative;
-  width: 75%;
+  width: 110%;
+  margin-left: 25px;
 }
 #aa-advance-search-list .aa-advance-search-area .aa-advance-search-top {
   display: inline;
@@ -2502,7 +2503,8 @@ img {
 }
 #aa-advance-search-list .aa-advance-search-area .aa-advance-search-top .aa-single-advance-search .aa-search-btn {
   border: medium none;
-  padding: 10px 10px;
+  margin-top: -3px;
+  padding: 6px 12px;
   border-radius: 0px;
   background-color: #0c5460;
   color: #F0F0F0;
@@ -2511,7 +2513,8 @@ img {
   height: 40px;
   outline: medium none;
   text-transform: uppercase;
-  width: 100%;
+  width: 140%;
+  border-radius: 10px;
 }
 #aa-advance-search-list .aa-advance-search-area .aa-advance-search-bottom {
   display: inline;
@@ -3179,3 +3182,8 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 10px 40%;
 }
 /* end style for update-post*/
+
+/*style for table update form*/
+#table-update-form{
+  margin-left: 20px;
+}
