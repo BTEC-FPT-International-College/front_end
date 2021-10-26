@@ -868,6 +868,7 @@ img {
 }
 #aa-agents .aa-agents-area .aa-agents-content .aa-agents-slider li .aa-single-agents .aa-agents-img img {
   width: 100%;
+  height: 200px;
 }
 #aa-agents .aa-agents-area .aa-agents-content .aa-agents-slider li .aa-single-agents .aa-agetns-info {
   display: inline;
