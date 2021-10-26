@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Post</title>
+    <link rel="stylesheet" href="./grid.css">
+    <link rel="stylesheet" href="./postnew.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/iconbtec.png" type="image/x-icon">
+    <!-- Font awesome -->
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">   
+    <!-- slick slider -->
+    <link rel="stylesheet" type="text/css" href="css/slick.css">
+    <!-- price picker slider -->
+    <link rel="stylesheet" type="text/css" href="css/nouislider.css">
+    <!-- Fancybox slider -->
+    <link rel="stylesheet" href="css/jquery.fancybox.css" type="text/css" media="screen" /> 
+    <!-- Theme color -->
+    <link id="switcher" href="css/theme-color/default-theme.css" rel="stylesheet">     
+
+    <!-- Main style sheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.css" rel="stylesheet">
+  
+    <!-- Date picker  -->
+    <link rel="stylesheet" href="https://scripts.guru/download/datetimepicker/css/bootstrap.min.css">
+	<link href="https://scripts.guru/download/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
+    
+   
+    <!-- Google Font -->
+    <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>    
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+</head>
+<body>
+  <!-- Header  -->
+  <!-- Pre Loader -->
+  <!-- <div id="aa-preloader-area">
+  <div class="pulse"></div>
+  </div> -->
+  <!-- SCROLL TOP BUTTON -->
+    <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
+  <!-- END SCROLL TOP BUTTON -->
+
+
+  <!-- Start header section -->
+  <header id="aa-header" >  
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-header-area" style="padding: 0px; line-height: 1;">
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-6" style="margin-top: 12px;">
+                <div class="aa-header-left">
+                  <div class="aa-telephone-no">
+                    <a href="tel:1-900-523-3564">
+                      <span class="fa fa-phone"></span>
+                    1-900-523-3564
+                    </a>
+                  </div>
+                  <div class="aa-email hidden-xs">
+                    <a href="mailto:info@markups.com">
+                      <span class="fa fa-envelope-o"></span> info@markups.com
+                    </a>
+                  </div>
+                </div>              
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="aa-header-right" style="cursor: pointer; margin-left: -5%;">
+                  <div class="header-right-click">
+                    <div href="#" class="aa-icon" style="border: 1px solid #fff;"></div>
+                    <div href="#" class="aa-login">Minh Minh
+
+                      <i class="fas fa-chevron-down"></i>
+                    </div>
+                  </div>
+                  <ul class="options-menu" style="z-index: 2;"> 
+                    <li><a href="#">
+                      <i class="far fa-list-alt"></i>
+                      LIST OF POST</a></li>
+                    <li><a href="#">
+                      <i class="fas fa-key"></i>
+                      CHANGE PASSWORD</a></li>
+                    <li><a href="#">
+                      <i class="far fa-user"></i>
+                      PROFILE</a></li>
+                    <li><a href="#">
+                      <i class="fas fa-edit"></i>
+                      POST</a></li>
+                    <li><a href="#">
+                      <i class="fas fa-credit-card"></i>
+                      DEPOSIT MONEY</a></li>
+                    <li><a href="#">
+                      <i class="fas fa-history"></i>
+                      TRANSACTION HISTORY</a></li>
+                    <li><a href="#">
+                      <i class="fas fa-sign-out-alt"></i>
+                      EXIT</a></li>
+                    
+                  </ul>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- End header section -->
+
+  <!-- Start menu section -->
+  <section id="aa-menu-area" style="z-index: 1;">
+    <nav class="navbar navbar-default main-navbar" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <!-- FOR MOBILE VIEW COLLAPSED BUTTON -->
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+            aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- LOGO -->
+          <!-- Text based logo -->
+          <a class="navbar-brand aa-logo" href="index.html"> BTEC <span>LAND</span></a>
+          <!-- Image based logo -->
+          <!-- <a class="navbar-brand aa-logo-img" href="index.html"><img src="img/logo.png" alt="logo"></a> -->
+        </div>
+
+        <!-- navbar  -->
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul id="top-menu" class="nav navbar-nav navbar-right aa-main-nav">
+            <li class="#"><a href="index.html">HOME</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown">BUY</a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="gallery.html">APARTMENT</a></li>
+                <li><a href="gallery.html">PRIVATE HOUSE, STREET HOUSE</a></li>
+                <li><a href="gallery.html">VILLA, ADJACENT HOUSES</a></li>
+                <li><a href="gallery.html">THE GROUND</a></li>
+                <li><a href="gallery.html">RESIDENTIAL LAND</a></li>
+                <li><a href="gallery.html">OFFICE BUILDING</a></li>
+                <li><a href="gallery.html">APARTMENT CONDOTEL</a></li>
+                <li><a href="gallery.html">OFFICETEL APARTMENT</a></li>
+                <li><a href="gallery.html">RESTAURANT</a></li>
+                <li><a href="gallery.html">WAREHOUSE, FACTORY, KIOT</a></li>
+                <li><a href="gallery.html">OTHER HOUSE AND LAND </a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown">RENT</a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="gallery.html">APARTMENT</a></li>
+                <li><a href="gallery.html">OFFICE</a></li>
+                <li><a href="gallery.html">PRIVATE HOUSE, STREET HOUSE</a></li>
+                <li><a href="gallery.html">APARTMENT CONDOTEL</a></li>
+                <li><a href="gallery.html">OFFICETEL APARTMENT</a></li>
+                <li><a href="gallery.html">RESTAURANT</a></li>
+                <li><a href="gallery.html">WAREHOUSE, FACTORY</a></li>
+                <li><a href="gallery.html">OTHER HOUSE AND LAND </a></li>
+
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="blog-archive.html">PROJECT</a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="blog-archive.html">APARTMENT</a></li>
+                <li><a href="blog-archive.html">VILLA, ADJACENT HOUSES</a></li>
+                <li><a href="blog-archive.html">THE GROUND</a></li>
+                <li><a href="blog-archive.html">NEW URBAND AREAS</a></li>
+                <li><a href="blog-archive.html">COMPLEX AREAS</a></li>
+                <li><a href="blog-archive.html">RESORT</a></li>
+                <li><a href="blog-archive.html">CONDOTEL</a></li>
+                <li><a href="blog-archive.html">SOCIAL HOUSING</a></li>
+                <li><a href="blog-archive.html">COMMERCIAL MEDIUM</a></li>
+                <li><a href="blog-archive.html">OFFICE BUILDING</a></li>
+                <li><a href="blog-archive.html">INDUSTRIAL AREA</a></li>
+                <li><a href="blog-archive.html">DIFFERENT</a></li>
+              </ul>
+            </li>
+            <li style="background-color: #ac2925"><a href="contact.html" class="post-button">CREATE POST <i
+                  style="color: #59abe3;" class="fa fa-pencil-square-o" aria-hidden="true"></i> </a></li>
+          </ul>
+        </div>
+        <!-- end of navbar  -->
+
+        <!--/.nav-collapse -->
+      </div>
+    </nav>
+  </section>
+  <!-- End menu section -->
+
+  
+  <!-- End of Header  -->
+
+  <!-- Container  -->
+  <div class="container-p">
+
+    <input type="checkbox" name="" id="nav-input">
+    <label class="nav__overlay" for="nav-input"></label>
+    <div class="content1 nav__content">
+      <label class="nav__close nav__bars-btn" for="nav-input">
+        <i class="fas fa-chevron-circle-left"></i>
+      </label>
+      <div class="content1-head">
+          <div class="content1-info">
+              <div class="content1-image">
+                  <i  class="fas fa-camera-retro"></i>
+              </div>
+              <div class="content-description">
+                  <div class="name">
+                      Minh Minh
+                  </div>
+                  
+                  <div class="wallet">
+                      BtecLand Wallet:
+                      <div class="coin">Coin</div>
+                  </div>
+              </div>
+          </div>
+          
+      </div>
+      <div class="content1-below">
+          <div class="management">MANAGE POST
+              <div class="management-des">
+                  <a href="">
+                    <i class="fas fa-feather-alt"></i>
+                    CREATE NEW POST
+                  </a>
+              </div>
+              <div class="management-des">
+                  <a href="">
+                    <i class="fas fa-list-ol"></i>
+                    LIST OF POST
+                  </a>
+              </div>
+          </div>
+          <div class="management">MANAGEMENT PROFILE
+              <div class="management-des">
+                  <a href=""><i class="far fa-user"></i>
+                    ACCOUNT INFOMATION
+                  </a>
+              </div>
+              <div class="management-des">
+                  <a href="">
+                    <i class="fas fa-key"></i>
+                  CHANGE PASSWORD
+                  </a>
+              </div>
+          </div>
+          <div class="management">MANAGEMENT WALLET
+              <div class="management-des">
+                  <a href="">
+                    <i class="fas fa-wallet"></i>
+                  BALANCE 
+                  </a>
+              </div>
+              <div class="management-des">
+                  <a href="">
+                    <i class="fas fa-history"></i>
+                  TRANSACTION HISTORY
+                  </a>
+              </div>
+          </div>
+          <div class="content1-below-post">
+              <div class="post" >
+                  <a href="" style="color: #fff;">
+                    <i class="fas fa-feather-alt"></i>
+                  CREATE POST
+                  </a>
+              </div>
+          </div>
+      </div>
+    </div>
+    <div class="nav__content2">
+      <label class="open nav__bars-btn" for="nav-input">
+        <i class="fas fa-chevron-circle-right"></i>
+      </label>
+      <ul>
+        <li>
+          <a href="">
+            <i class="fas fa-feather-alt list-icon"></i>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="fas fa-list-ol list-icon"></i>
+          </a>
+        </li>
+        <li>
+          <a href=""><i class="far fa-user list-icon"></i>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="fas fa-key list-icon"></i>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="fas fa-wallet list-icon"></i>
+          </a>
+        </li>
+        <li>
+          <a href="">
+            <i class="fas fa-history list-icon"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="row content3">
+      <!-- <div class="row"> -->
+        <div class="col l-8 content3__con1">
+          <div class=" content3__child content3__basic">
+            <h2 style="margin-bottom: 10px;">Basic Infomation</h2>
+            <div class="btn-group btn-group-toggle choose" data-toggle="buttons">
+              <label class="btn btn-secondary active">
+                <input type="radio" name="options" id="option1" autocomplete="off" checked> Buy
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" id="option2" autocomplete="off"> Rent
+              </label>
+            </div> 
+            <h4>Real estate type*</h4> 
+            <select class="form-control">
+              <option>Apartment</option>
+              <option>Private house, street house</option>
+              <option>Villa, adjacent houses</option>
+              <option>The ground</option>
+              <option>Residential land</option>
+              <option>Office building</option>
+              <option>Apartment condotel</option>
+              <option>Officetel apartment</option>
+              <option>Restaurant</option>
+              <option>Warehouse, factory, kiot</option>
+              <option>Other house and land</option>
+            </select> 
+            <h3>Address</h3>
+            <h4>Provice / City</h4>
+            <select class="form-control" name="ls_province"></select>
+            <h4>District</h4>
+            <select class="form-control" name="ls_district"></select>
+            <h4>Wards</h4>
+            <select class="form-control" name="ls_ward"></select>
+            <script src="vietnamlocalselector.js"></script>
+            <script>
+              var localpicker = new LocalPicker({
+                province: "ls_province",
+                district: "ls_district",
+                ward: "ls_ward"
+                  });
+            </script>
+            <h4>Detail address</h4>
+            <textarea class="form-control" placeholder="Enter detail address"></textarea>
+            
+          </div>
+          <div class=" content3__child content3__post">
+            <h2>Post Info</h2>
+            <h4>Title*</h4>
+            <input class="form-control" type="text" placeholder="Input title">
+            <h4>Description*</h4>
+            <textarea class="form-control" placeholder="Enter description"></textarea>
+          </div>
+          <div class=" content3__child content3__estate">
+            <h2>Real estate information </h2>
+            <h3 style="margin-top: 10px;">Specific description</h3>
+            <h4>Area*</h4>
+            <input class="form-control" type="text" placeholder="Input area (m²)">
+            <h4>Price*</h4>
+            <input class="form-control" type="text" placeholder="Input price / m²">
+            <h4>Bedroom</h4>
+            <div class="bedroom">
+              <button onclick="increment()"><h1><i class="fas fa-plus"></i></h1></button>
+              <button onclick="decrement()"><h1><i class="fas fa-minus"></i></h1></button>
+              <script>
+                function increment() {
+                    document.getElementById('demoInput').stepUp();
+                }
+                function decrement() {
+                    document.getElementById('demoInput').stepDown();
+                }
+              </script>
+              <input class="form-control" id="demoInput" type="number" min=0 max=110>
+            </div>
+            <h4>Bathroom</h4>
+            <div class="bathroom">
+              <button onclick="incrementBr()"><h1><i class="fas fa-plus"></i></h1></button>
+              <button onclick="decrementBr()"><h1><i class="fas fa-minus"></i></h1></button>
+              <script>
+                function incrementBr() {
+                    document.getElementById('demoInputBr').stepUp();
+                }
+                function decrementBr() {
+                    document.getElementById('demoInputBr').stepDown();
+                }
+              </script>
+              <input class="form-control" id="demoInputBr" type="number" min=0 max=110>
+            </div>
+            <h4>Number of floors</h4>
+            <input class="form-control" type="number" placeholder="Number of floors">
+            <h3>More description</h3>
+            <h4>The direction of the house</h4>
+            <select class="form-control">
+              <option>East</option>
+              <option>West</option>
+              <option>South</option>
+              <option>North</option>
+              <option>Northeast</option>
+              <option>Northwest</option>
+              <option>Southeast</option>
+              <option>Southwest</option>
+            </select>
+            <h4>Balcony direction</h4>
+            <select class="form-control">
+              <option>East</option>
+              <option>West</option>
+              <option>South</option>
+              <option>North</option>
+            </select>
+            <h4>Furniture</h4>
+            <input class="form-control" type="text" placeholder="Furniture info">
+            <h4>Facade</h4>
+            <input class="form-control" type="text" placeholder="Facade (m²)">
+            <h4>Front of the entrance road</h4>
+            <input class="form-control" type="text" placeholder="Font of the entrance road (m²)">
+
+          </div>
+          <div class=" content3__child content3__image">
+            <h2 style="margin-bottom: 10px;">Picture</h2>
+            <div id="drag-drop-area"></div>
+ 
+            <script src="https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.js"></script>
+            <script>
+              var uppy = Uppy.Core()
+                .use(Uppy.Dashboard, {
+                  inline: true,
+                  target: '#drag-drop-area'
+                })
+                .use(Uppy.Tus, {endpoint: 'https://master.tus.io/files/'}) //you can put upload URL here, where you want to upload images
+        
+              uppy.on('complete', (result) => {
+                console.log('Upload complete! We’ve uploaded these files:', result.successful)
+              })
+            </script>
+          </div>
+          <div class=" content3__child content3__contact">
+            <h2>Contact Info</h2>
+            <h4>Contact name*</h4>
+            <input placeholder="Nhập tên liên hệ"  type="text" class="input-exist" value="Phan Van Thai (BTEC HN)">
+            <h4>Phone number*</h4>
+            <input placeholder="Nhập tên liên hệ"  type="text" class="input-exist" value="9999999999">
+            <h4>Email</h4>
+            <input placeholder="Nhập tên liên hệ"  type="text" class="input-exist" value="minhminh@gmail.com">
+            <h4>Address</h4>
+            <textarea class="form-control" placeholder="Enter address"></textarea>
+          </div>
+        </div>
+        <div class="col l-4 content3__con2">
+          <div class="content3__con2-child">
+            <h4>Type of post</h4>
+            <select class="form-control">
+              <option>Regular post</option>
+              <option>Vip 1</option>
+              <option>Vip 2</option>
+              <option>Vip 3</option>
+            </select>
+            <h4>Start date</h4>
+            <div class="input-daterange input-group" style="height: 34px;" id="datepicker">
+              <input type="date" class="input-sm form-control" style="height: 34px; width:170px;font-size: 13px; z-index: 0;" name="from" placeholder="From date"/>
+              <span class="input-group-addon">to</span>
+              <input type="date" class="input-sm form-control" style="height: 34px; width:154px;font-size: 13px; z-index: 0;" name="to" placeholder="To date"/>
+            </div>
+            <div class="total-posting-date">
+              <h4>Total posting date</h4>
+              <input type="number" class="form-control">
+            </div>
+            <div class="payment">
+              <div class="payment-title">
+                <div class="cost-day">
+                  Posting cost / day
+                  <div class="money">
+                    USD
+                  </div>
+                </div> 
+                <div class="total-day">
+                  Total days
+                  <div class="day">
+                    Day
+                  </div>
+                </div>
+              </div>
+              <div class="payment-price">
+                Total prices
+              </div>
+              
+            </div>
+            <button>Next</button>
+          </div>
+        <!-- </div> -->
+      </div>
+      
+    </div>
+  </div>
+  <!-- End of container -->
+
+  <!-- Footer  -->
+  <footer id="aa-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-footer-area">
+            <div class="row">
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="aa-footer-left">
+                  <p>BTEC LAND</p>
+                  <p>REAL ESTATE E-COMMERCE SYSTEM</p>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="aa-footer-middle">
+                  <a href="#"><i class="fa fa-facebook"></i></a>
+                  <a href="#"><i class="fa fa-twitter"></i></a>
+                  <a href="#"><i class="fa fa-google-plus"></i></a>
+                  <a href="#"><i class="fa fa-youtube"></i></a>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="aa-footer-right">
+                  <a href="#">Home</a>
+                  <a href="#">Support</a>
+                  <a href="#">License</a>
+                  <a href="#">FAQ</a>
+                  <a href="#">Privacy & Term</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End of Footer  -->
+
+  <!-- jQuery library -->
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+  <script src="js/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.js"></script>
+  <!-- slick slider -->
+  <script type="text/javascript" src="js/slick.js"></script>
+  <!-- Price picker slider -->
+  <script type="text/javascript" src="js/nouislider.js"></script>
+  <!-- mixit slider -->
+  <script type="text/javascript" src="js/jquery.mixitup.js"></script>
+  <!-- Add fancyBox -->
+  <script type="text/javascript" src="js/jquery.fancybox.pack.js"></script>
+  <!-- Custom js -->
+  <script src="js/custom.js"></script>
+    
+    
+</body>
+</html>
