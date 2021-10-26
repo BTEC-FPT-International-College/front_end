@@ -28,13 +28,12 @@
 </head>
 
 <body>
-    <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="navbar-brand-wrapper d-flex justify-content-center">
         <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
-          <a class="navbar-brand brand-logo" href="index.jsp"><img src="images/logo.png" alt="logo" /></a>
-          <a class="navbar-brand brand-logo-mini" href="index.jsp"><img src="images/logo.png" alt="logo" /></a>
+          <a class="navbar-brand brand-logo" href="index.html"><img src="images/logo.png" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo.png" alt="logo" /></a>
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-sort-variant"></span>
           </button>
@@ -65,7 +64,7 @@
             </div>
           </li>
           <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="../index.html" data-toggle="dropdown" id="profileDropdown">
+            <a class="nav-link dropdown-toggle" href="index.html" data-toggle="dropdown" id="profileDropdown">
               <img src="images/faces/face5.jpg" alt="profile" />
               <span class="nav-profile-name">Admin</span>
             </a>
@@ -100,8 +99,8 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="pages/recharge_history.jsp">
-              <i class="mdi mdi-history"></i>
-              <span class="menu-title" style="margin-left: 20px;">Recharge history </span>
+              <i class="mdi mdi-audiobook"></i>
+              <span class="menu-title" style="margin-left: 20px;">Transaction history </span>
             </a>
           </li>
           <li class="nav-item">
@@ -145,7 +144,7 @@
             <div class="collapse" id="a">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="pages/post.jsp"> View </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/tran_post.jsp">  Transaction history </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/tran_post.jsp"> transaction history </a></li>
               </ul>
             </div>
           </li>
@@ -308,15 +307,29 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
   <!-- container-scroller -->
 
   <!-- plugins:js -->
-<%@ include file="inc/plugins.jsp" %>
+  <script src="vendors/base/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <script src="vendors/chart.js/Chart.min.js"></script>
+  <script src="vendors/datatables.net/jquery.dataTables.js"></script>
+  <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="js/off-canvas.js"></script>
+  <script src="js/hoverable-collapse.js"></script>
+  <script src="js/template.js"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page-->
+  <script src="js/dashboard.js"></script>
+  <script src="js/data-table.js"></script>
+  <script src="js/jquery.dataTables.js"></script>
+  <script src="js/dataTables.bootstrap4.js"></script>
+  <!-- End custom js for this page-->
 </body>
 
 </html>

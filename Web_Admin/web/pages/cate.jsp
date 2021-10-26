@@ -3,7 +3,9 @@
     Created on : 21-10-2021, 10:55:01
     Author     : nguyenbamang
 --%>
-
+	
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page autoFlush="true" buffer="1094kb"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -73,8 +75,8 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h2 class="card-body" style="text-align: center;">Category Management</h2>
-                                    <div class="container">
-                                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                   
+                                        <table id="example" class="table table-striped table-bordered" >
                                             <thead>
                                                 <tr>
                                                     <th>
@@ -84,10 +86,10 @@
                                                         Name
                                                     </th>
                                                     <th>
-                                                        Description
+                                                        Image
                                                     </th>
                                                     <th>
-                                                        Image
+                                                        Description
                                                     </th>
                                                     <th>
                                                         View detail
@@ -101,28 +103,32 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Tiger Nixon</td>
-                                                    <td>System Architect</td>
-                                                    <td>Edinburgh</td>
-                                                    <td>61</td>
-                                                    <td> <a href="viewDetailCate.jsp" class="btn btn-primary a-btn-slide-text">
-                                                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                                                            <i class="mdi mdi-eye"></i>
-                                                            <span> <strong> View</strong></span>            
-                                                        </a></td>
-                                                    <td><a href="updateCate.jsp" class="btn btn-warning a-btn-slide-text">
-                                                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                                                            <i class="mdi mdi-border-color"></i>
-                                                            <span> <strong> Update</strong></span>            
-                                                        </a></td>
-                                                    <td><a href="#" class="btn btn-danger a-btn-slide-text">
-                                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                                            <i class="mdi mdi-delete"></i>
-                                                            <span><strong>Delete</strong></span>            
-                                                        </a></td>
-                                                </tr>
-
+                                                <c:if test="${empty requestScope['listC']}">
+                                                    <jsp:forward page = "/CateController?ac=view" />
+                                                </c:if>
+                                                <c:forEach items="${listC}" var = "x" >
+                                                    <tr>
+                                                        <td>${x.getCateID()}</td>
+                                                        <td>${x.getCateName()}</td>
+                                                        <td>${x.getCateImage()}</td>
+                                                        <td>${x.getCateDes()}</td>
+                                                        <td> <a href="viewDetailCate.jsp" class="btn btn-primary a-btn-slide-text">
+                                                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                                                <i class="mdi mdi-eye"></i>
+                                                                <span> <strong> View</strong></span>            
+                                                            </a></td>
+                                                        <td><a href="updateCate.jsp?id=${x.getCateID()}" class="btn btn-warning a-btn-slide-text">
+                                                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                                                <i class="mdi mdi-border-color"></i>
+                                                                <span> <strong> Update</strong></span>            
+                                                            </a></td>
+                                                        <td><a href="../CateController?ac=del&id=${x.getCateID()}" class="btn btn-danger a-btn-slide-text">
+                                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                                <i class="mdi mdi-delete"></i>
+                                                                <span><strong>Delete</strong></span>            
+                                                            </a></td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                             <tfoot>
                                                 <tr>
@@ -150,8 +156,6 @@
                                                 </tr>
                                             </tfoot>
                                         </table>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>

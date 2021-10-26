@@ -7,6 +7,8 @@ package Model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +19,11 @@ public class GetConnection {
     public Connection getConnection() {
         Connection conn = null;
         try {
+            try { 
+               Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(GetConnection.class.getName()).log(Level.SEVERE, null, ex);
+            }
             conn = DriverManager.getConnection("jdbc:mysql://localhost/web?"
                             + "user=root&password=anhmang123");
         } catch (SQLException ex) {

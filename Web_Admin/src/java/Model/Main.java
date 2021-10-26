@@ -5,6 +5,7 @@
 package Model;
 
 import Entity.Category;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,7 +14,8 @@ import Entity.Category;
 public class Main {
     public static void main(String[] args) {
         CategoryModel c = new CategoryModel();
-        System.out.println(c.getListCategory().get(0).getCateName());
+        System.out.println(c.get("CTG01").size());
+        
     }
     
 }
