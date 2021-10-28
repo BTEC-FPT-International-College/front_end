@@ -20,45 +20,45 @@
         <link rel="shortcut icon" href="../images/favicon.png" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
-                   var id = "";
+            var id = "";
             $(document).ready(function () {
                 var now = new Date().toLocaleString();
                 $('#datePicker').val(now);
-                $('#CateID').keyup(function(e) {
-                let select = e.target.value;
-                console.log(select)
-                if(select.length > 5){
-                    $("#check").text("must be less than 5 characters")
-                            $("#check").css({"color": "red","margin-left":"10px"});
-                            $("#add").prop('disabled', true);
-                }else{
-                    $.ajax({
-                    url: "../CateController?ac=checkIDempty",
-                    method: "POST",
-                    data: {get: select},
-                    success: function (data) {
-                        let obj = $.parseJSON(data);
-                        console.log(obj)
-                        if(obj){
-                            $("#check").text("ID already")
-                            $("#check").css({"color": "red","margin-left":"10px"});
-                            $("#add").prop('disabled', true);
-                            
-                        }else{
-                            $("#check").text("ID valid")
-                            $("#check").css({"color": "green","margin-left":"10px"});
-                            $("#add").prop('disabled', false);
-                        }
-                    },
-                    error: function () {
-                        alert("error");
+                $('#CateID').keyup(function (e) {
+                    let select = e.target.value;
+                    console.log(select)
+                    if (select.length > 5) {
+                        $("#check").text("must be less than 5 characters")
+                        $("#check").css({"color": "red", "margin-left": "10px"});
+                        $("#add").prop('disabled', true);
+                    } else {
+                        $.ajax({
+                            url: "../CateController?ac=checkIDempty",
+                            method: "POST",
+                            data: {get: select},
+                            success: function (data) {
+                                let obj = $.parseJSON(data);
+                                console.log(obj)
+                                if (obj) {
+                                    $("#check").text("ID already")
+                                    $("#check").css({"color": "red", "margin-left": "10px"});
+                                    $("#add").prop('disabled', true);
+
+                                } else {
+                                    $("#check").text("ID valid")
+                                    $("#check").css({"color": "green", "margin-left": "10px"});
+                                    $("#add").prop('disabled', false);
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
                     }
-                }); 
-                }
-                        
+
                 });
                 var d = {};
-                $("#add").click(function() {
+                $("#add").click(function () {
                     d.CateID = $("#CateID").val();
                     d.CateName = $("#CateName").val()
                     d.cateImgage = $('#formFileDisabled').val().replace(/C:\\fakepath\\/i, '')
@@ -67,18 +67,34 @@
                     const da = JSON.stringify(d)
                     console.log(da)
                     $.ajax({
-                    url: "../CateController?ac=add",
-                    method: "POST",
-                    data: {get: da},
-                    success: function (data) {
-                        let obj = $.parseJSON(data);
-                        console.log(obj)
-                        
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                }); 
+                        url: "../CateController?ac=add",
+                        method: "POST",
+                        data: {get: da},
+                        success: function (data) {
+                            let rs = $.parseJSON(data);
+                            console.log(rs)
+                            if (rs) {
+                                $("#show").show();
+                            } else {
+                                $("#error").show()
+                            }
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                })
+                $("#x").click(function () {
+                    $("#show").hide()
+                    $("#form").trigger("reset");
+                    $("#add").prop('disabled', true);
+                    $("#check").hide()
+                })
+                $("#chuyen").click(function () {
+                    $("#show").hide()
+                    $("#form").trigger("reset");
+                    $("#add").prop('disabled', true);
+                    $("#check").text("")
                 })
             });
         </script>
@@ -95,18 +111,44 @@
                         <div class="card">
                             <div class="card-body">
                                 <nav aria-label="breadcrumb">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="../index.jsp">Home</a></li>
-                                            <li class="breadcrumb-item"><a href="cate.jsp">Category Management</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">Add new a category</li>
-                                        </ol>
-                                    </nav>
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="../index.jsp">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="cate.jsp">Category Management</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Add new a category</li>
+                                    </ol>
+                                </nav>
                                 <br>
-                                <h2 >Add a new category </h2>
-                                <form class="form-sample">
+                                <h2>Add a new category </h2>
+                                <form class="form-sample" id="form">
                                     <p class="card-description">
                                         Category info
                                     </p>
+                                    <div class="modal" tabindex="-1" id="show" role="dialog">
+                                        <div class="modal-dialog alert-success" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" style="color:green">Successful Add</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span id="x" aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Do you want to stay on the page or change the page?</p>
+                                                    <p>You will move to category management page</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button id="chuyen" type="button" class="btn btn-warning"><i class="mdi mdi-close"></i>Stay</button>
+                                                    <a href="cate.jsp"><button id="close" type="button" class="btn btn-success" data-dismiss="modal"><i class="mdi mdi-arrow-right-bold"></i>Move</button></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-danger alert-dismissible fade show" id="error" role="alert" style="display: none">
+                                        <strong>Fail Add!</strong> Please wait check out again!!
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -115,18 +157,19 @@
                                                 </span>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend bg-transparent" >
-                                                        <div class="input-group-text" style="background-color: #ed1607 ;border-color: #ed1607;display: block">
+                                                        <div class="input-group-text" style="background-color: #ed1607 ;border-color: #ed1607">
                                                             <i class="mdi mdi-key-variant "></i>
                                                         </div>
                                                     </div>
                                                     <input type="text" id="CateID" name="id" class="form-control" style="border-color:#686868;border-left-color: #ed1607 "  placeholder="Enter Category ID " required="true" />
 
                                                 </div>
-                                                <br>
-                                                <small id="passwordHelpInline" class="text-muted">
-                                                    Must be less than 5 characters and should be start widt CTG
-                                                </small>
+                                              
                                             </div>
+                                            
+                                                <small id="passwordHelpInline" class="text-muted">
+                                                    ID must be less than 5 characters and should be start widt CTG
+                                                </small>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -138,10 +181,16 @@
                                                         </span>
                                                     </div>
                                                     <input type="text" id="CateName" name="name" class="form-control"style="border-color:#1c1b1b;border-left-color: #ed1607 " placeholder="Enter Category Name" />
+                                                
                                                 </div>
+                                                
                                             </div>
+                                            <small id="passwordHelpInline" class="text-muted">
+                                                    Name must be less than 45 characters 
+                                                </small>
                                         </div>
                                     </div>
+                                    <br>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -154,6 +203,10 @@
                                                     </div>
                                                     <input type="file" class="form-control file-upload-info" id="formFileDisabled" style="border-color:#1c1b1b;border-left-color: #ed1607 "  name="file" placeholder="Upload Image"><br/>
                                                 </div>
+                                                <br>
+                                                <small id="passwordHelpInline" class="text-muted">
+                                                    File name must be less than 45 characters include filename.format
+                                                </small>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
