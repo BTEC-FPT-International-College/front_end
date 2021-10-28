@@ -3,7 +3,7 @@
     Created on : 21-10-2021, 10:55:01
     Author     : nguyenbamang
 --%>
-	
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page autoFlush="true" buffer="1094kb"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -16,7 +16,6 @@
         <link rel="stylesheet" href="../vendors/base/vendor.bundle.base.css">
         <!-- endinject -->
         <!-- plugin css for this page -->
-        <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="../vendors/datatables.net-bs4/dataTables.bootstrap4.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
         <!-- End plugin css for this page -->
@@ -54,6 +53,30 @@
                         }
                     }
                 });
+                $("#show").hide();
+                $("#error").hide();
+                $(".delete").click(function () {
+                    let select = $(this).attr("title")
+                    console.log(select)
+                    $.ajax({
+                        url: "../CateController?ac=del",
+                        method: "POST",
+                        data: {get: select},
+                        success: function (data) {
+                            let obj = $.parseJSON(data);
+                            console.log(obj)
+                            if (obj) {
+                                $("#show").show();
+                                setTimeout(function () {
+                                    location.reload()
+                                },2000);
+                            }
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                })
 
             });
         </script>
@@ -70,92 +93,143 @@
             <%@ include file="../inc/sidebar.jsp" %>
             <div class="main-panel">
                 <div class="content-wrapper">
+
                     <div class="row">
                         <div class="col-md-12 stretch-card">
+
                             <div class="card">
                                 <div class="card-body">
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="../index.jsp">Home</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Category Management</li>
+                                        </ol>
+                                    </nav>
                                     <h2 class="card-body" style="text-align: center;">Category Management</h2>
-                                   
-                                        <table id="example" class="table table-striped table-bordered" >
-                                            <thead>
+                                    <!-- Modal -->
+                                    <div class="modal" tabindex="-1" id="show" role="dialog">
+                                        <div class="modal-dialog alert-success" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" style="color:green">Successful Delete</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Please wait! Reloading the page</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-danger alert-dismissible fade show" id="error" role="alert">
+                                        <strong>Fail Deelete!</strong> Please wait check out again!!
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <a href="addCate.jsp" ><button style="margin-bottom: 10px" type="button" class="btn btn-success">Add new a category</button></a>
+                                    <table id="example" class="table table-striped table-bordered" >
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    ID
+                                                </th>
+                                                <th>
+                                                    Name
+                                                </th>
+                                                <th>
+                                                    Image
+                                                </th>
+                                                <th>
+                                                    Description
+                                                </th>
+                                                <th>
+                                                    View detail
+                                                </th>
+                                                <th>
+                                                    Update
+                                                </th>
+                                                <th>
+                                                    Delete
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:if test="${empty requestScope['listC']}">
+                                                <jsp:forward page = "/CateController?ac=view" />
+                                            </c:if>
+                                            <c:forEach items="${listC}" var = "x" >
                                                 <tr>
-                                                    <th>
-                                                        ID
-                                                    </th>
-                                                    <th>
-                                                        Name
-                                                    </th>
-                                                    <th>
-                                                        Image
-                                                    </th>
-                                                    <th>
-                                                        Description
-                                                    </th>
-                                                    <th>
-                                                        View detail
-                                                    </th>
-                                                    <th>
-                                                        Update
-                                                    </th>
-                                                    <th>
-                                                        Delete
-                                                    </th>
+                                                    <td>${x.getCateID()}</td>
+                                                    <td>${x.getCateName()}</td>
+                                                    <td>${x.getCateImage()}</td>
+                                                    <td>${x.getCateDes()}</td>
+                                                    <td> <a href="viewDetailCate.jsp" class="btn btn-primary a-btn-slide-text">
+                                                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                                            <i class="mdi mdi-eye"></i>
+                                                            <span> <strong> View</strong></span>            
+                                                        </a></td>
+                                                    <td><a href="updateCate.jsp?id=${x.getCateID()}" class="btn btn-warning a-btn-slide-text">
+                                                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                                            <i class="mdi mdi-border-color"></i>
+                                                            <span> <strong> Update</strong></span>            
+                                                        </a></td>
+                                                    <td>
+                                                        <div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal${x.getCateID()}"><i class="mdi mdi-delete"></i>Delete</button>
+                                                            <div id="my-modal${x.getCateID()}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                    <div class="modal-content border-0">
+                                                                        <div class="modal-body p-0">
+                                                                            <div class="card border-0 p-sm-3 p-2 justify-content-center">
+                                                                                <div class="card-header pb-0 bg-white border-0 ">
+                                                                                    <div class="row">
+                                                                                        <div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>
+                                                                                    </div>
+                                                                                    <p class="font-weight-bold mb-2"> Are you sure you wanna delete ${x.getCateID()} category ?</p>
+                                                                                    <p class="text-muted "> This change may affect other data. Be sure !!!</p>
+                                                                                </div>
+                                                                                <div class="card-body px-sm-4 mb-2 pt-1 pb-0">
+                                                                                    <div class="row justify-content-end no-gutters">
+                                                                                        <div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>
+                                                                                        <div class="col-auto"><div class="col-auto"><button title="${x.getCateID()}" type="button" class="btn btn-danger px-4 delete" data-dismiss="modal"><i class="mdi mdi-delete"></i>Delete</button></div></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                    </td>
                                                 </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:if test="${empty requestScope['listC']}">
-                                                    <jsp:forward page = "/CateController?ac=view" />
-                                                </c:if>
-                                                <c:forEach items="${listC}" var = "x" >
-                                                    <tr>
-                                                        <td>${x.getCateID()}</td>
-                                                        <td>${x.getCateName()}</td>
-                                                        <td>${x.getCateImage()}</td>
-                                                        <td>${x.getCateDes()}</td>
-                                                        <td> <a href="viewDetailCate.jsp" class="btn btn-primary a-btn-slide-text">
-                                                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                                                                <i class="mdi mdi-eye"></i>
-                                                                <span> <strong> View</strong></span>            
-                                                            </a></td>
-                                                        <td><a href="updateCate.jsp?id=${x.getCateID()}" class="btn btn-warning a-btn-slide-text">
-                                                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                                                                <i class="mdi mdi-border-color"></i>
-                                                                <span> <strong> Update</strong></span>            
-                                                            </a></td>
-                                                        <td><a href="../CateController?ac=del&id=${x.getCateID()}" class="btn btn-danger a-btn-slide-text">
-                                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                                                <i class="mdi mdi-delete"></i>
-                                                                <span><strong>Delete</strong></span>            
-                                                            </a></td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>
-                                                        ID
-                                                    </th>
-                                                    <th>
-                                                        Name
-                                                    </th>
-                                                    <th>
-                                                        Description
-                                                    </th>
-                                                    <th>
-                                                        Image
-                                                    </th>
-                                                    <th>
-                                                        View detail
-                                                    </th>
-                                                    <th>
-                                                        Update
-                                                    </th>
-                                                    <th>
-                                                        Delete
-                                                    </th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
+                                            </c:forEach>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>
+                                                    ID
+                                                </th>
+                                                <th>
+                                                    Name
+                                                </th>
+                                                <th>
+                                                    Description
+                                                </th>
+                                                <th>
+                                                    Image
+                                                </th>
+                                                <th>
+                                                    View detail
+                                                </th>
+                                                <th>
+                                                    Update
+                                                </th>
+                                                <th>
+                                                    Delete
+                                                </th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
                                 </div>
                             </div>
                         </div>

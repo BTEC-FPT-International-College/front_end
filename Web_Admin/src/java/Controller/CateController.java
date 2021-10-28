@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import jdk.nashorn.internal.parser.JSONParser;
 
 /**
  *
@@ -42,30 +43,32 @@ public class CateController extends HttpServlet {
             request.getRequestDispatcher("pages/cate.jsp").forward(request, response);
         }
         if (act.equals("add")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Category cate = json.fromJson(op, Category.class);
+            CategoryModel am = new CategoryModel();
+            boolean a = am.addCategory(cate.getCateID(), cate.getCateName(), cate.getCateImage(), cate.getCateDes(), cate.getCateCreateDate());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+          if (act.equals("del")) {
+            String op = request.getParameter("get");
+            CategoryModel am = new CategoryModel();
+            Boolean list = am.deleteCC(op);
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+          if (act.equals("update")) {
             String id = request.getParameter("id");
             String name = request.getParameter("name");
             String des = request.getParameter("description");
-            String file = request.getParameter("file");
-            String create = request.getParameter("create");
-            CategoryModel am = new CategoryModel();
-            if (am.checkCateExsist(id)) {
-                try (PrintWriter out = response.getWriter()) {
-                    request.setAttribute("error", "ID already empty");
-                    request.getRequestDispatcher("pages/cate.jsp").forward(request, response);
-                }
-            } else {
-                if (am.addCategory(id,name,file ,des,create)) {
-                    response.sendRedirect("pages/cate.jsp");
-                } else {
-                    request.setAttribute("error", "Error add !");
-                    response.sendRedirect("pages/cate.jsp");
-                }
-            }
-        }
-          if (act.equals("del")) {
-            String id = request.getParameter("id");
+            String file = request.getParameter("upfile");
+            String update = request.getParameter("update");
               CategoryModel am = new CategoryModel();
-            if (am.deleteCC(id)) {
+            if (am.updateCC(id, des, file, name, update)) {
                 response.sendRedirect("pages/cate.jsp");
             } else {
                 response.sendRedirect("error.jsp");
@@ -80,7 +83,15 @@ public class CateController extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
-       
+       if (act.equals("checkIDempty")) {
+            String op = request.getParameter("get");
+            CategoryModel am = new CategoryModel();
+            Boolean list = am.checkCateExsist(op);
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
