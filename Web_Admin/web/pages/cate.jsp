@@ -23,13 +23,14 @@
         <link rel="stylesheet" href="../css/style.css">
         <!-- endinject -->
         <link rel="shortcut icon" href="../images/favicon.png" />
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
         <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+       
         <script>
             $(document).ready(function () {
 
@@ -55,7 +56,7 @@
                 });
                 $("#show").hide();
                 $("#error").hide();
-                $(".delete").click(function () {
+                $(".delete[target='_blank']").click(function () {
                     let select = $(this).attr("title")
                     console.log(select)
                     $.ajax({
@@ -69,7 +70,7 @@
                                 $("#show").show();
                                 setTimeout(function () {
                                     location.reload()
-                                },2000);
+                                },1000);
                             }
                         },
                         error: function () {
@@ -93,7 +94,6 @@
             <%@ include file="../inc/sidebar.jsp" %>
             <div class="main-panel">
                 <div class="content-wrapper">
-
                     <div class="row">
                         <div class="col-md-12 stretch-card">
 
@@ -107,7 +107,7 @@
                                     </nav>
                                     <h2 class="card-body" style="text-align: center;">Category Management</h2>
                                     <!-- Modal -->
-                                    <div class="modal" tabindex="-1" id="show" role="dialog">
+                                    <div class="modal" tabindex="-1" id="show" role="dialog" style="display: none ">
                                         <div class="modal-dialog alert-success" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -122,7 +122,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="alert alert-danger alert-dismissible fade show" id="error" role="alert">
+                                    <div class="alert alert-danger alert-dismissible fade show" id="error" role="alert" style="display: none ">
                                         <strong>Fail Deelete!</strong> Please wait check out again!!
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
@@ -165,7 +165,7 @@
                                                     <td>${x.getCateName()}</td>
                                                     <td>${x.getCateImage()}</td>
                                                     <td>${x.getCateDes()}</td>
-                                                    <td> <a href="viewDetailCate.jsp" class="btn btn-primary a-btn-slide-text">
+                                                    <td> <a href="viewDetailCate.jsp?id=${x.getCateID()}" class="btn btn-primary a-btn-slide-text">
                                                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                                                             <i class="mdi mdi-eye"></i>
                                                             <span> <strong> View</strong></span>            
@@ -192,7 +192,7 @@
                                                                                 <div class="card-body px-sm-4 mb-2 pt-1 pb-0">
                                                                                     <div class="row justify-content-end no-gutters">
                                                                                         <div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>
-                                                                                        <div class="col-auto"><div class="col-auto"><button title="${x.getCateID()}" type="button" class="btn btn-danger px-4 delete" data-dismiss="modal"><i class="mdi mdi-delete"></i>Delete</button></div></div>
+                                                                                        <div class="col-auto"><div class="col-auto"><button title="${x.getCateID()}" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Delete</button></div></div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -200,6 +200,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             </c:forEach>

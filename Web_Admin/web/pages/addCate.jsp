@@ -61,8 +61,8 @@
                 $("#add").click(function () {
                     d.CateID = $("#CateID").val();
                     d.CateName = $("#CateName").val()
-                    d.cateImgage = $('#formFileDisabled').val().replace(/C:\\fakepath\\/i, '')
-                    d.cateDes = $("exampleTextarea1").text()
+                    d.CateImage = $('#formFileDisabled').val().replace(/C:\\fakepath\\/i, '')
+                    d.CateDes = $("#exampleTextarea1").val()
                     d.CateCreateDate = $("#datePicker").val()
                     const da = JSON.stringify(d)
                     console.log(da)
@@ -218,7 +218,6 @@
                                                             <i class="mdi mdi-alert-circle "></i>
                                                         </span>
                                                     </div>
-
                                                     <textarea class="form-control" id="exampleTextarea1" style="border-color:#1c1b1b;border-left-color: #ed1607 " name="description" placeholder="Enter Category Description" rows="4"></textarea>
                                                 </div>
                                             </div>

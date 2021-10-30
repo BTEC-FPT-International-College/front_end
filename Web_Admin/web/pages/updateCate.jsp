@@ -60,6 +60,45 @@
                     var y = $("#img").val().replace(/C:\\fakepath\\/i, '')
                     $("#upfile").val(y)
                 })
+                var d = {};
+                $("#add").click(function () {
+                    d.CateID = $("#CateID").val();
+                    d.CateName = $("#CateName").val()
+                    d.CateImage = $('#upfile').val()
+                    d.CateDes = $("#exampleTextarea1").val()
+                    d.CateUpdateDate = $("#datePicker").val()
+                    const da = JSON.stringify(d)
+                    console.log(da)
+                    $.ajax({
+                        url: "../CateController?ac=update",
+                        method: "POST",
+                        data: {get: da},
+                        success: function (data) {
+                            let rs = $.parseJSON(data);
+                            console.log(rs)
+                            if (rs) {
+                                $("#show").show();
+                            } else {
+                                $("#error").show()
+                            }
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                })
+                $("#x").click(function () {
+                    $("#show").hide()
+                    //$("#form").trigger("reset");
+                    //$("#add").prop('disabled', true);
+                    //$("#check").hide()
+                })
+                $("#chuyen").click(function () {
+                    $("#show").hide()
+                    //$("#form").trigger("reset");
+                    //$("#add").prop('disabled', true);
+                    //$("#check").text("")
+                })
             });
         </script>
     </head>
@@ -73,12 +112,45 @@
                     <div class="col-12 grid-margin">
                         <div class="card">
                             <div class="card-body">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="../index.jsp">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="cate.jsp">Category Management</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Update category</li>
+                                    </ol>
+                                </nav>
                                 <h2 >Update category <%=request.getParameter("id")%> </h2>
                                 <h1 id="getid" style="display: none"><%=request.getParameter("id")%></h1>
-                                <form class="form-sample" action="../CateController?ac=update" method="POST">
+                                <form class="form-sample" >
                                     <p class="card-description">
                                         Category info
                                     </p>
+                                    <div class="modal" tabindex="-1" id="show" role="dialog">
+                                        <div class="modal-dialog alert-success" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" style="color:green">Successful Update</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span id="x" aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Do you want to stay on the page or change the page?</p>
+                                                    <p>You will move to category management page</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button id="chuyen" type="button" class="btn btn-warning"><i class="mdi mdi-close"></i>Stay</button>
+                                                    <a href="cate.jsp"><button id="close" type="button" class="btn btn-success" data-dismiss="modal"><i class="mdi mdi-arrow-right-bold"></i>Move</button></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-danger alert-dismissible fade show" id="error" role="alert" style="display: none">
+                                        <strong>Fail Update!</strong> Please wait check out again!!
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -157,8 +229,9 @@
                                         </div>
                                     </div>
                                     <div style="float: right;">
-                                        <input type="submit" value="Update " class="btn btn-warning mr-2" />
+                                       <input id="add" type="button" value="Update" class="btn btn-primary mr-2" />
                                         <button class="btn btn-light">Reset</button>
+                                        <a href="cate.jsp" class="btn btn-danger">Cancle</a>
                                     </div>
                                 </form>
                             </div>

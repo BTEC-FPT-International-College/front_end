@@ -5,6 +5,7 @@
 package Controller;
 import com.google.gson.Gson;
 import Entity.Category;
+import Entity.ViewDetailCate;
 import Model.CategoryModel;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -62,22 +63,28 @@ public class CateController extends HttpServlet {
             response.getWriter().write(listTrainee);
         }
           if (act.equals("update")) {
-            String id = request.getParameter("id");
-            String name = request.getParameter("name");
-            String des = request.getParameter("description");
-            String file = request.getParameter("upfile");
-            String update = request.getParameter("update");
-              CategoryModel am = new CategoryModel();
-            if (am.updateCC(id, des, file, name, update)) {
-                response.sendRedirect("pages/cate.jsp");
-            } else {
-                response.sendRedirect("error.jsp");
-            }
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Category cate = json.fromJson(op, Category.class);
+            CategoryModel am = new CategoryModel();
+            boolean a = am.updateCC(cate.getCateID(), cate.getCateName(), cate.getCateImage(), cate.getCateDes(), cate.getCateUpdateDate());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
         }
         if (act.equals("viewCategory")) {
             String op = request.getParameter("get");
             CategoryModel am = new CategoryModel();
             Category list = am.getCategory(op);
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("viewCateDetail")) {
+            String op = request.getParameter("get");
+            CategoryModel am = new CategoryModel();
+            ViewDetailCate list = am.viewCateDetail(op);
             Gson json = new Gson();
             String listTrainee = json.toJson(list);
             response.setContentType("text/html");

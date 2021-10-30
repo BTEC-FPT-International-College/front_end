@@ -5,24 +5,33 @@
 package Model;
 
 import Entity.Category;
+import Entity.ViewDetailCate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Statement;
+
 /**
  *
  * @author nguyenbamang
  */
 public class CategoryModel {
-     public ArrayList<Category> getListCategory() {
+
+    public ArrayList<Category> getListCategory() {
         ArrayList<Category> list = new ArrayList<>();
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {
             Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM tbl_category ORDER BY Create_Day DESC");
+            ResultSet rs = stm.executeQuery("SELECT CategoryID,\n" +
+"COALESCE(Name,\"You haven't given a name yet\"),\n" +
+"coalesce(Img,\"You haven't given a image yet\"),\n" +
+"coalesce(Des,\"You haven't given a description yet\"),\n" +
+"Create_Day,\n" +
+"coalesce(Update_Day,\"It has never been updated\")\n" +
+"FROM web.tbl_category; ORDER BY Create_Day DESC");
             Category acc = null;
             while (rs.next()) {
                 acc = new Category();
@@ -42,7 +51,8 @@ public class CategoryModel {
         }
         return list;
     }
-     public boolean checkCateExsist(String id) {
+
+    public boolean checkCateExsist(String id) {
         boolean result = false;
         String sql = "SELECT * FROM tbl_category WHERE CategoryID = ?";
         GetConnection cn = new GetConnection();
@@ -61,7 +71,7 @@ public class CategoryModel {
         return result;
     }
 
-    public boolean addCategory(String id, String name, String img, String des,String CreatDay) {
+    public boolean addCategory(String id, String name, String img, String des, String CreatDay) {
         String sql = "INSERT INTO tbl_category(CategoryID,Name,Img,Des,Create_Day) VALUES(?,?,?,?,?)";
         int result = 0;
         GetConnection cn = new GetConnection();
@@ -98,7 +108,8 @@ public class CategoryModel {
         }
         return result > 0;
     }
-     public Category getCategory(String id) {
+
+    public Category getCategory(String id) {
         Category acc = null;
         String sql = "SELECT * FROM tbl_category WHERE CategoryID = ?";
         GetConnection cn = new GetConnection();
@@ -113,6 +124,7 @@ public class CategoryModel {
                 acc.setCateName(rs.getString(2));
                 acc.setCateImage(rs.getString(3));
                 acc.setCateDes(rs.getString(4));
+                acc.setCateCreateDate(rs.getString(5));
                 acc.setCateUpdateDate(rs.getString(6));
             }
             rs.close();
@@ -123,7 +135,35 @@ public class CategoryModel {
         }
         return acc;
     }
-    public boolean updateCC(String id, String des, String img, String name,String UpdateDate) {
+
+    public ViewDetailCate viewCateDetail(String id) {
+        ViewDetailCate acc = null;
+        String sql = "SELECT tbl_post.CategoryID,COUNT(tbl_post.PostID ) AS \"So luong\", COALESCE(SUM(tbl_transaction_history.Price),0) AS \"Sum\" \n"
+                + "FROM tbl_post ,tbl_transaction_history \n"
+                + "Where tbl_post.PostID = tbl_transaction_history.PostID \n"
+                + "AND tbl_post.CategoryID = ?\n"
+                + ";";
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                acc = new ViewDetailCate();
+                acc.setPostTotal(rs.getInt(2));
+                acc.setVenueTotal(rs.getInt(3));
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return acc;
+    }
+
+    public boolean updateCC(String id, String name, String img, String des, String UpdateDate) {
         String sql = "UPDATE tbl_category SET Name = ?, "
                 + "Img = ?, Des = ?, Update_Day = ? WHERE CategoryID = ? ";
         int result = 0;
