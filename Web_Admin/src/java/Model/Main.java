@@ -13,9 +13,8 @@ import java.util.ArrayList;
  */
 public class Main {
     public static void main(String[] args) {
-        CategoryModel c = new CategoryModel();
-        System.out.println(c.viewCateDetail("aaa").getVenueTotal());
-        System.out.println(c.viewCateDetail("aaa").getPostTotal());
+        SupModel s = new SupModel();
+        System.out.println(s.updateSup("SUP03", "Update", "", "", "", "", "", "", ""));
         
     }
     

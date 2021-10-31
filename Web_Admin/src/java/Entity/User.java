@@ -16,7 +16,7 @@ public class User {
     private String Address;
     private String Date_of_Birth;
     private String Password;
-    private String Reward_point;
+    private int Reward_point;
     private String Gender;
     private String CreateDate;
     private String UpdateDate;
@@ -25,7 +25,7 @@ public class User {
     public User() {
     }
 
-    public User(String UserID, String FullName, String Phone, String Email, String Address, String Date_of_Birth, String Password, String Reward_point, String Gender, String CreateDate, String UpdateDate, String RoleId) {
+    public User(String UserID, String FullName, String Phone, String Email, String Address, String Date_of_Birth, String Password, int Reward_point, String Gender, String CreateDate, String UpdateDate, String RoleId) {
         this.UserID = UserID;
         this.FullName = FullName;
         this.Phone = Phone;
@@ -96,11 +96,11 @@ public class User {
         this.Password = Password;
     }
 
-    public String getReward_point() {
+    public int getReward_point() {
         return Reward_point;
     }
 
-    public void setReward_point(String Reward_point) {
+    public void setReward_point(int Reward_point) {
         this.Reward_point = Reward_point;
     }
 
