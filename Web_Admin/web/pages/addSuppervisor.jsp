@@ -12,21 +12,126 @@
         <title>Add a new suppervisor Page</title>
         <link rel="stylesheet" href="../vendors/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="../vendors/base/vendor.bundle.base.css">
-        <!-- endinject -->
-        <!-- plugin css for this page -->
-        <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="../vendors/datatables.net-bs4/dataTables.bootstrap4.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
         <!-- End plugin css for this page -->
         <!-- inject:css -->
         <link rel="stylesheet" href="../css/style.css">
         <!-- endinject -->
-
         <link rel="shortcut icon" href="../images/favicon.png" />
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
         <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+        <script>
+            $(document).ready(function () {
+                var now = new Date().toLocaleString();
+                $('#datePicker').val(now);
+                $("#select").on("mouseover", function (event) {
+                    $.ajax({
+                        url: "../SupController?ac=viewCategory",
+                        method: "GET",
+                        success: function (data) {
+                            let rs = $.parseJSON(data);
+                            console.log(rs)
+                            $.each(rs, function (key, value) {
+                                $('#select').append('<option value="' + value.CateID + '">' + value.CateName + '</option>')
+                            });
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                    $(this).off(event);
+                });
+                $('#supID').keyup(function (e) {
+                    let select = e.target.value;
+                    console.log(select)
+                    if (select.length > 5) {
+                        $("#checkid").text("must be less than 5 characters")
+                        $("#checkid").css({"color": "red", "margin-left": "10px"});
+                        $("#add").prop('disabled', true);
+                    } else {
+                        $.ajax({
+                            url: "../SupController?ac=checkIDempty",
+                            method: "POST",
+                            data: {get: select},
+                            success: function (data) {
+                                let obj = $.parseJSON(data);
+                                console.log(obj)
+                                if (obj) {
+                                    $("#checkid").text("ID already")
+                                    $("#checkid").css({"color": "red", "margin-left": "10px"});
+                                    $("#add").prop('disabled', true);
 
+                                } else {
+                                    $("#checkid").text("ID valid")
+                                    $("#checkid").css({"color": "green", "margin-left": "10px"});
+                                    $("#add").prop('disabled', false);
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+
+                });
+                $('#phone').keyup(function (e) {
+                    let select = e.target.value;
+                    console.log(select)
+                    if (!phone_validate(select)) {
+                        $("#checkphone").text("must be less than 12 characters or is a phone number")
+                        $("#checkphone").css({"color": "red", "margin-left": "10px"});
+                        $("#add").prop('disabled', true);
+                    } else {
+                        $("#checkphone").text("Phone Number valid")
+                        $("#checkphone").css({"color": "green", "margin-left": "10px"});
+                        $("#add").prop('disabled', false);
+                        e.preventDefault();
+                    }
+
+                });
+                $('#email').keyup(function (e) {
+                    let select = e.target.value;
+                    console.log(select)
+                    var re = /^\w+([-+.'][^\s]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+
+                    var emailFormat = re.test($("#email").val()); // This return result in Boolean type
+
+                    if (!emailFormat) {
+                        $("#checkemail").text("Email is not valid")
+                        $("#checkemail").css({"color": "red", "margin-left": "10px"});
+                        $("#add").prop('disabled', true);
+                    }else {
+                        $("#checkemail").text("Email is valid")
+                        $("#checkemail").css({"color": "green", "margin-left": "10px"});
+                        $("#add").prop('disabled', false);
+                    }
+
+                });
+                var d = {};
+                $("#add").click(function () {
+                    d.UserID = $("#supID").val();
+                    d.FullName = $("#supName").val()
+                    d.Phone = $('#phone').val()
+                    d.Email = $("#email").val()
+                    d.Address = $("#address").val()
+                    d.Date_of_Birth = $("#datepicker").val();
+                    d.Password = $("#pass").val()
+
+                    d.Gender = $('input[name=membershipRadios]:checked', '#myForm').val();
+                    d.CreateDate = $("#datePicker").val()
+                    const da = JSON.stringify(d)
+                    console.log(da)
+
+                })
+            });
+            function phone_validate(phno)
+            {
+                var regexPattern = new RegExp(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im);    // regular expression pattern
+                return regexPattern.test(phno);
+            }
+        </script>
 
     </head>
     <body>
@@ -38,8 +143,15 @@
                     <div class="col-12 grid-margin">
                         <div class="card">
                             <div class="card-body">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="../index.jsp">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="suppervisor.jsp">Suppervisor Management</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Add new a suppervisor</li>
+                                    </ol>
+                                </nav>
                                 <h2>Add a new suppervisor </h2>
-                                <form class="form-sample">
+                                <form class="form-sample" id="myForm">
                                     <p class="card-description">
                                         Supervisor info
                                     </p>
@@ -48,36 +160,47 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">ID</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" />
+                                                    <input id="supID" type="text" class="form-control" style="border-color:#686868" placeholder="Enter ID" required="true" />
+                                                    <small id="checkid">
+                                                        ID must be less than 5 characters and should be start widt CTG
+                                                    </small>
                                                 </div>
                                             </div>
+
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">FullName</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" />
+                                                    <input id="supName" type="text" class="form-control" style="border-color:#686868" placeholder="Enter Full Name" required="true" />
                                                 </div>
+
                                             </div>
+
                                         </div>
                                     </div>
                                     <div class="row">
 
                                         <div class="col-md-6">
                                             <div class="form-group row">
-                                                <label class="col-sm-3 col-form-label">Username</label>
+                                                <label class="col-sm-3 col-form-label">Email</label>
                                                 <div class="col-sm-9">
-                                                    <input class="form-control" />
+                                                    <input id="email" class="form-control" style="border-color:#686868" placeholder="Enter Email" required="true"/>
+                                                    <small id="checkemail">
+                                                        
+                                                    </small>
                                                 </div>
                                             </div>
+
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Password</label>
                                                 <div class="col-sm-9">
-                                                    <input class="form-control" />
+                                                    <input id="pass" class="form-control" style="border-color:#686868" placeholder="Enter Password" required="true" />
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                     <div class="row">
@@ -85,54 +208,35 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Address</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" />
+                                                    <input id="address" type="text" class="form-control" placeholder="Enter Address" style="border-color:#686868" required ="true"/>
                                                 </div>
                                             </div>
+
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Phone</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" />
+                                                    <input id="phone" type="text" class="form-control" style="border-color:#686868" placeholder="Enter Phone" required="true" />
+                                                    <small id="checkphone">
+                                                        Phone must be less than 12 characters and is number
+                                                    </small>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group row">
+                                        <div class="col-md-6" style="border-color:#686868">
+                                            <div class="form-group row" style="border-color:#686868">
                                                 <label class="col-sm-3 col-form-label">Category</label>
-                                                <div class="col-sm-9">
-                                                    <select class="form-control" name="ls_provice"> 
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 col-form-label">Category</label>
-                                                <div class="col-sm-9">
-                                                    <select class="form-control">
-                                                        <option>Category1</option>
+                                                <div class="col-sm-9" >
+                                                    <select id="select" class="form-control" style="border-color:#686868" required="true" >
 
                                                     </select>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 col-form-label">Category</label>
-                                                <div class="col-sm-9">
-                                                    <select class="form-control">
-                                                        <option>Category1</option>
-                                                        <option>Category2</option>
-                                                        <option>Category3</option>
-                                                        <option>Category4</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group row">
@@ -141,7 +245,7 @@
                                                     <div class="form-check">
                                                         <label class="form-check-label">
                                                             <input type="radio" class="form-check-input" name="membershipRadios"
-                                                                   id="membershipRadios1" value="" checked>
+                                                                   id="membershipRadios1" value="Male" checked>
                                                             Male
                                                         </label>
                                                     </div>
@@ -150,20 +254,21 @@
                                                     <div class="form-check">
                                                         <label class="form-check-label">
                                                             <input type="radio" class="form-check-input" name="membershipRadios"
-                                                                   id="membershipRadios2" value="option2">
+                                                                   id="membershipRadios2" value="Female">
                                                             Female
                                                         </label>
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Date of Birth</label>
-                                                <div class="col-sm-9">
-                                                    <input id="datepicker" placeholder="dd/mm/yyyy" />
+                                                <div class="col-sm-9" style="border-color:#686868">
+                                                    <input id="datepicker" placeholder="dd/mm/yyyy" required="true">
                                                     <script>
                                                         $('#datepicker').datepicker({
                                                             uiLibrary: 'bootstrap4'
@@ -171,10 +276,21 @@
                                                     </script>
                                                 </div>
                                             </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row" style="display: ">
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label class="col-sm-3 col-form-label">CreateDay</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" readonly="true" id="datePicker" name="create" class="form-control" />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div style="float: right;">
-                                        <input type="submit" value="Add" class="btn btn-primary mr-2" />
+                                        <input id="add" type="button" value="Add" disabled="true" class="btn btn-primary mr-2" />
                                         <button class="btn btn-light">Reset</button>
                                     </div>
                                 </form>

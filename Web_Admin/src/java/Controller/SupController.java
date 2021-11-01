@@ -4,8 +4,14 @@
  */
 package Controller;
 
+import Entity.Category;
+import Entity.User;
+import Model.CategoryModel;
+import Model.SupModel;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,17 +37,48 @@ public class SupController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SupController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SupController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String act = request.getParameter("ac");
+            if (act.equals("view")) {
+            SupModel am = new SupModel();
+            ArrayList<User> list = am.getListSup();
+            request.setAttribute("listS", list);
+            request.getRequestDispatcher("pages/suppervisor.jsp").forward(request, response);
+        }
+        if (act.equals("add")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            User sup = json.fromJson(op, User.class);
+            SupModel am = new SupModel();
+            boolean a = am.addSup(sup.getUserID(),sup.getFullName(),sup.getPhone(),sup.getEmail(),sup.getAddress(),sup.getDate_of_Birth(),sup.getPassword(),0,sup.getGender(),sup.getCreateDate(),2);
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("del")) {
+            String op = request.getParameter("get");
+            SupModel am = new SupModel();
+            Boolean list = am.deleteSup(op);
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("viewCategory")) {
+            CategoryModel am = new CategoryModel();
+            ArrayList<Category> list = am.getListCategory();
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+       if (act.equals("checkIDempty")) {
+            String op = request.getParameter("get");
+            SupModel am = new SupModel();
+            Boolean list = am.checkUserExist(op);
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
         }
     }
 
