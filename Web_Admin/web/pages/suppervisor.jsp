@@ -66,7 +66,7 @@
                                 $("#show").show();
                                 setTimeout(function () {
                                     location.reload()
-                                },1000);
+                                },2000);
                             }
                         },
                         error: function () {
@@ -105,6 +105,30 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <p>Please wait! Reloading the page</p>
+                                                    <div class="spinner-grow text-primary" role="status">
+                                                        <span class="sr-only">Loading...</span>
+                                                    </div>
+                                                    <div class="spinner-grow text-secondary" role="status">
+                                                        <span class="sr-only">Loading...</span>
+                                                    </div>
+                                                    <div class="spinner-grow text-success" role="status">
+                                                        <span class="sr-only">Loading...</span>
+                                                    </div>
+                                                    <div class="spinner-grow text-danger" role="status">
+                                                        <span class="sr-only">Loading...</span>
+                                                    </div>
+                                                    <div class="spinner-grow text-warning" role="status">
+                                                        <span class="sr-only">Loading...</span>
+                                                    </div>
+                                                    <div class="spinner-grow text-info" role="status">
+                                                        <span class="sr-only">Loading...</span>
+                                                    </div>
+                                                    <div class="spinner-grow text-light" role="status">
+                                                        <span class="sr-only">Loading...</span>
+                                                    </div>
+                                                    <div class="spinner-grow text-dark" role="status">
+                                                        <span class="sr-only">Loading...</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -158,14 +182,14 @@
                                                     <td>${x.getEmail()}</td>
                                                     <td>${x.getPhone()}</td>
                                                     <td>
-                                                        <a href="viewDeatilSup.html" class="btn btn-primary a-btn-slide-text">
+                                                        <a href="viewDetailSup.jsp?id=${x.getUserID()}" class="btn btn-primary a-btn-slide-text">
                                                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                                                             <i class="mdi mdi-account-card-details"></i>
                                                             <span> <strong> View</strong></span>            
                                                         </a>
                                                     </td>
                                                     <td>                          
-                                                        <a href="updateSup.html" class="btn btn-warning a-btn-slide-text">
+                                                        <a href="updateSup.jsp?id=${x.getUserID()}" class="btn btn-warning a-btn-slide-text">
                                                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                                                             <i class="mdi mdi-border-color"></i>
                                                             <span> <strong> Update</strong></span>            

@@ -24,6 +24,10 @@
         <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
         <script>
             $(document).ready(function () {
+                $('[data-toggle="popover"]').popover()
+                $('.popover-dismiss').popover({
+                    trigger: 'focus'
+                })
                 var now = new Date().toLocaleString();
                 $('#datePicker').val(now);
                 $("#select").on("mouseover", function (event) {
@@ -102,7 +106,7 @@
                         $("#checkemail").text("Email is not valid")
                         $("#checkemail").css({"color": "red", "margin-left": "10px"});
                         $("#add").prop('disabled', true);
-                    }else {
+                    } else {
                         $("#checkemail").text("Email is valid")
                         $("#checkemail").css({"color": "green", "margin-left": "10px"});
                         $("#add").prop('disabled', false);
@@ -110,6 +114,7 @@
 
                 });
                 var d = {};
+                var c = {};
                 $("#add").click(function () {
                     d.UserID = $("#supID").val();
                     d.FullName = $("#supName").val()
@@ -118,12 +123,62 @@
                     d.Address = $("#address").val()
                     d.Date_of_Birth = $("#datepicker").val();
                     d.Password = $("#pass").val()
-
                     d.Gender = $('input[name=membershipRadios]:checked', '#myForm').val();
                     d.CreateDate = $("#datePicker").val()
+                    c.UserID = $("#supID").val();
+                    c.CategoryID = $('#select option:selected').attr('value');
                     const da = JSON.stringify(d)
+                    const cate = JSON.stringify(c)
                     console.log(da)
+                    console.log(cate)
+                    $.ajax({
+                        url: "../SupController?ac=add",
+                        method: "POST",
+                        data: {get: da},
+                        success: function (data) {
+                            let rs = $.parseJSON(data);
+                            console.log(rs)
+                            if (rs) {
+                                $.ajax({
+                                    url: "../SupController?ac=addtoCate",
+                                    method: "POST",
+                                    data: {get: cate},
+                                    success: function (data) {
+                                        let rs1 = $.parseJSON(data);
+                                        console.log(rs1)
+                                        if (rs1) {
+                                            $("#show").show();
+                                        } else {
+                                            $("#error").show()
+                                        }
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            } else {
+                                $("#error").show()
+                            }
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
 
+                })
+                $("#x").click(function () {
+                    $("#show").hide()
+                    $("#form").trigger("reset");
+                    $("#add").prop('disabled', true);
+                    $("#check").hide()
+                })
+                $("#chuyen").click(function () {
+                    $("#show").hide()
+                    $("#myForm").trigger("reset");
+                    $("#add").prop('disabled', true);
+                    $("#checkid").text("")
+                    $("#checkemail").text("")
+                    $("#checkphone").text("")
                 })
             });
             function phone_validate(phno)
@@ -150,11 +205,48 @@
                                         <li class="breadcrumb-item active" aria-current="page">Add new a suppervisor</li>
                                     </ol>
                                 </nav>
+                                <br>
+                                <a tabindex="0" class="btn btn-lg btn-danger" style="float: right" role="button" data-toggle="popover" data-trigger="focus" 
+                                   title="Guidance for add suppervisor" 
+                                   data-content="1. ID no more than 10 characters  <br />   
+                                   2. Name must not exceed 100 characters  <br />  
+                                   3. Phone numbers under 12 numbers and all numbers <br /> 
+                                   4. Emails under 100 characters <br /> 
+                                   5. Address less than 200 characters <br /> 
+                                   6. Password under 45 characters"
+                                   data-html="true">
+                                    Guidance</a>
                                 <h2>Add a new suppervisor </h2>
                                 <form class="form-sample" id="myForm">
                                     <p class="card-description">
                                         Supervisor info
                                     </p>
+                                    <div class="modal" tabindex="-1" id="show" role="dialog">
+                                        <div class="modal-dialog alert-success" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" style="color:green">Successful Add</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span id="x" aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Do you want to stay on the page or change the page?</p>
+                                                    <p>You will move to category management page</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button id="chuyen" type="button" class="btn btn-warning"><i class="mdi mdi-close"></i>Stay</button>
+                                                    <a href="suppervisor.jsp"><button id="close" type="button" class="btn btn-success" data-dismiss="modal"><i class="mdi mdi-arrow-right-bold"></i>Move</button></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-danger alert-dismissible fade show" id="error" role="alert" style="display: none">
+                                        <strong>Fail Add!</strong> Please wait check out again and read guidance!!
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group row">
@@ -162,7 +254,7 @@
                                                 <div class="col-sm-9">
                                                     <input id="supID" type="text" class="form-control" style="border-color:#686868" placeholder="Enter ID" required="true" />
                                                     <small id="checkid">
-                                                        ID must be less than 5 characters and should be start widt CTG
+                                                        ID must be less than 5 characters 
                                                     </small>
                                                 </div>
                                             </div>
@@ -187,7 +279,7 @@
                                                 <div class="col-sm-9">
                                                     <input id="email" class="form-control" style="border-color:#686868" placeholder="Enter Email" required="true"/>
                                                     <small id="checkemail">
-                                                        
+
                                                     </small>
                                                 </div>
                                             </div>

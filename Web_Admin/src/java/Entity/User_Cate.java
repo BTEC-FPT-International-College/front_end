@@ -11,14 +11,14 @@ package Entity;
 public class User_Cate {
     private String UserID;
     private String CategoryID;
-    private String ReadPostAmount;
-    private String DeletePostAmount;
+    private int ReadPostAmount;
+    private int DeletePostAmount;
     private String TotalHourActive;
 
     public User_Cate() {
     }
 
-    public User_Cate(String UserID, String CategoryID, String ReadPostAmount, String DeletePostAmount, String TotalHourActive) {
+    public User_Cate(String UserID, String CategoryID, int ReadPostAmount, int DeletePostAmount, String TotalHourActive) {
         this.UserID = UserID;
         this.CategoryID = CategoryID;
         this.ReadPostAmount = ReadPostAmount;
@@ -42,19 +42,19 @@ public class User_Cate {
         this.CategoryID = CategoryID;
     }
 
-    public String getReadPostAmount() {
+    public int getReadPostAmount() {
         return ReadPostAmount;
     }
 
-    public void setReadPostAmount(String ReadPostAmount) {
+    public void setReadPostAmount(int ReadPostAmount) {
         this.ReadPostAmount = ReadPostAmount;
     }
 
-    public String getDeletePostAmount() {
+    public int getDeletePostAmount() {
         return DeletePostAmount;
     }
 
-    public void setDeletePostAmount(String DeletePostAmount) {
+    public void setDeletePostAmount(int DeletePostAmount) {
         this.DeletePostAmount = DeletePostAmount;
     }
 

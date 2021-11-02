@@ -20,8 +20,13 @@
         <link rel="shortcut icon" href="../images/favicon.png" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script>
+
             var id = "";
             $(document).ready(function () {
+                $('[data-toggle="popover"]').popover()
+                $('.popover-dismiss').popover({
+                    trigger: 'focus'
+                })
                 var now = new Date().toLocaleString();
                 $('#datePicker').val(now);
                 $('#CateID').keyup(function (e) {
@@ -118,6 +123,14 @@
                                     </ol>
                                 </nav>
                                 <br>
+                                <a tabindex="0" class="btn btn-lg btn-danger" style="float: right" role="button" data-toggle="popover" data-trigger="focus" 
+                                   title="Guidance for add category" 
+                                   data-content="1. ID no more than 5 characters  <br />   
+                                   2. Name must not exceed 45 characters  <br />  
+                                   3. Image file name should not exceed 45 characters  <br />  
+                                   4. Descrition should not describe too long"
+                                   data-html="true">
+                                    Guidance</a>
                                 <h2>Add a new category </h2>
                                 <form class="form-sample" id="form">
                                     <p class="card-description">
@@ -144,15 +157,17 @@
                                         </div>
                                     </div>
                                     <div class="alert alert-danger alert-dismissible fade show" id="error" role="alert" style="display: none">
-                                        <strong>Fail Add!</strong> Please wait check out again!!
+                                        <strong>Fail Add!</strong> Please wait check out again and read guidance!!
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Category ID</label> 
+
                                                 <span id="check">
                                                 </span>
                                                 <div class="input-group">
@@ -164,12 +179,12 @@
                                                     <input type="text" id="CateID" name="id" class="form-control" style="border-color:#686868;border-left-color: #ed1607 "  placeholder="Enter Category ID " required="true" />
 
                                                 </div>
-                                              
+
                                             </div>
-                                            
-                                                <small id="passwordHelpInline" class="text-muted">
-                                                    ID must be less than 5 characters and should be start widt CTG
-                                                </small>
+
+                                            <small id="passwordHelpInline" class="text-muted">
+                                                ID must be less than 5 characters and should be start widt CTG
+                                            </small>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -181,13 +196,13 @@
                                                         </span>
                                                     </div>
                                                     <input type="text" id="CateName" name="name" class="form-control"style="border-color:#1c1b1b;border-left-color: #ed1607 " placeholder="Enter Category Name" />
-                                                
+
                                                 </div>
-                                                
+
                                             </div>
                                             <small id="passwordHelpInline" class="text-muted">
-                                                    Name must be less than 45 characters 
-                                                </small>
+                                                Name must be less than 45 characters 
+                                            </small>
                                         </div>
                                     </div>
                                     <br>

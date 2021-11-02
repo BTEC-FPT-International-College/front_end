@@ -4,6 +4,7 @@
  */
 package Model;
 
+import Entity.Suppervisor;
 import Entity.User;
 import Entity.ViewDetailCate;
 import java.sql.Connection;
@@ -110,6 +111,32 @@ public class SupModel {
         return result > 0;
     }
 
+    public boolean addSupandCate(String userId, String cateID, int Read, int Delete) {
+        String sql = "INSERT INTO `web`.`sup_cate`\n"
+                + "(`CategoryID`,\n"
+                + "`UserID`,\n"
+                + "`read`,\n"
+                + "`delete`)\n"
+                + "VALUES\n"
+                + "(?,?,?,?);";
+        int result = 0;
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, cateID);
+            ps.setString(2, userId);
+            ps.setInt(3, Read);
+            ps.setInt(4, Delete);
+            result = ps.executeUpdate();
+            ps.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return result > 0;
+    }
+
     public boolean deleteSup(String id) {
         String sql = "DELETE FROM web.tbl_user WHERE UserID = ?";
         int result = 0;
@@ -127,9 +154,14 @@ public class SupModel {
         return result > 0;
     }
 
-    public User getSup(String id) {
-        User acc = null;
-        String sql = "SELECT * FROM web.tbl_user WHERE UserID = ?";
+    public Suppervisor getSup(String id) {
+        Suppervisor acc = null;
+        String sql = "SELECT*\n"
+                + "    FROM sup_cate , tbl_user ,tbl_category\n"
+                + "    WHERE  sup_cate.UserID = tbl_user.UserID\n"
+                + "    AND sup_cate.CategoryID = tbl_category.CategoryID\n"
+                + "    AND sup_cate.UserID = ?\n"
+                + "    ;";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {
@@ -137,18 +169,22 @@ public class SupModel {
             st.setString(1, id);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                acc = new User();
-                acc.setUserID(rs.getString(1));
-                acc.setFullName(rs.getString(2));
-                acc.setPhone(rs.getString(3));
-                acc.setEmail(rs.getString(4));
-                acc.setAddress(rs.getString(5));
-                acc.setDate_of_Birth(rs.getString(6));
-                acc.setPassword(rs.getString(7));
-                acc.setReward_point(rs.getInt(8));
-                acc.setGender(rs.getString(9));
-                acc.setCreateDate(rs.getString(10));
-                acc.setUpdateDate(rs.getString(11));
+                acc = new Suppervisor();
+                acc.setUserID(rs.getString(5));
+                acc.setFullName(rs.getString(6));
+                acc.setPhone(rs.getString(7));
+                acc.setEmail(rs.getString(8));
+                acc.setAddress(rs.getString(9));
+                acc.setDate_of_Birth(rs.getString(10));
+                acc.setPassword(rs.getString(11));
+                acc.setReward_point(rs.getInt(12));
+                acc.setGender(rs.getString(13));
+                acc.setCreateDate(rs.getString(14));
+                acc.setUpdateDate(rs.getString(15));
+                acc.setCategoryID(rs.getString(1));
+                acc.setCategoryName(rs.getString(18));
+                acc.setReadPostAmount(rs.getInt(3));
+                acc.setDeletePostAmount(rs.getInt(4));
             }
             rs.close();
             st.close();
@@ -159,31 +195,25 @@ public class SupModel {
         return acc;
     }
 
-    public ViewDetailCate viewCateDetail(String id) {
-        ViewDetailCate acc = null;
-        String sql = "SELECT tbl_post.CategoryID,COUNT(tbl_post.PostID ) AS \"So luong\", COALESCE(SUM(tbl_transaction_history.Price),0) AS \"Sum\" \n"
-                + "FROM tbl_post ,tbl_transaction_history \n"
-                + "Where tbl_post.PostID = tbl_transaction_history.PostID \n"
-                + "AND tbl_post.CategoryID = ?\n"
-                + ";";
+    public boolean updateCateandSup(String userId, String cateID) {
+        String sql = "UPDATE `web`.`sup_cate`\n"
+                + "SET\n"
+                + "`CategoryID` = ?\n"
+                + "WHERE UserID = ? ";
+        int result = 0;
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {
-            PreparedStatement st = conn.prepareStatement(sql);
-            st.setString(1, id);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                acc = new ViewDetailCate();
-                acc.setPostTotal(rs.getInt(2));
-                acc.setVenueTotal(rs.getInt(3));
-            }
-            rs.close();
-            st.close();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, cateID);
+            ps.setString(2, userId);
+            result = ps.executeUpdate();
+            ps.close();
             conn.close();
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-        return acc;
+        return result > 0;
     }
 
     public boolean updateSup(String id, String name, String phone, String Email, String add, String date, String pass, String Gender, String UpdatDay) {

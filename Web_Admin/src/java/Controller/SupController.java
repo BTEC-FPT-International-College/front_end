@@ -5,7 +5,9 @@
 package Controller;
 
 import Entity.Category;
+import Entity.Suppervisor;
 import Entity.User;
+import Entity.User_Cate;
 import Model.CategoryModel;
 import Model.SupModel;
 import com.google.gson.Gson;
@@ -54,6 +56,36 @@ public class SupController extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
+        if (act.equals("update")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            User sup = json.fromJson(op, User.class);
+            SupModel am = new SupModel();
+            boolean a = am.updateSup(sup.getUserID(),sup.getFullName(),sup.getPhone(),sup.getEmail(),sup.getAddress(),sup.getDate_of_Birth(),sup.getPassword(),sup.getGender(),sup.getUpdateDate());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("updatetoCate")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            User_Cate sup = json.fromJson(op, User_Cate.class);
+            SupModel am = new SupModel();
+            boolean a = am.updateCateandSup(sup.getUserID(),sup.getCategoryID());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("addtoCate")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            User_Cate sup = json.fromJson(op, User_Cate.class);
+            SupModel am = new SupModel();
+            boolean a = am.addSupandCate(sup.getUserID(),sup.getCategoryID(),0,0);
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
         if (act.equals("del")) {
             String op = request.getParameter("get");
             SupModel am = new SupModel();
@@ -66,6 +98,15 @@ public class SupController extends HttpServlet {
         if (act.equals("viewCategory")) {
             CategoryModel am = new CategoryModel();
             ArrayList<Category> list = am.getListCategory();
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("viewSup")) {
+            String op = request.getParameter("get");
+             SupModel am = new SupModel();
+            Suppervisor list = am.getSup(op);
             Gson json = new Gson();
             String listTrainee = json.toJson(list);
             response.setContentType("text/html");

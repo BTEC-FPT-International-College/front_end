@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         SupModel s = new SupModel();
-        System.out.println(s.updateSup("SUP03", "Update", "", "", "", "", "", "", ""));
+        System.out.println(s.updateCateandSup("hi", "t"));
         
     }
     
