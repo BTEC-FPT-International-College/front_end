@@ -5,8 +5,11 @@
 package Controller;
 
 import Entity.Category;
+import Entity.Suppervisor;
 import Entity.User;
 import Entity.ViewTotalPost;
+import Entity.ViewTotalPurchases;
+import Entity.Wallet;
 import Model.CategoryModel;
 import Model.SupModel;
 import Model.UserModel;
@@ -55,10 +58,37 @@ public class UserController extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
+        if (act.equals("viewPur")) {
+            String op = request.getParameter("get");
+            UserModel am = new UserModel();
+            ViewTotalPurchases list = am.viewTotalP(op);
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("viewWallet")) {
+            String op = request.getParameter("get");
+            UserModel am = new UserModel();
+            Wallet list = am.viewWallet(op);
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
         if (act.equals("viewTotalPost")) {
             String op = request.getParameter("get");
             UserModel am = new UserModel();
             ViewTotalPost list = am.viewTotalPost(op);
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("viewUser")) {
+            String op = request.getParameter("get");
+            UserModel am = new UserModel();
+            User list = am.getUser(op);
             Gson json = new Gson();
             String listTrainee = json.toJson(list);
             response.setContentType("text/html");

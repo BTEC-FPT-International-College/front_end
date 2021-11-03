@@ -44,6 +44,7 @@
                         $("#gender").val(obj.Gender)
                         $("#createday").val(obj.CreateDate)
                         $("#updatedate").val(obj.UpdateDate)
+                        
                     },
                     error: function () {
                         alert("error");
@@ -89,7 +90,7 @@
                                         <li class="breadcrumb-item active" aria-current="page">View detail suppervisor</li>
                                     </ol>
                                 </nav>
-                <h2 >View Detail <%=request.getParameter("id")%> </h2>
+                <h2 style="text-align: center">View Detail <%=request.getParameter("id")%> </h2>
                 <h1 id="getid" style="display: none "><%=request.getParameter("id")%></h1>
                 <div class="modal" tabindex="-1" id="show" role="dialog" style="display: none" >
                     <div class="modal-dialog alert-success" role="document">

@@ -41,9 +41,35 @@
                         alert("error");
                     }
                 });
-                /** 
                 $.ajax({
-                    url: "../SupController?ac=viewSup",
+                    url: "../UserController?ac=viewPur",
+                    method: "POST",
+                    data: {get: select},
+                    success: function (data) {
+                        let obj = $.parseJSON(data);
+                        console.log(obj)
+                        $("#totalPur").val(obj.TotalPurchases)
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                $.ajax({
+                    url: "../UserController?ac=viewWallet",
+                    method: "POST",
+                    data: {get: select},
+                    success: function (data) {
+                        let obj = $.parseJSON(data);
+                        console.log(obj)
+                        $("#wallet").val(obj.WalletID)
+                        $("#surplus").val(obj.Surplus)
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                $.ajax({
+                    url: "../UserController?ac=viewUser",
                     method: "POST",
                     data: {get: select},
                     success: function (data) {
@@ -55,20 +81,26 @@
                         $("#pass").val(obj.Password)
                         $("#add").val(obj.Address)
                         $("#date").val(obj.Date_of_Birth)
-                        $("#role").val(obj.CategoryName)
-                        $("#reward").val(obj.Reward_point)
-                        $("#read").val(obj.ReadPostAmount)
-                        $("#delete").val(obj.DeletePostAmount)
+                        $("#point").val(obj.Reward_point)
                         $("#gender").val(obj.Gender)
                         $("#createday").val(obj.CreateDate)
                         $("#updatedate").val(obj.UpdateDate)
+                        const rank =  obj.Reward_point;
+                        if(rank==0)
+                            $("#rank").val("You don't have point")
+                        else if(rank<100)
+                            $("#rank").val("coper")
+                        else if (rank < 300)
+                            $("#rank").val("Silver")
+                        else if (rank <500)
+                            $("#rank").val("Gold")
+                        else
+                            $("#rank").val("Diamond")
                     },
                     error: function () {
                         alert("error");
                     }
                 });
-                 * 
-                 * @returns {undefined}          */
                 $(".delete[target='_blank']").click(function () {
                     let select = $(this).attr("title")
                     console.log(select)
@@ -102,7 +134,7 @@
             <%@ include file="../inc/sidebar.jsp" %>
             <%@ include file="../inc/plugins.jsp" %>
             <div class="container rounded bg-white mt-5">
-                <h2 >View Detail <%=request.getParameter("id")%> </h2>
+                <h2 style="text-align: center">View Detail <%=request.getParameter("id")%> </h2>
                 <h1 id="getid" style="display: none "><%=request.getParameter("id")%></h1>
                 <div class="modal" tabindex="-1" id="show" role="dialog" style="display: none" >
                     <div class="modal-dialog alert-success" role="document">
@@ -164,10 +196,6 @@
                                 <div class="col-md-6" >Phone <input id="phone" type="text" class="form-control" readonly="true"></div>
                             </div>
                             <div class="row mt-2">
-                                <div class="col-md-6">Role <input type="text" id="role" class="form-control" readonly="true"></div>
-                                <div class="col-md-6" >Reward point <input id="reward" type="text" class="form-control" readonly="true"></div>
-                            </div>
-                            <div class="row mt-2">
                                 <div class="col-md-12"> Address<input type="text" id="add" class="form-control" readonly="true"></div>
                             </div>
                             <div class="row mt-3">
@@ -179,17 +207,16 @@
                                 <div class="col-md-6"> Create Date<input type="text" id="createday" class="form-control" readonly="true"></div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-md-6"> Total Purchases<input type="text" class="form-control" readonly="true"></div>
-                                <div class="col-md-6"> Create Day<input type="text" class="form-control" readonly="true"></div>
+                                <div class="col-md-6"> Total Purchases<input id="totalPur" type="text" class="form-control" readonly="true"></div>
+                                <div class="col-md-6"> Total Post<input id="totalPost" type="text" class="form-control" readonly="true"></div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-md-6"> Reward Point<input type="text" class="form-control" readonly="true"></div>
-                                <div class="col-md-6"> Rank<input type="text" class="form-control" readonly="true"></div>
+                                <div class="col-md-6"> Reward Point<input id="point" type="text" class="form-control" readonly="true"></div>
+                                <div class="col-md-6"> Rank<input id="rank" type="text" class="form-control" readonly="true"></div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-md-4"> Wallet ID<input type="text" class="form-control" readonly="true"></div>
-                                <div class="col-md-4"> Surplus<input type="text" class="form-control" readonly="true"></div>
-                                <div class="col-md-4"> Total Post<input id="totalPost" type="text" class="form-control" readonly="true"></div>
+                                <div class="col-md-4"> Wallet ID<input id="wallet" type="text" class="form-control" readonly="true"></div>
+                                <div class="col-md-4"> Surplus<input type="text" id="surplus" class="form-control" readonly="true"></div>
                             </div>
                             <div class="mt-5 text-right"><button class="btn btn-danger profile-button" type="button">Delete</button></div>
                         </div>
@@ -197,8 +224,6 @@
                 </div>
             </div>
         </div>
-        <%@ include file="../inc/nvarbar.jsp" %>
-        <%@ include file="../inc/sidebar.jsp" %>
-        <%@ include file="../inc/plugins.jsp" %>
+<%@ include file="../inc/plugins.jsp" %>
     </body>
 </html>

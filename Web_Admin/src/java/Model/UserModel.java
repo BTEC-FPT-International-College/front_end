@@ -5,6 +5,7 @@
 package Model;
 
 import Entity.Category;
+import Entity.Suppervisor;
 import Entity.User;
 import Entity.ViewTotalPost;
 import Entity.ViewTotalPurchases;
@@ -147,5 +148,36 @@ public class UserModel {
             System.err.println(ex.getMessage());
         }
         return result > 0;
+    }
+    public User getUser(String id) {
+        User acc = null;
+        String sql = "SELECT * FROM web.tbl_user WHERE UserID= ?;";
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                acc = new User();
+                acc.setUserID(rs.getString(1));
+                acc.setFullName(rs.getString(2));
+                acc.setPhone(rs.getString(3));
+                acc.setEmail(rs.getString(4));
+                acc.setAddress(rs.getString(5));
+                acc.setDate_of_Birth(rs.getString(6));
+                acc.setPassword(rs.getString(7));
+                acc.setReward_point(rs.getInt(8));
+                acc.setGender(rs.getString(9));
+                acc.setCreateDate(rs.getString(10));
+                acc.setUpdateDate(rs.getString(11));
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return acc;
     }
 }
