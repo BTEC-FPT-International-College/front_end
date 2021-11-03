@@ -6,7 +6,6 @@ package Model;
 
 import Entity.Suppervisor;
 import Entity.User;
-import Entity.ViewDetailCate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

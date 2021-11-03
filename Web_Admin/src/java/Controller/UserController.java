@@ -4,9 +4,13 @@
  */
 package Controller;
 
+import Entity.Category;
 import Entity.User;
+import Entity.ViewTotalPost;
+import Model.CategoryModel;
 import Model.SupModel;
 import Model.UserModel;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -42,7 +46,26 @@ public class UserController extends HttpServlet {
             request.setAttribute("listU", list);
             request.getRequestDispatcher("pages/user.jsp").forward(request, response);
         }
+            if (act.equals("del")) {
+            String op = request.getParameter("get");
+            UserModel am = new UserModel();
+            Boolean list = am.deleteUser(op);
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("viewTotalPost")) {
+            String op = request.getParameter("get");
+            UserModel am = new UserModel();
+            ViewTotalPost list = am.viewTotalPost(op);
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
     }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
