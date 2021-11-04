@@ -31,9 +31,9 @@
                     success: function (data) {
                         let obj = $.parseJSON(data);
                         console.log(obj)
-                        if(obj===null){
+                        if (obj === null) {
                             $("#totalPost").val("0")
-                        }else{
+                        } else {
                             $("#totalPost").val(obj.TotalPost)
                         }
                     },
@@ -76,6 +76,7 @@
                         let obj = $.parseJSON(data);
                         console.log(obj)
                         $("#name").val(obj.FullName)
+                        $("#fullname").text(obj.FullName)
                         $("#email").val(obj.Email)
                         $("#phone").val(obj.Phone)
                         $("#pass").val(obj.Password)
@@ -85,17 +86,34 @@
                         $("#gender").val(obj.Gender)
                         $("#createday").val(obj.CreateDate)
                         $("#updatedate").val(obj.UpdateDate)
-                        const rank =  obj.Reward_point;
-                        if(rank==0)
-                            $("#rank").val("You don't have point")
-                        else if(rank<100)
-                            $("#rank").val("coper")
-                        else if (rank < 300)
-                            $("#rank").val("Silver")
-                        else if (rank <500)
-                            $("#rank").val("Gold")
-                        else
-                            $("#rank").val("Diamond")
+                        const rank = obj.Reward_point;
+                        if (rank === 0){
+                             $("#rank").val("User are not rated yet");
+                              $("#rank").css("color", "white");
+                             $("#rank").css("background-color", "red");
+                        } 
+                        else if (rank < 100){
+                            $("#rank").css("background-color", "#a37745");
+                            $("#rank").css("color", "white");
+                            $("#rank").val("Coper Member");
+                        }
+                         
+                        else if (rank < 300){
+                            $("#rank").val("Silver Member")
+                            $("#rank").css("color", "white");
+                            $("#rank").css("background-color", "#61605e");
+                        }
+                            
+                        else if (rank < 500){
+                            $("#rank").val("Gold Member");
+                            $("#rank").css("background-color", "#e8b10c");
+                        }
+                            
+                        else{
+                            $("#rank").val("Diamond Member");
+                            $("#rank").css("background-color", "#b5f5ee");
+                        }
+                            
                     },
                     error: function () {
                         alert("error");
@@ -183,8 +201,14 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4 border-right">
-                        <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src="https://i.imgur.com/0eg0aG0.jpg" width="90"><span class="font-weight-bold">John Doe</span><span class="text-black-50">john_doe12@bbb.com</span><span>United States</span></div>
+                        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                            <img class="rounded-circle mt-5" src="https://i.imgur.com/0eg0aG0.jpg" width="90">
+                            <span class="font-weight-bold" id="fullname"></span>
+                            
+                            
                     </div>
+                    </div>
+                    
                     <div class="col-md-8">
                         <div class="p-3 py-5">
                             <div class="row mt-2">
@@ -224,6 +248,6 @@
                 </div>
             </div>
         </div>
-<%@ include file="../inc/plugins.jsp" %>
+        <%@ include file="../inc/plugins.jsp" %>
     </body>
 </html>
