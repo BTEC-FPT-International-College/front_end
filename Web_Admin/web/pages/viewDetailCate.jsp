@@ -89,6 +89,7 @@
             <%@ include file="../inc/nvarbar.jsp" %>
             <%@ include file="../inc/sidebar.jsp" %>
             <%@ include file="../inc/plugins.jsp" %>
+            
             <div class="container rounded bg-white mt-5">
                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
@@ -97,7 +98,9 @@
                                         <li class="breadcrumb-item active" aria-current="page">View category detail</li>
                                     </ol>
                                 </nav>
+                
                 <h2 style="text-align: center">View Detail <%=request.getParameter("id")%> Category </h2>
+                
                 <h1 id="getid" style="display: none "><%=request.getParameter("id")%></h1>
                 <div class="modal" tabindex="-1" id="show" role="dialog" style="display: none" >
                                         <div class="modal-dialog alert-success" role="document">
@@ -185,11 +188,14 @@
                                                             <p class="text-muted "> This change may affect other data. Be sure !!!</p>
                                                         </div>
                                                         <div class="card-body px-sm-4 mb-2 pt-1 pb-0">
+                                                            
                                                             <div class="row justify-content-end no-gutters">
                                                                 <div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>
                                                                 <div class="col-auto"><div class="col-auto"><button title="<%=request.getParameter("id")%>" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Delete</button></div></div>
+                                                                
                                                             </div>
                                                         </div>
+                                                                
                                                     </div>
                                                 </div>
                                             </div>

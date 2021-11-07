@@ -27,8 +27,8 @@
                 $('.popover-dismiss').popover({
                     trigger: 'focus'
                 })
-                var now = new Date().toLocaleString();
-                $('#datePicker').val(now);
+                var now = new Date();
+                $('#datePicker').val(now.toLocaleString());
                 $('#CateID').keyup(function (e) {
                     let select = e.target.value;
                     console.log(select)
@@ -238,10 +238,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row" style="display: none">
+                                    <div class="row" style="display: none ">
                                         <div class="col-md-6">
                                             <div class="form-group row">
-                                                <label class="col-sm-3 col-form-label">ID</label>
+                                                <label class="col-sm-3 col-form-label">Create Date</label>
                                                 <div class="col-sm-9">
                                                     <input type="text" readonly="true" id="datePicker" name="create" class="form-control" />
                                                 </div>

@@ -33,7 +33,10 @@
 
         <script>
             $(document).ready(function () {
-
+                $('[data-toggle="popover"]').popover()
+                $('.popover-dismiss').popover({
+                    trigger: 'focus'
+                })
                 // Cấu hình các nhãn phân trang
                 $('#example').dataTable({
                     "language": {
@@ -153,6 +156,13 @@
                                         </button>
                                     </div>
                                     <a href="addCate.jsp" ><button style="margin-bottom: 10px" type="button" class="btn btn-success">Add new a category</button></a>
+                                    <a tabindex="0" class="btn btn-danger" style="float: right" role="button" data-toggle="popover" data-trigger="focus" 
+                                   title="Guidance for category management" 
+                                   data-content="If the category is contained in other tables, it cannot be deleted <br />  "
+                                   data-html="true">
+                                    Guidance</a>
+                                    <br>
+                                    <br>
                                     <table id="example" class="table table-striped table-bordered" >
                                         <thead>
                                             <tr>

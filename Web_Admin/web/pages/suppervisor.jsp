@@ -140,6 +140,11 @@
                                         </button>
                                     </div>
                                     <a href="addSuppervisor.jsp" ><button style="margin-bottom: 10px" type="button" class="btn btn-success">Add new a suppervisor</button></a>
+                                    <a tabindex="0" class="btn btn-danger" style="float: right" role="button" data-toggle="popover" data-trigger="focus" 
+                                   title="Guidance for suppervisor management" 
+                                   data-content=" <br />  "
+                                   data-html="true">
+                                    Guidance</a>
                                     <div  class="table-responsive">
                                         <table id="example" class="table table-striped table-bordered" >
                                             <thead>

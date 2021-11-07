@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class Main {
     public static void main(String[] args) {
-        UserModel um = new UserModel();
-        System.out.println(um.viewTotalPost("US1").getTotalPost());
+       RechargeModel r = new RechargeModel();
+        System.out.println(r.top3Recharge().size());
         
     }
 }

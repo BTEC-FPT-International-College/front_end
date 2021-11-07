@@ -3,331 +3,339 @@
     Created on : 21-10-2021, 10:51:08
     Author     : nguyenbamang
 --%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page autoFlush="true" buffer="1094kb"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Recharge History Page</title>
-  <link rel="stylesheet" href="../vendors/mdi/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="../vendors/base/vendor.bundle.base.css">
-  <!-- endinject -->
-  <!-- plugin css for this page -->
-  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="../vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="../css/style.css">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="../images/favicon.png" />
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-  <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="../vendors/mdi/css/materialdesignicons.min.css">
+        <link rel="stylesheet" href="../vendors/base/vendor.bundle.base.css">
+        <!-- endinject -->
+        <!-- plugin css for this page -->
+        <link rel="stylesheet" href="../vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <link rel="stylesheet" href="../css/style.css">
+        <!-- endinject -->
+        <link rel="shortcut icon" href="../images/favicon.png" />
 
-  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+        <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
-  <script>
-    $(document).ready(function () {
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
 
-      // Cấu hình các nhãn phân trang
-      $('#example').dataTable({
-        "language": {
-          "sProcessing": "Processing...",
-          "sLengthMenu": "View _MENU_ item",
-          "sZeroRecords": "No matching lines found",
-          "sInfo": "Viewing _START_ to _END_ of total _TOTAL_ entries",
-          "sInfoEmpty": "Viewing 0 to 0 out of 0 entries",
-          "sInfoFiltered": "(filtered from _MAX_ entries)",
-          "sInfoPostFix": "",
-          "sSearch": "Search now:",
-          "sUrl": "",
-          "oPaginate": {
-            "sFirst": "Head",
-            "sPrevious": "Previous",
-            "sNext": "Nex",
-            "sLast": "End"
-          }
-        }
-      });
+        <script>
+            /**
+             var date = new Date();
+             var now = new Date();
+             let dayNow = now.getDate();
+             let monthNow = now.getMonth() +1
+             let yearNow = now.getFullYear()
+             let oneDay = dayNow-1
+             let oneMonth = monthNow
+             console.log(dayNow+"/"+monthNow+"/"+yearNow)
+             * 
+             
+             * @type type  
+             *             // search 1 day
+             
+             // search 7 day
+             var curr = new Date; // get current date
+             var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+             var last = first - 7; // last day is the first day + 6
+             var firstday = new Date(curr.setDate(first)).toLocaleDateString();
+             var lastday = new Date(curr.setDate(last)).toLocaleDateString();
+             console.log(firstday)
+             console.log(lastday)
+             * 
+             
+             * @type type      */
 
-    });
-  </script>
-  <style>
-    .a:focus {
-      box-shadow: none;
-      border: none
-    }
-  </style>
+            //search 1 month
+            var a = {}
+            $(document).ready(function () {
+                $(function () {
+                    $('[data-toggle="popover"]').popover()
+                })
+                $(function () {
+                    $('.example-popover').popover({
+                        container: 'body'
+                    })
+                })
+                $("#getdate").click(function () {
+                    $("#cancledate").show();
+                    $("#getdate").hide()
+                    a.Start = $("#startdate").val()
+                    a.End = $("#enddate").val()
+                    const end = Date.parse(a.End)
+                    const start = Date.parse(a.Start)
+                    if ((end - start) < 0) {
+                        $("#error").show()
+                    } else {
+                        const da = JSON.stringify(a)
+                        console.log(da)
+                        $.ajax({
+                            url: "../RechargeController?ac=search",
+                            method: "POST",
+                            data: {get: da},
+                            success: function (data) {
+                                let obj = $.parseJSON(data);
+                                console.log(obj)
+                                $("#example tbody tr").empty();
+                                $.each(obj, function (key, value) {
+                                    $('#example').append(
+                                            "<tr> \n\
+                                        <td> " + value.RechargeID + "</td> \n\
+                                        <td> " + value.CreateDate + " " + value.CreateHourl + "</td> \n\
+                                        <td> " + value.WalletID + "</td> \n\
+                                        <td> " + value.UserID + "</td> \n\
+                                        <td> " + value.BankAccount + "</td> \n\
+                                        <td> " + value.Bank + "</td> \n\
+                                        <td> " + value.Amount + "</td> \n\
+                                    <tr>")
+                                });
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                })
+                $("#cancledate").click(function () {
+                    $.ajax({
+                        url: "../RechargeController?ac=viewR",
+                        method: "GET",
+                        success: function (data) {
+                            let rs = $.parseJSON(data);
+                            console.log(rs)
+                            $("#example tbody tr").empty();
+                            $.each(rs, function (key, value) {
+                                $('#example').append(
+                                        "<tr> \n\
+                                        <td> " + value.RechargeID + "</td> \n\
+                                        <td> " + value.CreateDate + " " + value.CreateHourl + "</td> \n\
+                                        <td> " + value.WalletID + "</td> \n\
+                                        <td> " + value.UserID + "</td> \n\
+                                        <td> " + value.BankAccount + "</td> \n\
+                                        <td> " + value.Bank + "</td> \n\
+                                        <td> " + value.Amount + "</td> \n\
+                                    <tr>")
+                            });
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                    $("#getdate").show()
+                    $("#cancledate").hide()
+                    $("#startdate").val("")
+                    $("#enddate").val("")
+                })
+                $("#top3").click(function (event) {
+                    $.ajax({
+                        url: "../RechargeController?ac=viewTop3",
+                        method: "GET",
+                        success: function (data) {
+                            let rs = $.parseJSON(data);
+                            $.each(rs, function (key, value) {
+                                $('#top').append('<a class="dropdown-item" id="' + key + '" href="' + value.WalletID + '">' + "Top " + (key + 1) + " " + "Wallet: " + value.WalletID + "- UserID: " + value.UserID + "- Total: " + value.SumRechargeofUser + '</a>')
+                            });
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                    $(this).off(event);
+                })
+                // Cấu hình các nhãn phân trang
+                $('#example').dataTable({
+                    "language": {
+                        "sProcessing": "Processing...",
+                        "sLengthMenu": "View _MENU_ item",
+                        "sZeroRecords": "No matching lines found",
+                        "sInfo": "Viewing _START_ to _END_ of total _TOTAL_ entries",
+                        "sInfoEmpty": "Viewing 0 to 0 out of 0 entries",
+                        "sInfoFiltered": "(filtered from _MAX_ entries)",
+                        "sInfoPostFix": "",
+                        "sSearch": "Search now:",
+                        "sUrl": "",
+                        "oPaginate": {
+                            "sFirst": "Head",
+                            "sPrevious": "Previous",
+                            "sNext": "Nex",
+                            "sLast": "End"
+                        }
+                    }
+                });
+                $("#1day").click(function () {
+                    var curr = new Date; // get current date
+                    var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+                    var last = first - 1; // last day is the first day + 6
+                    var firstday = new Date(curr.setDate(first)).toLocaleDateString();
+                    var lastday = new Date(curr.setDate(last)).toLocaleDateString();
+                    console.log(firstday)
+                    console.log(lastday)
+                })
+                $("#1week").click(function () {
+                    var curr = new Date; // get current date
+                    var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+                    var last = first - 7; // last day is the first day + 6
+                    var firstday = new Date(curr.setDate(first)).toLocaleDateString();
+                    var lastday = new Date(curr.setDate(last)).toLocaleDateString();
+                    console.log(firstday)
+                    console.log(lastday)
+                })
+                $("#1month").click(function () {
+                    var d = new Date();
+                    console.log(d.toLocaleDateString());
+                    d.setMonth(d.getMonth() - 1);
+                    console.log(d.toLocaleDateString())
+                })
+            });
+        </script>
+        <style>
+            .a:focus {
+                box-shadow: none;
+                border: none
+            }
+        </style>
     </head>
     <body>
-   <div class="container-scroller">
-   <%@ include file="../inc/nvarbar.jsp" %>
-   <%@ include file="../inc/sidebar.jsp" %>
-    <div class="main-panel">
-      <div class="content-wrapper">
-        <div class="row">
-          <div class="col-md-12 stretch-card">
-            <div class="card">
-              <div class="card-body">
-                <h2 class="card-body" style="text-align: center;">Recharge history List</h2>
-                <br>
-                <div class="row">
-                  <div class="col-md-2"></div>
-                  <div class="col-md-3">
-                    <input style="border: 1px solid rgb(177, 172, 172);
-                        color: #9ca3af; 
-                        border-left: 1px solid #d1d5db" id="datepicker" width="200" placeholder="Start Date" />
-                  </div>
-                  <div class="col-md-3">
-                    <input style="border: 1px solid rgb(177, 172, 172);
-                        color: #9ca3af; 
-                        border-left: 1px solid #d1d5db ; float: right;" id="datepicker1" width="200" placeholder="End Date" />
-                  </div>
-                  <script>
-                    $('#datepicker').datepicker({
-                      uiLibrary: 'bootstrap4'
-                    });
-                    $('#datepicker1').datepicker({
-                      uiLibrary: 'bootstrap4'
-                    });
-                  </script>
-                  <div class="col-md-1">
-                    <intput type="submit" style="height:2.875rem" class="btn btn-primary" value="Searh"> <i class="mdi mdi-magnify"></i>
-                  </div>
-                  <div class="col-md-2"></div>
-                </div>
-                <br />
-                <br />
-                <div class="container">
-                  <table id="example" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>WalletID</th>
-                        <th>User</th>
-                        <th>Create Date</th>
-                        <th>Bank</th>
-                        <th>Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-      <td>Tiger Nixon</td>
-      <td>System Architect</td>
-      <td>Edinburgh</td>
-      <td>61</td>
-      <td>2011/04/25</td>
-      <td>$320,800</td>
-    </tr>
-    <tr>
-      <td>Garrett Winters</td>
-      <td>Accountant</td>
-      <td>Tokyo</td>
-      <td>63</td>
-      <td>2011/07/25</td>
-      <td>$170,750</td>
-    </tr>
-    <tr>
-      <td>Ashton Cox</td>
-      <td>Junior Technical Author</td>
-      <td>San Francisco</td>
-      <td>66</td>
-      <td>2009/01/12</td>
-      <td>$86,000</td>
-    </tr>
-    <tr>
-      <td>Cedric Kelly</td>
-      <td>Senior Javascript Developer</td>
-      <td>Edinburgh</td>
-      <td>22</td>
-      <td>2012/03/29</td>
-      <td>$433,060</td>
-    </tr>
-    <tr>
-      <td>Airi Satou</td>
-      <td>Accountant</td>
-      <td>Tokyo</td>
-      <td>33</td>
-      <td>2008/11/28</td>
-      <td>$162,700</td>
-    </tr>
-    <tr>
-      <td>Brielle Williamson</td>
-      <td>Integration Specialist</td>
-      <td>New York</td>
-      <td>61</td>
-      <td>2012/12/02</td>
-      <td>$372,000</td>
-    </tr>
-    <tr>
-      <td>Herrod Chandler</td>
-      <td>Sales Assistant</td>
-      <td>San Francisco</td>
-      <td>59</td>
-      <td>2012/08/06</td>
-      <td>$137,500</td>
-    </tr>
-    <tr>
-      <td>Rhona Davidson</td>
-      <td>Integration Specialist</td>
-      <td>Tokyo</td>
-      <td>55</td>
-      <td>2010/10/14</td>
-      <td>$327,900</td>
-    </tr>
-    <tr>
-      <td>Tiger Nixon</td>
-      <td>System Architect</td>
-      <td>Edinburgh</td>
-      <td>61</td>
-      <td>2011/04/25</td>
-      <td>$320,800</td>
-    </tr>
-    <tr>
-      <td>Garrett Winters</td>
-      <td>Accountant</td>
-      <td>Tokyo</td>
-      <td>63</td>
-      <td>2011/07/25</td>
-      <td>$170,750</td>
-    </tr>
-    <tr>
-      <td>Ashton Cox</td>
-      <td>Junior Technical Author</td>
-      <td>San Francisco</td>
-      <td>66</td>
-      <td>2009/01/12</td>
-      <td>$86,000</td>
-    </tr>
-    <tr>
-      <td>Cedric Kelly</td>
-      <td>Senior Javascript Developer</td>
-      <td>Edinburgh</td>
-      <td>22</td>
-      <td>2012/03/29</td>
-      <td>$433,060</td>
-    </tr>
-    <tr>
-      <td>Airi Satou</td>
-      <td>Accountant</td>
-      <td>Tokyo</td>
-      <td>33</td>
-      <td>2008/11/28</td>
-      <td>$162,700</td>
-    </tr>
-    <tr>
-      <td>Brielle Williamson</td>
-      <td>Integration Specialist</td>
-      <td>New York</td>
-      <td>61</td>
-      <td>2012/12/02</td>
-      <td>$372,000</td>
-    </tr>
-    <tr>
-      <td>Herrod Chandler</td>
-      <td>Sales Assistant</td>
-      <td>San Francisco</td>
-      <td>59</td>
-      <td>2012/08/06</td>
-      <td>$137,500</td>
-    </tr>
-    <tr>
-      <td>Rhona Davidson</td>
-      <td>Integration Specialist</td>
-      <td>Tokyo</td>
-      <td>55</td>
-      <td>2010/10/14</td>
-      <td>$327,900</td>
-    </tr>
-    <tr>
-      <td>Tiger Nixon</td>
-      <td>System Architect</td>
-      <td>Edinburgh</td>
-      <td>61</td>
-      <td>2011/04/25</td>
-      <td>$320,800</td>
-    </tr>
-    <tr>
-      <td>Garrett Winters</td>
-      <td>Accountant</td>
-      <td>Tokyo</td>
-      <td>63</td>
-      <td>2011/07/25</td>
-      <td>$170,750</td>
-    </tr>
-    <tr>
-      <td>Ashton Cox</td>
-      <td>Junior Technical Author</td>
-      <td>San Francisco</td>
-      <td>66</td>
-      <td>2009/01/12</td>
-      <td>$86,000</td>
-    </tr>
-    <tr>
-      <td>Cedric Kelly</td>
-      <td>Senior Javascript Developer</td>
-      <td>Edinburgh</td>
-      <td>22</td>
-      <td>2012/03/29</td>
-      <td>$433,060</td>
-    </tr>
-    <tr>
-      <td>Airi Satou</td>
-      <td>Accountant</td>
-      <td>Tokyo</td>
-      <td>33</td>
-      <td>2008/11/28</td>
-      <td>$162,700</td>
-    </tr>
-    <tr>
-      <td>Brielle Williamson</td>
-      <td>Integration Specialist</td>
-      <td>New York</td>
-      <td>61</td>
-      <td>2012/12/02</td>
-      <td>$372,000</td>
-    </tr>
-    <tr>
-      <td>Herrod Chandler</td>
-      <td>Sales Assistant</td>
-      <td>San Francisco</td>
-      <td>59</td>
-      <td>2012/08/06</td>
-      <td>$137,500</td>
-    </tr>
-    <tr>
-      <td>Rhona Davidson</td>
-      <td>Integration Specialist</td>
-      <td>Tokyo</td>
-      <td>55</td>
-      <td>2010/10/14</td>
-      <td>$327,900</td>
-    </tr>
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>ID</th>
-                        <th>WalletID</th>
-                        <th>User</th>
-                        <th>Create Date</th>
-                        <th>Bank</th>
-                        <th>Status</th>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
+        <div class="container-scroller">
+            <%@ include file="../inc/nvarbar.jsp" %>
+            <%@ include file="../inc/sidebar.jsp" %>
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-md-12 stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h2 class="card-body" style="text-align: center;">Recharge history List</h2>
+                                    <div class="alert alert-danger alert-dismissible fade show" id="error" role="alert" style="display: none ">
+                                        <strong>Fail Search because end date is smaller than start date !</strong> Please wait check out again!!
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <br>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <input style="border: 1px solid rgb(177, 172, 172);
+                                                       color: #9ca3af;
+                                                       border-left: 1px solid #d1d5db" id="startdate" width="200" placeholder="Start Date" />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <input style="border: 1px solid rgb(177, 172, 172);
+                                                       color: #9ca3af;
+                                                       border-left: 1px solid #d1d5db ; float: right;" id="enddate" width="200" placeholder="End Date" />
+                                            </div>
+                                            <script>
+                                                $('#startdate').datepicker({
+                                                    uiLibrary: 'bootstrap4'
+                                                });
+                                                $('#enddate').datepicker({
+                                                    uiLibrary: 'bootstrap4'
+                                                });
+                                            </script>
+                                            <div class="col-md-1">
+                                                <button id="getdate" style="height:2.875rem" class="btn btn-primary" ><i class="mdi mdi-magnify"></i></button> 
+                                                <button id="cancledate" style="height:2.875rem;display: none" class="btn btn-danger" >Cancle</button> 
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div class="btn-group" style="height:2.875rem">
+                                                    <button type="button" id="top3" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Top 3 User Recharge
+                                                    </button>
+                                                    <div id="top" class="dropdown-menu">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
 
-              </div>
+                                            </div>
+                                            <div style="float: right;" >
+                                                <button style="height:2.875rem" type="button" class="btn btn-secondary" data-container="body" 
+                                                        data-toggle="popover" data-placement="top" 
+                                                        data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+                                                    Other information
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row" style="margin-top: 4px;margin-left:1px">
+                                        <ul class="nav">
+                                            <li class="nav-item">
+                                                <a class="nav-link disabled">Quickly Serach: </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="1day" href="#">1 day ago</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="1week" href="#">1 week ago</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="1month" href="#">1 month ago</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="container">
+                                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Create Date</th>
+                                                    <th>WalletID</th>
+                                                    <th>User</th>
+                                                    <th>Bank Acount</th>
+                                                    <th>Bank</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <c:if test="${empty requestScope['listR']}">
+                                                    <jsp:forward page = "/RechargeController?ac=view" />
+                                                </c:if>
+                                                <c:forEach items="${listR}" var = "x" >
+                                                    <tr>
+                                                        <td>${x.getRechargeID()}</td>
+                                                        <td>${x.getCreateDate()} ${x.getCreateHourl()}</td>
+                                                        <td>${x.getWalletID()}</td><!-- comment -->
+                                                        <td>${x.getUserID()}</td><!-- comment -->
+                                                        <td>${x.getBankAccount()}</td><!-- comment -->
+                                                        <td>${x.getBank()}</td>
+                                                        <td>${x.getAmount()}</td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Create Date</th>
+                                                    <th>WalletID</th>
+                                                    <th>User</th>
+                                                    <th>Bank Acount</th>
+                                                    <th>Bank</th>
+                                                    <th>Amount</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
-<%@ include file="../inc/plugins.jsp" %>
+        <%@ include file="../inc/plugins.jsp" %>
     </body>
 </html>
