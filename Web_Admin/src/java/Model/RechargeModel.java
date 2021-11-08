@@ -83,12 +83,186 @@ public class RechargeModel {
         return list;
     }
 
+    public ArrayList<Recharge> top1Recharge() {
+        ArrayList<Recharge> list = new ArrayList<>();
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT * FROM web.tbl_recharge_transaction\n"
+                    + "order by Amount desc\n"
+                    + "limit 1");
+            Recharge acc = null;
+            while (rs.next()) {
+                acc = new Recharge();
+                acc.setRechargeID(rs.getString(1));
+                acc.setCreateDate(rs.getString(2));
+                acc.setWalletID(rs.getString(8));
+                acc.setSumRechargeofUser(rs.getInt(3));
+                list.add(acc);
+            }
+            rs.close();
+            stm.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return list;
+    }
+
+    public ArrayList<Recharge> getRechargebyWaalet(String walletID) {
+        ArrayList<Recharge> list = new ArrayList<>();
+        String sql = "SELECT * FROM user_wallet,tbl_recharge_transaction,tbl_user\n"
+                + "WHERE user_wallet.walletID = tbl_recharge_transaction.walletID\n"
+                + "AND user_wallet.UserID = tbl_user.UserID\n"
+                + "AND tbl_recharge_transaction.walletID = ?;";
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, walletID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Recharge acc = new Recharge();
+                acc.setRechargeID(rs.getString(5));
+                acc.setCreateDate(rs.getString(6));
+                acc.setAmount(rs.getInt(7));
+                acc.setName(rs.getString(8));
+                acc.setBank(rs.getString(9));
+                acc.setBankAccount(rs.getString(10));
+                acc.setContent(rs.getString(11));
+                acc.setWalletID(rs.getString(12));
+                acc.setCreateHourl(rs.getString(13));
+                acc.setUserID(rs.getString(14));
+                list.add(acc);
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return list;
+    }
+
+    public ArrayList<Recharge> searchDatebyWallet(String start, String end, String WalletID) {
+        ArrayList<Recharge> list = new ArrayList<>();
+        String sql = "SELECT * from user_wallet,tbl_recharge_transaction,tbl_user\n"
+                + "where  user_wallet.walletID = tbl_recharge_transaction.walletID\n"
+                + "AND user_wallet.UserID = tbl_user.UserID\n"
+                + "AND STR_TO_DATE(Create_Date,'%d/%m/%Y')between STR_TO_DATE(?,'%m/%d/%Y') and STR_TO_DATE(?,'%m/%d/%Y')\n"
+                + "AND tbl_recharge_transaction.walletID = ?";
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, start);
+            st.setString(2, end);
+            st.setString(3, WalletID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Recharge acc = new Recharge();
+                acc.setRechargeID(rs.getString(5));
+                acc.setCreateDate(rs.getString(6));
+                acc.setAmount(rs.getInt(7));
+                acc.setName(rs.getString(8));
+                acc.setBank(rs.getString(9));
+                acc.setBankAccount(rs.getString(10));
+                acc.setContent(rs.getString(11));
+                acc.setWalletID(rs.getString(12));
+                acc.setCreateHourl(rs.getString(13));
+                acc.setUserID(rs.getString(14));
+                list.add(acc);
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return list;
+    }
+        public ArrayList<Recharge> searchDatebyWallet2(String start, String end, String WalletID) {
+        ArrayList<Recharge> list = new ArrayList<>();
+        String sql = "SELECT * from user_wallet,tbl_recharge_transaction,tbl_user\n"
+                + "where  user_wallet.walletID = tbl_recharge_transaction.walletID\n"
+                + "AND user_wallet.UserID = tbl_user.UserID\n"
+                + "AND STR_TO_DATE(Create_Date,'%d/%m/%Y')between STR_TO_DATE(?,'%d/%m/%Y') and STR_TO_DATE(?,'%d/%m/%Y')\n"
+                + "AND tbl_recharge_transaction.walletID = ?";
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, start);
+            st.setString(2, end);
+            st.setString(3, WalletID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Recharge acc = new Recharge();
+                acc.setRechargeID(rs.getString(5));
+                acc.setCreateDate(rs.getString(6));
+                acc.setAmount(rs.getInt(7));
+                acc.setName(rs.getString(8));
+                acc.setBank(rs.getString(9));
+                acc.setBankAccount(rs.getString(10));
+                acc.setContent(rs.getString(11));
+                acc.setWalletID(rs.getString(12));
+                acc.setCreateHourl(rs.getString(13));
+                acc.setUserID(rs.getString(14));
+                list.add(acc);
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return list;
+    }
+
     public ArrayList<Recharge> searchDate(String start, String end) {
         ArrayList<Recharge> list = new ArrayList<>();
         String sql = "SELECT * from user_wallet,tbl_recharge_transaction,tbl_user\n"
                 + "where  user_wallet.walletID = tbl_recharge_transaction.walletID\n"
                 + "AND user_wallet.UserID = tbl_user.UserID\n"
                 + "AND STR_TO_DATE(Create_Date,'%d/%m/%Y')between STR_TO_DATE(?,'%m/%d/%Y') and STR_TO_DATE(?,'%m/%d/%Y');\n"
+                + ";";
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, start);
+            st.setString(2, end);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Recharge acc = new Recharge();
+                acc.setRechargeID(rs.getString(5));
+                acc.setCreateDate(rs.getString(6));
+                acc.setAmount(rs.getInt(7));
+                acc.setName(rs.getString(8));
+                acc.setBank(rs.getString(9));
+                acc.setBankAccount(rs.getString(10));
+                acc.setContent(rs.getString(11));
+                acc.setWalletID(rs.getString(12));
+                acc.setCreateHourl(rs.getString(13));
+                acc.setUserID(rs.getString(14));
+                list.add(acc);
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return list;
+    }
+
+    public ArrayList<Recharge> searchDate2(String start, String end) {
+        ArrayList<Recharge> list = new ArrayList<>();
+        String sql = "SELECT * from user_wallet,tbl_recharge_transaction,tbl_user\n"
+                + "where  user_wallet.walletID = tbl_recharge_transaction.walletID\n"
+                + "AND user_wallet.UserID = tbl_user.UserID\n"
+                + "AND STR_TO_DATE(Create_Date,'%d/%m/%Y')between STR_TO_DATE(?,'%d/%m/%Y') and STR_TO_DATE(?,'%d/%m/%Y');\n"
                 + ";";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();

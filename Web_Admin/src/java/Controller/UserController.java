@@ -9,6 +9,7 @@ import Entity.Suppervisor;
 import Entity.User;
 import Entity.ViewTotalPost;
 import Entity.ViewTotalPurchases;
+import Entity.ViewTotalRecharge;
 import Entity.Wallet;
 import Model.CategoryModel;
 import Model.SupModel;
@@ -43,13 +44,13 @@ public class UserController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String act = request.getParameter("ac");
-            if (act.equals("view")) {
+        if (act.equals("view")) {
             UserModel am = new UserModel();
             ArrayList<User> list = am.getListUser();
             request.setAttribute("listU", list);
             request.getRequestDispatcher("pages/user.jsp").forward(request, response);
         }
-            if (act.equals("del")) {
+        if (act.equals("del")) {
             String op = request.getParameter("get");
             UserModel am = new UserModel();
             Boolean list = am.deleteUser(op);
@@ -85,6 +86,15 @@ public class UserController extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
+        if (act.equals("viewTotalRecharge")) {
+            String op = request.getParameter("get");
+            UserModel am = new UserModel();
+            ViewTotalRecharge list = am.viewTotalRecharge(op);
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
         if (act.equals("viewUser")) {
             String op = request.getParameter("get");
             UserModel am = new UserModel();
@@ -94,8 +104,17 @@ public class UserController extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
+        if (act.equals("updateStatus")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            User u = json.fromJson(op, User.class);
+            UserModel am = new UserModel();
+            boolean a = am.updateStatus(u.getUserID(), u.getStatus());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

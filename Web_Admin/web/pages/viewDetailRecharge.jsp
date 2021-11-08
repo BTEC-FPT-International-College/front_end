@@ -1,8 +1,9 @@
 <%-- 
-    Document   : recharge_history
-    Created on : 21-10-2021, 10:51:08
+    Document   : viewDetailRecharge
+    Created on : 08-11-2021, 16:05:27
     Author     : nguyenbamang
 --%>
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page autoFlush="true" buffer="1094kb"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -31,48 +32,40 @@
         <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
 
         <script>
-            /**
-             var date = new Date();
-             var now = new Date();
-             let dayNow = now.getDate();
-             let monthNow = now.getMonth() +1
-             let yearNow = now.getFullYear()
-             let oneDay = dayNow-1
-             let oneMonth = monthNow
-             console.log(dayNow+"/"+monthNow+"/"+yearNow)
-             * 
-             
-             * @type type  
-             *             // search 1 day
-             
-             // search 7 day
-             var curr = new Date; // get current date
-             var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
-             var last = first - 7; // last day is the first day + 6
-             var firstday = new Date(curr.setDate(first)).toLocaleDateString();
-             var lastday = new Date(curr.setDate(last)).toLocaleDateString();
-             console.log(firstday)
-             console.log(lastday)
-             * 
-             
-             * @type type      */
-
-            //search 1 month
+            var d = "<%=request.getParameter("id")%>"
             var a = {}
             $(document).ready(function () {
-                $(function () {
-                    $('[data-toggle="popover"]').popover()
-                })
-                $(function () {
-                    $('.example-popover').popover({
-                        container: 'body'
-                    })
-                })
+                $.ajax({
+                            url: "../RechargeController?ac=viewRechargebyWallet",
+                            method: "POST",
+                            data: {get: d},
+                            success: function (data) {
+                                let obj = $.parseJSON(data);
+                                console.log(obj)
+                                $("#example tbody tr").empty();
+                                $.each(obj, function (key, value) {
+                                    $('#example').append(
+                                            "<tr> \n\
+                                        <td> " + value.RechargeID + "</td> \n\
+                                        <td> " + value.CreateDate + " " + value.CreateHourl + "</td> \n\
+                                        <td> " + value.WalletID + "</td> \n\
+                                        <td> <a href='viewDetailUser.jsp?id="+ value.UserID+"'"+">"+ value.UserID +" </a></td> \n\
+                                        <td> " + value.BankAccount + "</td> \n\
+                                        <td> " + value.Bank + "</td> \n\
+                                        <td> " + value.Amount + "</td> \n\
+                                    <tr>")
+                                });
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
                 $("#getdate").click(function () {
                     $("#cancledate").show();
                     $("#getdate").hide()
                     a.Start = $("#startdate").val()
                     a.End = $("#enddate").val()
+                    a.Wallet = d
                     const end = Date.parse(a.End)
                     const start = Date.parse(a.Start)
                     if ((end - start) < 0) {
@@ -81,7 +74,7 @@
                         const da = JSON.stringify(a)
                         console.log(da)
                         $.ajax({
-                            url: "../RechargeController?ac=search",
+                            url: "../RechargeController?ac=searchRbyWallet",
                             method: "POST",
                             data: {get: da},
                             success: function (data) {
@@ -109,15 +102,16 @@
                 })
                 $("#cancledate").click(function () {
                     $.ajax({
-                        url: "../RechargeController?ac=viewR",
-                        method: "GET",
-                        success: function (data) {
-                            let rs = $.parseJSON(data);
-                            console.log(rs)
-                            $("#example tbody tr").empty();
-                            $.each(rs, function (key, value) {
-                                $('#example').append(
-                                        "<tr> \n\
+                            url: "../RechargeController?ac=viewRechargebyWallet",
+                            method: "POST",
+                            data: {get: d},
+                            success: function (data) {
+                                let obj = $.parseJSON(data);
+                                console.log(obj)
+                                $("#example tbody tr").empty();
+                                $.each(obj, function (key, value) {
+                                    $('#example').append(
+                                            "<tr> \n\
                                         <td> " + value.RechargeID + "</td> \n\
                                         <td> " + value.CreateDate + " " + value.CreateHourl + "</td> \n\
                                         <td> " + value.WalletID + "</td> \n\
@@ -126,12 +120,12 @@
                                         <td> " + value.Bank + "</td> \n\
                                         <td> " + value.Amount + "</td> \n\
                                     <tr>")
-                            });
-                        },
-                        error: function () {
-                            alert("error");
-                        }
-                    });
+                                });
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
                     $("#getdate").show()
                     $("#cancledate").hide()
                     $("#startdate").val("")
@@ -139,15 +133,16 @@
                 })
                 $("#refesh").click(function () {
                     $.ajax({
-                        url: "../RechargeController?ac=viewR",
-                        method: "GET",
-                        success: function (data) {
-                            let rs = $.parseJSON(data);
-                            console.log(rs)
-                            $("#example tbody tr").empty();
-                            $.each(rs, function (key, value) {
-                                $('#example').append(
-                                        "<tr> \n\
+                            url: "../RechargeController?ac=viewRechargebyWallet",
+                            method: "POST",
+                            data: {get: d},
+                            success: function (data) {
+                                let obj = $.parseJSON(data);
+                                console.log(obj)
+                                $("#example tbody tr").empty();
+                                $.each(obj, function (key, value) {
+                                    $('#example').append(
+                                            "<tr> \n\
                                         <td> " + value.RechargeID + "</td> \n\
                                         <td> " + value.CreateDate + " " + value.CreateHourl + "</td> \n\
                                         <td> " + value.WalletID + "</td> \n\
@@ -156,46 +151,16 @@
                                         <td> " + value.Bank + "</td> \n\
                                         <td> " + value.Amount + "</td> \n\
                                     <tr>")
-                            });
-                            $("#refesh").hide()
-                        },
-                        error: function () {
-                            alert("error");
-                        }
-                    });
-                })
-                $("#top3").click(function (event) {
-                    $.ajax({
-                        url: "../RechargeController?ac=viewTop3",
-                        method: "GET",
-                        success: function (data) {
-                            let rs = $.parseJSON(data);
-                            
-                            $.each(rs, function (key, value) {
-                                $('#top').append('<a class="dropdown-item" id="' + key + '" href="viewDetailRecharge.jsp?id=' + value.WalletID + '">' + "Top " + (key + 1) + " " + "Wallet: " + value.WalletID + "- UserID: " + value.UserID + "- Total: " + value.SumRechargeofUser + '</a>')
-                            });
-                        },
-                        error: function () {
-                            alert("error");
-                        }
-                    });
-                    $(this).off(event);
+                                });
+                                 $("#refesh").hide()
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
                 })
                 $("#orther").mouseenter(function(event) {
-                    $.ajax({
-                        url: "../RechargeController?ac=viewTop1Recharge",
-                        method: "GET",
-                        success: function (data) {
-                            let rs = $.parseJSON(data);
-                            console.log(rs)
-                            $.each(rs, function (key, value) {
-                               $("#orther").attr("data-content","Top 1 Recharge : ID: "+value.RechargeID + " Date: "+value.CreateDate +" Wallet: "+ value.WalletID + " Amount: "+value.SumRechargeofUser)
-                            });
-                        },
-                        error: function () {
-                            alert("error");
-                        }
-                    });   
+                    
                     $(this).off(event);
                 })
                 // Cấu hình các nhãn phân trang
@@ -228,12 +193,13 @@
                     console.log(lastday)
                     const searh1day = {
                         Start : firstday,
-                        End : lastday
+                        End : lastday,
+                        Wallet : d
                     }
                     const da = JSON.stringify(searh1day)
                     console.log(da)
                     $.ajax({
-                        url: "../RechargeController?ac=search1",
+                        url: "../RechargeController?ac=searchRbyWallet2",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
@@ -246,7 +212,7 @@
                                         <td> " + value.RechargeID + "</td> \n\
                                         <td> " + value.CreateDate + " " + value.CreateHourl + "</td> \n\
                                         <td> " + value.WalletID + "</td> \n\
-                                       <td> <a href='viewDetailUser.jsp?id="+ value.UserID+"'"+">"+ value.UserID +" </a></td> \n\
+                                        <td> <a href='viewDetailUser.jsp?id="+ value.UserID+"'"+">"+ value.UserID +" </a></td> \n\
                                         <td> " + value.BankAccount + "</td> \n\
                                         <td> " + value.Bank + "</td> \n\
                                         <td> " + value.Amount + "</td> \n\
@@ -266,12 +232,13 @@
                     console.log(lastweek.toLocaleDateString())
                     const searh1weeek = {
                         Start : lastweek.toLocaleDateString(),
-                        End : today.toLocaleDateString()
+                        End : today.toLocaleDateString(),
+                        Wallet : d
                     }
                     const da = JSON.stringify(searh1weeek)
                     console.log(da)
                     $.ajax({
-                        url: "../RechargeController?ac=search1",
+                        url: "../RechargeController?ac=searchRbyWallet2",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
@@ -298,19 +265,20 @@
                     });
                 })
                 $("#1month").click(function () {
-                    var d = new Date();
-                    const first = d.toLocaleDateString()
+                    var date = new Date();
+                    const first = date.toLocaleDateString()
                     console.log(first);
-                    d.setMonth(d.getMonth() - 1);
-                    console.log(d.toLocaleDateString())
+                    date.setMonth(date.getMonth() - 1);
+                    console.log(date.toLocaleDateString())
                     const searh1month = {
-                        Start : d.toLocaleDateString(),
-                        End : first
+                        Start : date.toLocaleDateString(),
+                        End : first,
+                        Wallet : d
                     }
                     const da = JSON.stringify(searh1month)
                     console.log(da)
                     $.ajax({
-                        url: "../RechargeController?ac=search1",
+                        url: "../RechargeController?ac=searchRbyWallet2",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
@@ -358,10 +326,10 @@
                                     <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="../index.jsp">Home</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Recharge History Management</li>
+                                        <li class="breadcrumb-item active" aria-current="page">View Detail Recharge history</li>
                                     </ol>
                                 </nav>
-                                    <h2 class="card-body" style="text-align: center;">Recharge history List</h2>
+                                    <h2 class="card-body" style="text-align: center;"><%=request.getParameter("id")%>' Recharge history List</h2>
                                     <div class="alert alert-danger alert-dismissible fade show" id="error" role="alert" style="display: none ">
                                         <strong>Fail Search because end date is smaller than start date !</strong> Please wait check out again!!
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -394,13 +362,7 @@
                                                 <button id="cancledate" style="height:2.875rem;display: none" class="btn btn-danger" >Cancle</button> 
                                             </div>
                                             <div class="col-md-1">
-                                                <div class="btn-group" style="height:2.875rem">
-                                                    <button type="button" id="top3" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Top 3 User Recharge
-                                                    </button>
-                                                    <div id="top" class="dropdown-menu">
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
                                             <div class="col-md-2">
 
@@ -448,20 +410,6 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <c:if test="${empty requestScope['listR']}">
-                                                    <jsp:forward page = "/RechargeController?ac=view" />
-                                                </c:if>
-                                                <c:forEach items="${listR}" var = "x" >
-                                                    <tr>
-                                                        <td>${x.getRechargeID()}</td>
-                                                        <td>${x.getCreateDate()} ${x.getCreateHourl()}</td>
-                                                        <td>${x.getWalletID()}</td><!-- comment -->
-                                                        <td><a href="viewDetailUser.jsp?id=${x.getUserID()}">${x.getUserID()}</a></td><!-- comment -->
-                                                        <td>${x.getBankAccount()}</td><!-- comment -->
-                                                        <td>${x.getBank()}</td>
-                                                        <td>${x.getAmount()}</td>
-                                                    </tr>
-                                                </c:forEach>
                                             </tbody>
                                             <tfoot>
                                                 <tr>

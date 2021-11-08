@@ -22,6 +22,55 @@
         <link rel="shortcut icon" href="../images/favicon.png" />
         <script>
             $(document).ready(function () {
+                $("#checkS").change(function () {
+                    if ($("#checkS").attr('checked') === 'checked') {
+                        $("#checkS").attr('checked', false)
+                        const not = {
+                            UserID: "<%=request.getParameter("id")%>",
+                            Status: 0
+                        }
+                        const da = JSON.stringify(not)
+                        console.log(da)
+                        $.ajax({
+                            url: "../UserController?ac=updateStatus",
+                            method: "POST",
+                            data: {get: da},
+                            success: function (data) {
+                                let rs = $.parseJSON(data);
+                                console.log(rs)
+                                if(rs){
+                                    $("#status").text("Allow")
+                                }
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    } else {
+                        $("#checkS").attr('checked', 'checked')
+                        console.log("set chekced")
+                        const check = {
+                            UserID: "<%=request.getParameter("id")%>",
+                            Status: 1
+                        }
+                        const da = JSON.stringify(check)
+                        console.log(da)
+                        $.ajax({
+                            url: "../UserController?ac=updateStatus",
+                            method: "POST",
+                            data: {get: da},
+                            success: function (data) {
+                                let rs = $.parseJSON(data);
+                                console.log(rs)
+                                if(rs)
+                                    $("#status").text("Block")
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                })
                 let select = $('#getid').text();
                 console.log(select)
                 $.ajax({
@@ -48,7 +97,30 @@
                     success: function (data) {
                         let obj = $.parseJSON(data);
                         console.log(obj)
-                        $("#totalPur").val(obj.TotalPurchases)
+                        if (obj == null) {
+                            $("#totalPur").val(0)
+                        } else {
+                            $("#totalPur").val(obj.TotalPurchases)
+                        }
+
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+                $.ajax({
+                    url: "../UserController?ac=viewTotalRecharge",
+                    method: "POST",
+                    data: {get: select},
+                    success: function (data) {
+                        let obj = $.parseJSON(data);
+                        console.log(obj)
+                        if (obj == null) {
+                            $("#recharge").val(0)
+                        } else {
+                            $("#recharge").val(obj.Total)
+                        }
+
                     },
                     error: function () {
                         alert("error");
@@ -86,34 +158,34 @@
                         $("#gender").val(obj.Gender)
                         $("#createday").val(obj.CreateDate)
                         $("#updatedate").val(obj.UpdateDate)
+                        const status = obj.Status
+                        if (status == 0) {
+                            $("#status").text("Allow")
+                        } else {
+                            $("#status").text("Block")
+                            $("#checkS").attr('checked', 'checked')
+                        }
                         const rank = obj.Reward_point;
-                        if (rank === 0){
-                             $("#rank").val("User are not rated yet");
-                              $("#rank").css("color", "white");
-                             $("#rank").css("background-color", "red");
-                        } 
-                        else if (rank < 100){
+                        if (rank === 0) {
+                            $("#rank").val("User are not rated yet");
+                            $("#rank").css("color", "white");
+                            $("#rank").css("background-color", "red");
+                        } else if (rank < 100) {
                             $("#rank").css("background-color", "#a37745");
                             $("#rank").css("color", "white");
                             $("#rank").val("Coper Member");
-                        }
-                         
-                        else if (rank < 300){
+                        } else if (rank < 300) {
                             $("#rank").val("Silver Member")
                             $("#rank").css("color", "white");
                             $("#rank").css("background-color", "#61605e");
-                        }
-                            
-                        else if (rank < 500){
+                        } else if (rank < 500) {
                             $("#rank").val("Gold Member");
                             $("#rank").css("background-color", "#e8b10c");
-                        }
-                            
-                        else{
+                        } else {
                             $("#rank").val("Diamond Member");
                             $("#rank").css("background-color", "#b5f5ee");
                         }
-                            
+
                     },
                     error: function () {
                         alert("error");
@@ -203,12 +275,10 @@
                     <div class="col-md-4 border-right">
                         <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                             <img class="rounded-circle mt-5" src="https://i.imgur.com/0eg0aG0.jpg" width="90">
-                            <span class="font-weight-bold" id="fullname"></span>
-                            
-                            
+                            <span class="font-weight-bold" id="fullname"></span>       
+                        </div>
                     </div>
-                    </div>
-                    
+
                     <div class="col-md-8">
                         <div class="p-3 py-5">
                             <div class="row mt-2">
@@ -241,8 +311,16 @@
                             <div class="row mt-3">
                                 <div class="col-md-4"> Wallet ID<input id="wallet" type="text" class="form-control" readonly="true"></div>
                                 <div class="col-md-4"> Surplus<input type="text" id="surplus" class="form-control" readonly="true"></div>
+                                <div class="col-md-4"> Total Recharge<input type="text" id="recharge" class="form-control" readonly="true"></div> 
+                                </div>
+                            <div class="form-check form-check-danger">
+                                <label class="form-check-label">
+                                        Status: <p id="status"></p>
+                                        <input id="checkS" type="checkbox" class="form-check-input">
+                                    </label>
                             </div>
-                            <div class="mt-5 text-right"><button class="btn btn-danger profile-button" type="button">Delete</button></div>
+                            </div>
+                        <div style="padding-bottom: 50px" class="text-right"><button class="btn btn-danger profile-button" type="button">Delete</button></div>
                         </div>
                     </div>
                 </div>

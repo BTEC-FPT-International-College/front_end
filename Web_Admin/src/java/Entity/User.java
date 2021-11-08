@@ -21,10 +21,25 @@ public class User {
     private String CreateDate;
     private String UpdateDate;
     private String RoleId;
-
+    private int Status;
     public User() {
     }
-
+    public User(String UserID, String FullName, String Phone, String Email, String Address, String Date_of_Birth, String Password, int Reward_point, String Gender, String CreateDate, String UpdateDate, String RoleId, int Status) {
+        this.UserID = UserID;
+        this.FullName = FullName;
+        this.Phone = Phone;
+        this.Email = Email;
+        this.Address = Address;
+        this.Date_of_Birth = Date_of_Birth;
+        this.Password = Password;
+        this.Reward_point = Reward_point;
+        this.Gender = Gender;
+        this.CreateDate = CreateDate;
+        this.UpdateDate = UpdateDate;
+        this.RoleId = RoleId;
+        this.Status = Status;
+    }
+    
     public User(String UserID, String FullName, String Phone, String Email, String Address, String Date_of_Birth, String Password, int Reward_point, String Gender, String CreateDate, String UpdateDate, String RoleId) {
         this.UserID = UserID;
         this.FullName = FullName;
@@ -134,6 +149,14 @@ public class User {
 
     public void setRoleId(String RoleId) {
         this.RoleId = RoleId;
+    }
+
+    public int getStatus() {
+        return Status;
+    }
+
+    public void setStatus(int Status) {
+        this.Status = Status;
     }
     
 }

@@ -9,6 +9,7 @@ import Entity.Suppervisor;
 import Entity.User;
 import Entity.ViewTotalPost;
 import Entity.ViewTotalPurchases;
+import Entity.ViewTotalRecharge;
 import Entity.Wallet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -44,6 +45,7 @@ public class UserModel {
                 acc.setGender(rs.getString(9));
                 acc.setCreateDate(rs.getString(10));
                 acc.setUpdateDate(rs.getString(11));
+                acc.setStatus(rs.getInt(13));
                 list.add(acc);
             }
             rs.close();
@@ -133,6 +135,33 @@ public class UserModel {
         return acc;
     }
 
+    public ViewTotalRecharge viewTotalRecharge(String id) {
+        ViewTotalRecharge acc = null;
+        String sql = "SELECT tbl_recharge_transaction.walletID,user_wallet.UserID,tbl_user.FullName, SUM(tbl_recharge_transaction.Amount)\n"
+                + "FROM tbl_recharge_transaction,tbl_user,user_wallet\n"
+                + "where tbl_recharge_transaction.walletID = user_wallet.walletID\n"
+                + "AND user_wallet.UserID = tbl_user.UserID\n"
+                + "AND  user_wallet.UserID = ?\n"
+                + "GROUP BY tbl_recharge_transaction.walletID ";
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                acc = new ViewTotalRecharge();
+                acc.setTotal(rs.getInt(4));
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return acc;
+    }
+
     public boolean deleteUser(String id) {
         String sql = "DELETE FROM web.tbl_user WHERE UserID = ?";
         int result = 0;
@@ -149,6 +178,7 @@ public class UserModel {
         }
         return result > 0;
     }
+
     public User getUser(String id) {
         User acc = null;
         String sql = "SELECT * FROM web.tbl_user WHERE UserID= ?;";
@@ -171,6 +201,7 @@ public class UserModel {
                 acc.setGender(rs.getString(9));
                 acc.setCreateDate(rs.getString(10));
                 acc.setUpdateDate(rs.getString(11));
+                acc.setStatus(rs.getInt(13));
             }
             rs.close();
             st.close();
@@ -179,5 +210,26 @@ public class UserModel {
             System.err.println(ex.getMessage());
         }
         return acc;
+    }
+
+    public boolean updateStatus(String id, int Status) {
+        String sql = "UPDATE `web`.`tbl_user`\n"
+                + "SET\n"
+                + "Status = ?\n"
+                + "WHERE UserID = ?; ";
+        int result = 0;
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(2, id);
+            ps.setInt(1, Status);
+            result = ps.executeUpdate();
+            ps.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return result > 0;
     }
 }

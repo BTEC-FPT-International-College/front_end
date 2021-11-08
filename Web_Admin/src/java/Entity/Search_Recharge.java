@@ -11,10 +11,16 @@ package Entity;
 public class Search_Recharge {
     private String Start;
     private String End;
-
+    private String Wallet;
     public Search_Recharge() {
     }
 
+    public Search_Recharge(String Start, String End, String Wallet) {
+        this.Start = Start;
+        this.End = End;
+        this.Wallet = Wallet;
+    }
+    
     public Search_Recharge(String Start, String End) {
         this.Start = Start;
         this.End = End;
@@ -34,6 +40,14 @@ public class Search_Recharge {
 
     public void setEnd(String End) {
         this.End = End;
+    }
+
+    public String getWallet() {
+        return Wallet;
+    }
+
+    public void setWallet(String Wallet) {
+        this.Wallet = Wallet;
     }
 
     

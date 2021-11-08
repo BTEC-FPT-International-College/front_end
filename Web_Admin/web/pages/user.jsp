@@ -30,8 +30,9 @@
         <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
         <script>
-                            $("#idth").removeClass("sorting_asc")
             $(document).ready(function () {
+                $("#idth").removeClass("sorting_asc")
+                $(".1").css("background-color", "yellow");
                 $('#example').dataTable({
                     "language": {
                         "sProcessing": "Processing...",
@@ -145,7 +146,7 @@
                                         <table id="example" class="table table-striped table-bordered" >
                                             <thead>
                                                 <tr>
-                                                    <th>
+                                                    <th id="idth">
                                                         ID
                                                     </th>
                                                     <th>
@@ -179,7 +180,7 @@
                                                 <jsp:forward page = "/UserController?ac=view" />
                                             </c:if>
                                             <c:forEach items="${listU}" var = "x" >
-                                                <tr>
+                                                <tr class="${x.getStatus()}">
                                                     <td>${x.getUserID()}</td>
                                                     <td>${x.getFullName()}</td>
                                                     <td>${x.getGender()}</td>

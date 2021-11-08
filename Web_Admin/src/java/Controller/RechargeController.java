@@ -57,6 +57,45 @@ public class RechargeController extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
+        if (act.equals("search1")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
+            RechargeModel am = new RechargeModel();
+            ArrayList<Recharge> a = am.searchDate2(sup.getStart(), sup.getEnd());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("searchRbyWallet")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
+            RechargeModel am = new RechargeModel();
+            ArrayList<Recharge> a = am.searchDatebyWallet(sup.getStart(), sup.getEnd(),sup.getWallet());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("searchRbyWallet2")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
+            RechargeModel am = new RechargeModel();
+            ArrayList<Recharge> a = am.searchDatebyWallet2(sup.getStart(), sup.getEnd(),sup.getWallet());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("viewRechargebyWallet")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            RechargeModel am = new RechargeModel();
+            ArrayList<Recharge> a = am.getRechargebyWaalet(op);
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
         if (act.equals("viewR")) {
             RechargeModel am = new RechargeModel();
             ArrayList<Recharge> list = am.getListRecharge();
@@ -65,9 +104,18 @@ public class RechargeController extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
+        
         if (act.equals("viewTop3")) {
             RechargeModel am = new RechargeModel();
             ArrayList<Recharge> list = am.top3Recharge();
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("viewTop1Recharge")) {
+            RechargeModel am = new RechargeModel();
+            ArrayList<Recharge> list = am.top1Recharge();
             Gson json = new Gson();
             String listTrainee = json.toJson(list);
             response.setContentType("text/html");
