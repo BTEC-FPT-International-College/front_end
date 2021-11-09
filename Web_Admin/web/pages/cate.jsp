@@ -163,6 +163,7 @@
                                     Guidance</a>
                                     <br>
                                     <br>
+                                    <div  class="container table-responsive">
                                     <table id="example" class="table table-striped table-bordered" >
                                         <thead>
                                             <tr>

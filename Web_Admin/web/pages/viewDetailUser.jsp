@@ -38,7 +38,7 @@
                             success: function (data) {
                                 let rs = $.parseJSON(data);
                                 console.log(rs)
-                                if(rs){
+                                if (rs) {
                                     $("#status").text("Allow")
                                 }
                             },
@@ -62,7 +62,7 @@
                             success: function (data) {
                                 let rs = $.parseJSON(data);
                                 console.log(rs)
-                                if(rs)
+                                if (rs)
                                     $("#status").text("Block")
                             },
                             error: function () {
@@ -135,6 +135,8 @@
                         console.log(obj)
                         $("#wallet").val(obj.WalletID)
                         $("#surplus").val(obj.Surplus)
+                        $("#viewRecharge").attr("href", "viewDetailRecharge.jsp?id="+obj.WalletID)
+                        $("#viewTransaction").attr("href", "tran_post.jsp?id="+obj.WalletID)
                     },
                     error: function () {
                         alert("error");
@@ -301,8 +303,20 @@
                                 <div class="col-md-6"> Create Date<input type="text" id="createday" class="form-control" readonly="true"></div>
                             </div>
                             <div class="row mt-3">
-                                <div class="col-md-6"> Total Purchases<input id="totalPur" type="text" class="form-control" readonly="true"></div>
-                                <div class="col-md-6"> Total Post<input id="totalPost" type="text" class="form-control" readonly="true"></div>
+                                <div class="col-md-6"> Total Purchases<input id="totalPur" type="text" class="form-control" readonly="true">
+                                    <a id="viewTransaction">
+                                        <small class="text-capitalize">
+                                        View transaction history list
+                                    </small>
+                                    </a>
+                                </div>
+                                <div class="col-md-6"> Total Post<input id="totalPost" type="text" class="form-control" readonly="true">
+                                    <a href="post.jsp?id=<%=request.getParameter("id")%>" id="viewPost">
+                                        <small class="text-capitalize">
+                                        View post list
+                                    </small>
+                                    </a>
+                                </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-6"> Reward Point<input id="point" type="text" class="form-control" readonly="true"></div>
@@ -311,21 +325,27 @@
                             <div class="row mt-3">
                                 <div class="col-md-4"> Wallet ID<input id="wallet" type="text" class="form-control" readonly="true"></div>
                                 <div class="col-md-4"> Surplus<input type="text" id="surplus" class="form-control" readonly="true"></div>
-                                <div class="col-md-4"> Total Recharge<input type="text" id="recharge" class="form-control" readonly="true"></div> 
-                                </div>
+                                <div class="col-md-4"> Total Recharge<input type="text" id="recharge" class="form-control" readonly="true">
+                                    <a id="viewRecharge">
+                                        <small class="text-capitalize">
+                                        View recharge history list
+                                    </small>
+                                    </a>
+                                </div> 
+                            </div>
                             <div class="form-check form-check-danger">
                                 <label class="form-check-label">
-                                        Status: <p id="status"></p>
-                                        <input id="checkS" type="checkbox" class="form-check-input">
-                                    </label>
+                                    Status: <p id="status"></p>
+                                    <input id="checkS" type="checkbox" class="form-check-input">
+                                </label>
                             </div>
-                            </div>
-                        <div style="padding-bottom: 50px" class="text-right"><button class="btn btn-danger profile-button" type="button">Delete</button></div>
                         </div>
+                        <div style="padding-bottom: 50px" class="text-right"><button class="btn btn-danger profile-button" type="button">Delete</button></div>
                     </div>
                 </div>
             </div>
         </div>
-        <%@ include file="../inc/plugins.jsp" %>
-    </body>
+    </div>
+    <%@ include file="../inc/plugins.jsp" %>
+</body>
 </html>

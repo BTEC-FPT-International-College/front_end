@@ -59,8 +59,8 @@
             </a>
             <div class="collapse" id="a">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../pages/post.jsp"> View </a></li>
-                <li class="nav-item"> <a class="nav-link" href="../pages/tran_post.jsp">  Transaction history </a></li>
+                <li class="nav-item"> <a class="nav-link" href="../pages/post.jsp"> View</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../pages/tran_post.jsp">Transaction history</a></li>
               </ul>
             </div>
           </li>

@@ -434,7 +434,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="container">
+                                    <div class="container table-responsive-xl">
                                         <table id="example" class="table table-striped table-bordered" style="width:100%">
                                             <thead>
                                                 <tr>

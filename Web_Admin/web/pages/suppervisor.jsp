@@ -145,7 +145,7 @@
                                    data-content=" <br />  "
                                    data-html="true">
                                     Guidance</a>
-                                    <div  class="table-responsive">
+                                    <div  class="table-responsive container">
                                         <table id="example" class="table table-striped table-bordered" >
                                             <thead>
                                                 <tr>

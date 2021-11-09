@@ -9,7 +9,7 @@
         <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
           <a class="navbar-brand brand-logo" href="../index.jsp"><img src="../images/logo.png" alt="logo" /></a>
           <a class="navbar-brand brand-logo-mini" href="../index.jsp"><img src="../images/logo.png" alt="logo" /></a>
-          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" data-target="#sidebar" aria-expanded="false" aria-controls="sidebar">
             <span class="mdi mdi-sort-variant"></span>
           </button>
         </div>
@@ -61,3 +61,4 @@
         </button>
       </div>
     </nav>
+

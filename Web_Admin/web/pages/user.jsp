@@ -5,11 +5,11 @@
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page autoFlush="true" buffer="1094kb"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+          <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>User Management Page</title>
         <link rel="stylesheet" href="../vendors/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="../vendors/base/vendor.bundle.base.css">
@@ -31,8 +31,7 @@
         <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
         <script>
             $(document).ready(function () {
-                $("#idth").removeClass("sorting_asc")
-                $(".1").css("background-color", "yellow");
+                
                 $('#example').dataTable({
                     "language": {
                         "sProcessing": "Processing...",
@@ -83,7 +82,6 @@
         <div class="container-scroller">
             <%@ include file="../inc/nvarbar.jsp" %>
             <%@ include file="../inc/sidebar.jsp" %>
-            <%@ include file="../inc/plugins.jsp" %>
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="row">
@@ -142,7 +140,7 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div  class="table-responsive">
+                                    <div  class="table-responsive container">
                                         <table id="example" class="table table-striped table-bordered" >
                                             <thead>
                                                 <tr>
@@ -265,5 +263,7 @@
                 </div>
             </div>
         </div>
+        </div>
+    <%@ include file="../inc/plugins.jsp" %>
     </body>
 </html>
