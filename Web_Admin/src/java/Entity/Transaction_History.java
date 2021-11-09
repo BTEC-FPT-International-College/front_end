@@ -9,19 +9,52 @@ package Entity;
  * @author nguyenbamang
  */
 public class Transaction_History {
+    private int TransactionID;
     private String PostID;
     private String WalletID;
-    private double Price;
+    private int Price;
     private String CreateDate;
-
+    private String CreateHour;
+    private int Packet;
     public Transaction_History() {
     }
 
-    public Transaction_History(String PostID, String WalletID, double Price, String CreateDate) {
+    public Transaction_History(int TransactionID, String PostID, String WalletID, int Price, String CreateDate, String CreateHour, int Packet) {
+        this.TransactionID = TransactionID;
         this.PostID = PostID;
         this.WalletID = WalletID;
         this.Price = Price;
         this.CreateDate = CreateDate;
+        this.CreateHour = CreateHour;
+        this.Packet = Packet;
+    }
+
+    public int getPacket() {
+        return Packet;
+    }
+
+    public void setPacket(int Packet) {
+        this.Packet = Packet;
+    }
+    
+    
+
+    public int getTransactionID() {
+        return TransactionID;
+    }
+
+    public void setTransactionID(int TransactionID) {
+        this.TransactionID = TransactionID;
+    }
+    
+    
+
+    public String getCreateHour() {
+        return CreateHour;
+    }
+
+    public void setCreateHour(String CreateHour) {
+        this.CreateHour = CreateHour;
     }
 
     public String getPostID() {
@@ -40,11 +73,11 @@ public class Transaction_History {
         this.WalletID = WalletID;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return Price;
     }
 
-    public void setPrice(double Price) {
+    public void setPrice(int Price) {
         this.Price = Price;
     }
 

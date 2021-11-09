@@ -12,9 +12,10 @@ import java.util.ArrayList;
  * @author nguyenbamang
  */
 public class Main {
+
     public static void main(String[] args) {
-       RechargeModel r = new RechargeModel();
-        System.out.println(r.getRechargebyWaalet("WL01").size());
-        
+        TransactionModel t = new TransactionModel();
+        System.out.println(t.getListTransaction().size());
+
     }
 }
