@@ -42,6 +42,7 @@ public class PostDaoImlp extends AbstractDao<PostModel> implements IPostDao{
 			return postid;
 		} catch (Exception e) {
 			if(connection != null) {
+				dang lam cai auto cho tbl post
 				try {
 					connection.rollback();
 				} catch (SQLException e1) {

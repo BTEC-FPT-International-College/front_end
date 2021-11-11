@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.18, for macos10.14 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
 --
--- Host: localhost    Database: web
+-- Host: 127.0.0.1    Database: web
 -- ------------------------------------------------------
--- Server version	8.0.16
+-- Server version	8.0.25
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `user_wallet`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_wallet` (
   `walletid` bigint NOT NULL,
-  `surplus` int(11) DEFAULT NULL,
+  `surplus` int DEFAULT NULL,
   `recharge_date` varchar(45) DEFAULT NULL,
   `userid` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`walletid`),
@@ -39,7 +39,6 @@ CREATE TABLE `user_wallet` (
 
 LOCK TABLES `user_wallet` WRITE;
 /*!40000 ALTER TABLE `user_wallet` DISABLE KEYS */;
-
 /*!40000 ALTER TABLE `user_wallet` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-09 21:26:34
+-- Dump completed on 2021-11-11 16:47:11

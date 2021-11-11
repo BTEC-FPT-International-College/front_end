@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.18, for macos10.14 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
 --
--- Host: localhost    Database: web
+-- Host: 127.0.0.1    Database: web
 -- ------------------------------------------------------
--- Server version	8.0.16
+-- Server version	8.0.25
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,36 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tbl_transaction_history`
+-- Table structure for table `tbl_recharge_transaction`
 --
 
-DROP TABLE IF EXISTS `tbl_transaction_history`;
+DROP TABLE IF EXISTS `tbl_recharge_transaction`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tbl_transaction_history` (
-  `postid` BIGINT NOT NULL,
-  `walletid` bigint NOT NULL,
-  `price` int(45) DEFAULT NULL,
-  `create_day` varchar(45) DEFAULT NULL,
+CREATE TABLE `tbl_recharge_transaction` (
+  `rechargeid` bigint NOT NULL,
+  `create_date` varchar(45) DEFAULT NULL,
+  `amount` int DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `bank` varchar(45) DEFAULT NULL,
+  `bank_account` varchar(45) DEFAULT NULL,
+  `content` mediumtext,
+  `walletid` bigint DEFAULT NULL,
   `create_hour` varchar(45) DEFAULT NULL,
-  `transactionid` bigint NOT NULL,
-  `packet` int(11) DEFAULT NULL,
-  PRIMARY KEY (`transactionid`),
-  KEY `walletI_idx` (`walletid`),
-  KEY `index3` (`postid`),
-  CONSTRAINT `postI` FOREIGN KEY (`postid`) REFERENCES `tbl_post` (`postid`),
-  CONSTRAINT `walletI` FOREIGN KEY (`walletid`) REFERENCES `user_wallet` (`walletid`)
+  PRIMARY KEY (`rechargeid`),
+  KEY `WalletID_idx` (`walletid`),
+  CONSTRAINT `walletid` FOREIGN KEY (`walletid`) REFERENCES `user_wallet` (`walletid`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbl_transaction_history`
+-- Dumping data for table `tbl_recharge_transaction`
 --
 
-LOCK TABLES `tbl_transaction_history` WRITE;
-/*!40000 ALTER TABLE `tbl_transaction_history` DISABLE KEYS */;
-INSERT INTO `tbl_transaction_history` VALUES ('5','WL03',10,'8/11/2021',NULL,1,1),('4','WL04',20,'3/11/2021',NULL,2,2),('4','WL04',80,'2/11/2021',NULL,3,3),('4','WL04',40,'1/11/2021',NULL,4,4),('6','WL05',10,'11/11/201',NULL,5,1),('7','WL04',80,'12/11/2021',NULL,6,4);
-/*!40000 ALTER TABLE `tbl_transaction_history` ENABLE KEYS */;
+LOCK TABLES `tbl_recharge_transaction` WRITE;
+/*!40000 ALTER TABLE `tbl_recharge_transaction` DISABLE KEYS */;
+INSERT INTO `tbl_recharge_transaction` VALUES (1,'3/11/2021',10,'Nguyen Ba Mang','Mbbank','020202020','ck',0,'00:00:01'),(2,'6/11/2021',10,'Nguyen Thi No','VCB','200202','ck',0,'20:00:12'),(3,'7/11/2021',20,'Nguyen Ba Mang','Mbbank','0201002010','ck',0,'20:00:11'),(4,'11/11/2021',100,'A','VCB','0101010','ck',0,'09:09:01'),(5,'1/11/2021',600,'A','VCB','10101001','ck',0,'22:11:22');
+/*!40000 ALTER TABLE `tbl_recharge_transaction` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-09 21:26:34
+-- Dump completed on 2021-11-11 16:47:11

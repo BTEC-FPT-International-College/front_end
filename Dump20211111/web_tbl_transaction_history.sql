@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.18, for macos10.14 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
 --
--- Host: localhost    Database: web
+-- Host: 127.0.0.1    Database: web
 -- ------------------------------------------------------
--- Server version	8.0.16
+-- Server version	8.0.25
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,28 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tbl_role`
+-- Table structure for table `tbl_transaction_history`
 --
 
-DROP TABLE IF EXISTS `tbl_role`;
+DROP TABLE IF EXISTS `tbl_transaction_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tbl_role` (
-  `roleid` bigint NOT NULL,
-  `rolename` varchar(15) DEFAULT NULL,
-  `roledescription` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`roleid`)
+CREATE TABLE `tbl_transaction_history` (
+  `postid` bigint NOT NULL,
+  `walletid` bigint NOT NULL,
+  `price` int DEFAULT NULL,
+  `create_day` varchar(45) DEFAULT NULL,
+  `create_hour` varchar(45) DEFAULT NULL,
+  `transactionid` bigint NOT NULL,
+  `packet` int DEFAULT NULL,
+  PRIMARY KEY (`transactionid`),
+  KEY `walletI_idx` (`walletid`),
+  KEY `index3` (`postid`),
+  CONSTRAINT `postI` FOREIGN KEY (`postid`) REFERENCES `tbl_post` (`postid`),
+  CONSTRAINT `walletI` FOREIGN KEY (`walletid`) REFERENCES `user_wallet` (`walletid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbl_role`
+-- Dumping data for table `tbl_transaction_history`
 --
 
-LOCK TABLES `tbl_role` WRITE;
-/*!40000 ALTER TABLE `tbl_role` DISABLE KEYS */;
-INSERT INTO `tbl_role` VALUES (1,'Admin','This role is for system administrator'),(2,'Suppervisors','This role is for suppervisors'),(3,'User','This role is for system\"user');
-/*!40000 ALTER TABLE `tbl_role` ENABLE KEYS */;
+LOCK TABLES `tbl_transaction_history` WRITE;
+/*!40000 ALTER TABLE `tbl_transaction_history` DISABLE KEYS */;
+INSERT INTO `tbl_transaction_history` VALUES (5,0,10,'8/11/2021',NULL,1,1),(4,0,20,'3/11/2021',NULL,2,2),(4,0,80,'2/11/2021',NULL,3,3),(4,0,40,'1/11/2021',NULL,4,4),(6,0,10,'11/11/201',NULL,5,1),(7,0,80,'12/11/2021',NULL,6,4);
+/*!40000 ALTER TABLE `tbl_transaction_history` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-09 21:26:34
+-- Dump completed on 2021-11-11 16:47:11

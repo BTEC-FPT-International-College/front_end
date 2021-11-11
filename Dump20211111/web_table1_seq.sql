@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.18, for macos10.14 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
 --
--- Host: localhost    Database: web
+-- Host: 127.0.0.1    Database: web
 -- ------------------------------------------------------
--- Server version	8.0.16
+-- Server version	8.0.25
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,30 +16,26 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tbl_category`
+-- Table structure for table `table1_seq`
 --
 
-DROP TABLE IF EXISTS `tbl_category`;
+DROP TABLE IF EXISTS `table1_seq`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tbl_category` (
-  `categoryid` bigint NOT NULL,
-  `name` varchar(45) NOT NULL,
-  `image` varchar(45) DEFAULT NULL,
-  `description` text,
-  `create_day` varchar(45) DEFAULT NULL,
-  `update_day` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`categoryid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `table1_seq` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbl_category`
+-- Dumping data for table `table1_seq`
 --
 
-LOCK TABLES `tbl_category` WRITE;
-/*!40000 ALTER TABLE `tbl_category` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_category` ENABLE KEYS */;
+LOCK TABLES `table1_seq` WRITE;
+/*!40000 ALTER TABLE `table1_seq` DISABLE KEYS */;
+INSERT INTO `table1_seq` VALUES (1),(2),(3);
+/*!40000 ALTER TABLE `table1_seq` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +47,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-09 21:26:35
+-- Dump completed on 2021-11-11 16:47:10

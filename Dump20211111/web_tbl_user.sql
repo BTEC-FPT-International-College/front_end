@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.18, for macos10.14 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
 --
--- Host: localhost    Database: web
+-- Host: 127.0.0.1    Database: web
 -- ------------------------------------------------------
--- Server version	8.0.16
+-- Server version	8.0.25
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,30 +16,40 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tbl_post_img`
+-- Table structure for table `tbl_user`
 --
 
-DROP TABLE IF EXISTS `tbl_post_img`;
+DROP TABLE IF EXISTS `tbl_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tbl_post_img` (
-  `imageid` bigint NOT NULL,
-  `url` varchar(45) DEFAULT NULL,
-  `description` mediumtext,
-  `postid` BIGINT DEFAULT NULL,
-  PRIMARY KEY (`imageid`),
-  KEY `PostID_idx` (`postid`),
-  CONSTRAINT `postid` FOREIGN KEY (`postid`) REFERENCES `tbl_post` (`postid`)
+CREATE TABLE `tbl_user` (
+  `userid` varchar(10) NOT NULL,
+  `fullname` varchar(100) DEFAULT NULL,
+  `phone` varchar(12) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `date_of_birth` varchar(100) DEFAULT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  `reward_point` int DEFAULT NULL,
+  `gender` varchar(7) DEFAULT NULL,
+  `create_day` varchar(45) DEFAULT NULL,
+  `update_day` varchar(45) DEFAULT NULL,
+  `roleid` bigint DEFAULT NULL,
+  `status` bigint DEFAULT NULL,
+  PRIMARY KEY (`userid`),
+  KEY `RoleID_idx` (`roleid`) /*!80000 INVISIBLE */,
+  CONSTRAINT `roleid` FOREIGN KEY (`roleid`) REFERENCES `tbl_role` (`roleid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tbl_post_img`
+-- Dumping data for table `tbl_user`
 --
 
-LOCK TABLES `tbl_post_img` WRITE;
-/*!40000 ALTER TABLE `tbl_post_img` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tbl_post_img` ENABLE KEYS */;
+LOCK TABLES `tbl_user` WRITE;
+/*!40000 ALTER TABLE `tbl_user` DISABLE KEYS */;
+INSERT INTO `tbl_user` VALUES ('US000001','Manh',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('US000002','ManhTRan',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),('US000003','Mark',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `tbl_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-09 21:26:34
+-- Dump completed on 2021-11-11 16:47:11
