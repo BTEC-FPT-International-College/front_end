@@ -15,7 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
         TransactionModel t = new TransactionModel();
-        System.out.println(t.getListTransaction().size());
+        System.out.println(t.topPacket().size());
 
     }
 }

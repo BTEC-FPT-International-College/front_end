@@ -16,10 +16,23 @@ public class Transaction_History {
     private String CreateDate;
     private String CreateHour;
     private int Packet;
+    private String UserID;
+    private int totalPrice;
+    private int numberOfPacket;
     public Transaction_History() {
     }
 
-    public Transaction_History(int TransactionID, String PostID, String WalletID, int Price, String CreateDate, String CreateHour, int Packet) {
+    public Transaction_History(String WalletID, String UserID, int totalPrice) {
+        this.WalletID = WalletID;
+        this.UserID = UserID;
+        this.totalPrice = totalPrice;
+    }
+
+    public Transaction_History(int Packet, int numberOfPacket) {
+        this.Packet = Packet;
+        this.numberOfPacket = numberOfPacket;
+    } 
+    public Transaction_History(int TransactionID, String PostID, String WalletID, int Price, String CreateDate, String CreateHour, int Packet, String UserID) {
         this.TransactionID = TransactionID;
         this.PostID = PostID;
         this.WalletID = WalletID;
@@ -27,7 +40,32 @@ public class Transaction_History {
         this.CreateDate = CreateDate;
         this.CreateHour = CreateHour;
         this.Packet = Packet;
+        this.UserID = UserID;
     }
+      public int getNumberOfPacket() {
+        return numberOfPacket;
+    }
+
+    public void setNumberOfPacket(int numberOfPacket) {
+        this.numberOfPacket = numberOfPacket;
+    }
+    
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getUserID() {
+        return UserID;
+    }
+
+    public void setUserID(String UserID) {
+        this.UserID = UserID;
+    }
+    
 
     public int getPacket() {
         return Packet;

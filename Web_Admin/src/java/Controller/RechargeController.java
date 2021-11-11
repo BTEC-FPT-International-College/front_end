@@ -113,6 +113,14 @@ public class RechargeController extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
+        if (act.equals("viewTop1PostBuy")) {
+            RechargeModel am = new RechargeModel();
+            ArrayList<Recharge> list = am.top3Recharge();
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
         if (act.equals("viewTop1Recharge")) {
             RechargeModel am = new RechargeModel();
             ArrayList<Recharge> list = am.top1Recharge();

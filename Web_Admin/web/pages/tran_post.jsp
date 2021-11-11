@@ -29,6 +29,304 @@
 
         <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $(function () {
+                    $('[data-toggle="popover"]').popover()
+                })
+                $(function () {
+                    $('.example-popover').popover({
+                        container: 'body'
+                    })
+                })
+                $('#example').dataTable({
+                    "language": {
+                        "sProcessing": "Processing...",
+                        "sLengthMenu": "View _MENU_ item",
+                        "sZeroRecords": "No matching lines found",
+                        "sInfo": "Viewing _START_ to _END_ of total _TOTAL_ entries",
+                        "sInfoEmpty": "Viewing 0 to 0 out of 0 entries",
+                        "sInfoFiltered": "(filtered from _MAX_ entries)",
+                        "sInfoPostFix": "",
+                        "sSearch": "Search now:",
+                        "sUrl": "",
+                        "oPaginate": {
+                            "sFirst": "Head",
+                            "sPrevious": "Previous",
+                            "sNext": "Nex",
+                            "sLast": "End"
+                        }
+                    }
+                });
+                $("#getdate").click(function () {
+                    $("#cancledate").show();
+                    $("#getdate").hide()
+                    a.Start = $("#startdate").val()
+                    a.End = $("#enddate").val()
+                    const end = Date.parse(a.End)
+                    const start = Date.parse(a.Start)
+                    if ((end - start) < 0) {
+                        $("#error").show()
+                    } else {
+                        const da = JSON.stringify(a)
+                        console.log(da)
+                        $.ajax({
+                            url: "../TransactionController?ac=search",
+                            method: "POST",
+                            data: {get: da},
+                            success: function (data) {
+                                let obj = $.parseJSON(data);
+                                console.log(obj)
+                                $("#example tbody tr").empty();
+                                $.each(obj, function (key, value) {
+                                    $('#example').append(
+                                            "<tr> \n\
+                                        <td> " + value.TransactionID + "</td> \n\
+                                        <td> <a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a></td> \n\
+                                        <td> <a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a></td> \n\
+                                        <td> <a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a></td> \n\
+                                        <td> " + value.CreateDate + " " + value.CreateHour + "</td> \n\
+                                        <td> " + value.Packet + "</td> \n\
+                                        <td> " + value.Price + "</td> \n\
+                                    <tr>")
+                                });
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    }
+                })
+                $("#cancledate").click(function () {
+                    $.ajax({
+                        url: "../TransactionController?ac=viewT",
+                        method: "GET",
+                        success: function (data) {
+                            let rs = $.parseJSON(data);
+                            console.log(rs)
+                            $("#example tbody tr").empty();
+                            $.each(rs, function (key, value) {
+                                $('#example').append(
+                                        "<tr> \n\
+                                        <td> " + value.TransactionID + "</td> \n\
+                                        <td> <a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a></td> \n\
+                                        <td> <a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a></td> \n\
+                                        <td> <a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a></td> \n\
+                                        <td> " + value.CreateDate + " " + value.CreateHour + "</td> \n\
+                                        <td> " + value.Packet + "</td> \n\
+                                        <td> " + value.Price + "</td> \n\
+                                    <tr>")
+                            });
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                    $("#getdate").show()
+                    $("#cancledate").hide()
+                    $("#startdate").val("")
+                    $("#enddate").val("")
+                })
+                $("#1day").click(function () {
+                    var curr = new Date;
+                    var first = curr.getDate();
+                    var last = first - 1;
+                    var firstday = new Date().toLocaleDateString();
+                    var lastday = new Date(curr.setDate(last)).toLocaleDateString();
+                    console.log(firstday)
+                    console.log(lastday)
+                    const searh1day = {
+                        Start: lastday,
+                        End: firstday
+                    }
+                    const da = JSON.stringify(searh1day)
+                    console.log(da)
+                    $.ajax({
+                        url: "../TransactionController?ac=search1",
+                        method: "POST",
+                        data: {get: da},
+                        success: function (data) {
+                            let obj = $.parseJSON(data);
+                            console.log(obj)
+                            $("#example tbody tr").empty();
+                            $.each(obj, function (key, value) {
+                                $('#example').append(
+                                        "<tr> \n\
+                                        <td> " + value.TransactionID + "</td> \n\
+                                        <td> <a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a></td> \n\
+                                        <td> <a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a></td> \n\
+                                        <td> <a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a></td> \n\
+                                        <td> " + value.CreateDate + " " + value.CreateHour + "</td> \n\
+                                        <td> " + value.Packet + "</td> \n\
+                                        <td> " + value.Price + "</td> \n\
+                                    <tr>")
+                            });
+                            $("#refesh").show()
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                })
+                $("#1week").click(function () {
+                    var today = new Date();
+                    var lastweek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+                    console.log(today.toLocaleDateString())
+                    console.log(lastweek.toLocaleDateString())
+                    const searh1weeek = {
+                        Start: lastweek.toLocaleDateString(),
+                        End: today.toLocaleDateString()
+                    }
+                    const da = JSON.stringify(searh1weeek)
+                    console.log(da)
+                    $.ajax({
+                        url: "../TransactionController?ac=search1",
+                        method: "POST",
+                        data: {get: da},
+                        success: function (data) {
+                            let obj = $.parseJSON(data);
+                            console.log(obj)
+                            $("#example tbody tr").empty();
+                            $.each(obj, function (key, value) {
+                                $('#example').append(
+                                        "<tr> \n\
+                                        <td> " + value.TransactionID + "</td> \n\
+                                        <td> <a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a></td> \n\
+                                        <td> <a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a></td> \n\
+                                        <td> <a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a></td> \n\
+                                        <td> " + value.CreateDate + " " + value.CreateHour + "</td> \n\
+                                        <td> " + value.Packet + "</td> \n\
+                                        <td> " + value.Price + "</td> \n\
+                                    <tr>")
+                            });
+                            $("#refesh").show()
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                })
+                $("#1month").click(function () {
+                    var d = new Date();
+                    const first = d.toLocaleDateString()
+                    console.log(first);
+                    d.setMonth(d.getMonth() - 1);
+                    console.log(d.toLocaleDateString())
+                    const searh1month = {
+                        Start: d.toLocaleDateString(),
+                        End: first
+                    }
+                    const da = JSON.stringify(searh1month)
+                    console.log(da)
+                    $.ajax({
+                        url: "../TransactionController?ac=search1",
+                        method: "POST",
+                        data: {get: da},
+                        success: function (data) {
+                            let obj = $.parseJSON(data);
+                            console.log(obj)
+                            $("#example tbody tr").empty();
+                            $.each(obj, function (key, value) {
+                                $('#example').append(
+                                        "<tr> \n\
+                                        <td> " + value.TransactionID + "</td> \n\
+                                        <td> <a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a></td> \n\
+                                        <td> <a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a></td> \n\
+                                        <td> <a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a></td> \n\
+                                        <td> " + value.CreateDate + " " + value.CreateHour + "</td> \n\
+                                        <td> " + value.Packet + "</td> \n\
+                                        <td> " + value.Price + "</td> \n\
+                                    <tr>")
+                            });
+                            $("#refesh").show()
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                })
+                $("#refesh").click(function () {
+                    $.ajax({
+                        url: "../TransactionController?ac=viewT",
+                        method: "GET",
+                        success: function (data) {
+                            let rs = $.parseJSON(data);
+                            console.log(rs)
+                            $("#example tbody tr").empty();
+                            $.each(rs, function (key, value) {
+                                $('#example').append(
+                                        "<tr> \n\
+                                        <td> " + value.TransactionID + "</td> \n\
+                                        <td> <a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a></td> \n\
+                                        <td> <a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a></td> \n\
+                                        <td> <a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a></td> \n\
+                                        <td> " + value.CreateDate + " " + value.CreateHour + "</td> \n\
+                                        <td> " + value.Packet + "</td> \n\
+                                        <td> " + value.Price + "</td> \n\
+                                    <tr>")
+                            });
+                            $("#refesh").hide()
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                })
+                $("#top3").click(function (event) {
+                    $.ajax({
+                        url: "../TransactionController?ac=viewTop3",
+                        method: "GET",
+                        success: function (data) {
+                            let rs = $.parseJSON(data);
+
+                            $.each(rs, function (key, value) {
+                                $('#top').append('<a class="dropdown-item" id="' + key + '" href="viewDetailRecharge.jsp?id=' + value.WalletID + '">' + "Top " + (key + 1) + " " + "Wallet: " + value.WalletID + "- UserID: " + value.UserID + "- Total: " + value.totalPrice + '</a>')
+                            });
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                    $(this).off(event);
+                })
+                $("#orther").mouseenter(function (event) {
+                    $.ajax({
+                        url: "../TransactionController?ac=viewTop1PostBuy",
+                        method: "GET",
+                        success: function (data) {
+                            let rs = $.parseJSON(data);
+                            console.log(rs)
+                            $.each(rs, function (key, value) {
+                                $("#orther").attr("data-content", "Top 1 Post purchased : PostID: " + value.PostID + "- UserID: " + value.UserID + "- Total Price: " + value.totalPrice)
+                            });
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                    $(this).off(event);
+                })
+                $("#topPacket").mouseenter(function (event) {
+                    $.ajax({
+                        url: "../TransactionController?ac=viewTopPacket",
+                        method: "GET",
+                        success: function (data) {
+                            let rs = $.parseJSON(data);
+                            console.log(rs)
+                            $('#topPacket').attr("data-content"
+                                    , "Top 1: " + "Packet " + rs[0].Packet + "- Amount: " + rs[0].numberOfPacket + "<br>" +
+                                    "Top 2: " + "Packet " + rs[1].Packet + "- Amount: " + rs[1].numberOfPacket + "<br>" +
+                                    "Top 3: " + "Packet " + rs[2].Packet + "- Amount: " + rs[2].numberOfPacket + "<br>" +
+                                    "Top 4: " + "Packet " + rs[3].Packet + "- Amount: " + rs[3].numberOfPacket + "<br>")
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                    $(this).off(event);
+                })
+            });
+        </script>
     </head>
     <body>
         <div class="container-scroller">
@@ -46,7 +344,7 @@
                                             <li class="breadcrumb-item active" aria-current="page">Recharge History Management</li>
                                         </ol>
                                     </nav>
-                                    <h2 class="card-body" style="text-align: center;">Recharge history List</h2>
+                                    <h2 class="card-body" style="text-align: center;">Transaction history List</h2>
                                     <div class="alert alert-danger alert-dismissible fade show" id="error" role="alert" style="display: none ">
                                         <strong>Fail Search because end date is smaller than start date !</strong> Please wait check out again!!
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -85,30 +383,29 @@
                                             <div class="col-md-6">
                                                 <div class="row">
                                                     <div class="col-md-4">
-                                                <div class="btn-group" style="height:2.875rem">
-                                                    <button type="button" id="top3" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Top 3 User Buy
-                                                    </button>
-                                                    <div id="top" class="dropdown-menu">
+                                                        <div class="btn-group" style="height:2.875rem">
+                                                            <button type="button" id="top3" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                Top 3 User Buy
+                                                            </button>
+                                                            <div id="top" class="dropdown-menu">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <button type="button" style="height:2.875rem" class="btn btn-github" data-toggle="popover" data-placement="left"
+                                                                title="Top packages purchased" data-content="" id="topPacket" data-html="true">
+                                                            Top Packet purchased</button>
+                                                    </div>
+                                                    <div style="float: right;" class="col-md-4" >
+                                                        <button style="height:2.875rem" type="button"  class="btn btn-facebook" data-container="body" 
+                                                                data-toggle="popover" data-placement="top" id="orther"
+                                                                data-content="">
+                                                            Other information
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
-                                                <button type="button" style="height:2.875rem" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
-                                                        sagittis lacus vel augue laoreet rutrum faucibus.">
-                                                    Number of pakcet
-                                                </button>
-                                            </div>
-                                            <div style="float: right;" class="col-md-4" >
-                                                <button style="height:2.875rem" type="button" class="btn btn-facebook" data-container="body" 
-                                                        data-toggle="popover" data-placement="top" id="orther"
-                                                        data-content="">
-                                                    Other information
-                                                </button>
-                                            </div>
-                                                </div>
-                                            </div>
-                                            
+
                                         </div>
                                     </div>
                                     <br>
@@ -137,6 +434,7 @@
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>WalletID</th>
+                                                    <th>UserID</th>
                                                     <th>PostID</th>
                                                     <th>Create Date</th>
                                                     <th>Packet</th>
@@ -150,8 +448,9 @@
                                                 <c:forEach items="${listTran}" var = "x" >
                                                     <tr>
                                                         <td>${x.getTransactionID()}</td>
-                                                        <td>${x.getWalletID()}</td>
-                                                        <td>${x.getPostID()}</td><!-- comment -->
+                                                        <td><a href="viewDetaiTranbyWallet.jsp?id=${x.getWalletID()}">${x.getWalletID()}</a></td>
+                                                        <td><a href="viewDetailUser.jsp?id=${x.getUserID()}">${x.getUserID()}</a></td>
+                                                        <td><a href="viewDetailByPost.jsp?id=${x.getPostID()}">${x.getPostID()}</a></td><!-- comment -->
                                                         <td>${x.getCreateDate()}, ${x.getCreateHour()} </td><!-- comment -->
                                                         <td>${x.getPacket()}</td><!-- comment -->
                                                         <td>${x.getPrice()}</td>

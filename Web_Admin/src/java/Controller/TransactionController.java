@@ -5,9 +5,11 @@
 package Controller;
 
 import Entity.Recharge;
+import Entity.Search_Recharge;
 import Entity.Transaction_History;
 import Model.RechargeModel;
 import Model.TransactionModel;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -42,6 +44,58 @@ public class TransactionController extends HttpServlet {
             ArrayList<Transaction_History> list = am.getListTransaction();
             request.setAttribute("listTran", list);
             request.getRequestDispatcher("pages/tran_post.jsp").forward(request, response);
+        }
+        if (act.equals("viewT")) {
+            TransactionModel am = new TransactionModel();
+            ArrayList<Transaction_History> list = am.getListTransaction();
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("search")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
+            TransactionModel am = new TransactionModel();
+            ArrayList<Transaction_History> a = am.searchDate(sup.getStart(), sup.getEnd());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("search1")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
+            TransactionModel am = new TransactionModel();
+            ArrayList<Transaction_History> a = am.searchDate2(sup.getStart(), sup.getEnd());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("viewTop3")) {
+            TransactionModel am = new TransactionModel();
+            ArrayList<Transaction_History> list = am.top3UserBuy();
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("viewTopPacket")) {
+            TransactionModel am = new TransactionModel();
+            ArrayList<Transaction_History> list = am.topPacket();
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("viewTop1PostBuy")) {
+            TransactionModel am = new TransactionModel();
+            ArrayList<Transaction_History> list = am.top1PostBuy();
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
         }
     }
 
