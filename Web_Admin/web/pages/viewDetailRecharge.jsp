@@ -193,7 +193,8 @@
                     console.log(lastday)
                     const searh1day = {
                         Start : lastday,
-                        End :  firstday
+                        End :  firstday,
+                        Wallet : d
                     }
                     const da = JSON.stringify(searh1day)
                     console.log(da)
@@ -325,6 +326,7 @@
                                     <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item"><a href="../index.jsp">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="recharge_history.jsp">Recharge history List</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">View Detail Recharge history</li>
                                     </ol>
                                 </nav>

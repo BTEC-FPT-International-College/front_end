@@ -77,6 +77,16 @@ public class RechargeController extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
+                if (act.equals("searchRbyPost")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
+            RechargeModel am = new RechargeModel();
+            ArrayList<Recharge> a = am.searchDatebyWallet(sup.getStart(), sup.getEnd(),sup.getWallet());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
         if (act.equals("searchRbyWallet2")) {
             String op = request.getParameter("get");
             Gson json = new Gson();

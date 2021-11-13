@@ -428,7 +428,7 @@
                                                     <tr>
                                                         <td>${x.getRechargeID()}</td>
                                                         <td>${x.getCreateDate()} ${x.getCreateHourl()}</td>
-                                                        <td>${x.getWalletID()}</td><!-- comment -->
+                                                        <td><a href="viewDetailRecharge.jsp?id=${x.getWalletID()}">${x.getWalletID()}</a></td><!-- comment -->
                                                         <td><a href="viewDetailUser.jsp?id=${x.getUserID()}">${x.getUserID()}</a></td><!-- comment -->
                                                         <td>${x.getBankAccount()}</td><!-- comment -->
                                                         <td>${x.getBank()}</td>

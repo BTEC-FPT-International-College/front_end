@@ -136,7 +136,7 @@
                         $("#wallet").val(obj.WalletID)
                         $("#surplus").val(obj.Surplus)
                         $("#viewRecharge").attr("href", "viewDetailRecharge.jsp?id="+obj.WalletID)
-                        $("#viewTransaction").attr("href", "tran_post.jsp?id="+obj.WalletID)
+                        $("#viewTransaction").attr("href", "viewDetaiTranbyWallet.jsp?id="+obj.WalletID)
                     },
                     error: function () {
                         alert("error");

@@ -5,6 +5,7 @@
 package Model;
 
 import Entity.Category;
+import Entity.Post;
 import java.util.ArrayList;
 
 /**
@@ -14,8 +15,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        TransactionModel t = new TransactionModel();
-        System.out.println(t.topPacket().size());
+
 
     }
 }

@@ -167,6 +167,138 @@ public class TransactionModel {
         return list;
     }
 
+    public ArrayList<Transaction_History> searchDatebyWallet(String start, String end ,String walletID) {
+        ArrayList<Transaction_History> list = new ArrayList<>();
+        String sql = "SELECT * FROM web.tbl_transaction_history,user_wallet\n"
+                + "WHERE tbl_transaction_history.walletID = user_wallet.walletID\n"
+                + "AND tbl_transaction_history.walletID = ?\n"
+                + "AND STR_TO_DATE(Create_Day,'%d/%m/%Y')between STR_TO_DATE(?,'%m/%d/%Y') and STR_TO_DATE(?,'%m/%d/%Y');";
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(2, start);
+            st.setString(3, end);
+            st.setString(1, walletID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Transaction_History acc = new Transaction_History();
+                acc.setPostID(rs.getString(1));
+                acc.setWalletID(rs.getString(2));
+                acc.setPrice(rs.getInt(3));
+                acc.setCreateDate(rs.getString(4));
+                acc.setCreateHour(rs.getString(5));
+                acc.setTransactionID(rs.getInt(6));
+                acc.setPacket(rs.getInt(7));
+                acc.setUserID(rs.getString(11));
+                list.add(acc);
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return list;
+    }
+    public ArrayList<Transaction_History> searchDatebyPost(String start, String end ,String postID) {
+        ArrayList<Transaction_History> list = new ArrayList<>();
+        String sql = "SELECT * FROM web.tbl_transaction_history,user_wallet\n"
+                + "WHERE tbl_transaction_history.walletID = user_wallet.walletID\n"
+                + "AND tbl_transaction_history.PostID = ?\n"
+                + "AND STR_TO_DATE(Create_Day,'%d/%m/%Y')between STR_TO_DATE(?,'%m/%d/%Y') and STR_TO_DATE(?,'%m/%d/%Y');";
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(2, start);
+            st.setString(3, end);
+            st.setString(1, postID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Transaction_History acc = new Transaction_History();
+                acc.setPostID(rs.getString(1));
+                acc.setWalletID(rs.getString(2));
+                acc.setPrice(rs.getInt(3));
+                acc.setCreateDate(rs.getString(4));
+                acc.setCreateHour(rs.getString(5));
+                acc.setTransactionID(rs.getInt(6));
+                acc.setPacket(rs.getInt(7));
+                acc.setUserID(rs.getString(11));
+                list.add(acc);
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return list;
+    }
+
+    public ArrayList<Transaction_History> getListByWallet(String walletID) {
+        ArrayList<Transaction_History> list = new ArrayList<>();
+        String sql = "SELECT * FROM web.tbl_transaction_history,user_wallet\n"
+                + "WHERE tbl_transaction_history.walletID = user_wallet.walletID\n"
+                + "AND tbl_transaction_history.walletID=?;";
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, walletID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Transaction_History acc = new Transaction_History();
+                acc.setPostID(rs.getString(1));
+                acc.setWalletID(rs.getString(2));
+                acc.setPrice(rs.getInt(3));
+                acc.setCreateDate(rs.getString(4));
+                acc.setCreateHour(rs.getString(5));
+                acc.setTransactionID(rs.getInt(6));
+                acc.setPacket(rs.getInt(7));
+                acc.setUserID(rs.getString(11));
+                list.add(acc);
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return list;
+    }
+    public ArrayList<Transaction_History> getListByPost(String postID) {
+        ArrayList<Transaction_History> list = new ArrayList<>();
+        String sql = "SELECT * FROM web.tbl_transaction_history,user_wallet\n" +
+"WHERE tbl_transaction_history.walletID = user_wallet.walletID\n" +
+"AND tbl_transaction_history.PostID=?;";
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, postID);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Transaction_History acc = new Transaction_History();
+                acc.setPostID(rs.getString(1));
+                acc.setWalletID(rs.getString(2));
+                acc.setPrice(rs.getInt(3));
+                acc.setCreateDate(rs.getString(4));
+                acc.setCreateHour(rs.getString(5));
+                acc.setTransactionID(rs.getInt(6));
+                acc.setPacket(rs.getInt(7));
+                acc.setUserID(rs.getString(11));
+                list.add(acc);
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return list;
+    }
+
     public ArrayList<Transaction_History> searchDate2(String start, String end) {
         ArrayList<Transaction_History> list = new ArrayList<>();
         String sql = "SELECT * FROM web.tbl_transaction_history,user_wallet\n"
@@ -178,6 +310,74 @@ public class TransactionModel {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, start);
             st.setString(2, end);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Transaction_History acc = new Transaction_History();
+                acc.setPostID(rs.getString(1));
+                acc.setWalletID(rs.getString(2));
+                acc.setPrice(rs.getInt(3));
+                acc.setCreateDate(rs.getString(4));
+                acc.setCreateHour(rs.getString(5));
+                acc.setTransactionID(rs.getInt(6));
+                acc.setPacket(rs.getInt(7));
+                acc.setUserID(rs.getString(11));
+                list.add(acc);
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return list;
+    }
+        public ArrayList<Transaction_History> searchDate2byWallet(String start, String end,String walletID) {
+        ArrayList<Transaction_History> list = new ArrayList<>();
+        String sql = "SELECT * FROM web.tbl_transaction_history,user_wallet\n"
+                + "WHERE tbl_transaction_history.walletID = user_wallet.walletID\n"
+                + "AND tbl_transaction_history.walletID = ?\n"
+                + "AND STR_TO_DATE(Create_Day,'%d/%m/%Y')between STR_TO_DATE(?,'%d/%m/%Y') and STR_TO_DATE(?,'%d/%m/%Y');";
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, walletID);
+            st.setString(2, start);
+            st.setString(3, end);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Transaction_History acc = new Transaction_History();
+                acc.setPostID(rs.getString(1));
+                acc.setWalletID(rs.getString(2));
+                acc.setPrice(rs.getInt(3));
+                acc.setCreateDate(rs.getString(4));
+                acc.setCreateHour(rs.getString(5));
+                acc.setTransactionID(rs.getInt(6));
+                acc.setPacket(rs.getInt(7));
+                acc.setUserID(rs.getString(11));
+                list.add(acc);
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return list;
+    }
+    public ArrayList<Transaction_History> searchDate2byPost(String start, String end,String postID) {
+        ArrayList<Transaction_History> list = new ArrayList<>();
+        String sql = "SELECT * FROM web.tbl_transaction_history,user_wallet\n"
+                + "WHERE tbl_transaction_history.walletID = user_wallet.walletID\n"
+                + "AND tbl_transaction_history.PostID = ?\n"
+                + "AND STR_TO_DATE(Create_Day,'%d/%m/%Y')between STR_TO_DATE(?,'%d/%m/%Y') and STR_TO_DATE(?,'%d/%m/%Y');";
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, postID);
+            st.setString(2, start);
+            st.setString(3, end);
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Transaction_History acc = new Transaction_History();

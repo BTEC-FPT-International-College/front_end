@@ -45,6 +45,24 @@ public class TransactionController extends HttpServlet {
             request.setAttribute("listTran", list);
             request.getRequestDispatcher("pages/tran_post.jsp").forward(request, response);
         }
+        if (act.equals("viewTByWallet")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            TransactionModel am = new TransactionModel();
+            ArrayList<Transaction_History> a = am.getListByWallet(op);
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("viewTByPost")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            TransactionModel am = new TransactionModel();
+            ArrayList<Transaction_History> a = am.getListByPost(op);
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
         if (act.equals("viewT")) {
             TransactionModel am = new TransactionModel();
             ArrayList<Transaction_History> list = am.getListTransaction();
@@ -63,12 +81,52 @@ public class TransactionController extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
+            if (act.equals("searchbyWallet")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
+            TransactionModel am = new TransactionModel();
+            ArrayList<Transaction_History> a = am.searchDatebyWallet(sup.getStart(), sup.getEnd(),sup.getWallet());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+            if (act.equals("searchbyPost")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
+            TransactionModel am = new TransactionModel();
+            ArrayList<Transaction_History> a = am.searchDatebyPost(sup.getStart(), sup.getEnd(),sup.getWallet());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
         if (act.equals("search1")) {
             String op = request.getParameter("get");
             Gson json = new Gson();
             Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
             TransactionModel am = new TransactionModel();
             ArrayList<Transaction_History> a = am.searchDate2(sup.getStart(), sup.getEnd());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("search1byWallet")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
+            TransactionModel am = new TransactionModel();
+            ArrayList<Transaction_History> a = am.searchDate2byWallet(sup.getStart(), sup.getEnd(),sup.getWallet());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("search1byPost")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
+            TransactionModel am = new TransactionModel();
+            ArrayList<Transaction_History> a = am.searchDate2byPost(sup.getStart(), sup.getEnd(),sup.getWallet());
             String listTrainee = json.toJson(a);
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);

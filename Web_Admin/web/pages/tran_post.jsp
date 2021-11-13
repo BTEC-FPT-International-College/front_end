@@ -57,6 +57,7 @@
                             "sLast": "End"
                         }
                     }
+                    
                 });
                 $("#getdate").click(function () {
                     $("#cancledate").show();
@@ -280,7 +281,7 @@
                             let rs = $.parseJSON(data);
 
                             $.each(rs, function (key, value) {
-                                $('#top').append('<a class="dropdown-item" id="' + key + '" href="viewDetailRecharge.jsp?id=' + value.WalletID + '">' + "Top " + (key + 1) + " " + "Wallet: " + value.WalletID + "- UserID: " + value.UserID + "- Total: " + value.totalPrice + '</a>')
+                                $('#top').append('<a class="dropdown-item" id="' + key + '" href="viewDetaiTranbyWallet.jsp?id=' + value.WalletID + '">' + "Top " + (key + 1) + " " + "Wallet: " + value.WalletID + "- UserID: " + value.UserID + "- Total: " + value.totalPrice + '</a>')
                             });
                         },
                         error: function () {
@@ -325,6 +326,23 @@
                     });
                     $(this).off(event);
                 })
+                $("#orther").mouseenter(function(event) {
+                    $.ajax({
+                        url: "../TransactionController?ac=viewTop1PostBuy",
+                        method: "GET",
+                        success: function (data) {
+                            let rs = $.parseJSON(data);
+                            console.log(rs)
+                            
+                               $("#orther").attr("data-content","Top 1: PostID: "+rs[0].PostID + " Wallet: "+ rs[0].UserID + " Amount: "+rs[0].valuetotalPrice)
+                        
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });   
+                    $(this).off(event);
+                })
             });
         </script>
     </head>
@@ -341,7 +359,7 @@
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="../index.jsp">Home</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">Recharge History Management</li>
+                                            <li class="breadcrumb-item active" aria-current="page">Transaction History Management</li>
                                         </ol>
                                     </nav>
                                     <h2 class="card-body" style="text-align: center;">Transaction history List</h2>

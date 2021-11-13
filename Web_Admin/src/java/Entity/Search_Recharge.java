@@ -14,12 +14,13 @@ public class Search_Recharge {
     private String Wallet;
     public Search_Recharge() {
     }
-
+    
     public Search_Recharge(String Start, String End, String Wallet) {
         this.Start = Start;
         this.End = End;
         this.Wallet = Wallet;
     }
+    
     
     public Search_Recharge(String Start, String End) {
         this.Start = Start;
