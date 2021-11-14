@@ -38,15 +38,15 @@ public class PostModel {
                 acc.setTotal_View(rs.getInt(9));
                 acc.setUserID(rs.getString(10));
                 acc.setCreate_Date(rs.getString(11));
-                acc.setPostType(rs.getInt(7));
-                acc.setStatus(rs.getString(8));
-                acc.setReadUnread(rs.getInt(9));
-                acc.setUpdate_Date(rs.getString(10));
-                acc.setLocation(rs.getString(11));
-                acc.setCategory(rs.getString(8));
-                acc.setPriod(rs.getInt(9));
-                acc.setEndDate(rs.getString(10));
-                acc.setCreate_Hour(rs.getString(11));
+                acc.setPostType(rs.getInt(12));
+                acc.setStatus(rs.getString(13));
+                acc.setReadUnread(rs.getInt(14));
+                acc.setUpdate_Date(rs.getString(15));
+                acc.setLocation(rs.getString(16));
+                acc.setCategory(rs.getString(17));
+                acc.setPriod(rs.getInt(18));
+                acc.setEndDate(rs.getString(19));
+                acc.setCreate_Hour(rs.getString(20));
                 list.add(acc);
             }
             rs.close();
@@ -77,7 +77,7 @@ public class PostModel {
     public Post getPost(String id) {
         Post acc = null;
         String sql = "SELECT * FROM web.tbl_post\n" +
-"where PostID = ?;";
+            "where PostID = ?;";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {
