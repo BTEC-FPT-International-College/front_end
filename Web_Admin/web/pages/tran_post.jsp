@@ -39,26 +39,10 @@
                         container: 'body'
                     })
                 })
-                $('#example').dataTable({
-                    "language": {
-                        "sProcessing": "Processing...",
-                        "sLengthMenu": "View _MENU_ item",
-                        "sZeroRecords": "No matching lines found",
-                        "sInfo": "Viewing _START_ to _END_ of total _TOTAL_ entries",
-                        "sInfoEmpty": "Viewing 0 to 0 out of 0 entries",
-                        "sInfoFiltered": "(filtered from _MAX_ entries)",
-                        "sInfoPostFix": "",
-                        "sSearch": "Search now:",
-                        "sUrl": "",
-                        "oPaginate": {
-                            "sFirst": "Head",
-                            "sPrevious": "Previous",
-                            "sNext": "Nex",
-                            "sLast": "End"
-                        }
-                    }
-                    
-                });
+                $('#dtOrderExample').DataTable({
+                        "order": [[4, "desc"]]
+                    });
+                    $('.dataTables_length').addClass('bs-select');
                 $("#getdate").click(function () {
                     $("#cancledate").show();
                     $("#getdate").hide()
@@ -78,19 +62,19 @@
                             success: function (data) {
                                 let obj = $.parseJSON(data);
                                 console.log(obj)
-                                $("#example tbody tr").empty();
+                                $("#dtOrderExample").DataTable().clear();
+                                var t = $('#dtOrderExample').DataTable();
                                 $.each(obj, function (key, value) {
-                                    $('#example').append(
-                                            "<tr> \n\
-                                        <td> " + value.TransactionID + "</td> \n\
-                                        <td> <a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a></td> \n\
-                                        <td> <a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a></td> \n\
-                                        <td> <a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a></td> \n\
-                                        <td> " + value.CreateDate + " " + value.CreateHour + "</td> \n\
-                                        <td> " + value.Packet + "</td> \n\
-                                        <td> " + value.Price + "</td> \n\
-                                    <tr>")
-                                });
+                                    t.row.add([
+                                        value.TransactionID,
+                                        "<a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a>",
+                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                        "<a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a>",
+                                        value.CreateDate + " " + value.CreateHour,
+                                        value.Packet ,
+                                        value.Price
+                                    ]).draw(false);
+                                })
                             },
                             error: function () {
                                 alert("error");
@@ -105,19 +89,19 @@
                         success: function (data) {
                             let rs = $.parseJSON(data);
                             console.log(rs)
-                            $("#example tbody tr").empty();
-                            $.each(rs, function (key, value) {
-                                $('#example').append(
-                                        "<tr> \n\
-                                        <td> " + value.TransactionID + "</td> \n\
-                                        <td> <a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a></td> \n\
-                                        <td> <a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a></td> \n\
-                                        <td> <a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a></td> \n\
-                                        <td> " + value.CreateDate + " " + value.CreateHour + "</td> \n\
-                                        <td> " + value.Packet + "</td> \n\
-                                        <td> " + value.Price + "</td> \n\
-                                    <tr>")
-                            });
+                            $("#dtOrderExample").DataTable().clear();
+                                var t = $('#dtOrderExample').DataTable();
+                                $.each(rs, function (key, value) {
+                                    t.row.add([
+                                        value.TransactionID,
+                                        "<a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a>",
+                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                        "<a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a>",
+                                        value.CreateDate + " " + value.CreateHour,
+                                        value.Packet ,
+                                        value.Price
+                                    ]).draw(false);
+                                })
                         },
                         error: function () {
                             alert("error");
@@ -149,19 +133,19 @@
                         success: function (data) {
                             let obj = $.parseJSON(data);
                             console.log(obj)
-                            $("#example tbody tr").empty();
-                            $.each(obj, function (key, value) {
-                                $('#example').append(
-                                        "<tr> \n\
-                                        <td> " + value.TransactionID + "</td> \n\
-                                        <td> <a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a></td> \n\
-                                        <td> <a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a></td> \n\
-                                        <td> <a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a></td> \n\
-                                        <td> " + value.CreateDate + " " + value.CreateHour + "</td> \n\
-                                        <td> " + value.Packet + "</td> \n\
-                                        <td> " + value.Price + "</td> \n\
-                                    <tr>")
-                            });
+                            $("#dtOrderExample tbody tr").empty();
+                                var t = $('#dtOrderExample').DataTable();
+                                $.each(obj, function (key, value) {
+                                    t.row.add([
+                                        value.TransactionID,
+                                        "<a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a>",
+                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                        "<a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a>",
+                                        value.CreateDate + " " + value.CreateHour,
+                                        value.Packet ,
+                                        value.Price
+                                    ]).draw(false);
+                                })
                             $("#refesh").show()
                         },
                         error: function () {
@@ -187,19 +171,19 @@
                         success: function (data) {
                             let obj = $.parseJSON(data);
                             console.log(obj)
-                            $("#example tbody tr").empty();
-                            $.each(obj, function (key, value) {
-                                $('#example').append(
-                                        "<tr> \n\
-                                        <td> " + value.TransactionID + "</td> \n\
-                                        <td> <a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a></td> \n\
-                                        <td> <a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a></td> \n\
-                                        <td> <a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a></td> \n\
-                                        <td> " + value.CreateDate + " " + value.CreateHour + "</td> \n\
-                                        <td> " + value.Packet + "</td> \n\
-                                        <td> " + value.Price + "</td> \n\
-                                    <tr>")
-                            });
+                            $("#dtOrderExample tbody tr").empty();
+                                var t = $('#dtOrderExample').DataTable();
+                                $.each(obj, function (key, value) {
+                                    t.row.add([
+                                        value.TransactionID,
+                                        "<a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a>",
+                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                        "<a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a>",
+                                        value.CreateDate + " " + value.CreateHour,
+                                        value.Packet ,
+                                        value.Price
+                                    ]).draw(false);
+                                })
                             $("#refesh").show()
                         },
                         error: function () {
@@ -226,19 +210,19 @@
                         success: function (data) {
                             let obj = $.parseJSON(data);
                             console.log(obj)
-                            $("#example tbody tr").empty();
-                            $.each(obj, function (key, value) {
-                                $('#example').append(
-                                        "<tr> \n\
-                                        <td> " + value.TransactionID + "</td> \n\
-                                        <td> <a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a></td> \n\
-                                        <td> <a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a></td> \n\
-                                        <td> <a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a></td> \n\
-                                        <td> " + value.CreateDate + " " + value.CreateHour + "</td> \n\
-                                        <td> " + value.Packet + "</td> \n\
-                                        <td> " + value.Price + "</td> \n\
-                                    <tr>")
-                            });
+                            $("#dtOrderExample tbody tr").empty();
+                                var t = $('#dtOrderExample').DataTable();
+                                $.each(obj, function (key, value) {
+                                    t.row.add([
+                                        value.TransactionID,
+                                        "<a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a>",
+                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                        "<a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a>",
+                                        value.CreateDate + " " + value.CreateHour,
+                                        value.Packet ,
+                                        value.Price
+                                    ]).draw(false);
+                                })
                             $("#refesh").show()
                         },
                         error: function () {
@@ -253,19 +237,19 @@
                         success: function (data) {
                             let rs = $.parseJSON(data);
                             console.log(rs)
-                            $("#example tbody tr").empty();
-                            $.each(rs, function (key, value) {
-                                $('#example').append(
-                                        "<tr> \n\
-                                        <td> " + value.TransactionID + "</td> \n\
-                                        <td> <a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a></td> \n\
-                                        <td> <a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a></td> \n\
-                                        <td> <a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a></td> \n\
-                                        <td> " + value.CreateDate + " " + value.CreateHour + "</td> \n\
-                                        <td> " + value.Packet + "</td> \n\
-                                        <td> " + value.Price + "</td> \n\
-                                    <tr>")
-                            });
+                            $("#dtOrderExample tbody tr").empty();
+                                var t = $('#dtOrderExample').DataTable();
+                                $.each(rs, function (key, value) {
+                                    t.row.add([
+                                        value.TransactionID,
+                                        "<a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a>",
+                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                        "<a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a>",
+                                        value.CreateDate + " " + value.CreateHour,
+                                        value.Packet ,
+                                        value.Price
+                                    ]).draw(false);
+                                })
                             $("#refesh").hide()
                         },
                         error: function () {
@@ -447,7 +431,7 @@
                                         </ul>
                                     </div>
                                     <div class="container table-responsive-xl">
-                                        <table id="example" class="table table-bordered" style="width:100%">
+                                        <table id="dtOrderExample" class="table table-bordered" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>

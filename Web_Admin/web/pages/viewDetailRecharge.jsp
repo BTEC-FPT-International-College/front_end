@@ -36,30 +36,31 @@
             var a = {}
             $(document).ready(function () {
                 $.ajax({
-                            url: "../RechargeController?ac=viewRechargebyWallet",
-                            method: "POST",
-                            data: {get: d},
-                            success: function (data) {
-                                let obj = $.parseJSON(data);
-                                console.log(obj)
-                                $("#example tbody tr").empty();
-                                $.each(obj, function (key, value) {
-                                    $('#example').append(
-                                            "<tr> \n\
-                                        <td> " + value.RechargeID + "</td> \n\
-                                        <td> " + value.CreateDate + " " + value.CreateHourl + "</td> \n\
-                                        <td> " + value.WalletID + "</td> \n\
-                                        <td> <a href='viewDetailUser.jsp?id="+ value.UserID+"'"+">"+ value.UserID +" </a></td> \n\
-                                        <td> " + value.BankAccount + "</td> \n\
-                                        <td> " + value.Bank + "</td> \n\
-                                        <td> " + value.Amount + "</td> \n\
-                                    <tr>")
-                                });
-                            },
-                            error: function () {
-                                alert("error");
-                            }
+                    url: "../RechargeController?ac=viewRechargebyWallet",
+                    method: "POST",
+                    data: {get: d},
+                    success: function (data) {
+                        let obj = $.parseJSON(data);
+                        console.log(obj)
+                        $("#dtOrderExample tbody tr").empty();
+                        var t = $('#dtOrderExample').DataTable();
+                        $.each(obj, function (key, value) {
+                            t.row.add([
+                                value.RechargeID,
+                                value.CreateDate + " " + value.CreateHourl,
+                                "<a href='viewDetailUser.jsp?id=" +value.WalletID+ "'" + ">" +value.WalletID + " </a>",
+                                "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                value.BankAccount,
+                                value.Bank,
+                                value.Amount
+                            ]).draw(false);
                         });
+
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
                 $("#getdate").click(function () {
                     $("#cancledate").show();
                     $("#getdate").hide()
@@ -80,19 +81,19 @@
                             success: function (data) {
                                 let obj = $.parseJSON(data);
                                 console.log(obj)
-                                $("#example tbody tr").empty();
+                                 $("#dtOrderExample tbody tr").empty();
+                                var t = $('#dtOrderExample').DataTable();
                                 $.each(obj, function (key, value) {
-                                    $('#example').append(
-                                            "<tr> \n\
-                                        <td> " + value.RechargeID + "</td> \n\
-                                        <td> " + value.CreateDate + " " + value.CreateHourl + "</td> \n\
-                                        <td> " + value.WalletID + "</td> \n\
-                                        <td> <a href='viewDetailUser.jsp?id="+ value.UserID+"'"+">"+ value.UserID +" </a></td> \n\
-                                        <td> " + value.BankAccount + "</td> \n\
-                                        <td> " + value.Bank + "</td> \n\
-                                        <td> " + value.Amount + "</td> \n\
-                                    <tr>")
-                                });
+                                    t.row.add([
+                                        value.RechargeID,
+                                        value.CreateDate + " " + value.CreateHourl,
+                                        "<a href='viewDetailUser.jsp?id=" +value.WalletID+ "'" + ">" +value.WalletID + " </a>",
+                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                        value.BankAccount,
+                                        value.Bank,
+                                        value.Amount
+                                    ]).draw(false);
+                                })
                             },
                             error: function () {
                                 alert("error");
@@ -102,30 +103,30 @@
                 })
                 $("#cancledate").click(function () {
                     $.ajax({
-                            url: "../RechargeController?ac=viewRechargebyWallet",
-                            method: "POST",
-                            data: {get: d},
-                            success: function (data) {
-                                let obj = $.parseJSON(data);
-                                console.log(obj)
-                                $("#example tbody tr").empty();
+                        url: "../RechargeController?ac=viewRechargebyWallet",
+                        method: "POST",
+                        data: {get: d},
+                        success: function (data) {
+                            let obj = $.parseJSON(data);
+                            console.log(obj)
+                             $("#dtOrderExample tbody tr").empty();
+                                var t = $('#dtOrderExample').DataTable();
                                 $.each(obj, function (key, value) {
-                                    $('#example').append(
-                                            "<tr> \n\
-                                        <td> " + value.RechargeID + "</td> \n\
-                                        <td> " + value.CreateDate + " " + value.CreateHourl + "</td> \n\
-                                        <td> " + value.WalletID + "</td> \n\
-                                        <td> <a href='viewDetailUser.jsp?id="+ value.UserID+"'"+">"+ value.UserID +" </a></td> \n\
-                                        <td> " + value.BankAccount + "</td> \n\
-                                        <td> " + value.Bank + "</td> \n\
-                                        <td> " + value.Amount + "</td> \n\
-                                    <tr>")
-                                });
-                            },
-                            error: function () {
-                                alert("error");
-                            }
-                        });
+                                    t.row.add([
+                                        value.RechargeID,
+                                        value.CreateDate + " " + value.CreateHourl,
+                                        "<a href='viewDetailUser.jsp?id=" +value.WalletID+ "'" + ">" +value.WalletID + " </a>",
+                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                        value.BankAccount,
+                                        value.Bank,
+                                        value.Amount
+                                    ]).draw(false);
+                                })
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
                     $("#getdate").show()
                     $("#cancledate").hide()
                     $("#startdate").val("")
@@ -133,68 +134,53 @@
                 })
                 $("#refesh").click(function () {
                     $.ajax({
-                            url: "../RechargeController?ac=viewRechargebyWallet",
-                            method: "POST",
-                            data: {get: d},
-                            success: function (data) {
-                                let obj = $.parseJSON(data);
-                                console.log(obj)
-                                $("#example tbody tr").empty();
+                        url: "../RechargeController?ac=viewRechargebyWallet",
+                        method: "POST",
+                        data: {get: d},
+                        success: function (data) {
+                            let obj = $.parseJSON(data);
+                            console.log(obj)
+                             $("#dtOrderExample tbody tr").empty();
+                                var t = $('#dtOrderExample').DataTable();
                                 $.each(obj, function (key, value) {
-                                    $('#example').append(
-                                            "<tr> \n\
-                                        <td> " + value.RechargeID + "</td> \n\
-                                        <td> " + value.CreateDate + " " + value.CreateHourl + "</td> \n\
-                                        <td> " + value.WalletID + "</td> \n\
-                                        <td> <a href='viewDetailUser.jsp?id="+ value.UserID+"'"+">"+ value.UserID +" </a></td> \n\
-                                        <td> " + value.BankAccount + "</td> \n\
-                                        <td> " + value.Bank + "</td> \n\
-                                        <td> " + value.Amount + "</td> \n\
-                                    <tr>")
-                                });
-                                 $("#refesh").hide()
-                            },
-                            error: function () {
-                                alert("error");
-                            }
-                        });
+                                    t.row.add([
+                                        value.RechargeID,
+                                        value.CreateDate + " " + value.CreateHourl,
+                                        "<a href='viewDetailUser.jsp?id=" +value.WalletID+ "'" + ">" +value.WalletID + " </a>",
+                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                        value.BankAccount,
+                                        value.Bank,
+                                        value.Amount
+                                    ]).draw(false);
+                                })
+                            $("#refesh").hide()
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
                 })
-                $("#orther").mouseenter(function(event) {
-                    
+                $("#orther").mouseenter(function (event) {
+
                     $(this).off(event);
                 })
                 // Cấu hình các nhãn phân trang
-                $('#example').dataTable({
-                    "language": {
-                        "sProcessing": "Processing...",
-                        "sLengthMenu": "View _MENU_ item",
-                        "sZeroRecords": "No matching lines found",
-                        "sInfo": "Viewing _START_ to _END_ of total _TOTAL_ entries",
-                        "sInfoEmpty": "Viewing 0 to 0 out of 0 entries",
-                        "sInfoFiltered": "(filtered from _MAX_ entries)",
-                        "sInfoPostFix": "",
-                        "sSearch": "Search now:",
-                        "sUrl": "",
-                        "oPaginate": {
-                            "sFirst": "Head",
-                            "sPrevious": "Previous",
-                            "sNext": "Nex",
-                            "sLast": "End"
-                        }
-                    }
+                $('#dtOrderExample').DataTable({
+                    "order": [[1, "desc"]]
                 });
+                $('.dataTables_length').addClass('bs-select');
                 $("#1day").click(function () {
-                   var curr = new Date;
-                    var first = curr.getDate(); 
-                    var last = first - 1; 
+                    var curr = new Date;
+                    var first = curr.getDate();
+                    var last = first - 1;
                     var firstday = new Date().toLocaleDateString();
                     var lastday = new Date(curr.setDate(last)).toLocaleDateString();
                     console.log(firstday)
                     console.log(lastday)
                     const searh1day = {
-                        Start : lastday,
-                        End :  firstday,
-                        Wallet : d
+                        Start: lastday,
+                        End: firstday,
+                        Wallet: d
                     }
                     const da = JSON.stringify(searh1day)
                     console.log(da)
@@ -205,19 +191,19 @@
                         success: function (data) {
                             let obj = $.parseJSON(data);
                             console.log(obj)
-                            $("#example tbody tr").empty();
-                            $.each(obj, function (key, value) {
-                                $('#example').append(
-                                        "<tr> \n\
-                                        <td> " + value.RechargeID + "</td> \n\
-                                        <td> " + value.CreateDate + " " + value.CreateHourl + "</td> \n\
-                                        <td> " + value.WalletID + "</td> \n\
-                                        <td> <a href='viewDetailUser.jsp?id="+ value.UserID+"'"+">"+ value.UserID +" </a></td> \n\
-                                        <td> " + value.BankAccount + "</td> \n\
-                                        <td> " + value.Bank + "</td> \n\
-                                        <td> " + value.Amount + "</td> \n\
-                                    <tr>")
-                            });
+                             $("#dtOrderExample tbody tr").empty();
+                                var t = $('#dtOrderExample').DataTable();
+                                $.each(obj, function (key, value) {
+                                    t.row.add([
+                                        value.RechargeID,
+                                        value.CreateDate + " " + value.CreateHourl,
+                                        "<a href='viewDetailUser.jsp?id=" +value.WalletID+ "'" + ">" +value.WalletID + " </a>",
+                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                        value.BankAccount,
+                                        value.Bank,
+                                        value.Amount
+                                    ]).draw(false);
+                                })
                             $("#refesh").show()
                         },
                         error: function () {
@@ -231,9 +217,9 @@
                     console.log(today.toLocaleDateString())
                     console.log(lastweek.toLocaleDateString())
                     const searh1weeek = {
-                        Start : lastweek.toLocaleDateString(),
-                        End : today.toLocaleDateString(),
-                        Wallet : d
+                        Start: lastweek.toLocaleDateString(),
+                        End: today.toLocaleDateString(),
+                        Wallet: d
                     }
                     const da = JSON.stringify(searh1weeek)
                     console.log(da)
@@ -244,19 +230,19 @@
                         success: function (data) {
                             let obj = $.parseJSON(data);
                             console.log(obj)
-                            $("#example tbody tr").empty();
-                            $.each(obj, function (key, value) {
-                                $('#example').append(
-                                        "<tr> \n\
-                                        <td> " + value.RechargeID + "</td> \n\
-                                        <td> " + value.CreateDate + " " + value.CreateHourl + "</td> \n\
-                                        <td> " + value.WalletID + "</td> \n\
-                                        <td> <a href='viewDetailUser.jsp?id="+ value.UserID+"'"+">"+ value.UserID +" </a></td> \n\
-                                        <td> " + value.BankAccount + "</td> \n\
-                                        <td> " + value.Bank + "</td> \n\
-                                        <td> " + value.Amount + "</td> \n\
-                                    <tr>")
-                            });
+                             $("#dtOrderExample tbody tr").empty();
+                                var t = $('#dtOrderExample').DataTable();
+                                $.each(obj, function (key, value) {
+                                    t.row.add([
+                                        value.RechargeID,
+                                        value.CreateDate + " " + value.CreateHourl,
+                                        "<a href='viewDetailUser.jsp?id=" +value.WalletID+ "'" + ">" +value.WalletID + " </a>",
+                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                        value.BankAccount,
+                                        value.Bank,
+                                        value.Amount
+                                    ]).draw(false);
+                                })
                             $("#refesh").show()
                         },
                         error: function () {
@@ -271,9 +257,9 @@
                     date.setMonth(date.getMonth() - 1);
                     console.log(date.toLocaleDateString())
                     const searh1month = {
-                        Start : date.toLocaleDateString(),
-                        End : first,
-                        Wallet : d
+                        Start: date.toLocaleDateString(),
+                        End: first,
+                        Wallet: d
                     }
                     const da = JSON.stringify(searh1month)
                     console.log(da)
@@ -284,19 +270,19 @@
                         success: function (data) {
                             let obj = $.parseJSON(data);
                             console.log(obj)
-                            $("#example tbody tr").empty();
-                            $.each(obj, function (key, value) {
-                                $('#example').append(
-                                        "<tr> \n\
-                                        <td> " + value.RechargeID + "</td> \n\
-                                        <td> " + value.CreateDate + " " + value.CreateHourl + "</td> \n\
-                                        <td> " + value.WalletID + "</td> \n\
-                                        <td> <a href='viewDetailUser.jsp?id="+ value.UserID+"'"+">"+ value.UserID +" </a></td> \n\
-                                        <td> " + value.BankAccount + "</td> \n\
-                                        <td> " + value.Bank + "</td> \n\
-                                        <td> " + value.Amount + "</td> \n\
-                                    <tr>")
-                            });
+                             $("#dtOrderExample tbody tr").empty();
+                                var t = $('#dtOrderExample').DataTable();
+                                $.each(obj, function (key, value) {
+                                    t.row.add([
+                                        value.RechargeID,
+                                        value.CreateDate + " " + value.CreateHourl,
+                                        "<a href='viewDetailUser.jsp?id=" +value.WalletID+ "'" + ">" +value.WalletID + " </a>",
+                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                        value.BankAccount,
+                                        value.Bank,
+                                        value.Amount
+                                    ]).draw(false);
+                                })
                             $("#refesh").show()
                         },
                         error: function () {
@@ -324,12 +310,12 @@
                             <div class="card">
                                 <div class="card-body">
                                     <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="../index.jsp">Home</a></li>
-                                        <li class="breadcrumb-item"><a href="recharge_history.jsp">Recharge history List</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">View Detail Recharge history</li>
-                                    </ol>
-                                </nav>
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="../index.jsp">Home</a></li>
+                                            <li class="breadcrumb-item"><a href="recharge_history.jsp">Recharge history List</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">View Detail Recharge history</li>
+                                        </ol>
+                                    </nav>
                                     <h2 class="card-body" style="text-align: center;"><%=request.getParameter("id")%>' Recharge history List</h2>
                                     <div class="alert alert-danger alert-dismissible fade show" id="error" role="alert" style="display: none ">
                                         <strong>Fail Search because end date is smaller than start date !</strong> Please wait check out again!!
@@ -363,7 +349,7 @@
                                                 <button id="cancledate" style="height:2.875rem;display: none" class="btn btn-danger" >Cancle</button> 
                                             </div>
                                             <div class="col-md-1">
-                                                
+
                                             </div>
                                             <div class="col-md-2">
 
@@ -398,7 +384,7 @@
                                         </ul>
                                     </div>
                                     <div class="container">
-                                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                                        <table id="dtOrderExample" class="table table-striped table-bordered" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>

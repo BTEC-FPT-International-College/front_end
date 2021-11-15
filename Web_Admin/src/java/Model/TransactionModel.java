@@ -25,16 +25,15 @@ public class TransactionModel {
         Connection conn = cn.getConnection();
         try {
             Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM web.tbl_transaction_history,user_wallet\n"
-                    + "WHERE tbl_transaction_history.walletID = user_wallet.walletID\n"
-                    + "order by Create_Day DESC;");
+            ResultSet rs = stm.executeQuery("SELECT *,STR_TO_DATE(tbl_transaction_history.Create_Day,'%d/%m/%Y') FROM web.tbl_transaction_history,user_wallet\n" +
+            "WHERE tbl_transaction_history.walletID = user_wallet.walletID;");
             Transaction_History acc = null;
             while (rs.next()) {
                 acc = new Transaction_History();
                 acc.setPostID(rs.getString(1));
                 acc.setWalletID(rs.getString(2));
                 acc.setPrice(rs.getInt(3));
-                acc.setCreateDate(rs.getString(4));
+                acc.setCreateDate(rs.getString(12));
                 acc.setCreateHour(rs.getString(5));
                 acc.setTransactionID(rs.getInt(6));
                 acc.setPacket(rs.getInt(7));

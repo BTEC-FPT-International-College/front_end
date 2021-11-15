@@ -25,22 +25,28 @@ public class RechargeModel {
         Connection conn = cn.getConnection();
         try {
             Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM user_wallet,tbl_recharge_transaction,tbl_user\n"
+            ResultSet rs = stm.executeQuery("SELECT tbl_recharge_transaction.rechargeID,\n"
+                    + "STR_TO_DATE(tbl_recharge_transaction.Create_Date,'%d/%m/%Y'),\n"
+                    + "tbl_recharge_transaction.Create_Hour,\n"
+                    + "tbl_recharge_transaction.walletID,\n"
+                    + "user_wallet.UserID,\n"
+                    + "tbl_recharge_transaction.Bank_Account,\n"
+                    + "tbl_recharge_transaction.Bank,\n"
+                    + "tbl_recharge_transaction.Amount\n"
+                    + "from user_wallet,tbl_recharge_transaction,tbl_user\n"
                     + "WHERE user_wallet.walletID = tbl_recharge_transaction.walletID\n"
                     + "AND user_wallet.UserID = tbl_user.UserID;");
             Recharge acc = null;
             while (rs.next()) {
                 acc = new Recharge();
-                acc.setRechargeID(rs.getString(5));
-                acc.setCreateDate(rs.getString(6));
-                acc.setAmount(rs.getInt(7));
-                acc.setName(rs.getString(8));
-                acc.setBank(rs.getString(9));
-                acc.setBankAccount(rs.getString(10));
-                acc.setContent(rs.getString(11));
-                acc.setWalletID(rs.getString(12));
-                acc.setCreateHourl(rs.getString(13));
-                acc.setUserID(rs.getString(14));
+                acc.setRechargeID(rs.getString(1));
+                acc.setCreateDate(rs.getString(2));
+                acc.setAmount(rs.getInt(8));
+                acc.setBank(rs.getString(7));
+                acc.setBankAccount(rs.getString(6));
+                acc.setWalletID(rs.getString(4));
+                acc.setCreateHourl(rs.getString(3));
+                acc.setUserID(rs.getString(5));
                 list.add(acc);
             }
             rs.close();
@@ -112,10 +118,19 @@ public class RechargeModel {
 
     public ArrayList<Recharge> getRechargebyWaalet(String walletID) {
         ArrayList<Recharge> list = new ArrayList<>();
-        String sql = "SELECT * FROM user_wallet,tbl_recharge_transaction,tbl_user\n"
-                + "WHERE user_wallet.walletID = tbl_recharge_transaction.walletID\n"
-                + "AND user_wallet.UserID = tbl_user.UserID\n"
-                + "AND tbl_recharge_transaction.walletID = ?;";
+        String sql = "SELECT tbl_recharge_transaction.rechargeID,\n" +
+"STR_TO_DATE(tbl_recharge_transaction.Create_Date,'%d/%m/%Y'),\n" +
+"tbl_recharge_transaction.Create_Hour,\n" +
+"tbl_recharge_transaction.walletID,\n" +
+"user_wallet.UserID,\n" +
+"tbl_recharge_transaction.Bank_Account,\n" +
+"tbl_recharge_transaction.Bank,\n" +
+"tbl_recharge_transaction.Amount\n" +
+"from user_wallet,tbl_recharge_transaction,tbl_user\n" +
+"WHERE user_wallet.walletID = tbl_recharge_transaction.walletID\n" +
+"AND user_wallet.UserID = tbl_user.UserID\n" +
+"AND tbl_recharge_transaction.walletID = ?\n" +
+"order by STR_TO_DATE(tbl_recharge_transaction.Create_Date,'%d/%m/%Y') desc;";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {
@@ -124,16 +139,14 @@ public class RechargeModel {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Recharge acc = new Recharge();
-                acc.setRechargeID(rs.getString(5));
-                acc.setCreateDate(rs.getString(6));
-                acc.setAmount(rs.getInt(7));
-                acc.setName(rs.getString(8));
-                acc.setBank(rs.getString(9));
-                acc.setBankAccount(rs.getString(10));
-                acc.setContent(rs.getString(11));
-                acc.setWalletID(rs.getString(12));
-                acc.setCreateHourl(rs.getString(13));
-                acc.setUserID(rs.getString(14));
+                acc.setRechargeID(rs.getString(1));
+                acc.setCreateDate(rs.getString(2));
+                acc.setAmount(rs.getInt(8));
+                acc.setBank(rs.getString(7));
+                acc.setBankAccount(rs.getString(6));
+                acc.setWalletID(rs.getString(4));
+                acc.setCreateHourl(rs.getString(3));
+                acc.setUserID(rs.getString(5));
                 list.add(acc);
             }
             rs.close();
@@ -182,7 +195,8 @@ public class RechargeModel {
         }
         return list;
     }
-        public ArrayList<Recharge> searchDatebyWallet2(String start, String end, String WalletID) {
+
+    public ArrayList<Recharge> searchDatebyWallet2(String start, String end, String WalletID) {
         ArrayList<Recharge> list = new ArrayList<>();
         String sql = "SELECT * from user_wallet,tbl_recharge_transaction,tbl_user\n"
                 + "where  user_wallet.walletID = tbl_recharge_transaction.walletID\n"

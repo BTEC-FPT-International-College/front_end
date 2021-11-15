@@ -38,25 +38,10 @@
                     trigger: 'focus'
                 })
                 // Cấu hình các nhãn phân trang
-                $('#example').dataTable({
-                    "language": {
-                        "sProcessing": "Processing...",
-                        "sLengthMenu": "View _MENU_ item",
-                        "sZeroRecords": "No matching lines found",
-                        "sInfo": "Viewing _START_ to _END_ of total _TOTAL_ entries",
-                        "sInfoEmpty": "Viewing 0 to 0 out of 0 entries",
-                        "sInfoFiltered": "(filtered from _MAX_ entries)",
-                        "sInfoPostFix": "",
-                        "sSearch": "Search now:",
-                        "sUrl": "",
-                        "oPaginate": {
-                            "sFirst": "Head",
-                            "sPrevious": "Previous",
-                            "sNext": "Nex",
-                            "sLast": "End"
-                        }
-                    }
-                });
+                $('#dtOrderExample').DataTable({
+                        "order": [[0, "desc"]]
+                    });
+                    $('.dataTables_length').addClass('bs-select');
                 $("#show").hide();
                 $("#error").hide();
                 $(".delete[target='_blank']").click(function () {
@@ -164,7 +149,7 @@
                                     <br>
                                     <br>
                                     <div  class="container table-responsive">
-                                    <table id="example" class="table table-striped table-bordered" >
+                                    <table id="dtOrderExample" class="table table-striped table-bordered" >
                                         <thead>
                                             <tr>
                                                 <th>
