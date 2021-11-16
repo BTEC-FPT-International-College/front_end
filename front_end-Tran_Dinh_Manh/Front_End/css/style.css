@@ -750,6 +750,7 @@ img {
   float: left;
   margin-top: 30px;
   width: 100%;
+  height: 500px;
   position: relative;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;

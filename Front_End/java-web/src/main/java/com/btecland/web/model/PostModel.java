@@ -4,7 +4,7 @@ public class PostModel {
     private String title;
     private String avartar;
     private int area;
-    private double price;
+    private int price;
     private String description;
     private String phone;
     private String email;
@@ -17,6 +17,28 @@ public class PostModel {
     private String location;
     private String categoryid;
     private String enddate;
+    private String sale_rent;
+    private int room;
+    private int bath;
+    
+	public int getRoom() {
+		return room;
+	}
+	public void setRoom(int room) {
+		this.room = room;
+	}
+	public int getBath() {
+		return bath;
+	}
+	public void setBath(int bath) {
+		this.bath = bath;
+	}
+	public String getSale_rent() {
+		return sale_rent;
+	}
+	public void setSale_rent(String sale_rent) {
+		this.sale_rent = sale_rent;
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -35,10 +57,10 @@ public class PostModel {
 	public void setArea(int area) {
 		this.area = area;
 	}
-	public double getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	public String getDescription() {

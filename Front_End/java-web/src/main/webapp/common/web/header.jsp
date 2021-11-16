@@ -44,13 +44,12 @@
           </button>
           <!-- LOGO -->
           <!-- Text based logo -->
-           <a class="navbar-brand aa-logo" href="index.html"> BTEC <span>LAND</span></a>
+           <a class="navbar-brand aa-logo" href="index.jsp"> BTEC <span>LAND</span></a>
            <!-- Image based logo -->
-           <!-- <a class="navbar-brand aa-logo-img" href="index.html"><img src="img/logo.png" alt="logo"></a> -->
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul id="top-menu" class="nav navbar-nav navbar-right aa-main-nav">
-            <li class="active"><a href="index.html">HOME</a></li>
+            <li class="active"><a href="index.jsp">HOME</a></li>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" >BUY</a>
               <ul class="dropdown-menu" role="menu">

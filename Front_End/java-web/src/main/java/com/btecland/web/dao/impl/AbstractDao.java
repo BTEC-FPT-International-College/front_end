@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import com.btecland.web.dao.GenericDAO;
 import com.btecland.web.mapper.RowMapper;
 
 public class AbstractDao<T> implements GenericDAO<T> {
-	
+
 	public Connection getConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -33,7 +34,7 @@ public class AbstractDao<T> implements GenericDAO<T> {
 		ResultSet resultSet = null;
 		try {
 			connection = getConnection();
-			statement =connection.prepareStatement(sql);
+			statement = connection.prepareStatement(sql);
 			setParameter(statement, parameters);
 			resultSet = statement.executeQuery();
 			while (resultSet.next()) {
@@ -43,37 +44,118 @@ public class AbstractDao<T> implements GenericDAO<T> {
 		} catch (SQLException e) {
 			return null;
 		} finally {
-			try{
-				if(connection != null) {
-				connection.close();
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+				if (statement != null) {
+					statement.close();
+				}
+				if (resultSet != null) {
+					resultSet.close();
+				}
+			} catch (SQLException e) {
+				return null;
 			}
-			if(statement !=null) {
-				statement.close();
-			}
-			if(resultSet != null) {
-				resultSet.close();
-			}
-		} catch (SQLException e) {
-			return null;
 		}
 	}
-}
 
 	private void setParameter(PreparedStatement statement, Object... parameters) {
 		try {
-			for(int i = 0; i < parameters.length; i++) {
+			for (int i = 0; i < parameters.length; i++) {
 				Object parameter = parameters[i];
-				int index = i+1;
-				if(parameter instanceof Long) {
+				int index = i + 1;
+				if (parameter instanceof Long) {
 					statement.setLong(index, (Long) parameter);
-				}else if(parameter instanceof String) {
+				} else if (parameter instanceof String) {
 					statement.setString(index, (String) parameter);
+				} else if (parameter instanceof Integer) {
+					statement.setInt(index, (Integer)parameter);
 				}
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
+
 	}
+
+	@Override
+	public void update(String sql, Object... parameters) {
+		Connection connection = null;
+		PreparedStatement statement = null;
+		try {
+			connection = getConnection();
+			connection.setAutoCommit(false);
+			statement = connection.prepareStatement(sql);
+			setParameter(statement, parameters);
+			statement.executeUpdate();
+			connection.commit();
+		} catch (SQLException e) {
+			if (connection != null) {
+				try {
+					connection.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+				if (statement != null) {
+					statement.close();
+				}
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+
+	}
+
+	@Override
+	public Long insert(String sql, Object... parameters) {
+		ResultSet resultSet = null;
+		Connection connection = null;
+		PreparedStatement statement = null;
+		try{
+			Long postid = null;
+			connection = getConnection();
+			connection.setAutoCommit(false);
+			statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			setParameter(statement, parameters);
+			statement.executeUpdate();
+			resultSet = statement.getGeneratedKeys();
+			if (resultSet.next()) {
+				postid = resultSet.getLong(1);
+			}
+			connection.commit();
+			return postid;
+		} catch (SQLException e) {
+			if (connection != null) {
+				try {
+					connection.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		} finally {
+			try {
+				if (connection != null) {
+					connection.close();
+				}
+				if (statement != null) {
+					statement.close();
+				}
+				if(resultSet != null) {
+					resultSet.close();
+				}
+			} catch (SQLException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return null;
+	}
+
 }

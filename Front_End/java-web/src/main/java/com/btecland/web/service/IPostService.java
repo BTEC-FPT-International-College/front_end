@@ -5,6 +5,7 @@ import java.util.List;
 import com.btecland.web.model.PostModel;
 
 public interface IPostService {
+	List<PostModel>  findAll();
 	List<PostModel> findPostByCategoryID(String categoryid) ;
 	PostModel save(PostModel postModel);
 }

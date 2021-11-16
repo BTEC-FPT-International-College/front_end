@@ -17,25 +17,23 @@ import com.btecland.web.service.impl.PostServiceImpl;
 
 @WebServlet(urlPatterns = {"/home"})
 public class HomController  extends HttpServlet {
-	@Inject
-	private ICategoryService categoryService;
+//	@Inject
+//	private ICategoryService categoryService;
 	@Inject
 	private IPostService postService;
 	
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		
-		String title = "Demo test create post ";
-		String description = "test add post";
-		String categoryid = "1";
-		PostModel postModel = new PostModel();
-		postModel.setTitle(title);
-		postModel.setDescription(description);
-		postModel.setCategoryid(categoryid);
-		postService.save(postModel);
-		/*String categoryid = "1";
-		request.setAttribute("posts", postService.findPostByCategoryID(categoryid));
-		request.setAttribute("categories", categoryService.findAll()); */
+//		String title = "Demo test create post123 ";
+//		String description = "test add post23";
+//		String categoryid = "1";
+//		PostModel postModel = new PostModel();
+//		postModel.setTitle(title);
+//		postModel.setDescription(description);
+//		postModel.setCategoryid(categoryid);
+//		postService.save(postModel);
+//		request.setAttribute("posts", postService.findPostByCategoryID(categoryid));
+		request.setAttribute("posts", postService.findAll()); 
 		RequestDispatcher rd = request.getRequestDispatcher("/view/web/home.jsp");
 		rd.forward(request, response);
 	}

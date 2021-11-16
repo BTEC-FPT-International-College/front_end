@@ -23,5 +23,9 @@ public class PostServiceImpl implements IPostService{
 		System.out.print(postid);
 		return null;
 	}
+	@Override
+	public List<PostModel> findAll() {
+		return postDao.findAll();
+	}
 
 }
