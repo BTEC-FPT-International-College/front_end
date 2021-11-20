@@ -100,7 +100,7 @@
           <li class="nav-item">
             <a class="nav-link" href="pages/recharge_history.jsp">
               <i class="mdi mdi-audiobook"></i>
-              <span class="menu-title" style="margin-left: 20px;">Transaction history </span>
+              <span class="menu-title" style="margin-left: 20px;">Recharge history </span>
             </a>
           </li>
           <li class="nav-item">

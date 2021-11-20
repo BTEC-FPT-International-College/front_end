@@ -60,7 +60,12 @@
                             success: function (data) {
                                 let obj = $.parseJSON(data);
                                 console.log(obj)
-                                $("#dtOrderExample tbody tr").empty();
+                                $("#dtOrderExample").DataTable().clear().destroy();
+                                $('#dtOrderExample').DataTable({
+                                retrieve: true,
+                                paging: false,
+                                "order": [[1, "desc"]]
+                            });
                                 var t = $('#dtOrderExample').DataTable();
                                 $.each(obj, function (key, value) {
                                     t.row.add([
@@ -87,7 +92,12 @@
                         success: function (data) {
                             let rs = $.parseJSON(data);
                             console.log(rs)
-                            $("#dtOrderExample tbody tr").empty();
+                            $("#dtOrderExample").DataTable().clear().destroy();
+                            $('#dtOrderExample').DataTable({
+                                retrieve: true,
+                                paging: false,
+                                "order": [[1, "desc"]]
+                            });
                             var t = $('#dtOrderExample').DataTable();
                             $.each(rs, function (key, value) {
                                 t.row.add([
@@ -117,7 +127,12 @@
                         success: function (data) {
                             let rs = $.parseJSON(data);
                             console.log(rs)
-                            $("#dtOrderExample tbody tr").empty();
+                            $("#dtOrderExample").DataTable().clear().destroy();
+                            $('#dtOrderExample').DataTable({
+                                retrieve: true,
+                                paging: false,
+                                "order": [[1, "desc"]]
+                            });
                             var t = $('#dtOrderExample').DataTable();
                             $.each(rs, function (key, value) {
                                 t.row.add([
@@ -197,7 +212,12 @@
                         success: function (data) {
                             let obj = $.parseJSON(data);
                             console.log(obj)
-                            $("#dtOrderExample tbody tr").empty();
+                            $("#dtOrderExample").DataTable().clear().destroy();
+                            $('#dtOrderExample').DataTable({
+                                retrieve: true,
+                                paging: false,
+                                "order": [[1, "desc"]]
+                            });
                             var t = $('#dtOrderExample').DataTable();
                             $.each(obj, function (key, value) {
                                 t.row.add([
@@ -235,7 +255,12 @@
                         success: function (data) {
                             let obj = $.parseJSON(data);
                             console.log(obj)
-                            $("#dtOrderExample tbody tr").empty();
+                            $("#dtOrderExample").DataTable().clear().destroy();
+                            $('#dtOrderExample').DataTable({
+                                retrieve: true,
+                                paging: false,
+                                "order": [[1, "desc"]]
+                            });
                             var t = $('#dtOrderExample').DataTable();
                             $.each(obj, function (key, value) {
                                 t.row.add([
@@ -274,7 +299,12 @@
                         success: function (data) {
                             let obj = $.parseJSON(data);
                             console.log(obj)
-                            $("#dtOrderExample tbody tr").empty();
+                            $("#dtOrderExample").DataTable().clear().destroy();
+                            $('#dtOrderExample').DataTable({
+                                retrieve: true,
+                                paging: false,
+                                "order": [[1, "desc"]]
+                            });
                             var t = $('#dtOrderExample').DataTable();
                             $.each(obj, function (key, value) {
                                 t.row.add([

@@ -6,8 +6,12 @@ package Controller;
 
 import Entity.Category;
 import Entity.Post;
+import Entity.Recharge;
+import Entity.Search_Recharge;
 import Model.CategoryModel;
 import Model.PostModel;
+import Model.RechargeModel;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -42,6 +46,34 @@ public class PostController extends HttpServlet {
             ArrayList<Post> list = am.getListPost();
             request.setAttribute("listPost", list);
             request.getRequestDispatcher("pages/post.jsp").forward(request, response);
+        }
+        if (act.equals("viewP")) {
+            Gson json = new Gson();
+            PostModel am = new PostModel();
+            ArrayList<Post> a = am.getListPost();
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("search")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
+            PostModel am = new PostModel();
+            ArrayList<Post> a = am.searchDate(sup.getStart(), sup.getEnd());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("search1")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
+            PostModel am = new PostModel();
+            ArrayList<Post> a = am.searchDate2(sup.getStart(), sup.getEnd());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
         }
     }
 

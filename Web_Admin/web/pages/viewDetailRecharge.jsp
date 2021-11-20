@@ -35,6 +35,10 @@
             var d = "<%=request.getParameter("id")%>"
             var a = {}
             $(document).ready(function () {
+                $('#dtOrderExample').DataTable({
+                    "order": [[1, "desc"]]
+                });
+                $('.dataTables_length').addClass('bs-select');
                 $.ajax({
                     url: "../RechargeController?ac=viewRechargebyWallet",
                     method: "POST",
@@ -42,20 +46,19 @@
                     success: function (data) {
                         let obj = $.parseJSON(data);
                         console.log(obj)
-                        $("#dtOrderExample tbody tr").empty();
                         var t = $('#dtOrderExample').DataTable();
                         $.each(obj, function (key, value) {
                             t.row.add([
                                 value.RechargeID,
                                 value.CreateDate + " " + value.CreateHourl,
-                                "<a href='viewDetailUser.jsp?id=" +value.WalletID+ "'" + ">" +value.WalletID + " </a>",
+                                "<a href='viewDetailUser.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a>",
                                 "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
                                 value.BankAccount,
                                 value.Bank,
                                 value.Amount
                             ]).draw(false);
-                        });
 
+                        });
                     },
                     error: function () {
                         alert("error");
@@ -81,13 +84,18 @@
                             success: function (data) {
                                 let obj = $.parseJSON(data);
                                 console.log(obj)
-                                 $("#dtOrderExample tbody tr").empty();
+                                $("#dtOrderExample").DataTable().clear().destroy();
+                                $('#dtOrderExample').DataTable({
+                                retrieve: true,
+                                paging: false,
+                                "order": [[1, "desc"]]
+                            });
                                 var t = $('#dtOrderExample').DataTable();
                                 $.each(obj, function (key, value) {
                                     t.row.add([
                                         value.RechargeID,
                                         value.CreateDate + " " + value.CreateHourl,
-                                        "<a href='viewDetailUser.jsp?id=" +value.WalletID+ "'" + ">" +value.WalletID + " </a>",
+                                        "<a href='viewDetailUser.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a>",
                                         "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
                                         value.BankAccount,
                                         value.Bank,
@@ -109,19 +117,24 @@
                         success: function (data) {
                             let obj = $.parseJSON(data);
                             console.log(obj)
-                             $("#dtOrderExample tbody tr").empty();
-                                var t = $('#dtOrderExample').DataTable();
-                                $.each(obj, function (key, value) {
-                                    t.row.add([
-                                        value.RechargeID,
-                                        value.CreateDate + " " + value.CreateHourl,
-                                        "<a href='viewDetailUser.jsp?id=" +value.WalletID+ "'" + ">" +value.WalletID + " </a>",
-                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
-                                        value.BankAccount,
-                                        value.Bank,
-                                        value.Amount
-                                    ]).draw(false);
-                                })
+                            $("#dtOrderExample").DataTable().clear().destroy();
+                            $('#dtOrderExample').DataTable({
+                                retrieve: true,
+                                paging: false,
+                                "order": [[1, "desc"]]
+                            });
+                            var t = $('#dtOrderExample').DataTable();
+                            $.each(obj, function (key, value) {
+                                t.row.add([
+                                    value.RechargeID,
+                                    value.CreateDate + " " + value.CreateHourl,
+                                    "<a href='viewDetailUser.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a>",
+                                    "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                    value.BankAccount,
+                                    value.Bank,
+                                    value.Amount
+                                ]).draw(false);
+                            })
                         },
                         error: function () {
                             alert("error");
@@ -140,19 +153,24 @@
                         success: function (data) {
                             let obj = $.parseJSON(data);
                             console.log(obj)
-                             $("#dtOrderExample tbody tr").empty();
-                                var t = $('#dtOrderExample').DataTable();
-                                $.each(obj, function (key, value) {
-                                    t.row.add([
-                                        value.RechargeID,
-                                        value.CreateDate + " " + value.CreateHourl,
-                                        "<a href='viewDetailUser.jsp?id=" +value.WalletID+ "'" + ">" +value.WalletID + " </a>",
-                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
-                                        value.BankAccount,
-                                        value.Bank,
-                                        value.Amount
-                                    ]).draw(false);
-                                })
+                            $("#dtOrderExample").DataTable().clear().destroy();
+                            $('#dtOrderExample').DataTable({
+                                retrieve: true,
+                                paging: false,
+                                "order": [[1, "desc"]]
+                            });
+                            var t = $('#dtOrderExample').DataTable();
+                            $.each(obj, function (key, value) {
+                                t.row.add([
+                                    value.RechargeID,
+                                    value.CreateDate + " " + value.CreateHourl,
+                                    "<a href='viewDetailUser.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a>",
+                                    "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                    value.BankAccount,
+                                    value.Bank,
+                                    value.Amount
+                                ]).draw(false);
+                            })
                             $("#refesh").hide()
                         },
                         error: function () {
@@ -165,10 +183,6 @@
                     $(this).off(event);
                 })
                 // Cấu hình các nhãn phân trang
-                $('#dtOrderExample').DataTable({
-                    "order": [[1, "desc"]]
-                });
-                $('.dataTables_length').addClass('bs-select');
                 $("#1day").click(function () {
                     var curr = new Date;
                     var first = curr.getDate();
@@ -191,19 +205,24 @@
                         success: function (data) {
                             let obj = $.parseJSON(data);
                             console.log(obj)
-                             $("#dtOrderExample tbody tr").empty();
-                                var t = $('#dtOrderExample').DataTable();
-                                $.each(obj, function (key, value) {
-                                    t.row.add([
-                                        value.RechargeID,
-                                        value.CreateDate + " " + value.CreateHourl,
-                                        "<a href='viewDetailUser.jsp?id=" +value.WalletID+ "'" + ">" +value.WalletID + " </a>",
-                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
-                                        value.BankAccount,
-                                        value.Bank,
-                                        value.Amount
-                                    ]).draw(false);
-                                })
+                            $("#dtOrderExample").DataTable().clear().destroy();
+                            $('#dtOrderExample').DataTable({
+                                retrieve: true,
+                                paging: false,
+                                "order": [[1, "desc"]]
+                            });
+                            var t = $('#dtOrderExample').DataTable();
+                            $.each(obj, function (key, value) {
+                                t.row.add([
+                                    value.RechargeID,
+                                    value.CreateDate + " " + value.CreateHourl,
+                                    "<a href='viewDetailUser.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a>",
+                                    "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                    value.BankAccount,
+                                    value.Bank,
+                                    value.Amount
+                                ]).draw(false);
+                            })
                             $("#refesh").show()
                         },
                         error: function () {
@@ -230,19 +249,24 @@
                         success: function (data) {
                             let obj = $.parseJSON(data);
                             console.log(obj)
-                             $("#dtOrderExample tbody tr").empty();
-                                var t = $('#dtOrderExample').DataTable();
-                                $.each(obj, function (key, value) {
-                                    t.row.add([
-                                        value.RechargeID,
-                                        value.CreateDate + " " + value.CreateHourl,
-                                        "<a href='viewDetailUser.jsp?id=" +value.WalletID+ "'" + ">" +value.WalletID + " </a>",
-                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
-                                        value.BankAccount,
-                                        value.Bank,
-                                        value.Amount
-                                    ]).draw(false);
-                                })
+                            $("#dtOrderExample").DataTable().clear().destroy();
+                            $('#dtOrderExample').DataTable({
+                                retrieve: true,
+                                paging: false,
+                                "order": [[1, "desc"]]
+                            });
+                            var t = $('#dtOrderExample').DataTable();
+                            $.each(obj, function (key, value) {
+                                t.row.add([
+                                    value.RechargeID,
+                                    value.CreateDate + " " + value.CreateHourl,
+                                    "<a href='viewDetailUser.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a>",
+                                    "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                    value.BankAccount,
+                                    value.Bank,
+                                    value.Amount
+                                ]).draw(false);
+                            })
                             $("#refesh").show()
                         },
                         error: function () {
@@ -270,19 +294,24 @@
                         success: function (data) {
                             let obj = $.parseJSON(data);
                             console.log(obj)
-                             $("#dtOrderExample tbody tr").empty();
-                                var t = $('#dtOrderExample').DataTable();
-                                $.each(obj, function (key, value) {
-                                    t.row.add([
-                                        value.RechargeID,
-                                        value.CreateDate + " " + value.CreateHourl,
-                                        "<a href='viewDetailUser.jsp?id=" +value.WalletID+ "'" + ">" +value.WalletID + " </a>",
-                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
-                                        value.BankAccount,
-                                        value.Bank,
-                                        value.Amount
-                                    ]).draw(false);
-                                })
+                            $("#dtOrderExample").DataTable().clear().destroy();
+                            $('#dtOrderExample').DataTable({
+                                retrieve: true,
+                                paging: false,
+                                "order": [[1, "desc"]]
+                            });
+                            var t = $('#dtOrderExample').DataTable();
+                            $.each(obj, function (key, value) {
+                                t.row.add([
+                                    value.RechargeID,
+                                    value.CreateDate + " " + value.CreateHourl,
+                                    "<a href='viewDetailUser.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a>",
+                                    "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                    value.BankAccount,
+                                    value.Bank,
+                                    value.Amount
+                                ]).draw(false);
+                            })
                             $("#refesh").show()
                         },
                         error: function () {

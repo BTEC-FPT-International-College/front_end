@@ -16,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) {
         PostModel p = new PostModel();
-        System.out.println(p.getListPost().size());
+        System.out.println(p.searchDatebyU("US4","10/1/2021","10/9/2021"));
 
     }
 }

@@ -6,7 +6,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Post Management page</title>
-                <link rel="stylesheet" href="../vendors/mdi/css/materialdesignicons.min.css">
+        <link rel="stylesheet" href="../vendors/mdi/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="../vendors/base/vendor.bundle.base.css">
         <!-- endinject -->
         <!-- plugin css for this page -->
@@ -51,6 +51,164 @@
                     $(".1").text("Unread")
                     $(".0").text("Read")
                     $(".0").addClass("badge-success")
+                    $("#getdate").click(function () {
+                        $("#cancledate").show();
+                        $("#getdate").hide()
+                        a.Start = $("#startdate").val()
+                        a.End = $("#enddate").val()
+                        const end = Date.parse(a.End)
+                        const start = Date.parse(a.Start)
+                        if ((end - start) < 0) {
+                            $("#error").show()
+                        } else {
+                            const da = JSON.stringify(a)
+                            console.log(da)
+                            $.ajax({
+                                url: "../PostController?ac=search",
+                                method: "POST",
+                                data: {get: da},
+                                success: function (data) {
+                                    let obj = $.parseJSON(data);
+                                    console.log(obj)
+                                    $("#dtOrderExample").DataTable().clear().destroy();
+                                    $('#dtOrderExample').DataTable({
+                                        retrieve: true,
+                                        paging: false,
+                                        "order": [[3, "desc"]]
+                                    });
+                                    var t = $('#dtOrderExample').DataTable();
+                                    $.each(obj, function (key, value) {
+                                        t.row.add([
+                                                value.PostID,
+                                                "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                                value.Category,
+                                                value.Create_Date + " " + value.Create_Hour,
+                                                value.EndDate,
+                                                value.status,
+                                                '<label class="badge ' + value.ReadUnread + '">' + value.ReadUnread + "</label>",
+                                                "<a href='viewDetailPost.jsp?id=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
+                                                + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
+                                                + '<i class="mdi mdi-eye"></i>'
+                                        +'<span> <strong> View</strong></span>'
+                                                + "</a>",
+                                                '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Delete</button>'
+                                        +'<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
+                                        +'<div class="modal-dialog modal-dialog-centered" role="document">'
+                                        +'<div class="modal-content border-0">'
+                                        +'<div class="modal-body p-0">'
+                                        +'<div class="card border-0 p-sm-3 p-2 justify-content-center">'
+                                        +'<div class="card-header pb-0 bg-white border-0 ">'
+                                        +'<div class="row">'
+                                        +'<div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>'
+                                        +'</div>'
+                                        +        '<p class="font-weight-bold mb-2"> Are you sure you wanna delete' + value.PostID + 'post ?</p>'
+                                        +        '<p class="text-muted "> This change may affect other data. Be sure !!!</p>'
+                                        +'</div>'
+                                        +'<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
+                                        +'<div class="row justify-content-end no-gutters">'
+                                        +'<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
+                                        +'<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Delete</button></div></div>'
+                                        +'</div>'
+                                        +'</div>'
+                                        +'</div>'
+                                        +'</div>'
+                                        +'</div>'
+                                        +'</div>'
+                                        +'</div>'
+                                        +'</div>'
+                                        ]).draw(false);
+                                    })
+                                    $(".1").addClass("badge-danger")
+                                    $(".1").text("Unread")
+                                    $(".0").text("Read")
+                                    $(".0").addClass("badge-success")
+                                },
+                                error: function () {
+                                    alert("error");
+                                }
+                            });
+                        }
+                    })
+                    $("#cancledate").click(function () {
+                        $.ajax({
+                            url: "../PostController?ac=viewP",
+                            method: "GET",
+                            success: function (data) {
+                                let rs = $.parseJSON(data);
+                                console.log(rs)
+                                $("#dtOrderExample").DataTable().clear().destroy();
+                                $('#dtOrderExample').DataTable({
+                                    retrieve: true,
+                                    paging: false,
+                                    "order": [[3, "desc"]]
+                                });
+                                var t = $('#dtOrderExample').DataTable();
+                                $.each(rs, function (key, value) {
+                                    t.row.add([
+                                            value.PostID,
+                                            "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                    value.Category,
+                                            value.Create_Date + " " + value.Create_Hour,
+                                            value.EndDate,
+                                            value.status,
+                                            '<label class="badge' + value.ReadUnread + ">" + value.ReadUnread + "</label>",
+                                            "<a href='viewDetailPost.jsp?id=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
+                                            + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
+                                            + '<i class="mdi mdi-eye"></i>'
+                                            + '<span> <strong> View</strong></span>'
+                                            + "</a>",
+                                            '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Delete</button>'
+                                        +'<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
+                                        +'<div class="modal-dialog modal-dialog-centered" role="document">'
+                                        +'<div class="modal-content border-0">'
+                                        +'<div class="modal-body p-0">'
+                                        +'<div class="card border-0 p-sm-3 p-2 justify-content-center">'
+                                        +'<div class="card-header pb-0 bg-white border-0 ">'
+                                        +'<div class="row">'
+                                        +'<div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>'
+                                        +'</div>'
+                                        +        '<p class="font-weight-bold mb-2"> Are you sure you wanna delete' + value.PostID + 'post ?</p>'
+                                        +        '<p class="text-muted "> This change may affect other data. Be sure !!!</p>'
+                                        +'</div>'
+                                        +'<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
+                                        +'<div class="row justify-content-end no-gutters">'
+                                        +'<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
+                                        +'<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Delete</button></div></div>'
+                                        +'</div>'
+                                        +'</div>'
+                                        +'</div>'
+                                        +'</div>'
+                                        +'</div>'
+                                        +'</div>'
+                                        +'</div>'
+                                        +'</div>'
+                                    ]).draw(false);
+                                })
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                        $("#getdate").show()
+                        $("#cancledate").hide()
+                        $("#startdate").val("")
+                        $("#enddate").val("")
+                    })
+                    $("#refesh").click(function () {
+                        $.ajax({
+                            url: "../RechargeController?ac=viewP",
+                            method: "GET",
+                            success: function (data) {
+                                let rs = $.parseJSON(data);
+                                console.log(rs)
+
+                                $("#refesh").hide()
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                    })
                 });
             })
         </script>
@@ -169,9 +327,29 @@
                                                         uiLibrary: 'bootstrap4'
                                                     });
                                                 </script>
+
                                                 <div class="col-md-4">
                                                     <button id="getdate" style="height:2.875rem" class="btn btn-primary" ><i class="mdi mdi-magnify"></i></button> 
                                                     <button id="cancledate" style="height:2.875rem;display: none" class="btn btn-danger" >Cancle</button> 
+                                                </div>
+                                                <div class="row" style="margin-top: 4px;margin-left:1px">
+                                                    <ul class="nav">
+                                                        <li class="nav-item">
+                                                            <a class="nav-link disabled">Quickly Serach: </a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" id="1day" href="#">1 day ago</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" id="1week" href="#">1 week ago</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" id="1month" href="#">1 month ago</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" style="display: none" id="refesh" href="#">Refesh</a>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
@@ -199,42 +377,43 @@
                                             </thead>
                                             <tbody>
                                                 <c:if test="${empty requestScope['listPost']}">
-                                                <jsp:forward page = "/PostController?ac=view" />
-                                            </c:if>
+                                                    <jsp:forward page = "/PostController?ac=view" />
+                                                </c:if>
                                                 <c:forEach items="${listPost}" var = "x" >
                                                     <tr>
-                                                    <td>${x.getPostID()}</td>
-                                                    <td>${x.getUserID()}</td>
-                                                    <td>${x.getCategory()}</td>
-                                                    <td>${x.getCreate_Date()}</td>
-                                                    <td>${x.getEndDate()}</td>
-                                                    <td>${x.getStatus()}</td>
-                                                    <td><label class="badge ${x.getReadUnread()}">${x.getReadUnread()}</label></td>
-                                                    <td>                          
-                                                        <a href="viewDetailPost.jsp?id=${x.getPostID()}" class="btn btn-primary a-btn-slide-text">
-                                                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                                                            <i class="mdi mdi-eye"></i>
-                                                            <span> <strong> View</strong></span>            
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                         <div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal${x.getPostID()}"><i class="mdi mdi-delete"></i>Delete</button>
-                                                            <div id="my-modal${x.getPostID()}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                                    <div class="modal-content border-0">
-                                                                        <div class="modal-body p-0">
-                                                                            <div class="card border-0 p-sm-3 p-2 justify-content-center">
-                                                                                <div class="card-header pb-0 bg-white border-0 ">
-                                                                                    <div class="row">
-                                                                                        <div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>
+                                                        <td>${x.getPostID()}</td>
+                                                        <td>${x.getUserID()}</td>
+                                                        <td>${x.getCategory()}</td>
+                                                        <td>${x.getCreate_Date()}</td>
+                                                        <td>${x.getEndDate()}</td>
+                                                        <td>${x.getStatus()}</td>
+                                                        <td><label class="badge ${x.getReadUnread()}">${x.getReadUnread()}</label></td>
+                                                        <td>                          
+                                                            <a href="viewDetailPost.jsp?id=${x.getPostID()}" class="btn btn-primary a-btn-slide-text">
+                                                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                                                                <i class="mdi mdi-eye"></i>
+                                                                <span> <strong> View</strong></span>            
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal${x.getPostID()}"><i class="mdi mdi-delete"></i>Delete</button>
+                                                                <div id="my-modal${x.getPostID()}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                        <div class="modal-content border-0">
+                                                                            <div class="modal-body p-0">
+                                                                                <div class="card border-0 p-sm-3 p-2 justify-content-center">
+                                                                                    <div class="card-header pb-0 bg-white border-0 ">
+                                                                                        <div class="row">
+                                                                                            <div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>
+                                                                                        </div>
+                                                                                        <p class="font-weight-bold mb-2"> Are you sure you wanna delete ${x.getPostID()} post ?</p>
+                                                                                        <p class="text-muted "> This change may affect other data. Be sure !!!</p>
                                                                                     </div>
-                                                                                    <p class="font-weight-bold mb-2"> Are you sure you wanna delete ${x.getPostID()} post ?</p>
-                                                                                    <p class="text-muted "> This change may affect other data. Be sure !!!</p>
-                                                                                </div>
-                                                                                <div class="card-body px-sm-4 mb-2 pt-1 pb-0">
-                                                                                    <div class="row justify-content-end no-gutters">
-                                                                                        <div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>
-                                                                                        <div class="col-auto"><div class="col-auto"><button title="${x.getPostID()}" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Delete</button></div></div>
+                                                                                    <div class="card-body px-sm-4 mb-2 pt-1 pb-0">
+                                                                                        <div class="row justify-content-end no-gutters">
+                                                                                            <div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>
+                                                                                            <div class="col-auto"><div class="col-auto"><button title="${x.getPostID()}" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Delete</button></div></div>
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -242,8 +421,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
+                                                        </td>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
@@ -253,7 +431,7 @@
                                                     <th>User</th>
                                                     <th>Category</th>
                                                     <th>Create Date</th>
-                                                     <th>End Date</th>
+                                                    <th>End Date</th>
                                                     <th>Status</th>
                                                     <th>
                                                         View detail
