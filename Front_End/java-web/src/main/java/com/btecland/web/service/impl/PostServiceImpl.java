@@ -27,5 +27,13 @@ public class PostServiceImpl implements IPostService{
 	public List<PostModel> findAll() {
 		return postDao.findAll();
 	}
+	@Override
+	public List<PostModel> getTop6() {
+		return postDao.getTop6();
+	}
+	@Override
+	public List<PostModel> getNext6() {
+		return postDao.getNext6();
+	}
 
 }

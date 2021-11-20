@@ -1,3 +1,4 @@
+<%@include file="/common/taglib.jsp"%>
 <!-- Start header section -->
   <header id="aa-header">
     <div class="container">
@@ -19,7 +20,7 @@
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="aa-header-right">
                   <a href="register.html" class="aa-register">Register</a>
-                  <a href="signin.html" class="aa-login">Login</a>
+                 <a class="aa-login" href="/login.jsp">Login</a>
                 </div>
               </div>
             </div>

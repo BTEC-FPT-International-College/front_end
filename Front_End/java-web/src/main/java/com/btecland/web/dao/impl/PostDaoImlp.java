@@ -73,7 +73,6 @@ public class PostDaoImlp extends AbstractDao<PostModel> implements IPostDao{
 
 	@Override
 	public void update(PostModel postModel) {
-		// TODO Auto-generated method stub
 		String sql = "DELETE FROM web.tbl_post WHERE id=?";
 //		this.update(sql, postModel.get);
 	}
@@ -81,6 +80,18 @@ public class PostDaoImlp extends AbstractDao<PostModel> implements IPostDao{
 	@Override
 	public List<PostModel> findAll() {
 		String sql = "SELECT * FROM web.tbl_post"; 
+		return query(sql, new PostMapper());
+	}
+
+	@Override
+	public List<PostModel> getTop6() {
+		String sql = "SELECT * FROM web.tbl_post LIMIT 6"; 
+		return query(sql, new PostMapper());
+	}
+
+	@Override
+	public List<PostModel> getNext6() {
+		String sql = "SELECT * FROM web.tbl_post ORDER BY postid OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY"; 
 		return query(sql, new PostMapper());
 	}
 }

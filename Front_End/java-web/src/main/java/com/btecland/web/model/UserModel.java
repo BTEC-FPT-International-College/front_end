@@ -1,90 +1,100 @@
 package com.btecland.web.model;
 
 public class UserModel {
-	private String UserID;
-    private String FullName;
-    private String Phone;
-    private String Email;
-    private String Address;
-    private String Date_of_Birth;
-    private String Password;
-    private int Reward_point;
-    private String Gender;
-    private String CreateDate;
-    private String UpdateDate;
-    private String RoleId;
+	private String userid;
+    private String fullname;
+    private String phone;
+    private String email;
+    private String address;
+    private String date_of_birth;
+    private String username;
+	private String password;
+    private int reward_point;
+    private String gender;
+    private String createday;
+    private String updateday;
+    private String roleid;
+
+    public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
     
-	public String getUserID() {
-		return UserID;
+	public String getUserid() {
+		return userid;
 	}
-	public void setUserID(String userID) {
-		UserID = userID;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
-	public String getFullName() {
-		return FullName;
+	public String getFullname() {
+		return fullname;
 	}
-	public void setFullName(String fullName) {
-		FullName = fullName;
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
 	}
 	public String getPhone() {
-		return Phone;
+		return phone;
 	}
 	public void setPhone(String phone) {
-		Phone = phone;
+		this.phone = phone;
 	}
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 	public String getAddress() {
-		return Address;
+		return address;
 	}
 	public void setAddress(String address) {
-		Address = address;
+		this.address = address;
 	}
-	public String getDate_of_Birth() {
-		return Date_of_Birth;
+	public String getDate_of_birth() {
+		return date_of_birth;
 	}
-	public void setDate_of_Birth(String date_of_Birth) {
-		Date_of_Birth = date_of_Birth;
+	public void setDate_of_birth(String date_of_birth) {
+		this.date_of_birth = date_of_birth;
 	}
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
 	public int getReward_point() {
-		return Reward_point;
+		return reward_point;
 	}
 	public void setReward_point(int reward_point) {
-		Reward_point = reward_point;
+		this.reward_point = reward_point;
 	}
 	public String getGender() {
-		return Gender;
+		return gender;
 	}
 	public void setGender(String gender) {
-		Gender = gender;
+		this.gender = gender;
 	}
-	public String getCreateDate() {
-		return CreateDate;
+	public String getCreateday() {
+		return createday;
 	}
-	public void setCreateDate(String createDate) {
-		CreateDate = createDate;
+	public void setCreateday(String createday) {
+		this.createday = createday;
 	}
-	public String getUpdateDate() {
-		return UpdateDate;
+	public String getUpdateday() {
+		return updateday;
 	}
-	public void setUpdateDate(String updateDate) {
-		UpdateDate = updateDate;
+	public void setUpdateday(String updateday) {
+		this.updateday = updateday;
 	}
-	public String getRoleId() {
-		return RoleId;
+	public String getRoleid() {
+		return roleid;
 	}
-	public void setRoleId(String roleId) {
-		RoleId = roleId;
+	public void setRoleid(String roleid) {
+		this.roleid = roleid;
 	}
+    
+	
     
 }
