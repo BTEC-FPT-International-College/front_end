@@ -18,7 +18,8 @@ import java.util.ArrayList;
  * @author nguyenbamang
  */
 public class PostModel {
-     public ArrayList<Post> getListPost() {
+
+    public ArrayList<Post> getListPost() {
         ArrayList<Post> list = new ArrayList<>();
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
@@ -58,10 +59,11 @@ public class PostModel {
         }
         return list;
     }
-     public ArrayList<Post> getListPostByUser(String id) {
+
+    public ArrayList<Post> getListPostByUser(String id) {
         ArrayList<Post> list = new ArrayList<>();
-        String sql = "SELECT *,STR_TO_DATE(Create_Day,'%d/%m/%Y') FROM web.tbl_post\n" +
-"WHERE UserID = ?";
+        String sql = "SELECT *,STR_TO_DATE(Create_Day,'%d/%m/%Y') FROM web.tbl_post\n"
+                + "WHERE UserID = ?";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {
@@ -100,7 +102,8 @@ public class PostModel {
         }
         return list;
     }
-     public boolean deletePots(String id) {
+
+    public boolean deletePots(String id) {
         String sql = "DELETE FROM web.tbl_user WHERE PostID = ?";
         int result = 0;
         GetConnection cn = new GetConnection();
@@ -119,8 +122,8 @@ public class PostModel {
 
     public Post getPost(String id) {
         Post acc = null;
-        String sql = "SELECT * FROM web.tbl_post\n" +
-            "where PostID = ?;";
+        String sql = "SELECT * FROM web.tbl_post\n"
+                + "where PostID = ?;";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {
@@ -158,10 +161,31 @@ public class PostModel {
         }
         return acc;
     }
-        public ArrayList<Post> searchDate(String start, String end) {
+    public Post TotalPost() {
+        Post acc = null;
+        String sql = "SELECT Count(PostID) FROM tbl_post";
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                acc = new Post();
+                acc.setTotal_View(rs.getInt(1));
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return acc;
+    }
+
+    public ArrayList<Post> searchDate(String start, String end) {
         ArrayList<Post> list = new ArrayList<>();
-        String sql = "SELECT *,STR_TO_DATE(Create_Day,'%d/%m/%Y')  FROM tbl_post\n" +
-"WHERE STR_TO_DATE(Create_Day,'%d/%m/%Y')between STR_TO_DATE(?,'%m/%d/%Y') and STR_TO_DATE(?,'%m/%d/%Y');";
+        String sql = "SELECT *,STR_TO_DATE(Create_Day,'%d/%m/%Y')  FROM tbl_post\n"
+                + "WHERE STR_TO_DATE(Create_Day,'%d/%m/%Y')between STR_TO_DATE(?,'%m/%d/%Y') and STR_TO_DATE(?,'%m/%d/%Y');";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {
@@ -201,10 +225,11 @@ public class PostModel {
         }
         return list;
     }
-            public ArrayList<Post> searchDate2(String start, String end) {
+
+    public ArrayList<Post> searchDate2(String start, String end) {
         ArrayList<Post> list = new ArrayList<>();
-        String sql = "SELECT *,STR_TO_DATE(Create_Day,'%d/%m/%Y')  FROM tbl_post\n" +
-"WHERE STR_TO_DATE(Create_Day,'%d/%m/%Y')between STR_TO_DATE(?,'%d/%m/%Y') and STR_TO_DATE(?,'%d/%m/%Y');";
+        String sql = "SELECT *,STR_TO_DATE(Create_Day,'%d/%m/%Y')  FROM tbl_post\n"
+                + "WHERE STR_TO_DATE(Create_Day,'%d/%m/%Y')between STR_TO_DATE(?,'%d/%m/%Y') and STR_TO_DATE(?,'%d/%m/%Y');";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {
@@ -244,11 +269,12 @@ public class PostModel {
         }
         return list;
     }
-    public ArrayList<Post> searchDatebyU(String id,String start, String end) {
+
+    public ArrayList<Post> searchDatebyU(String id, String start, String end) {
         ArrayList<Post> list = new ArrayList<>();
-        String sql = "SELECT *,STR_TO_DATE(Create_Day,'%d/%m/%Y') FROM tbl_post\n" +
-"where UserID =?\n" +
-"AND STR_TO_DATE(Create_Day,'%d/%m/%Y')between STR_TO_DATE(?,'%m/%d/%Y') and STR_TO_DATE(?,'%m/%d/%Y');";
+        String sql = "SELECT *,STR_TO_DATE(Create_Day,'%d/%m/%Y') FROM tbl_post\n"
+                + "where UserID =?\n"
+                + "AND STR_TO_DATE(Create_Day,'%d/%m/%Y')between STR_TO_DATE(?,'%m/%d/%Y') and STR_TO_DATE(?,'%m/%d/%Y');";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {
@@ -289,11 +315,12 @@ public class PostModel {
         }
         return list;
     }
-            public ArrayList<Post> searchDate2byU(String id,String start, String end) {
+
+    public ArrayList<Post> searchDate2byU(String id, String start, String end) {
         ArrayList<Post> list = new ArrayList<>();
-        String sql = "SELECT *,STR_TO_DATE(Create_Day,'%d/%m/%Y') FROM tbl_post\n" +
-"where UserID = ?\n" +
-"AND STR_TO_DATE(Create_Day,'%d/%m/%Y')between STR_TO_DATE(?,'%m/%d/%Y') and STR_TO_DATE(?,'%m/%d/%Y');";
+        String sql = "SELECT *,STR_TO_DATE(Create_Day,'%d/%m/%Y') FROM tbl_post\n"
+                + "where UserID = ?\n"
+                + "AND STR_TO_DATE(Create_Day,'%d/%m/%Y')between STR_TO_DATE(?,'%m/%d/%Y') and STR_TO_DATE(?,'%m/%d/%Y');";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {

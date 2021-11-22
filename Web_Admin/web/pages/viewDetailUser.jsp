@@ -311,7 +311,7 @@
                                     </a>
                                 </div>
                                 <div class="col-md-6"> Total Post<input id="totalPost" type="text" class="form-control" readonly="true">
-                                    <a href="post.jsp?id=<%=request.getParameter("id")%>" id="viewPost">
+                                    <a href="viewPostByUsers.jsp?id=<%=request.getParameter("id")%>" id="viewPost">
                                         <small class="text-capitalize">
                                         View post list
                                     </small>

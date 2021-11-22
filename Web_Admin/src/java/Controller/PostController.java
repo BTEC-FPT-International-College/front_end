@@ -55,12 +55,49 @@ public class PostController extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
+            if (act.equals("viewPostByUser")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            PostModel am = new PostModel();
+            ArrayList<Post> a = am.getListPostByUser(op);
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("viewTotalPost")) {
+            Gson json = new Gson();
+            PostModel am = new PostModel();
+            Post a = am.TotalPost();
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
         if (act.equals("search")) {
             String op = request.getParameter("get");
             Gson json = new Gson();
             Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
             PostModel am = new PostModel();
             ArrayList<Post> a = am.searchDate(sup.getStart(), sup.getEnd());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("searchbyUser")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
+            PostModel am = new PostModel();
+            ArrayList<Post> a = am.searchDatebyU(sup.getWallet(),sup.getStart(), sup.getEnd());
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("search2byUser")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
+            PostModel am = new PostModel();
+            ArrayList<Post> a = am.searchDate2byU(sup.getWallet(),sup.getStart(), sup.getEnd());
             String listTrainee = json.toJson(a);
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
