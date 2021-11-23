@@ -44,9 +44,6 @@
                     });
                     console.log(va)
                 });
-                $('#dtOrderExample').DataTable({
-                    "order": [[3, "desc"]],
-                });
                 $('.dataTables_length').addClass('bs-select');
 
                 $(".1").addClass("badge-danger")
@@ -496,23 +493,87 @@
                     });
                     $(this).off(event);
                 })
-                $(".check").on("click", function () {
-                    list = []
-                    $("#dtOrderExample tbody tr").hide()
-                    var flag = 1
-                    $("input:checkbox[name=check]:checked").each(function () {
-                        flag = 0;
-                        name_list.push($(this).val())
-                        var value = $(this).val();
-                        $("#dtOrderExample tr").filter(function () {
-                            if ($(this).text().indexOf(value) > -1)
-                                $(this).show()
-                        });
-                    });
-                    if (flag === 1)
-                        $("#dtOrderExample tbody tr").show()
-                });
+                  $(".check").on("click", function() {
+  $("#dtOrderExample tbody tr").hide()
+  var flag = 1
+  $("input:checkbox[name=check]:checked").each(function(){
+  		flag = 0;
+    	var value = $(this).val();
+      	$("#dtOrderExample tr").filter(function() {
+            if($(this).text().indexOf(value) > -1)
+        		$(this).show()
+    	});
+ 	 });
+    if(flag == 1)
+    	$("#dtOrderExample tr").show()
+  });
 
+
+                $('#dtOrderExample thead tr')
+                        .clone(true)
+                        .addClass('filters')
+                        .attr('id', 'filter')
+                        .appendTo('#dtOrderExample thead')
+                        .hide()
+                var table = $('#dtOrderExample').DataTable({
+                    orderCellsTop: true,
+                    fixedHeader: true,
+                    "order": [[3, "desc"]],
+                    initComplete: function () {
+                        var api = this.api();
+                        console.log(api)
+                        // For each column
+                        api
+                                .columns()
+                                .eq(0)
+                                .each(function (colIdx) {
+                                    // Set the header cell to contain the input element
+                                    var cell = $('.filters th').eq(
+                                            $(api.column(colIdx).header()).index()
+                                            );
+                                    if (colIdx > 6) {
+                                        $(cell).html('<a></a>');
+                                    } else {
+
+                                        var title = $(cell).text();
+                                        $(cell).html('<input type="text" placeholder="' + title + '" />');
+                                    }
+                                    // On every keypress in this input
+                                    $(
+                                            'input',
+                                            $('.filters th').eq($(api.column(colIdx).header()).index())
+                                            )
+                                            .off('keyup change')
+                                            .on('keyup change', function (e) {
+                                                e.stopPropagation();
+
+                                                // Get the search value
+                                                $(this).attr('title', $(this).val());
+                                                var regexr = '({search})'; //$(this).parents('th').find('select').val();
+
+                                                var cursorPosition = this.selectionStart;
+                                                // Search the column for that value
+                                                api
+                                                        .column(colIdx)
+                                                        .search(
+                                                                this.value != ''
+                                                                ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                                                : '',
+                                                                this.value != '',
+                                                                this.value == ''
+                                                                )
+                                                        .draw();
+
+                                                $(this)
+                                                        .focus()[0]
+                                                        .setSelectionRange(cursorPosition, cursorPosition);
+                                            });
+                                });
+                    },
+                });
+                $("#more").click(function() {
+                    $("#filter").toggle()
+})
             })
         </script>
         <style>
@@ -584,13 +645,13 @@
                                             View by post status:
                                             <div class="form-check form-check-success">
                                                 <label class="form-check-label">
-                                                    <input name="check" type="checkbox" class="form-check-input check" value="Read" />
+                                                    <input name="check" type="checkbox" class="form-check-input check" value="Yes" />
                                                     Read
                                                 </label>
                                             </div>
                                             <div class="form-check form-check-danger">
                                                 <label class="form-check-label">
-                                                    <input name="check" type="checkbox" class="form-check-input check" value="Unread" />
+                                                    <input name="check" type="checkbox" class="form-check-input check" value="No" />
                                                     Unread
                                                 </label>
                                             </div>
@@ -599,19 +660,19 @@
                                             View by Category:
                                             <div class="form-check form-check-primary">
                                                 <label class="form-check-label">
-                                                    <input name="cate" type="checkbox" class="form-check-input check" value="CT01" >
+                                                    <input  name="check" type="checkbox" class="form-check-input check" value="CT01" >
                                                     Buy
                                                 </label>
                                             </div>
                                             <div class="form-check form-check-primary">
                                                 <label class="form-check-label">
-                                                    <input name="cate" type="checkbox" class="form-check-input check" value="CT02" >
+                                                    <input name="check" type="checkbox" class="form-check-input check" value="CT02" >
                                                     Rent
                                                 </label>
                                             </div>
                                             <div class="form-check form-check-primary">
                                                 <label class="form-check-label">
-                                                    <input name="cate" type="checkbox" class="form-check-input check" value="CT03" >
+                                                    <input name="check" type="checkbox" class="form-check-input check" value="CT03" >
                                                     Project
                                                 </label>
                                             </div>
@@ -668,9 +729,11 @@
                                         </div>
                                     </div>
                                     <br>
-
+                                    <span id="more" class="table-add float-right mb-3 mr-2"
+                                          ><a href="#" class="text-success"
+                                        ><i class="mdi mdi-chevron-double-down" style="font-size: 20px" aria-hidden="true"></i>More</a
+                                        ></span>
                                     <div class="table-responsive">
-
                                         <table id="dtOrderExample" class="table table-striped display" width="100%">
                                             <thead>
                                                 <tr>
@@ -688,6 +751,7 @@
                                                         Delete
                                                     </th>
                                                 </tr>
+
                                             </thead>
                                             <tbody>
                                                 <c:if test="${empty requestScope['listPost']}">
@@ -715,8 +779,8 @@
                                                                         </div>
                                                                         <!--Footer-->
                                                                         <div class="modal-footer justify-content-center">
-                                                                            <a href="${x.getUserID()}" type="button" class="btn btn-info">Go to view infor</a>
-                                                                            <a href="${x.getUserID()}" type="button" class="btn btn-outline-info waves-effect">Go to view user'post</a>
+                                                                            <a href="viewDetailUser.jsp?id=${x.getUserID()}" type="button" class="btn btn-info">Go to view infor</a>
+                                                                            <a href="viewPostByUser.jsp?id=${x.getUserID()}" type="button" class="btn btn-outline-info waves-effect">Go to view user'post</a>
                                                                         </div>
                                                                     </div>
                                                                     <!--/.Content-->
@@ -784,6 +848,7 @@
                                                 </tr>
                                             </tfoot>
                                         </table>
+
                                     </div>
                                 </div>
                             </div>
