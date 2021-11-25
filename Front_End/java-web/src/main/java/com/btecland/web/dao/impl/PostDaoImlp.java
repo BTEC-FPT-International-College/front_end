@@ -84,14 +84,27 @@ public class PostDaoImlp extends AbstractDao<PostModel> implements IPostDao{
 	}
 
 	@Override
+	public List<PostModel> searchAll(String location) {
+		String sql = "SELECT * FROM web.tbl_post WHERE location LIKE ?";
+		return query(sql, new PostMapper(), "%" + location + "%");
+	}
+
+	@Override
 	public List<PostModel> getTop6() {
-		String sql = "SELECT * FROM web.tbl_post LIMIT 6"; 
+		String sql = "SELECT * FROM web.tbl_post limit 6"; 
 		return query(sql, new PostMapper());
 	}
 
 	@Override
-	public List<PostModel> getNext6() {
-		String sql = "SELECT * FROM web.tbl_post ORDER BY postid OFFSET ? ROWS FETCH NEXT 6 ROWS ONLY"; 
-		return query(sql, new PostMapper());
+	public List<PostModel> getNext6(int amout) {
+		String sql = "SELECT *\r\n"
+				+ "FROM web.tbl_post\r\n"
+				+ "ORDER BY postid\r\n"
+				+ "LIMIT 6\r\n"
+				+ "OFFSET ?"; 
+		return query(sql, new PostMapper(), amout);
 	}
+
+
+	
 }

@@ -28,12 +28,16 @@ public class PostServiceImpl implements IPostService{
 		return postDao.findAll();
 	}
 	@Override
+	public List<PostModel> searchAll(String location) {
+		return postDao.searchAll(location);
+	}
+	@Override
 	public List<PostModel> getTop6() {
 		return postDao.getTop6();
 	}
 	@Override
-	public List<PostModel> getNext6() {
-		return postDao.getNext6();
+	public List<PostModel> getNext6(int amout) {
+		return postDao.getNext6(amout);
 	}
 
 }

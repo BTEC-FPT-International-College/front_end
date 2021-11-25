@@ -15,7 +15,7 @@ import com.btecland.web.service.ICategoryService;
 import com.btecland.web.service.IPostService;
 import com.btecland.web.service.impl.PostServiceImpl;
 
-@WebServlet(urlPatterns = {"/home"})
+@WebServlet(urlPatterns = {"/home","/login"})
 public class HomController  extends HttpServlet {
 //	@Inject
 //	private ICategoryService categoryService;
@@ -33,9 +33,17 @@ public class HomController  extends HttpServlet {
 //		postModel.setCategoryid(categoryid);
 //		postService.save(postModel);
 //		request.setAttribute("posts", postService.findPostByCategoryID(categoryid));
-		request.setAttribute("posts", postService.findAll()); 
-		RequestDispatcher rd = request.getRequestDispatcher("/view/web/home.jsp");
+		String action = request.getParameter("action");
+		if(action != null && action.equals("login")) {
+			RequestDispatcher rd = request.getRequestDispatcher("/view/login.jsp");
+			rd.forward(request, response);
+		}else if(action != null && action.equals("logout")) {
+			//tra ve logout
+		}else {
+		request.setAttribute("posts", postService.getTop6()); 
+		RequestDispatcher rd = request.getRequestDispatcher("view/web/home.jsp");
 		rd.forward(request, response);
+		}
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		

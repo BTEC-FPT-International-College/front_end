@@ -1,62 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file="/common/taglib.jsp"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title><dec:title default="BTEC LAND" /></title>
-
-<!-- Favicon -->
-<link rel="shortcut icon"
-	href="<c:url value='/template/img/iconbtec.png'/>" type="image/x-icon">
-
-<!-- Font awesome -->
-<link href="<c:url value='/template/css/font-awesome.css' />"
-	rel="stylesheet">
-<!-- Bootstrap -->
-<link href="<c:url value='/template/css/bootstrap.css' />"
-	rel="stylesheet">
-<!-- slick slider -->
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='/template/css/slick.css' />">
-<!-- price picker slider -->
-<link rel="stylesheet" type="text/css"
-	href="<c:url value='/template/css/nouislider.css' />">
-<!-- Fancybox slider -->
-<link rel="stylesheet"
-	href="<c:url value='/template/css/jquery.fancybox.css' />"
-	type="text/css" media="screen" />
-<!-- Theme color -->
-<link id="switcher"
-	href="<c:url value='/template/css/theme-color/default-theme.css' />"
-	rel="stylesheet">
-
-<!-- Main style sheet -->
-<link href="<c:url value='/template/css/style.css' />" rel="stylesheet">
-
-
-<!-- Google Font -->
-<link href='https://fonts.googleapis.com/css?family=Vollkorn'
-	rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans'
-	rel='stylesheet' type='text/css'>
-
-
-</head>
-<body class="aa-price-range ">
-	<!-- Pre Loader -->
-	<div id="aa-preloader-area">
-		<div class="pulse"></div>
-	</div>
-	<!-- SCROLL TOP BUTTON -->
-	<a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
-	<!-- END SCROLL TOP BUTTON -->
-
-	<!--  menu -->
-	<%@ include file="header.jsp"%>
-	<!-- end-menu -->
 	<!-- Start slider  -->
 	<section id="aa-slider">
 		<div class="aa-slider-area">
@@ -176,77 +119,80 @@
 	<!-- End slider  -->
 
 	<!-- Advance Search -->
-	<section id="aa-advance-search">
-		<div class="container">
-			<div class="aa-advance-search-area">
-				<div class="form">
-					<div class="aa-advance-search-top">
-						<div class="row">
-							<div class="col-md-4">
-								<div class="aa-single-advance-search">
-									<input type="text" placeholder="Type Your Location">
+	<form action="search" method="post">
+		<section id="aa-advance-search">
+			<div class="container">
+				<div class="aa-advance-search-area">
+					<div class="form">
+						<div class="aa-advance-search-top">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="aa-single-advance-search">
+										<input type="text" placeholder="Type Your Location"
+											name="location">
+									</div>
 								</div>
-							</div>
-							<div class="col-md-2">
-								<div class="aa-single-advance-search">
-									<select>
-										<option value="0" selected>Category</option>
-										<option value="1">APARTMENT</option>
-										<option value="2">PRIVATE HOUSE, STREET HOUSE</option>
-										<option value="3">VILLA, ADJACENT HOUSES</option>
-										<option value="4">THE GROUND</option>
-										<option value="5">RESIDENTIAL LAND</option>
-										<option value="6">OFFICE BUILDING</option>
-										<option value="7">APARTMENT CONDOTEL</option>
-										<option value="8">OFFICETEL APARTMENT</option>
-										<option value="9">RESTAURANT</option>
-										<option value="10">WAREHOUSE, FACTORY, KIOT</option>
-										<option value="11">OTHER HOUSE AND LAND</option>
-									</select>
+								<div class="col-md-2">
+									<div class="aa-single-advance-search">
+										<select id="category" name="category">
+											<option value="*" selected>Category</option>
+											<option value="1">APARTMENT</option>
+											<option value="2">PRIVATE HOUSE, STREET HOUSE</option>
+											<option value="3">VILLA, ADJACENT HOUSES</option>
+											<option value="4">THE GROUND</option>
+											<option value="5">RESIDENTIAL LAND</option>
+											<option value="6">OFFICE BUILDING</option>
+											<option value="7">APARTMENT CONDOTEL</option>
+											<option value="8">OFFICETEL APARTMENT</option>
+											<option value="9">RESTAURANT</option>
+											<option value="10">WAREHOUSE, FACTORY, KIOT</option>
+											<option value="11">OTHER HOUSE AND LAND</option>
+										</select>
+									</div>
 								</div>
-							</div>
-							<div class="col-md-2">
-								<div class="aa-single-advance-search">
-									<select>
-										<option value="0" selected>Budget</option>
-										<option value="1"><500 Million</option>
-										<option value="2">500M -> 1 Billion</option>
-										<option value="3">1 -> 2 Billion</option>
-										<option value="4">2 -> 3 Billion</option>
-										<option value="5">3 - 5 Billion</option>
-										<option value="6">5 - 7 Billion</option>
-										<option value="7">7 - 10 Billion</option>
-										<option value="8">10 - 20 Billion</option>
-										<option value="9">>20 Billion</option>
-									</select>
+								<div class="col-md-2">
+									<div class="aa-single-advance-search">
+										<select>
+											<option value="0" selected>Budget</option>
+											<option value="1"><500 Million</option>
+											<option value="2">500M -> 1 Billion</option>
+											<option value="3">1 -> 2 Billion</option>
+											<option value="4">2 -> 3 Billion</option>
+											<option value="5">3 - 5 Billion</option>
+											<option value="6">5 - 7 Billion</option>
+											<option value="7">7 - 10 Billion</option>
+											<option value="8">10 - 20 Billion</option>
+											<option value="9">>20 Billion</option>
+										</select>
+									</div>
 								</div>
-							</div>
-							<div class="col-md-2">
-								<div class="aa-single-advance-search">
-									<select>
-										<option value="0" selected>Area</option>
-										<option value="1"><30 m²</option>
-										<option value="2">30 -> 50 m²</option>
-										<option value="3">50 -> 70 m²</option>
-										<option value="4">70 -> 100 m²</option>
-										<option value="4">100 -> 150 m²</option>
-										<option value="4">150 -> 300 m²</option>
-										<option value="4">300 -> 500 m²</option>
-										<option value="4">> 500 m²</option>
-									</select>
+								<div class="col-md-2">
+									<div class="aa-single-advance-search">
+										<select>
+											<option value="0" selected>Area</option>
+											<option value="1"><30 m²</option>
+											<option value="2">30 -> 50 m²</option>
+											<option value="3">50 -> 70 m²</option>
+											<option value="4">70 -> 100 m²</option>
+											<option value="4">100 -> 150 m²</option>
+											<option value="4">150 -> 300 m²</option>
+											<option value="4">300 -> 500 m²</option>
+											<option value="4">> 500 m²</option>
+										</select>
+									</div>
 								</div>
-							</div>
-							<div class="col-md-2">
-								<div class="aa-single-advance-search">
-									<input class="aa-search-btn" type="submit" value="Search">
+								<div class="col-md-2">
+									<div class="aa-single-advance-search">
+										<input class="aa-search-btn" type="submit" value="Search">
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+		</section>
+	</form>
 	<!-- / Advance Search -->
 
 	<c:if test="${empty requestScope['posts']}">
@@ -261,49 +207,44 @@
 					<span></span>
 				</div>
 				<div class="aa-latest-properties-content">
-					<div class="row">
-						<c:forEach items="${posts}" var="p" begin="0" end="11">
-							<div class="col-md-4">
-								<article class="aa-properties-item">
-									<a href='<c:url value="/postdetail.jsp"/>'
-										class="aa-properties-item-img"> <img
-										src="${p.getAvartar()}" alt="img">
-									</a>
-									<div class="aa-tag for-${p.getSale_rent()}">For
-										${p.getSale_rent()}</div>
-									<div class="aa-properties-item-content">
-										<div class="aa-properties-info">
-											<span>${p.getRoom()} Rooms</span> <span>${p.getBath()}
-												Baths</span> <span>Area: ${p.getArea()} m²</span>
+					<div class="row" id="content">
+						<c:if test="${empty myselect}">
+							<c:forEach items="${posts}" var="p">
+								<div class="col-md-4">
+									<article class="aa-properties-item">
+										<a href='<c:url value="/postdetail.jsp"/>'
+											class="aa-properties-item-img"> <img
+											src="${p.getAvartar()}" alt="img">
+										</a>
+										<div class="aa-tag for-${p.getSale_rent()}">For
+											${p.getSale_rent()}</div>
+										<div class="aa-properties-item-content">
+											<div class="aa-properties-info">
+												<span>${p.getRoom()} Rooms</span> <span>${p.getBath()}
+													Baths</span> <span>Area: ${p.getArea()} m²</span>
+											</div>
+											<div class="aa-properties-about">
+												<h3>
+													<a href="#">${p.getTitle()}</a>
+												</h3>
+											</div>
+											<div id="post-location">
+												<i class="fa fa-map-marker"> ${p.getLocation()}</i>
+											</div>
+											<div class="aa-properties-detial">
+												<span class="aa-price"> $ ${p.getPrice()}</span> <a href="#"
+													class="aa-secondary-btn">View Details</a>
+											</div>
 										</div>
-										<div class="aa-properties-about">
-											<h3>
-												<a href="#">${p.getTitle()}</a>
-											</h3>
-										</div>
-										<div id="post-location">
-											<i class="fa fa-map-marker"> ${p.getLocation()}</i>
-										</div>
-										<div class="aa-properties-detial">
-											<span class="aa-price"> $ ${p.getPrice()}</span> <a href="#"
-												class="aa-secondary-btn">View Details</a>
-										</div>
-									</div>
-								</article>
-							</div>
-						</c:forEach>
+									</article>
+								</div>
+							</c:forEach>
+						</c:if>
 					</div>
-					<div class="button-show-more">
-						Show 
-						<select>
-								<option value="0" selected>12</option>
-								<option value="1">18</option>
-								<option value="2">24</option>
-								<option value="3">30</option>
-						</select> 
-					</div>
+					<button onclick="loadMore()" class="btn btn-primary">Load More</button>
+					
+				</div>
 			</div>
-		</div>
 		</div>
 	</section>
 	<!-- / Latest property -->
@@ -436,11 +377,23 @@
 		</div>
 	</section>
 	<!-- / Featured Investor Section-->
-	<!-- Footer -->
-	<%@ include file="footer.jsp"%>
-	<!-- / Footer -->
-
-
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		function loadMore(){
+			$.ajax({
+				url: "/java-web/load",
+				type: "get",
+				success: function (data){
+					var row = document.getElementById("content");
+					row.innerHTML += data;
+				},
+				error: function (xhr){
+					
+				}
+			})
+		}
+	</script>
 
 	<!-- jQuery library -->
 	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
@@ -458,6 +411,11 @@
 		src="template/js/jquery.fancybox.pack.js"></script>
 	<!-- Custom js -->
 	<script src="template/js/custom.js"></script>
+	<script type="text/javascript">
+		function showList() {
+			document.getParameter('myform').submit();
+		}
+	</script>
 
 </body>
 </html>
