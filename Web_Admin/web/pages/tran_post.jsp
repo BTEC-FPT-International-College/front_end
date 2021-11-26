@@ -357,6 +357,38 @@
                     });
                     $(this).off(event);
                 })
+                $("#1hour").click(function () {
+                    $.ajax({
+                        url: "../TransactionController?ac=viewTby1Hour",
+                        method: "GET",
+                        success: function (data) {
+                            let rs = $.parseJSON(data);
+                            console.log(rs)
+                            $("#dtOrderExample").DataTable().clear().destroy();
+                            $('#dtOrderExample').DataTable({
+                                retrieve: true,
+                                paging: false,
+                                "order": [[4, "desc"]]
+                            });
+                            var t = $('#dtOrderExample').DataTable();
+                            $.each(rs, function (key, value) {
+                                t.row.add([
+                                    value.TransactionID,
+                                    "<a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a>",
+                                    "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                    "<a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a>",
+                                    value.CreateDate + " " + value.CreateHour,
+                                    value.Packet,
+                                    value.Price
+                                ]).draw(false);
+                            })
+                            $("#refesh").show()
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                })
             });
         </script>
     </head>
@@ -445,6 +477,9 @@
                                         <ul class="nav">
                                             <li class="nav-item">
                                                 <a class="nav-link disabled">Quickly Serach: </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="1hour" href="#">1 hour ago</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" id="1day" href="#">1 day ago</a>

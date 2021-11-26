@@ -5,7 +5,6 @@
 package Model;
 
 import Entity.Post;
-import Entity.Transaction_History;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

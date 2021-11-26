@@ -313,7 +313,39 @@
                         });
                         $("#refesh").hide()
                 })
-                
+                $("#1hour").click(function () {
+                    $.ajax({
+                            url: "../TransactionController?ac=viewTByWallet1Hour",
+                            method: "POST",
+                            data: {get: d},
+                            success: function (data) {
+                                let obj = $.parseJSON(data);
+                                console.log(obj)
+                                $("#dtOrderExample").DataTable().clear().destroy();
+                                $('#dtOrderExample').DataTable({
+                                retrieve: true,
+                                paging: false,
+                                "order": [[4, "desc"]]
+                            });
+                                var t = $('#dtOrderExample').DataTable();
+                                $.each(obj, function (key, value) {
+                                    t.row.add([
+                                        value.TransactionID,
+                                        "<a href='viewDetaiTranbyWallet.jsp?id=" + value.WalletID + "'" + ">" + value.WalletID + " </a>",
+                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                        "<a href='viewDetailByPost.jsp?id=" + value.PostID + "'" + ">" + value.PostID + " </a>",
+                                        value.CreateDate + " " + value.CreateHour,
+                                        value.Packet,
+                                        value.Price
+                                    ]).draw(false);
+                                })
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                        $("#refesh").show()
+                })
             });
         </script>
     </head>
@@ -384,6 +416,9 @@
                                         <ul class="nav">
                                             <li class="nav-item">
                                                 <a class="nav-link disabled">Quickly Serach: </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="1hour" href="#">1 hour ago</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" id="1day" href="#">1 day ago</a>

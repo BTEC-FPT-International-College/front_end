@@ -3,7 +3,6 @@
     Created on : 21-10-2021, 10:11:42
     Author     : nguyenbamang
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +16,6 @@
   <link rel="stylesheet" href="vendors/base/vendor.bundle.base.css">
   <!-- endinject -->
   <!-- plugin css for this page -->
-  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
   <!-- End plugin css for this page -->
@@ -99,7 +97,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="pages/recharge_history.jsp">
-              <i class="mdi mdi-audiobook"></i>
+              <i class="mdi mdi-history"></i>
               <span class="menu-title" style="margin-left: 20px;">Recharge history </span>
             </a>
           </li>
@@ -225,7 +223,7 @@
                           <i class="mdi mdi-bulletin-board mr-3 icon-lg text-danger"></i>
                           <div class="d-flex flex-column justify-content-around">
                             <small class="mb-1 text-muted">Top Post</small>
-                            <h5 class="mr-2 mb-0">user</h5>
+                            <h5 class="mr-2 mb-0">7</h5>
                           </div>
                         </div>
                       </div>
@@ -236,18 +234,26 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-7 grid-margin stretch-card">
+            <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Total Revenue</p>
+                  <p class="card-title">Total Revenue by month</p>
                   <div id="cash-deposits-chart-legend" class="d-flex justify-content-center pt-3"></div>
-                  <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+                  <canvas id="monthChar" style="width:100%;max-width:600px"></canvas>
                   <script>
-                    var xValues = ["2021", "2020", "2019" , "2018"];
+                    var d= new Date();
+                    let getMonth = d.getMonth()
+                    var xValues = [];
+                    for(let i =0 ;i< getMonth;i++){
+                        xValues.push("M"+(i+1))
+                    }
                     var yValues = [300, 4229, 4114,3457];
-                    var barColors = ["red", "green", "blue" ,"yellow"];
-
-                    new Chart("myChart", {
+                    var barColors = [];
+                    for(let i =0 ;i<getMonth;i++){
+                        const randomColor = Math.floor(Math.random()*16777215).toString(16);
+                        barColors.push('#'+randomColor)
+                    }
+                    new Chart("monthChar", {
                       type: "bar",
                       data: {
                         labels: xValues,
@@ -268,14 +274,37 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-5 grid-margin stretch-card">
+            <div class="col-md-6 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Total user</p>
-                  <h1>9833</h1>
-                  <div id="total-sales-chart-legend"></div>
+                  <p class="card-title">Total Revenue by yearr</p>
+                  <div id="cash-deposits-chart-legend" class="d-flex justify-content-center pt-3"></div>
+                  <canvas id="YearChart" style="width:100%;max-width:600px"></canvas>
+                  <script>
+                    var xValues = ["2021", "2020", "2019" , "2018"];
+                    var yValues = [300, 4229, 4114,3457];
+                    var barColors = ["red", "green", "blue" ,"yellow"];
+
+                    new Chart("YearChart", {
+                      type: "bar",
+                      data: {
+                        labels: xValues,
+                        datasets: [{
+                          backgroundColor: barColors,
+                          data: yValues
+                        }]
+                      },
+                      options: {
+                        legend: { display: false },
+                        title: {
+                          display: true,
+                          text: "Total Veneue"
+                        }
+                      }
+                    });
+                  </script>
                 </div>
-                <canvas id="total-sales-chart"></canvas>
+                
               </div>
             </div>
           </div>

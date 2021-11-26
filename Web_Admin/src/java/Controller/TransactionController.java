@@ -54,6 +54,15 @@ public class TransactionController extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
+        if (act.equals("viewTByWallet1Hour")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            TransactionModel am = new TransactionModel();
+            ArrayList<Transaction_History> a = am.getListByWallet1Hour(op);
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
         if (act.equals("viewTByPost")) {
             String op = request.getParameter("get");
             Gson json = new Gson();
@@ -63,9 +72,26 @@ public class TransactionController extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
+        if (act.equals("viewTByPost1Hour")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            TransactionModel am = new TransactionModel();
+            ArrayList<Transaction_History> a = am.getListByPost1Hour(op);
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
         if (act.equals("viewT")) {
             TransactionModel am = new TransactionModel();
             ArrayList<Transaction_History> list = am.getListTransaction();
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("viewTby1Hour")) {
+            TransactionModel am = new TransactionModel();
+            ArrayList<Transaction_History> list = am.getListTransactionby1Hour();
             Gson json = new Gson();
             String listTrainee = json.toJson(list);
             response.setContentType("text/html");

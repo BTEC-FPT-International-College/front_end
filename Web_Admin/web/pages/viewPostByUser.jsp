@@ -180,9 +180,9 @@
                                     ]).draw(false);
                                 })
                                 $(".1").addClass("badge-danger")
-                                $(".1").text("Unread")
-                                $(".0").text("Read")
-                                $(".0").addClass("badge-success")
+                        $(".1").text("No")
+                        $(".0").text("Yes")
+                        $(".0").addClass("badge-success")
                             },
                             error: function () {
                                 alert("error");
@@ -330,6 +330,10 @@
                                             + '</div>'
                                 ]).draw(false);
                             })
+                            $(".1").addClass("badge-danger")
+                        $(".1").text("No")
+                        $(".0").text("Yes")
+                        $(".0").addClass("badge-success")
                             $("#refesh").show()
                         },
                         error: function () {
@@ -404,6 +408,10 @@
                                             + '</div>'
                                 ]).draw(false);
                             })
+                            $(".1").addClass("badge-danger")
+                        $(".1").text("No")
+                        $(".0").text("Yes")
+                        $(".0").addClass("badge-success")
                             $("#refesh").show()
                         },
                         error: function () {
@@ -479,6 +487,10 @@
                                             + '</div>'
                                 ]).draw(false);
                             })
+                            $(".1").addClass("badge-danger")
+                        $(".1").text("No")
+                        $(".0").text("Yes")
+                        $(".0").addClass("badge-success")
                             $("#refesh").show()
                         },
                         error: function () {
@@ -569,12 +581,10 @@
                     $(this).off(event);
                 })
                 $(".check").on("click", function () {
-                    list = []
                     $("#dtOrderExample tbody tr").hide()
                     var flag = 1
                     $("input:checkbox[name=check]:checked").each(function () {
                         flag = 0;
-                        name_list.push($(this).val())
                         var value = $(this).val();
                         $("#dtOrderExample tr").filter(function () {
                             if ($(this).text().indexOf(value) > -1)
@@ -656,13 +666,13 @@
                                             View by post status:
                                             <div class="form-check form-check-success">
                                                 <label class="form-check-label">
-                                                    <input name="check" type="checkbox" class="form-check-input check" value="Read" />
+                                                    <input name="check" type="checkbox" class="form-check-input check" value="Yes" />
                                                     Read
                                                 </label>
                                             </div>
                                             <div class="form-check form-check-danger">
                                                 <label class="form-check-label">
-                                                    <input name="check" type="checkbox" class="form-check-input check" value="Unread" />
+                                                    <input name="check" type="checkbox" class="form-check-input check" value="No" />
                                                     Unread
                                                 </label>
                                             </div>
@@ -671,19 +681,19 @@
                                             View by Category:
                                             <div class="form-check form-check-primary">
                                                 <label class="form-check-label">
-                                                    <input name="cate" type="checkbox" class="form-check-input check" value="CT01" >
+                                                    <input name="check" type="checkbox" class="form-check-input check" value="CT01" >
                                                     Buy
                                                 </label>
                                             </div>
                                             <div class="form-check form-check-primary">
                                                 <label class="form-check-label">
-                                                    <input name="cate" type="checkbox" class="form-check-input check" value="CT02" >
+                                                    <input name="check" type="checkbox" class="form-check-input check" value="CT02" >
                                                     Rent
                                                 </label>
                                             </div>
                                             <div class="form-check form-check-primary">
                                                 <label class="form-check-label">
-                                                    <input name="cate" type="checkbox" class="form-check-input check" value="CT03" >
+                                                    <input name="check" type="checkbox" class="form-check-input check" value="CT03" >
                                                     Project
                                                 </label>
                                             </div>

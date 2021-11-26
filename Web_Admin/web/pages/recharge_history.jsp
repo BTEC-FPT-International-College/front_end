@@ -191,6 +191,38 @@
                     "order": [[1, "desc"]]
                 });
                 $('.dataTables_length').addClass('bs-select');
+                $("#1hour").click(function () {
+                    $.ajax({
+                        url: "../RechargeController?ac=viewRby1Hour",
+                        method: "GET",
+                        success: function (data) {
+                            let rs = $.parseJSON(data);
+                            console.log(rs)
+                            $("#dtOrderExample").DataTable().clear().destroy();
+                            $('#dtOrderExample').DataTable({
+                                retrieve: true,
+                                paging: false,
+                                "order": [[1, "desc"]]
+                            });
+                            var t = $('#dtOrderExample').DataTable();
+                            $.each(rs, function (key, value) {
+                                t.row.add([
+                                    value.RechargeID,
+                                    value.CreateDate + " " + value.CreateHourl,
+                                    "<a href='viewDetailUser.jsp?id=" +value.WalletID +"'" + ">" +value.WalletID + " </a>",
+                                    "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                    value.BankAccount,
+                                    value.Bank,
+                                    value.Amount
+                                ]).draw(false);
+                            })
+                            $("#refesh").show()
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                })
                 $("#1day").click(function () {
                     var curr = new Date;
                     var first = curr.getDate();
@@ -407,6 +439,9 @@
                                         <ul class="nav">
                                             <li class="nav-item">
                                                 <a class="nav-link disabled">Quickly Serach: </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="1hour" href="#">1 hour ago</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" id="1day" href="#">1 day ago</a>

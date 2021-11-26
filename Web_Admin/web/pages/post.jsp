@@ -84,7 +84,7 @@
                                         value.Create_Date + " " + value.Create_Hour,
                                         value.EndDate,
                                         value.status,
-                                        '<label class="badge ' + value.ReadUnread + '">' + value.ReadUnread + "</label>",
+                                        '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
                                         "<a href='viewDetailPost.jsp?id=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
                                                 + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
                                                 + '<i class="mdi mdi-eye"></i>'
@@ -118,8 +118,8 @@
                                     ]).draw(false);
                                 })
                                 $(".1").addClass("badge-danger")
-                                $(".1").text("Unread")
-                                $(".0").text("Read")
+                                $(".1").text("No")
+                                $(".0").text("Yes")
                                 $(".0").addClass("badge-success")
                             },
                             error: function () {
@@ -150,7 +150,7 @@
                                     value.Create_Date + " " + value.Create_Hour,
                                     value.EndDate,
                                     value.status,
-                                    '<label class="badge' + value.ReadUnread + ">" + value.ReadUnread + "</label>",
+                                    '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
                                     "<a href='viewDetailPost.jsp?id=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
                                             + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
                                             + '<i class="mdi mdi-eye"></i>'
@@ -183,6 +183,10 @@
                                             + '</div>'
                                 ]).draw(false);
                             })
+                            $(".1").addClass("badge-danger")
+                            $(".1").text("No")
+                            $(".0").text("Yes")
+                            $(".0").addClass("badge-success")
                         },
                         error: function () {
                             alert("error");
@@ -229,7 +233,7 @@
                                     value.Create_Date + " " + value.Create_Hour,
                                     value.EndDate,
                                     value.status,
-                                    '<label class="badge' + value.ReadUnread + ">" + value.ReadUnread + "</label>",
+                                    '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
                                     "<a href='viewDetailPost.jsp?id=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
                                             + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
                                             + '<i class="mdi mdi-eye"></i>'
@@ -262,6 +266,10 @@
                                             + '</div>'
                                 ]).draw(false);
                             })
+                            $(".1").addClass("badge-danger")
+                            $(".1").text("No")
+                            $(".0").text("Yes")
+                            $(".0").addClass("badge-success")
                             $("#refesh").show()
                         },
                         error: function () {
@@ -302,7 +310,7 @@
                                     value.Create_Date + " " + value.Create_Hour,
                                     value.EndDate,
                                     value.status,
-                                    '<label class="badge' + value.ReadUnread + ">" + value.ReadUnread + "</label>",
+                                    '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
                                     "<a href='viewDetailPost.jsp?id=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
                                             + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
                                             + '<i class="mdi mdi-eye"></i>'
@@ -335,6 +343,10 @@
                                             + '</div>'
                                 ]).draw(false);
                             })
+                            $(".1").addClass("badge-danger")
+                            $(".1").text("No")
+                            $(".0").text("Yes")
+                            $(".0").addClass("badge-success")
                             $("#refesh").show()
                         },
                         error: function () {
@@ -376,7 +388,7 @@
                                     value.Create_Date + " " + value.Create_Hour,
                                     value.EndDate,
                                     value.status,
-                                    '<label class="badge' + value.ReadUnread + ">" + value.ReadUnread + "</label>",
+                                    '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
                                     "<a href='viewDetailPost.jsp?id=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
                                             + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
                                             + '<i class="mdi mdi-eye"></i>'
@@ -409,6 +421,10 @@
                                             + '</div>'
                                 ]).draw(false);
                             })
+                            $(".1").addClass("badge-danger")
+                            $(".1").text("No")
+                            $(".0").text("Yes")
+                            $(".0").addClass("badge-success")
                             $("#refesh").show()
                         },
                         error: function () {
@@ -438,7 +454,7 @@
                                     value.Create_Date + " " + value.Create_Hour,
                                     value.EndDate,
                                     value.status,
-                                    '<label class="badge' + value.ReadUnread + ">" + value.ReadUnread + "</label>",
+                                    '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
                                     "<a href='viewDetailPost.jsp?id=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
                                             + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
                                             + '<i class="mdi mdi-eye"></i>'
@@ -471,6 +487,10 @@
                                             + '</div>'
                                 ]).draw(false);
                             })
+                            $(".1").addClass("badge-danger")
+                            $(".1").text("No")
+                            $(".0").text("Yes")
+                            $(".0").addClass("badge-success")
                             $("#refesh").hide()
                         },
                         error: function () {
@@ -493,20 +513,20 @@
                     });
                     $(this).off(event);
                 })
-                  $(".check").on("click", function() {
-  $("#dtOrderExample tbody tr").hide()
-  var flag = 1
-  $("input:checkbox[name=check]:checked").each(function(){
-  		flag = 0;
-    	var value = $(this).val();
-      	$("#dtOrderExample tr").filter(function() {
-            if($(this).text().indexOf(value) > -1)
-        		$(this).show()
-    	});
- 	 });
-    if(flag == 1)
-    	$("#dtOrderExample tr").show()
-  });
+                $(".check").on("click", function () {
+                    $("#dtOrderExample tbody tr").hide()
+                    var flag = 1
+                    $("input:checkbox[name=check]:checked").each(function () {
+                        flag = 0;
+                        var value = $(this).val();
+                        $("#dtOrderExample tr").filter(function () {
+                            if ($(this).text().indexOf(value) > -1)
+                                $(this).show()
+                        });
+                    });
+                    if (flag == 1)
+                        $("#dtOrderExample tr").show()
+                });
 
 
                 $('#dtOrderExample thead tr')
@@ -571,9 +591,9 @@
                                 });
                     },
                 });
-                $("#more").click(function() {
+                $("#more").click(function () {
                     $("#filter").toggle()
-})
+                })
             })
         </script>
         <style>

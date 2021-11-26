@@ -115,6 +115,15 @@ public class RechargeController extends HttpServlet {
             response.getWriter().write(listTrainee);
         }
         
+        if (act.equals("viewRby1Hour")) {
+            RechargeModel am = new RechargeModel();
+            ArrayList<Recharge> list = am.getListRecharge1Hour();
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        
         if (act.equals("viewTop3")) {
             RechargeModel am = new RechargeModel();
             ArrayList<Recharge> list = am.top3Recharge();
