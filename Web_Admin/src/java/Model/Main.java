@@ -15,8 +15,8 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        PostModel p = new PostModel();
-        System.out.println(p.TotalPost().getTotal_View());
+        MainModel m = new MainModel();
+        System.out.println(m.getRevenuebyMonth().get(10).getAmount());
 
     }
 }
