@@ -7,6 +7,7 @@ package Controller;
 import Entity.Recharge;
 import Model.MainModel;
 import Model.RechargeModel;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -46,6 +47,32 @@ public class MainControllers extends HttpServlet {
             MainModel am = new MainModel();
             ArrayList<Recharge> list = am.getRevenuebyMonth();
             request.setAttribute("listMonth", list);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+        if (act.equals("viewYear")) {
+            MainModel am = new MainModel();
+            ArrayList<Recharge> list = am.getRevenuebyYear();
+            request.setAttribute("listYear", list);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+        if (act.equals("viewInfor")) {
+            MainModel am = new MainModel();
+             ArrayList<Entity.Main> list = am.getInfor();
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("viewTop1")) {
+            MainModel am = new MainModel();
+            ArrayList<Entity.Main> list = am.getTop1Recharge();
+            request.setAttribute("listTop1", list);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+        if (act.equals("viewTop1Post")) {
+            MainModel am = new MainModel();
+            ArrayList<Entity.Main> list = am.getTop1PostBuy();
+            request.setAttribute("listTop1Post", list);
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }

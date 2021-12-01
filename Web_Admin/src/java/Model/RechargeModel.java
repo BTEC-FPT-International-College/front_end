@@ -58,25 +58,25 @@ public class RechargeModel {
         return list;
     }
 
-        public ArrayList<Recharge> getListRecharge1Hour() {
+    public ArrayList<Recharge> getListRecharge1Hour() {
         ArrayList<Recharge> list = new ArrayList<>();
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {
             Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT tbl_recharge_transaction.rechargeID,\n" +
-"STR_TO_DATE(tbl_recharge_transaction.Create_Date,'%d/%m/%Y'),\n" +
-"tbl_recharge_transaction.Create_Hour,\n" +
-"tbl_recharge_transaction.walletID,\n" +
-"user_wallet.UserID,\n" +
-"tbl_recharge_transaction.Bank_Account,\n" +
-"tbl_recharge_transaction.Bank,\n" +
-"tbl_recharge_transaction.Amount\n" +
-"from user_wallet,tbl_recharge_transaction,tbl_user\n" +
-"WHERE user_wallet.walletID = tbl_recharge_transaction.walletID\n" +
-"AND user_wallet.UserID = tbl_user.UserID\n" +
-"AND Concat(STR_TO_DATE(tbl_recharge_transaction.Create_Date,'%d/%m/%Y'), \" \",tbl_recharge_transaction.Create_Hour)  \n" +
-">= DATE_SUB(NOW(), INTERVAL 1 HOUR);");
+            ResultSet rs = stm.executeQuery("SELECT tbl_recharge_transaction.rechargeID,\n"
+                    + "STR_TO_DATE(tbl_recharge_transaction.Create_Date,'%d/%m/%Y'),\n"
+                    + "tbl_recharge_transaction.Create_Hour,\n"
+                    + "tbl_recharge_transaction.walletID,\n"
+                    + "user_wallet.UserID,\n"
+                    + "tbl_recharge_transaction.Bank_Account,\n"
+                    + "tbl_recharge_transaction.Bank,\n"
+                    + "tbl_recharge_transaction.Amount\n"
+                    + "from user_wallet,tbl_recharge_transaction,tbl_user\n"
+                    + "WHERE user_wallet.walletID = tbl_recharge_transaction.walletID\n"
+                    + "AND user_wallet.UserID = tbl_user.UserID\n"
+                    + "AND Concat(STR_TO_DATE(tbl_recharge_transaction.Create_Date,'%d/%m/%Y'), \" \",tbl_recharge_transaction.Create_Hour)  \n"
+                    + ">= DATE_SUB(NOW(), INTERVAL 1 HOUR);");
             Recharge acc = null;
             while (rs.next()) {
                 acc = new Recharge();
@@ -98,7 +98,7 @@ public class RechargeModel {
         }
         return list;
     }
-    
+
     public ArrayList<Recharge> top3Recharge() {
         ArrayList<Recharge> list = new ArrayList<>();
         GetConnection cn = new GetConnection();
@@ -159,19 +159,19 @@ public class RechargeModel {
 
     public ArrayList<Recharge> getRechargebyWaalet(String walletID) {
         ArrayList<Recharge> list = new ArrayList<>();
-        String sql = "SELECT tbl_recharge_transaction.rechargeID,\n" +
-"STR_TO_DATE(tbl_recharge_transaction.Create_Date,'%d/%m/%Y'),\n" +
-"tbl_recharge_transaction.Create_Hour,\n" +
-"tbl_recharge_transaction.walletID,\n" +
-"user_wallet.UserID,\n" +
-"tbl_recharge_transaction.Bank_Account,\n" +
-"tbl_recharge_transaction.Bank,\n" +
-"tbl_recharge_transaction.Amount\n" +
-"from user_wallet,tbl_recharge_transaction,tbl_user\n" +
-"WHERE user_wallet.walletID = tbl_recharge_transaction.walletID\n" +
-"AND user_wallet.UserID = tbl_user.UserID\n" +
-"AND tbl_recharge_transaction.walletID = ?\n" +
-"order by STR_TO_DATE(tbl_recharge_transaction.Create_Date,'%d/%m/%Y') desc;";
+        String sql = "SELECT tbl_recharge_transaction.rechargeID,\n"
+                + "STR_TO_DATE(tbl_recharge_transaction.Create_Date,'%d/%m/%Y'),\n"
+                + "tbl_recharge_transaction.Create_Hour,\n"
+                + "tbl_recharge_transaction.walletID,\n"
+                + "user_wallet.UserID,\n"
+                + "tbl_recharge_transaction.Bank_Account,\n"
+                + "tbl_recharge_transaction.Bank,\n"
+                + "tbl_recharge_transaction.Amount\n"
+                + "from user_wallet,tbl_recharge_transaction,tbl_user\n"
+                + "WHERE user_wallet.walletID = tbl_recharge_transaction.walletID\n"
+                + "AND user_wallet.UserID = tbl_user.UserID\n"
+                + "AND tbl_recharge_transaction.walletID = ?\n"
+                + "order by STR_TO_DATE(tbl_recharge_transaction.Create_Date,'%d/%m/%Y') desc;";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {

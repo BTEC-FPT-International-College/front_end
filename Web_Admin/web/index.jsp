@@ -18,23 +18,41 @@
         <!-- endinject -->
         <!-- plugin css for this page -->
         <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-        
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
         <!-- End plugin css for this page -->
         <!-- inject:css -->
         <link rel="stylesheet" href="css/style.css">
         <!-- endinject -->
         <link rel="shortcut icon" href="images/favicon.png" />
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-         <script>
-             $(document).ready(function(){
-                 $('#dtOrderExample').DataTable({
-                                retrieve: true,
-                                paging: false,
-                                "order": [[1, "desc"]]
-                 });
-             })
-         </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#dtOrderExample').DataTable({
+                    retrieve: true,
+                    paging: false,
+                    "order": [[1, "desc"]]
+                });
+
+                    $.ajax({
+                        url: "MainControllers?ac=viewInfor",
+                        method: "GET",
+                        success: function (data) {
+                            let rs = $.parseJSON(data);
+                            console.log(rs)
+                            $("#revenue").text(rs[2].TotalValue)
+                            $("#totalPost").text(rs[1].TotalValue)
+                            $("#totalUser").text(rs[0].TotalValue)
+                            console.log(rs[0].Amount)
+                            
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+ 
+            })
+        </script>
     </head>
     <body>
         <!-- partial:partials/_navbar.html -->
@@ -190,19 +208,22 @@
                                                     class="d-none d-xl-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
                                                     <i class="mdi mdi-calendar-heart icon-lg mr-3 text-primary"></i>
                                                     <div class="d-flex flex-column justify-content-around">
-                                                        <small class="mb-1 text-muted">Date</small>
-                                                        <div class="dropdown">
-                                                            <a class="btn btn-secondary dropdown-toggle p-0 bg-transparent border-0 text-dark shadow-none font-weight-medium"
-                                                               href="#" role="button" id="dropdownMenuLinkA" data-toggle="dropdown"
-                                                               aria-haspopup="true" aria-expanded="false">
-                                                                <h5 class="mb-0 d-inline-block">Now</h5>
-                                                            </a>
-                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkA">
-                                                                <a class="dropdown-item" href="#">12 Aug 2018</a>
-                                                                <a class="dropdown-item" href="#">22 Sep 2018</a>
-                                                                <a class="dropdown-item" href="#">21 Oct 2018</a>
-                                                            </div>
-                                                        </div>
+                                                        <small class="mb-1 text-muted">Top Post Buy</small>
+                                                 
+                                                          
+                                                         <c:if test="${empty requestScope['listTop1Post']}">
+                                            <jsp:forward page = "MainControllers?ac=viewTop1Post" />
+                                        </c:if>
+                                        <c:forEach items="${listTop1Post}" var = "x" >
+                                     
+                               
+                                       <h5 class="mr-2 mb-0">
+                                       <a href="pages/viewDetailByPost.jsp?id=${x.getWalletID()}">ID: ${x.getWalletID()}- ${x.getTotalValue()}</a>
+                                       </h5>
+                                        </c:forEach>
+                                                            
+                                              
+                                                   
                                                     </div>
                                                 </div>
                                                 <div
@@ -210,7 +231,7 @@
                                                     <i class="mdi mdi-currency-usd mr-3 icon-lg text-danger"></i>
                                                     <div class="d-flex flex-column justify-content-around">
                                                         <small class="mb-1 text-muted">Revenue</small>
-                                                        <h5 class="mr-2 mb-0">$577545</h5>
+                                                        <h5 class="mr-2 mb-0" id="revenue"></h5>
                                                     </div>
                                                 </div>
                                                 <div
@@ -218,7 +239,9 @@
                                                     <i class="mdi mdi-account mr-3 icon-lg text-success"></i>
                                                     <div class="d-flex flex-column justify-content-around">
                                                         <small class="mb-1 text-muted">Total User</small>
-                                                        <h5 class="mr-2 mb-0">9833</h5>
+                                                        <h5 class="mr-2 mb-0" id="totalUser">
+                                                    
+                                                        </h5>
                                                     </div>
                                                 </div>
                                                 <div
@@ -226,15 +249,25 @@
                                                     <i class="mdi mdi-bulletin-board mr-3 icon-lg text-warning"></i>
                                                     <div class="d-flex flex-column justify-content-around">
                                                         <small class="mb-1 text-muted">Total Post</small>
-                                                        <h5 class="mr-2 mb-0">22337</h5>
+                                                        <h5 class="mr-2 mb-0" id="totalPost"></h5>
                                                     </div>
                                                 </div>
                                                 <div
                                                     class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
                                                     <i class="mdi mdi-bulletin-board mr-3 icon-lg text-danger"></i>
-                                                    <div class="d-flex flex-column justify-content-around">
-                                                        <small class="mb-1 text-muted">Top Post</small>
-                                                        <h5 class="mr-2 mb-0">7</h5>
+                                                    <div class="d-flex flex-column justify-content-around" style="text-align: center">
+                                                        <small class="mb-1 text-muted">Top Recharge</small>
+                                      
+                                                            <c:if test="${empty requestScope['listTop1']}">
+                                            <jsp:forward page = "MainControllers?ac=viewTop1" />
+                                        </c:if>
+                                        <c:forEach items="${listTop1}" var = "x" >
+                                     
+                               
+                                       <h5 class="mr-2 mb-0">
+                                       <a href="pages/viewDetailRecharge.jsp?id=${x.getWalletID()}">${x.getWalletID()} : ${x.getTotalValue()}</a>
+                                       </h5>
+                                        </c:forEach>
                                                     </div>
                                                 </div>
                                             </div>
@@ -258,13 +291,13 @@
                                         for (let i = 0; i <= getMonth; i++) {
                                             xValues.push("M" + (i + 1))
                                         }
-                                         var yValues = [];
+                                        var yValues = [];
                                         <c:if test="${empty requestScope['listMonth']}">
-                                                    <jsp:forward page = "MainControllers?ac=viewMonth" />
-                                                </c:if>
-                                               <c:forEach items="${listMonth}" var = "x" >
-                                                    yValues.push(${x.getAmount()})
-                                                </c:forEach>
+                                            <jsp:forward page = "MainControllers?ac=viewMonth" />
+                                        </c:if>
+                                        <c:forEach items="${listMonth}" var = "x" >
+                                        yValues.push(${x.getAmount()})
+                                        </c:forEach>
                                         console.log(yValues)
                                         var barColors = [];
                                         for (let i = 0; i < getMonth; i++) {
@@ -302,20 +335,26 @@
                                         var d = new Date();
                                         let getYear = d.getFullYear()
                                         var xValues = [];
-                                        for(let i = getYear;i>getYear-6;i--){
+                                        for (let i = getYear; i > getYear - 5; i--) {
                                             xValues.push(i)
                                         }
                                         console.log(xValues)
-                                        var yValues = [300, 4229, 4114, 3457];
-                                        var barColors = ["red", "green", "blue", "yellow"];
-
+                                        var yValuesyear = [];
+                                        <c:if test="${empty requestScope['listYear']}">
+                                            <jsp:forward page = "MainControllers?ac=viewYear" />
+                                        </c:if>
+                                        <c:forEach items="${listYear}" var = "x" >
+                                        yValuesyear.push(${x.getAmount()})
+                                        </c:forEach>
+                                        console.log(yValuesyear)
+                                        var barColors = ["red", "green", "blue", "yellow", "purple"];
                                         new Chart("YearChart", {
                                             type: "bar",
                                             data: {
                                                 labels: xValues,
                                                 datasets: [{
                                                         backgroundColor: barColors,
-                                                        data: yValues
+                                                        data: yValuesyear
                                                     }]
                                             },
                                             options: {

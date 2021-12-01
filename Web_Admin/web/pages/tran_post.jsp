@@ -304,23 +304,6 @@
                     });
                     $(this).off(event);
                 })
-                $("#orther").mouseenter(function (event) {
-                    $.ajax({
-                        url: "../TransactionController?ac=viewTop1PostBuy",
-                        method: "GET",
-                        success: function (data) {
-                            let rs = $.parseJSON(data);
-                            console.log(rs)
-                            $.each(rs, function (key, value) {
-                                $("#orther").attr("data-content", "Top 1 Post purchased : PostID: " + value.PostID + "- UserID: " + value.UserID + "- Total Price: " + value.totalPrice)
-                            });
-                        },
-                        error: function () {
-                            alert("error");
-                        }
-                    });
-                    $(this).off(event);
-                })
                 $("#topPacket").mouseenter(function (event) {
                     $.ajax({
                         url: "../TransactionController?ac=viewTopPacket",
@@ -348,7 +331,7 @@
                             let rs = $.parseJSON(data);
                             console.log(rs)
 
-                            $("#orther").attr("data-content", "Top 1: PostID: " + rs[0].PostID + " Wallet: " + rs[0].UserID + " Amount: " + rs[0].valuetotalPrice)
+                            $("#orther").attr("data-content", "Top 1: PostID: " + rs[0].PostID + " Wallet: " + rs[0].UserID + " Amount: " + rs[0].totalPrice)
 
                         },
                         error: function () {

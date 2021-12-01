@@ -16,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) {
         MainModel m = new MainModel();
-        System.out.println(m.getRevenuebyMonth().get(10).getAmount());
+        System.out.println(m.getTop1Recharge().size());
 
     }
 }
