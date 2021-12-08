@@ -253,12 +253,20 @@
         <div class="form">
          <div class="aa-advance-search-top">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="aa-single-advance-search">
                   <input type="text" placeholder="Type Your Location">
                 </div>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 search-type">
+                <div class="aa-single-advance-search">
+                  <select id="category" name="category">
+                    <option value="*" selected>BUY</option>
+                    <option value="1">RENT</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-2 search-type">
                 <div class="aa-single-advance-search">
                   <select>
                    <option value="0" selected>Category</option>
@@ -276,7 +284,7 @@
                   </select>
                 </div>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 search-type">
                  <div class="aa-single-advance-search">
                   <select>
                     <option value="0" selected>Budget</option>
@@ -292,7 +300,7 @@
                   </select>
               </div>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2 search-type">
                  <div class="aa-single-advance-search">
                   <select>
                     <option value="0" selected>Area</option>
