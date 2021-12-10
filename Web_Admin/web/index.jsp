@@ -59,8 +59,8 @@
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex justify-content-center">
                 <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
-                    <a class="navbar-brand brand-logo" href="index.html"><img src="images/logo.png" alt="logo" /></a>
-                    <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo.png" alt="logo" /></a>
+                    <a class="navbar-brand brand-logo" href="index.jsp"><img src="images/logo.png" alt="logo" /></a>
+                    <a class="navbar-brand brand-logo-mini" href="index.jsp"><img src="images/logo.png" alt="logo" /></a>
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                         <span class="mdi mdi-sort-variant"></span>
                     </button>
@@ -119,7 +119,7 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.jsp">
+                        <a class="nav-link" href="pages/index.jsp">
                             <i class="mdi mdi-home menu-icon"></i>
                             <span class="menu-title">Home</span>
                         </a>
@@ -397,8 +397,8 @@
                                                     <tr>
                                                         <td>${x.getRechargeID()}</td>
                                                         <td>${x.getCreateDate()} ${x.getCreateHourl()}</td>
-                                                        <td><a href="viewDetailRecharge.jsp?id=${x.getWalletID()}">${x.getWalletID()}</a></td><!-- comment -->
-                                                        <td><a href="viewDetailUser.jsp?id=${x.getUserID()}">${x.getUserID()}</a></td><!-- comment -->
+                                                        <td><a href="pages/viewDetailRecharge.jsp?id=${x.getWalletID()}">${x.getWalletID()}</a></td><!-- comment -->
+                                                        <td><a href="pages/viewDetailUser.jsp?id=${x.getUserID()}">${x.getUserID()}</a></td><!-- comment -->
                                                         <td>${x.getBankAccount()}</td><!-- comment -->
                                                         <td>${x.getBank()}</td>
                                                         <td>${x.getAmount()}</td>

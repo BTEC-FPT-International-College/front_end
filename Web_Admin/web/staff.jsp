@@ -1,6 +1,6 @@
 <%-- 
-    Document   : viewDeatilPost
-    Created on : 21-10-2021, 10:56:27
+    Document   : staff
+    Created on : 07-12-2021, 13:41:41
     Author     : nguyenbamang
 --%>
 
@@ -12,9 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-    <div class="container-scroller">
-   <%@ include file="../inc/nvarbar.jsp" %>
-   <%@ include file="../inc/sidebar.jsp" %>
-   <%@ include file="../inc/plugins.jsp" %>
+        <h1>Đây là mục staff</h1>
     </body>
 </html>

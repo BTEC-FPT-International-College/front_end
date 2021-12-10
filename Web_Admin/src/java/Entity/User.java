@@ -20,11 +20,11 @@ public class User {
     private String Gender;
     private String CreateDate;
     private String UpdateDate;
-    private String RoleId;
+    private int RoleId;
     private int Status;
     public User() {
     }
-    public User(String UserID, String FullName, String Phone, String Email, String Address, String Date_of_Birth, String Password, int Reward_point, String Gender, String CreateDate, String UpdateDate, String RoleId, int Status) {
+    public User(String UserID, String FullName, String Phone, String Email, String Address, String Date_of_Birth, String Password, int Reward_point, String Gender, String CreateDate, String UpdateDate, int RoleId, int Status) {
         this.UserID = UserID;
         this.FullName = FullName;
         this.Phone = Phone;
@@ -40,7 +40,7 @@ public class User {
         this.Status = Status;
     }
     
-    public User(String UserID, String FullName, String Phone, String Email, String Address, String Date_of_Birth, String Password, int Reward_point, String Gender, String CreateDate, String UpdateDate, String RoleId) {
+    public User(String UserID, String FullName, String Phone, String Email, String Address, String Date_of_Birth, String Password, int Reward_point, String Gender, String CreateDate, String UpdateDate, int RoleId) {
         this.UserID = UserID;
         this.FullName = FullName;
         this.Phone = Phone;
@@ -143,11 +143,11 @@ public class User {
         this.UpdateDate = UpdateDate;
     }
 
-    public String getRoleId() {
+    public int getRoleId() {
         return RoleId;
     }
 
-    public void setRoleId(String RoleId) {
+    public void setRoleId(int RoleId) {
         this.RoleId = RoleId;
     }
 

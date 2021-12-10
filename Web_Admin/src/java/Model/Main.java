@@ -15,8 +15,8 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        MainModel m = new MainModel();
-        System.out.println(m.getTop1Recharge().size());
+        LoginModel l = new LoginModel();
+        System.out.println(l.checkLogin("mangnbbhaf190168@fp.vn", "anhmang123"));
 
     }
 }
