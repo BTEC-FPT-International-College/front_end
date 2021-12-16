@@ -36,8 +36,8 @@ public class PostServiceImpl implements IPostService{
 		return postDao.getTop6();
 	}
 	@Override
-	public List<PostModel> getNext6(int amout) {
-		return postDao.getNext6(amout);
+	public List<PostModel> getNext6(int iamout) {
+		return postDao.getNext6(iamout);
 	}
 	@Override
 	public List<PostModel> getPostById(String postid) {

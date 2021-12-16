@@ -15,12 +15,12 @@ public class TransactionDao {
         Connection conn = cn.getConnection();
         try {
             Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT postid, walletid, price, create_day FROM web.tbl_transaction_history ORDER BY create_day DESC");
+            ResultSet rs = stm.executeQuery("SELECT postid, content, price, create_day FROM web.tbl_transaction_history ORDER BY create_day DESC");
             TransactionModel acc = null;
             while (rs.next()) {
                 acc = new TransactionModel();
                 acc.setPostID(rs.getString(1));
-                acc.setWalletID(rs.getString(2));
+                acc.setContent(rs.getString(2));
                 acc.setPrice(rs.getDouble(3));
                 acc.setCreateDay(rs.getString(4));
                 list.add(acc);

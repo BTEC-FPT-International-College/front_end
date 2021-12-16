@@ -19,7 +19,7 @@
                       </label>
                     <!-- </a> -->
                     <!-- <a href="recharge-history.html" > -->
-                      <label class="btn btn-secondary btns"  rel="panel2" onclick="Redirect();">
+                      <label class="btn btn-secondary btns"  rel="panel2" onclick="Redirectf();">
                           <input type="radio" name="options" id="option2" autocomplete="off" > <h3>Recharge History</h3>
                         
                       </label>
@@ -59,7 +59,7 @@
                     <c:forEach items="${listT}" var="x">
                     <tr>
                         <td>${x.getPostID()}</td>
-                        <td>${x.getWalletID()}</td>
+                        <td>${x.getContent()}</td>
                         <td>${x.getPrice()}</td>
                         <td>${x.getCreateDay()}</td>
                     </tr>

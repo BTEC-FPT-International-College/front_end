@@ -3,6 +3,7 @@
 	<!-- Start slider  -->
 	<section id="aa-slider">
 		<div class="aa-slider-area">
+		<p><%=session.getAttribute("userid") %></p>
 			<!-- Top slider -->
 			<div class="aa-top-slider">
 				<!-- Top slider single slide -->
@@ -215,10 +216,10 @@
 					<span></span>
 				</div>
 				<div class="aa-latest-properties-content">
-					<div class="row" id="content">
+					<div class="row"  id="content">
 						<c:if test="${empty myselect}">
 							<c:forEach items="${posts}" var="p">
-								<div class="col-md-4">
+								<div class="product col-md-4 ">
 									<article class="aa-properties-item">
 										<a href='<c:url value ="/detail?postId=${p.getPostid() }"/>'
 											class="aa-properties-item-img"> <img
@@ -389,9 +390,14 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 		function loadMore(){
+			 var amount = document.getElementsByClassName("product").length;
+			 
 			$.ajax({
 				url: "/java-web/load",
 				type: "get",
+				data: {
+                    exits: amount
+                },
 				success: function (data){
 					var row = document.getElementById("content");
 					row.innerHTML += data;
@@ -401,6 +407,7 @@
 				}
 			})
 		}
+		console.log(amount);
 	</script>
 
 	<!-- jQuery library -->

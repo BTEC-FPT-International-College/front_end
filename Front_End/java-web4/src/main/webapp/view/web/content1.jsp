@@ -25,7 +25,7 @@
     <div class="content1-below">
         <div class="management">MANAGE POST
             <div class="management-des">
-                <a href="">
+                <a href="<c:url value ='view/web/newpost.jsp' />">
                   <i class="fas fa-feather-alt"></i>
                   CREATE NEW POST
                 </a>
@@ -39,7 +39,7 @@
         </div>
         <div class="management">MANAGEMENT PROFILE
             <div class="management-des">
-                <a href=""><i class="far fa-user"></i>
+                <a href="<c:url value ='/profile?action=profile' />"><i class="far fa-user"></i>
                   ACCOUNT INFOMATION
                 </a>
             </div>
@@ -58,7 +58,7 @@
                 </a>
             </div>
             <div class="management-des">
-                <a href="<c:url value ='/transaction?action=transaction' />">
+                <a href="<c:url value ='/transaction?action=recharge' />">
                   <i class="fas fa-history"></i>
                 TRANSACTION HISTORY
                 </a>

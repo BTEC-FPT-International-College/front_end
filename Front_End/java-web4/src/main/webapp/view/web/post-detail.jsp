@@ -34,15 +34,15 @@
 <!--                            <img src="img/post-detail/3.jpg" alt="Oop something wrong with the image!!!">-->
                         </div>
                         <p class="image-small-slider">
-                            <img src="img/post-detail/1.jpg" alt="Oop something wrong with the image!!!">
-                            <img src="img/post-detail/2.jpg" alt="Oop something wrong with the image!!!">
-                            <img src="img/post-detail/3.jpg" alt="Oop something wrong with the image!!!">
-                            <img src="img/post-detail/4.jpg" alt="Oop something wrong with the image!!!">
-                            <img src="img/post-detail/5.jpg" alt="Oop something wrong with the image!!!">
-                            <img src="img/post-detail/6.jpg" alt="Oop something wrong with the image!!!">
-                            <img src="img/post-detail/7.jpg" alt="Oop something wrong with the image!!!">
-                            <img src="img/post-detail/8.jpg" alt="Oop something wrong with the image!!!">
-                            <img src="img/post-detail/9.jpg" alt="Oop something wrong with the image!!!">
+                            <img src="template/img/post-detail/1.jpg" alt="Oop something wrong with the image!!!">
+                            <img src="template/img/post-detail/2.jpg" alt="Oop something wrong with the image!!!">
+                            <img src="template/img/post-detail/3.jpg" alt="Oop something wrong with the image!!!">
+                            <img src="template/img/post-detail/4.jpg" alt="Oop something wrong with the image!!!">
+                            <img src="template/img/post-detail/5.jpg" alt="Oop something wrong with the image!!!">
+                            <img src="template/img/post-detail/6.jpg" alt="Oop something wrong with the image!!!">
+                            <img src="template/img/post-detail/7.jpg" alt="Oop something wrong with the image!!!">
+                            <img src="template/img/post-detail/8.jpg" alt="Oop something wrong with the image!!!">
+                            <img src="template/img/post-detail/9.jpg" alt="Oop something wrong with the image!!!">
                         </p>
                         <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
                         <script>
@@ -127,8 +127,8 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <article class="aa-properties-item">
-                                            <a class="aa-properties-item-img" href="#"><img alt="img" src="img/item/1.jpg"></a>
-                                            <div class="aa-tag for-sale">For Sale</div>
+                                            <a class="aa-properties-item-img" href="#"><img alt="img" src="template/img/item/1.jpg"></a>
+                                            <div class="aa-tag for-rent">For Sale</div>
                                             <div class="aa-properties-item-content">
                                                 <div class="aa-properties-info">
                                                     <span>5 Rooms</span>
@@ -150,7 +150,7 @@
                                     <div class="col-md-6">
                                         <article class="aa-properties-item">
                                             <a class="aa-properties-item-img" href="#">
-                                                <img alt="img" src="img/item/6.jpg">
+                                                <img alt="img" src="template/img/item/6.jpg">
                                             </a>
                                             <div class="aa-tag for-sale">
                                                 For Sale
@@ -256,7 +256,7 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src="img/item/1.jpg" alt="img">
+                                    <img class="media-object" src="template/img/item/1.jpg" alt="img">
                                 </a>
                             </div>
                             <div class="media-body">
@@ -269,7 +269,7 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src="img/item/2.jpg" alt="img">
+                                    <img class="media-object" src="template/img/item/2.jpg" alt="img">
                                 </a>
                             </div>
                             <div class="media-body">
@@ -282,7 +282,7 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src="img/item/3.jpg" alt="img">
+                                    <img class="media-object" src="template/img/item/3.jpg" alt="img">
                                 </a>
                             </div>
                             <div class="media-body">
@@ -295,7 +295,7 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src="img/item/1.jpg" alt="img">
+                                    <img class="media-object" src="template/img/item/1.jpg" alt="img">
                                 </a>
                             </div>
                             <div class="media-body">
@@ -308,7 +308,7 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src="img/item/2.jpg" alt="img">
+                                    <img class="media-object" src="template/img/item/2.jpg" alt="img">
                                 </a>
                             </div>
                             <div class="media-body">
@@ -321,7 +321,7 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src="img/item/3.jpg" alt="img">
+                                    <img class="media-object" src="template/img/item/3.jpg" alt="img">
                                 </a>
                             </div>
                             <div class="media-body">
@@ -334,7 +334,7 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src="img/item/1.jpg" alt="img">
+                                    <img class="media-object" src="template/img/item/1.jpg" alt="img">
                                 </a>
                             </div>
                             <div class="media-body">
@@ -347,7 +347,7 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src="img/item/2.jpg" alt="img">
+                                    <img class="media-object" src="template/img/item/2.jpg" alt="img">
                                 </a>
                             </div>
                             <div class="media-body">
@@ -360,7 +360,7 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src="img/item/3.jpg" alt="img">
+                                    <img class="media-object" src="template/img/item/3.jpg" alt="img">
                                 </a>
                             </div>
                             <div class="media-body">
@@ -373,7 +373,7 @@
                         <<div class="media">
                         <div class="media-left">
                             <a href="#">
-                                <img class="media-object" src="img/item/1.jpg" alt="img">
+                                <img class="media-object" src="template/img/item/1.jpg" alt="img">
                             </a>
                         </div>
                         <div class="media-body">
@@ -386,7 +386,7 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src="img/item/2.jpg" alt="img">
+                                    <img class="media-object" src="template/img/item/2.jpg" alt="img">
                                 </a>
                             </div>
                             <div class="media-body">
@@ -399,7 +399,7 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" src="img/item/3.jpg" alt="img">
+                                    <img class="media-object" src="template/img/item/3.jpg" alt="img">
                                 </a>
                             </div>
                             <div class="media-body">
@@ -417,41 +417,6 @@
 </section>
 <!-- / Properties  -->
 
-<!-- Footer -->
-<footer id="aa-footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="aa-footer-area">
-                    <div class="row">
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="aa-footer-left">
-                                <p>BTEC LAND</p>
-                                <p>REAL ESTATE E-COMMERCE SYSTEM</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="aa-footer-middle">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-google-plus"></i></a>
-                                <a href="#"><i class="fa fa-youtube"></i></a>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="aa-footer-right">
-                                <a href="#">Home</a>
-                                <a href="#">Support</a>
-                                <a href="#">License</a>
-                                <a href="#">FAQ</a>
-                                <a href="#">Privacy & Term</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+
 <!-- / Footer -->
 

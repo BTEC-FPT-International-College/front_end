@@ -2,6 +2,14 @@ package com.btecland.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -14,54 +22,73 @@ import javax.servlet.http.HttpSession;
 
 import com.btecland.web.dao.ILoginDao;
 import com.btecland.web.dao.checkLogin;
+import com.btecland.web.model.Profile;
 import com.btecland.web.model.ProfileModel;
 import com.btecland.web.model.UserModel;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.mysql.cj.xdevapi.JsonArray;
+import org.json.simple.JSONObject;
+import java.util.ArrayList;  
+import java.util.List;  
+import org.json.simple.JSONValue;  
+
 
 /**
  * Servlet implementation class LoginController
  */
-@WebServlet(urlPatterns = {"/loginsssss"})
+@WebServlet(urlPatterns = {"/loginss"})
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		 PrintWriter out = response.getWriter();
-		 checkLogin am = new checkLogin();
-         try {
-		String username = request.getParameter("user");
-		String password = request.getParameter("pass");
-         if (am.checkLogin(username, password)) {
-             // lay thong tin role ve         
-             ProfileModel user = am.getlogin(username, password);
-             String RoleID = user.getRoleid();
-             String UserID = user.getUserid();
-             // tao session va them cac gia tri vao trong sesstion
-             HttpSession session = request.getSession();
-             session.setAttribute("username", username);
-             session.setAttribute("password", password);
-             session.setAttribute("RoleID", RoleID);
-             session.setAttribute("UserID", UserID);
-             // chuyen ve tung trang home theo tung role khac nhau 
-             if ("1".equals(RoleID)) {
-            	 response.sendRedirect("/decorators/profile.jsp?id="+UserID);
-             }
-             if ("2".equals(RoleID)) {
-                 response.sendRedirect("#");
-             }
-             if ("3".equals(RoleID)) {
-                 response.sendRedirect("#");
-             }
-         } else {
-             request.setAttribute("error", "Username and Password invalid !");
-             RequestDispatcher dis = request.getRequestDispatcher("/decorators/login.jsp");
-             dis.forward(request, response);
-         }
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-     } finally {
-         out.close();
-     }
+		PrintWriter out = response.getWriter();
+		Connection con;
+		PreparedStatement statement;
+		ResultSet resultSet;
+		List list = new ArrayList();
 		
-	}
-
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		
+		JSONObject obj = new JSONObject();
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/web?" + "user=root&password=tranmanh@123");
+			statement = con.prepareStatement("SELECT fullname, roleid,userid FROM tbl_user WHERE username = ? AND   password = ?");
+		    statement.setString(1, username);
+            statement.setString(2, password);
+            
+            resultSet = statement.executeQuery();
+            
+            String msg;
+            
+            HttpSession session = request.getSession();
+            
+            if(resultSet.next()) {
+            	session.setAttribute("username", username);
+            	session.setAttribute("password", password);
+            	
+            	msg = "1";
+            	obj.put("msg", msg);
+            	list.add(obj);
+            	String jsonText = JSONValue.toJSONString(list);  
+            	out.print(jsonText);
+            	out.flush();
+            	
+            }else {
+            	msg = "3";
+            	obj.put("msg", msg);
+            	list.add(obj);
+            	String jsonText = JSONValue.toJSONString(list);  
+            	out.print(jsonText);
+            	out.flush();
+            }
+		} catch (ClassNotFoundException e) {
+			Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
+		} catch (SQLException e) {
+			Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
+		}
+}
 }

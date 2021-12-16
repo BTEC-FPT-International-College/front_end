@@ -24,6 +24,9 @@
 	<decorator name="post-detail" page="post-detail.jsp">
 		<pattern>/post*</pattern>
 	</decorator>
+	<decorator name="post-detail" page="newpost.jsp">
+		<pattern>/createpost*</pattern>
+	</decorator>
 	<decorator name="web" page="web.jsp">
 		<pattern>/*</pattern>
 	</decorator>

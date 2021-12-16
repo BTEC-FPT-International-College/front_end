@@ -3,20 +3,30 @@ package com.btecland.web.model;
 public class TransactionModel {
 	private String postID;
     private String walletID;
+    private String content;
     private double price;
     private String createDay;
 
     public TransactionModel() {
     }
 
-    public TransactionModel(String postID, String walletID, double price, String createDay) {
+    public TransactionModel(String postID, String walletID, String content, double price, String createDay) {
         this.postID = postID;
         this.walletID = walletID;
+        this.content = content;
         this.price = price;
         this.createDay = createDay;
     }
 
-    public void setPostID(String postID) {
+    public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public void setPostID(String postID) {
         this.postID = postID;
     }
 

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.btecland.web.model.Profile;
 import com.btecland.web.model.ProfileModel;
 import com.btecland.web.model.UserModel;
 
@@ -34,8 +35,8 @@ public class checkLogin {
 	        }
 	        return result;
 	    }
-	    public ProfileModel getlogin(String username, String password) {
-	        ProfileModel acc = null;
+	    public Profile getlogin(String username, String password) {
+	        Profile acc = null;
 	        GetConnection cn = new GetConnection();
 	        Connection conn = cn.getConnection();
 	        try {
@@ -44,10 +45,10 @@ public class checkLogin {
 	            ps.setString(2, password);
 	            ResultSet rs = ps.executeQuery();
 	            while (rs.next()) {
-	                acc = new ProfileModel();
-	                acc.setUserid(rs.getString(3));
-	                acc.setFullname(rs.getString(1));
-	                acc.setRoleid(rs.getString(2));
+	                acc = new Profile();
+	                acc.setUserID(rs.getString(3));
+	                acc.setFullName(rs.getString(1));
+	                acc.setRoleID(rs.getString(2));
 	            }
 	            rs.close();
 	            ps.close();

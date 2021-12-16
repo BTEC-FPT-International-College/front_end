@@ -24,11 +24,12 @@ public class LoadMoreController extends HttpServlet {
 	@Inject
 	private IPostService postService;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 PrintWriter out = response.getWriter();
-		List<PostModel> list =  postService.getTop6(); 
+		
+		PrintWriter out = response.getWriter();
+		List<PostModel> list =  postService.getNext6(2); 
 		for(PostModel p : list)
-		out.println("<c:forEach items=\"${posts}\" var=\"p\">"
-				+ "<div class=\"col-md-4\">\r\n"
+		out.println(
+				 "<div class=\"product col-md-4\">\r\n"
 				+ "								<article class=\"aa-properties-item\">\r\n"
 				+ "									<a href='<c:url value=\"/postdetail.jsp\"/>'\r\n"
 				+ "										class=\"aa-properties-item-img\"> <img\r\n"
@@ -56,8 +57,10 @@ public class LoadMoreController extends HttpServlet {
 				+ "									</div>\r\n"
 				+ "								</article>\r\n"
 				+ "							</div>"
-				+"</c:forEach>"
+				
+		
 				);
+
 //		RequestDispatcher rd = request.getRequestDispatcher("/view/web/home.jsp");
 //		rd.forward(request, response);
 	}

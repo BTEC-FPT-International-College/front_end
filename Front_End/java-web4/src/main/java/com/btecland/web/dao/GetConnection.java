@@ -24,8 +24,7 @@ public class GetConnection {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(GetConnection.class.getName()).log(Level.SEVERE, null, ex);
             }
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/web?"
-                            + "user=root&password=tranmanh@123");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/web?" + "user=root&password=tranmanh@123");
         } catch (SQLException ex) {
             // handle any errors
             System.out.println("SQLException: " + ex.getMessage());

@@ -53,7 +53,7 @@
                             <li><a href="#">
                               <i class="fas fa-key"></i>
                               CHANGE PASSWORD</a></li>
-                            <li><a href="profile.jsp">
+                            <li><a href="<c:url value ='/profile?action=profile' />">
                               <i class="far fa-user"></i>
                               PROFILE</a></li>
                             <li><a href="#">
@@ -62,7 +62,7 @@
                             <li><a href="#">
                               <i class="fas fa-credit-card"></i>
                               DEPOSIT MONEY</a></li>
-                            <li><a href="#">
+                            <li><a href="<c:url value ='/transaction?action=transaction' />">
                               <i class="fas fa-history"></i>
                               TRANSACTION HISTORY</a></li>
                             <li><a href="#">
