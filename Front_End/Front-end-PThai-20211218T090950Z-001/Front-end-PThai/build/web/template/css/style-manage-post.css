@@ -1,0 +1,223 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+}
+
+
+body {
+    background-color: #d9d4d4 !important;
+    font-family: "Open Sans", sans-serif;
+
+}
+/* ===================
+=================== */
+.container-p {
+    padding: 0 40px;
+    /*margin-top: 166px;*/
+}
+
+.content {
+    /*width: 1048px;*/
+    height: 100%;
+    margin: auto;
+    padding: 0px;
+}
+
+/* For content 1  */
+.content1 {
+    width: 20%;
+    height: 100%;
+    background: #fff;
+    float: left;
+    margin: 16px 0 16px;
+}
+.content1-head {
+    width: 100%;
+    height: 225px;
+    background: #fff;
+}
+.content1-below {
+    width: 100%;
+    height: 100%;
+    background: #F0F0F0;
+}
+.content1-info {
+    width: 100%;
+    background: #fff;
+    text-align: center;
+}
+.content1-info i {
+    float: inline-end;
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-top: 61px;
+    margin-left: 70px;
+    font-size: 24px;
+    box-shadow: 2px 5px 7px -1px;
+    color: #59abe3;
+}
+.content1-info .content-description {
+    margin: 20px;
+    font-weight: 400;
+    line-height: 1.5;
+    display: inline;
+}
+.content1-info .wallet {
+    position: relative;
+    text-align: left;
+    margin: 0 12px;
+    margin-top: 24px;
+}
+
+.content1-info .wallet {
+    position: relative;
+    text-align: left;
+    margin: 0 12px;
+    margin-top: 24px;
+}
+.content1-info .wallet p {
+    display: inline;
+}
+
+.content1-info .coin {
+    display: inline;
+    color:	#DAA520;
+}
+.content1-info .name {
+    color: #59abe3;
+    padding: 6px;
+    font-size: 24px;
+}
+.content1-info .border {
+    height: 2px;
+    background: #a9a9a9;
+    width: 20%;
+    margin: 10px auto;
+}
+.content1-info .date {
+    margin-top: 6px;
+    font-size: 12px;
+}
+.content1-info .date-des {
+    color: #59abe3;
+}
+.content1-head .main-account {
+    font-size: 12px;
+    padding: 6px 0;
+    margin: 0 6px;
+    border-top: 2px dotted #ccc;
+    border-bottom: 2px dotted #ccc;
+    font-style: oblique;
+}
+.content1-head .account-KM {
+    font-size: 12px;
+    padding: 6px;
+    font-style: oblique;
+}
+.usd {
+    float: right;
+}
+.content1-image {
+    width: 88px;
+    height: 88px;
+    margin-left: 100px;
+    margin-top: 16px;
+    border-radius: 50%;
+    border: 1px solid #59abe3;
+    left: 50%;
+    background: #ccc;
+    font-display: block;
+    background: url("./img/iconbtec.png") top center / cover no-repeat;
+    background-size: cover;
+}
+.management {
+    color: #090a0d;
+    font-size: 13px;
+    margin-left: 20px;
+    padding: 16px 0;
+}
+.management-des {
+    border-top: 1px solid #F0F0F0;
+    border-bottom: 1px solid #F0F0F0;
+    border-color: #F0F0F0;
+    mask-border-width: 9px;
+    font-weight: 800;
+    padding: 4px 0;
+    margin: 8px 0;
+    color: #5d7d92;
+}
+.management .fas, .management .far {
+    color: #0f6674;
+}
+.content1-below-post {
+    text-align: center;
+}
+.post {
+    background: #a71f07;
+    color: #fff;
+    display: inline-block;
+    width: auto;
+    padding: 6px 12px;
+    margin-top: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 47px;
+}
+/* End content1  */
+
+/* For content2  */
+.content2 {
+    width: 79%;
+    height: 100%;
+    border-radius: 5px;
+    background: #fff;
+    float: right;
+    margin: 16px 0 16px;
+}
+.content2 .content2-title {
+    margin-top: 14px;
+    margin-left: 10px;
+    font-size: 24px;
+    color: #59abe3;
+    border-bottom: 1px solid #59abe3;
+    border-bottom-left-radius: 0ch;
+    font-weight: 600;
+}
+
+/* End content 2  */
+.clear { clear: both }
+
+.container-p .content .content1 .content1-below .management .active a {
+    background-color: #FFF;
+}
+.container-p .content .content1 .content1-below .management .open a {
+    background-color: #fff;
+}
+.container-p .content .content1 .content1-below .management li a:hover, .container-p .content .content1 .content1-below .management li a:focus {
+    color: #59abe3;
+}
+.container-p .content .content1 .content1-below .management li{
+    list-style: none;
+}
+.update-post-body {
+    width: 78%;
+    height: 100%;
+    border-radius: 5px;
+    background: #fff;
+    float: right;
+    margin: 16px 0 16px;
+}
+.update-post-body .body-title {
+    margin-top: 14px;
+    margin-left: 10px;
+    font-size: 24px;
+    color: #59abe3;
+    border-bottom: 1px solid #59abe3;
+    border-bottom-left-radius: 0ch;
+    font-weight: 600;
+}
+#table-update-form a:hover {
+    color: #46b8da;
+}
