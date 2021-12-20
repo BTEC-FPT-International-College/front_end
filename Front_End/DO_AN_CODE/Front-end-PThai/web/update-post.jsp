@@ -4,9 +4,9 @@
     <!--<meta charset="UTF-8">-->
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-    <title>Create Post</title>
+    <title>Update Post</title>
     <link rel="stylesheet" href="./grid.css">
-    <link rel="stylesheet" href="./postnew.css">
+    <link rel="stylesheet" href="./template/css/update-post.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     
     <!-- Favicon -->
@@ -51,119 +51,13 @@
       <label class="nav__close nav__bars-btn" for="nav-input">
         <i class="fas fa-chevron-circle-left"></i>
       </label>
-      <div class="content1-head">
-          <div class="content1-info">
-              <div class="content1-image">
-                  <i  class="fas fa-camera-retro"></i>
-              </div>
-              <div class="content-description">
-                  <div class="name-post">
-                     
-                  </div>
-                  <div class="wallet">
-                      BtecLand Wallet:<input class="wallet-post" style="pointer-events: none;" id="wallet-post"  >
-                      
-                      <div class="coin">Coin</div>
-                  </div>
-                  <div class="reward-point">
-                      Reward Point:<input class="reward-point" style="pointer-events: none; width: 90px;" id="reward-point"  >
-                      
-                      <div class="point">Point</div>
-                  </div>
-              </div>
-          </div>
-          
-      </div>
-      <div class="content1-below">
-          <div class="management">MANAGE POST
-              <div class="management-des">
-                  <a href="">
-                    <i class="fas fa-feather-alt"></i>
-                    CREATE NEW POST
-                  </a>
-              </div>
-              <div class="management-des">
-                  <a href="">
-                    <i class="fas fa-list-ol"></i>
-                    LIST OF POST
-                  </a>
-              </div>
-          </div>
-          <div class="management">MANAGEMENT PROFILE
-              <div class="management-des">
-                  <a href="profile.jsp?id=<%=request.getParameter("id")%>"><i class="far fa-user"></i>
-                    ACCOUNT INFOMATION
-                  </a>
-              </div>
-              <div class="management-des">
-                  <a href="">
-                    <i class="fas fa-key"></i>
-                  CHANGE PASSWORD
-                  </a>
-              </div>
-          </div>
-          <div class="management">MANAGEMENT WALLET
-              <div class="management-des">
-                  <a href="">
-                    <i class="fas fa-wallet"></i>
-                  BALANCE 
-                  </a>
-              </div>
-              <div class="management-des">
-                  <a href="">
-                    <i class="fas fa-history"></i>
-                  TRANSACTION HISTORY
-                  </a>
-              </div>
-          </div>
-          <div class="content1-below-post">
-              <div class="post" >
-                  <a href="" style="color: #fff;">
-                    <i class="fas fa-feather-alt"></i>
-                  CREATE POST
-                  </a>
-              </div>
-          </div>
-      </div>
+      
+    
+     
     </div>
-    <div class="nav__content2" ">
-      <label class="open nav__bars-btn" for="nav-input">
-        <i class="fas fa-chevron-circle-right"></i>
-      </label>
-      <ul>
-        <li>
-          <a href="">
-            <i class="fas fa-feather-alt list-icon"></i>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="fas fa-list-ol list-icon"></i>
-          </a>
-        </li>
-        <li>
-          <a href=""><i class="far fa-user list-icon"></i>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="fas fa-key list-icon"></i>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="fas fa-wallet list-icon"></i>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <i class="fas fa-history list-icon"></i>
-          </a>
-        </li>
-      </ul>
-    </div>
-   
-    <div class="row content3" style="height: 2860px;">
+    
+    <%@ include file="./content1.jsp" %>
+    <div class="content3 body-form" style="height: 2860px;">
       <!-- <div class="row"> -->
         <div class="col l-8 content3__con1">
           <div class=" content3__child content3__basic">
@@ -175,7 +69,7 @@
                         <div class="modal-header">
                             <h5 class="modal-title" style="color:green">Successful Add</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span id="x" aria-hidden="true">&times;</span>
+                                <span id="x-button" aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
@@ -328,7 +222,99 @@
               <input type="date" class="input-sm form-control" id="drop_date" onchange="cal(); calTypes(); " style="height: 34px; width:154px;font-size: 13px; z-index: 0;" name="to" placeholder="To date"/>
             </div>
             
-            <script type="text/javascript">
+           
+            <div class="total-posting-date">
+              <h4>Total posting date</h4>
+              <input type="number" class="form-control" style="pointer-events: none;" id="sumDay2" >
+            </div>
+            <div class="payment">
+              <div class="payment-title">
+                <div class="cost-day">
+                  Posting cost / day
+                  <input  id="postCost" style="pointer-events: none;" onchange="sum()" />
+                  <div class="money">
+                    Coin
+                  </div>
+                </div> 
+                <div class="total-day">
+                  Total days<input id="sumDay22" style="pointer-events: none;" onchange="sum()"/>
+                  <div class="day">
+                    Day
+                  </div>
+                </div>
+              </div>
+              <div class="payment-price">
+                Total prices
+                <input id="sumAll" onchange="tSum(); after();" style="pointer-events: none;
+                                                            margin-left: 12px;"/>
+              </div>
+            </div>
+            <button type="submit" value="submit" id="submit" >Update</button>
+            
+          </div>
+        <!-- </div> -->
+      </div>
+      
+    </div>
+   <!--</form>-->
+  
+  </div>
+  <!-- End of container -->
+
+  <!-- Footer  -->
+  <footer id="aa-footer" style="margin-top: 2956px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="aa-footer-area">
+            <div class="row">
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="aa-footer-left">
+                  <p>BTEC LAND</p>
+                  <p>REAL ESTATE E-COMMERCE SYSTEM</p>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="aa-footer-middle">
+                  <a href="#"><i class="fa fa-facebook"></i></a>
+                  <a href="#"><i class="fa fa-twitter"></i></a>
+                  <a href="#"><i class="fa fa-google-plus"></i></a>
+                  <a href="#"><i class="fa fa-youtube"></i></a>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="aa-footer-right">
+                  <a href="#">Home</a>
+                  <a href="#">Support</a>
+                  <a href="#">License</a>
+                  <a href="#">FAQ</a>
+                  <a href="#">Privacy & Term</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- End of Footer  -->
+
+  <!-- jQuery library -->
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+  <script src="js/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="js/bootstrap.js"></script>
+  <!-- slick slider -->
+  <script type="text/javascript" src="js/slick.js"></script>
+  <!-- Price picker slider -->
+  <script type="text/javascript" src="js/nouislider.js"></script>
+  <!-- mixit slider -->
+  <script type="text/javascript" src="js/jquery.mixitup.js"></script>
+  <!-- Add fancyBox -->
+  <script type="text/javascript" src="js/jquery.fancybox.pack.js"></script>
+  <!-- Custom js -->
+  <script src="js/custom.js"></script>
+     <script type="text/javascript">
                 function fixStartDate() {
                     var today = new Date();
                 var dd = String(today.getDate()).padStart(2, '0');
@@ -400,42 +386,8 @@
                   return after;
               }
             </script>
-            <div class="total-posting-date">
-              <h4>Total posting date</h4>
-              <input type="number" class="form-control" style="pointer-events: none;" id="sumDay2" >
-            </div>
-            <div class="payment">
-              <div class="payment-title">
-                <div class="cost-day">
-                  Posting cost / day
-                  <input  id="postCost" style="pointer-events: none;" onchange="sum()" />
-                  <div class="money">
-                    Coin
-                  </div>
-                </div> 
-                <div class="total-day">
-                  Total days<input id="sumDay22" style="pointer-events: none;" onchange="sum()"/>
-                  <div class="day">
-                    Day
-                  </div>
-                </div>
-              </div>
-              <div class="payment-price">
-                Total prices
-                <input id="sumAll" onchange="tSum(); after();" style="pointer-events: none;
-                                                            margin-left: 12px;"/>
-              </div>
-            </div>
-            <button type="submit" value="submit" id="submit" >Next</button>
-            
-          </div>
-        <!-- </div> -->
-      </div>
-      
-    </div>
-   <!--</form>-->
-    <script>
-        $("#x").click(function () {
+      <script>
+        $("#x-button").click(function () {
             $("#show").hide()
             $("#form").trigger("reset");
             $("#add").prop('disabled', true);
@@ -576,63 +528,73 @@
             });
         });
     </script>
-  </div>
-  <!-- End of container -->
-
-  <!-- Footer  -->
-  <footer id="aa-footer" style="margin-top: 2956px;">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="aa-footer-area">
-            <div class="row">
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="aa-footer-left">
-                  <p>BTEC LAND</p>
-                  <p>REAL ESTATE E-COMMERCE SYSTEM</p>
-                </div>
-              </div>
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="aa-footer-middle">
-                  <a href="#"><i class="fa fa-facebook"></i></a>
-                  <a href="#"><i class="fa fa-twitter"></i></a>
-                  <a href="#"><i class="fa fa-google-plus"></i></a>
-                  <a href="#"><i class="fa fa-youtube"></i></a>
-                </div>
-              </div>
-              <div class="col-md-6 col-sm-12 col-xs-12">
-                <div class="aa-footer-right">
-                  <a href="#">Home</a>
-                  <a href="#">Support</a>
-                  <a href="#">License</a>
-                  <a href="#">FAQ</a>
-                  <a href="#">Privacy & Term</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!-- End of Footer  -->
-
-  <!-- jQuery library -->
-  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-  <script src="js/jquery.min.js"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="js/bootstrap.js"></script>
-  <!-- slick slider -->
-  <script type="text/javascript" src="js/slick.js"></script>
-  <!-- Price picker slider -->
-  <script type="text/javascript" src="js/nouislider.js"></script>
-  <!-- mixit slider -->
-  <script type="text/javascript" src="js/jquery.mixitup.js"></script>
-  <!-- Add fancyBox -->
-  <script type="text/javascript" src="js/jquery.fancybox.pack.js"></script>
-  <!-- Custom js -->
-  <script src="js/custom.js"></script>
     
-    
+    <script>
+    $(document).ready(function() {
+            let postid = '<%=request.getParameter("postId")%>'
+            console.log("aaa"+postid)
+            $.ajax({
+                    url: "UpdatePostController?ac=view",
+                    method: "POST",
+                    data: {gets: postid},
+                    success: function (data) {
+                        let objpro = $.parseJSON(data);
+                        console.log("aaa"+objpro)
+//                        $("#fullname").val(objpro[0].fullName)
+                        
+                        
+                        // Các cái phone, email kia làm tương tự
+                        //lấy object phải giống trong entity user
+//                        $("#phone").val(objpro[0].phone)
+//                        $("#email").val(objpro[0].email)
+//                        $("#address").val(objpro[0].address)
+//                        $("#date").val(objpro[0].dateOfBirth)
+//                        let c = objpro[0].gender
+//                        if (c === '0')
+//                            $('#female').attr('checked', true)
+//                        else
+//                            $('#male').attr('checked', true)
+                        
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+              // for update profile
+              var p = {};
+                $("#submit-update").click(function() {
+    //                alert("succeess");
+//                    p.fullName = $('#fullname').val();
+//                    p.phone = $('#phone').val();
+//                    p.email = $('#email').val();
+//                    p.dateOfBirth = $('#date').val();
+//                    p.gender = $('input[name=gender]:checked').val();
+//                    p.address = $('#address').val();
+//                    
+//                    p.userID =    '<%=request.getParameter("id")%>'
+//                    const po = JSON.stringify(p)
+//                    console.log(po)
+
+                    $.ajax({
+                        url: "ProfileController?ac=update",
+                        type: "post",
+                        data: {get: po},
+                        success: function (data) {
+                            let rs = $.parseJSON(data);
+                            console.log(rs)
+                            if (rs) {
+//                                $("#show").show();
+                                alert("UPDATE SUCCESSFUL")
+                            } else {
+                                $("#error").show()
+                            }
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                });
+                });
+    </script>
 </body>
 </html>

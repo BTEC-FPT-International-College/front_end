@@ -54,7 +54,7 @@
                     data: {getpr: id},
                     success: function (data) {
                         let rst = $.parseJSON(data);
-                        console.log("aaaaa"+rst)
+                        console.log("tesst"+rst)
                         $.each(rst, function (key, value) {
                             $('#tbody').append('<tr><td>'+value.transactionID+'</td>' 
                     +"<td>"

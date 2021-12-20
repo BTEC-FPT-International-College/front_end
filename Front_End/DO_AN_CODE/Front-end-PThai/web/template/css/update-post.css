@@ -207,128 +207,89 @@
   /*========================
   For content 1  
   =========================*/
-  .content1 {
-  width: 286px;
-  height: 100%;
-  background: #fff;
-  float: left;
-  margin: 168px 0 16px;
-  box-shadow: 0 0 10px #ccc;
-  }
-  .content1-head {
-  width: 100%;
-  height: 254px;
-  background: #fff;
-  }
-  .name-post {
-    color: #59abe3;
-    padding: 6px;
-    font-size: 24px;
-  }
-  .wallet-post {
-    width: 88px;
-    margin-left: 8px;
-  }
-  .content1-below {
-  width: 100%;
-  height: 520px;
-  background: #e1e7e9;
-  }
-  .content1-info {
-  width: 100%;
-  background: #fff;
-  text-align: center;
-  }
-  .content1-info i {
-  float: inline-end;
-  margin-bottom: 0;
-  margin-right: 0;
-  margin-top: 61px;
-  margin-left: 70px;
-  font-size: 24px;
-  box-shadow: 2px 5px 7px -1px;
-  color: #59abe3;
-  }
-  .content1-info .content-description {
-  margin: 20px;
-  font-weight: 400;
-  line-height: 1.5;
-  display: inline;
-  }
-  .content1-info .reward-point {
-  position: relative;
-  text-align: left;
-  margin: 0 12px;
-  margin-top: 2px;
-  }
-  .content1-info .point {
-  float: right;
-  display: inline;
-  }
-  .content1-info .wallet {
-  position: relative;
-  text-align: left;
-  margin: 0 12px;
-  margin-top: 24px;
-  }
-  .content1-info .coin {
-  float: right;
-  display: inline;
-  }
-  .content1-info .name {
-  color: #59abe3;
-  padding: 6px;
-  font-size: 24px;
-  }
-  .content1-info .border {
-  height: 2px;
-  background: #a9a9a9;
-  width: 20%;
-  margin: 10px auto;
-  }
-  
-  .usd {
-  float: right;
-  }
-  .content1-image {
-  width: 88px;
-  height: 88px;
-  margin-left: 100px;
-  margin-top: 16px;
-  border-radius: 50%;
-  border: 1px solid #59abe3;
-  left: 50%;
-  background: #ccc;
-  font-display: inline-block;
-  background: url("./img/iconbtec.png") top center / cover no-repeat;
-  background-size: cover;
-  }
-  .management {
-  color: #7c8085;
-  font-size: 13px;
-  margin-left: 6px;
-  padding: 16px 0;
-  }
-  .management-des {
-  border-top: 1px solid #85817c;
-  border-bottom: 1px solid #85817c;
-  border-color: #c7d9e0;
-  mask-border-width: 9px;
-  font-weight: 800;
-  padding: 4px 0;
-  margin: 8px 0;
-  color: #2a6e83;
-  }
-  .management-des a {
-    display: block;
-  }
-  .management .fas,
-  .management .far {
-  color: #a6beeb;
-  }
-  .content1-below-post {
-  text-align: center;
-  }
+ .content1 {
+width: 286px;
+height: 100%;
+background: #fff;
+float: left;
+margin: 16px 0 16px;
+box-shadow: 0 0 10px #ccc;
+}
+.content1-image {
+width: 88px;
+height: 88px;
+margin-left: 100px;
+margin-top: 16px;
+border-radius: 50%;
+border: 1px solid #59abe3;
+left: 50%;
+background: #ccc;
+font-display: inline-block;
+background: url("../img/iconbtec.png") top center / cover no-repeat;
+background-size: cover;
+}
+.content1-head {
+width: 100%;
+height: 254px;
+background: #fff;
+}
+.content1-below {
+width: 100%;
+height: 491px;
+background: #e1e7e9;
+}
+.content1-info {
+width: 100%;
+background: #fff;
+text-align: center;
+}
+.content1-info i {
+float: inline-end;
+margin-bottom: 0;
+margin-right: 0;
+margin-top: 61px;
+margin-left: 70px;
+font-size: 24px;
+box-shadow: 2px 5px 7px -1px;
+color: #59abe3;
+}
+.content1-info .content-description {
+margin: 20px;
+font-weight: 400;
+line-height: 1.5;
+display: inline;
+}
+.content1-info .wallet {
+position: relative;
+text-align: left;
+margin: 0 12px;
+margin-top: 24px;
+}
+.content1-info .coin {
+float: right;
+display: inline;
+}
+.content1-info .reward-point {
+position: relative;
+text-align: left;
+margin: 0 12px;
+margin-top: 4px;
+}
+.content1-info .point {
+float: right;
+display: inline;
+}
+.content1-info .name {
+color: #59abe3;
+padding: 6px;
+font-size: 24px;
+}
+.content1-info .border {
+height: 2px;
+background: #a9a9a9;
+width: 20%;
+margin: 10px auto;
+}
   .post {
   background: #a71f07;
   color: #fff;
@@ -373,6 +334,115 @@
 /* Handle on hover */
 .nav__content::-webkit-scrollbar-thumb:hover {
   background: #b30000; 
+}
+.content1 {
+width: 286px;
+height: 100%;
+background: #fff;
+float: left;
+margin: 16px 0 16px;
+box-shadow: 0 0 10px #ccc;
+}
+.content1-head {
+width: 100%;
+height: 254px;
+background: #fff;
+}
+.content1-below {
+width: 100%;
+height: 491px;
+background: #e1e7e9;
+}
+.content1-info {
+width: 100%;
+background: #fff;
+text-align: center;
+}
+.content1-info i {
+float: inline-end;
+margin-bottom: 0;
+margin-right: 0;
+margin-top: 61px;
+margin-left: 70px;
+font-size: 24px;
+box-shadow: 2px 5px 7px -1px;
+color: #59abe3;
+}
+.content1-info .content-description {
+margin: 20px;
+font-weight: 400;
+line-height: 1.5;
+display: inline;
+}
+.content1-info .wallet {
+position: relative;
+text-align: left;
+margin: 0 12px;
+margin-top: 24px;
+}
+.content1-info .coin {
+float: right;
+display: inline;
+}
+.content1-info .reward-point {
+position: relative;
+text-align: left;
+margin: 0 12px;
+margin-top: 4px;
+}
+.content1-info .point {
+float: right;
+display: inline;
+}
+.content1-info .name {
+color: #59abe3;
+padding: 6px;
+font-size: 24px;
+}
+.content1-info .border {
+height: 2px;
+background: #a9a9a9;
+width: 20%;
+margin: 10px auto;
+}
+.management {
+color: #7c8085;
+font-size: 13px;
+margin-left: 6px;
+padding: 16px 0;
+}
+.management-des {
+border-top: 1px solid #85817c;
+border-bottom: 1px solid #85817c;
+border-color: #c7d9e0;
+mask-border-width: 9px;
+font-weight: 800;
+padding: 4px 0;
+margin: 8px 0;
+color: #2a6e83;
+}
+.management-des a {
+  display: block;
+}
+.management .fas,
+.management .far {
+color: #a6beeb;
+}
+.content1-below-post {
+text-align: center;
+}
+.post {
+background: #a71f07;
+color: #fff;
+display: inline-block;
+width: auto;
+padding: 6px 12px;
+margin-top: 20px;
+border-radius: 4px;
+cursor: pointer;
+}
+.post:hover {
+  opacity: .6;
 }
   .nav__content {
     position: fixed;
@@ -476,12 +546,16 @@ For content 2
 For content 3
 ===================*/
 .content3 {
-    width: 90%;
+    width: 75%;
+    float: right;
     height: 2860px;
-    margin-left: 74px !important;
+    margin-right: 200px;
     background-color: #f1f3f3;
     position: absolute;
     display: flex;
+}
+.body-form{
+    margin-left: 340px;
 }
 .content3__con1,
 .content3__con2  {

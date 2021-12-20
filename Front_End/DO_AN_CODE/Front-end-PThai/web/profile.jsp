@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
-    <link rel="stylesheet" href="./style-profile.css">
+    <link rel="stylesheet" href="./thaicss/style-profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     
     <!-- Favicon -->

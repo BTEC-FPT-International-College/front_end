@@ -29,13 +29,13 @@ public class Post {
     private String location;
     private String categoryId;
     private int priod;
-    private String endDay;
+    private String end_day;
     private int room;
     private int bath;
     
     public Post() {}
 
-    public Post(String postId, String title, String avatar, int area, int price, String saleRent, String description, String phone, String email, int totalView, String userId, String createDay, int postType, String status, int readUnread, String updateDay, String location, String categoryId, int priod, String endDay, int room, int bath) {
+    public Post(String postId, String title, String avatar, int area, int price, String saleRent, String description, String phone, String email, int totalView, String userId, String createDay, int postType, String status, int readUnread, String updateDay, String location, String categoryId, int priod, String end_day, int room, int bath) {
         this.postId = postId;
         this.title = title;
         this.avatar = avatar;
@@ -55,7 +55,7 @@ public class Post {
         this.location = location;
         this.categoryId = categoryId;
         this.priod = priod;
-        this.endDay = endDay;
+        this.end_day = end_day;
         this.room = room;
         this.bath = bath;
     }
@@ -216,12 +216,12 @@ public class Post {
         this.priod = priod;
     }
 
-    public String getEndDay() {
-        return endDay;
+    public String getEnd_day() {
+        return end_day;
     }
 
-    public void setEndDay(String endDay) {
-        this.endDay = endDay;
+    public void setEnd_day(String endDay) {
+        this.end_day = endDay;
     }
 
     public int getRoom() {

@@ -42,30 +42,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script>
-        $(document).ready(function(){
-        let id = '<%=request.getParameter("postId")%>'
-        console.log(id)
-        $.ajax({
-                    url: "DController?ac=view",
-                    method: "POST",
-                    data: {get: id},
-                    success: function (data) {
-                        let o = $.parseJSON(data);
-                        console.log(o)
-                    $('#title').text(o[0].title)
-                    $('#avatar').attr('src',o[0].avatar);
-                     $('#price').text(o[0].price);
-                     $('#description').text(o[0].description);
-                         $('#room').text(o[0].room);
-                          $('#bath').text(o[0].bath);
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                })
-        } );
-    </script>
+  
 </head>
 <body class="aa-price-range">
 <!-- Pre Loader -->
@@ -516,6 +493,52 @@
 <script type="text/javascript" src="js/jquery.fancybox.pack.js"></script>
 <!-- Custom js -->
 <script src="js/custom.js"></script>
-
+  <script>
+        $(document).ready(function(){
+        let id = '<%=request.getParameter("postId")%>'
+        console.log(id)
+        $.ajax({
+                    url: "DController?ac=view",
+                    method: "POST",
+                    data: {get: id},
+                    success: function (data) {
+                        let o = $.parseJSON(data);
+                        console.log(o)
+                    $('#title').text(o[0].title)
+                    $('#avatar').attr('src',o[0].avatar);
+                     $('#price').text(o[0].price);
+                     $('#description').text(o[0].description);
+                         $('#room').text(o[0].room);
+                          $('#bath').text(o[0].bath);
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                })
+        } );
+    </script>  <script>
+        $(document).ready(function(){
+        let id = '<%=request.getParameter("postId")%>'
+        console.log(id)
+        $.ajax({
+                    url: "DController?ac=view",
+                    method: "POST",
+                    data: {get: id},
+                    success: function (data) {
+                        let o = $.parseJSON(data);
+                        console.log(o)
+                    $('#title').text(o[0].title)
+                    $('#avatar').attr('src',o[0].avatar);
+                     $('#price').text(o[0].price);
+                     $('#description').text(o[0].description);
+                         $('#room').text(o[0].room);
+                          $('#bath').text(o[0].bath);
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                })
+        } );
+    </script>
 </body>
 </html>

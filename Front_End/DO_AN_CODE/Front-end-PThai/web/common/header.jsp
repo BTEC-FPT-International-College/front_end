@@ -20,7 +20,7 @@
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="aa-header-right">
                   <a  class="aa-register" href="<c:url value ='/profile?action=profile' />">Register</a>
-                 <a class="aa-login" href="<c:url value ='/login?action=login' />">Login</a>
+                 <a class="aa-login" href="<c:url value ='/login.jsp' />">Login</a>
                 </div>
               </div>
             </div>
@@ -98,7 +98,7 @@
                 <li><a href="blog-archive.html">DIFFERENT</a></li>
               </ul>
             </li>
-            <li style="background-color: #ac2925"><a href="contact.html" class="post-button" >CREATE POST <i style="color: #59abe3;" class="fa fa-pencil-square-o" aria-hidden="true"></i> </a></li>
+            <li style="background-color: #ac2925"><a href="login.jsp" class="post-button" >CREATE POST <i style="color: #59abe3;" class="fa fa-pencil-square-o" aria-hidden="true"></i> </a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>

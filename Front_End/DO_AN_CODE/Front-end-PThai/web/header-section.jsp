@@ -1,9 +1,3 @@
-<%-- 
-    Document   : link
-    Created on : Nov 11, 2021, 12:01:07 PM
-    Author     : Admin
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -52,10 +46,10 @@
                         <div class="aa-header-left">
                           <div class="aa-telephone-no">
                             <span class="fa fa-phone"></span>
-                            1-900-523-3564
+                            19006789
                           </div>
                           <div class="aa-email hidden-xs">
-                            <span class="fa fa-envelope-o"></span> info@markups.com
+                            <span class="fa fa-envelope-o"></span> btecland@btec.com
                           </div>
                         </div>              
                       </div>
@@ -72,7 +66,7 @@
                             </div>
                           </div>
                           <ul class="options-menu" style="z-index: 10000001;"> 
-                            <li><a href="#">
+                            <li><a href="manager-post.jsp?id=<%=request.getParameter("id")%>">
                               <i class="far fa-list-alt"></i>
                               LIST OF POST</a></li>
                             <li><a href="#">
@@ -121,7 +115,7 @@
                   </button>
                   <!-- LOGO -->
                   <!-- Text based logo -->
-                  <a class="navbar-brand aa-logo" href="index.html"> BTEC <span>LAND</span></a>
+                  <a class="navbar-brand aa-logo" href="index.jsp"> BTEC <span>LAND</span></a>
                   <!-- Image based logo -->
                   <!-- <a class="navbar-brand aa-logo-img" href="index.html"><img src="img/logo.png" alt="logo"></a> -->
                 </div>
@@ -129,7 +123,7 @@
                 <!-- navbar  -->
                 <div id="navbar" class="navbar-collapse collapse" style="z-index: 999997">
                   <ul id="top-menu" class="nav navbar-nav navbar-right aa-main-nav">
-                    <li class="#"><a href="index.html">HOME</a></li>
+                    <li class="#"><a href="index.jsp">HOME</a></li>
                     <li class="dropdown">
                       <a class="dropdown-toggle" data-toggle="dropdown">BUY</a>
                       <ul class="dropdown-menu" role="menu">

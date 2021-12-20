@@ -1,13 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package Controller;
 
 import Entity.Post;
-import com.google.gson.Gson;
 import dao.dao;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -19,33 +18,34 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Admin
+ * @author MarkTran
  */
-@WebServlet(name = "DController", urlPatterns = {"/DController"})
-public class DController extends HttpServlet {
+@WebServlet(name = "UpdatePostController", urlPatterns = {"/UpdatePostController"})
+public class UpdatePostController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-    
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+         response.setContentType("text/html;charset=UTF-8");
          String act = request.getParameter("ac");
         if (act.equals("view")) {
-            String op = request.getParameter("get");
+            String op = request.getParameter("gets");
             dao am = new dao();
             ArrayList<Post> list = am.getPostById(Integer.parseInt(op));
             Gson json = new Gson();
-            String listPost = json.toJson(list);
+            String listTrainee = json.toJson(list);
             response.setContentType("text/html");
-            response.getWriter().write(listPost);
+            response.getWriter().write(listTrainee);
         }
-         
-        }
- 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

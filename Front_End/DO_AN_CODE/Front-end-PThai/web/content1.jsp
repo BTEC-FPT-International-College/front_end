@@ -67,7 +67,7 @@
                 </a>
             </div>
             <div class="management-des">
-                <a href="">
+                <a href="manager-post.jsp?id=<%=request.getParameter("id")%>">
                   <i class="fas fa-list-ol"></i>
                   LIST OF POST
                 </a>

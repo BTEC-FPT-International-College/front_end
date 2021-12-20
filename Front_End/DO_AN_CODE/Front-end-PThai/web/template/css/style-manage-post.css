@@ -18,7 +18,7 @@ body {
     /*margin-top: 166px;*/
 }
 
-.content {
+.contenta {
     /*width: 1048px;*/
     height: 100%;
     margin: auto;
@@ -129,7 +129,7 @@ body {
     left: 50%;
     background: #ccc;
     font-display: block;
-    background: url("./img/iconbtec.png") top center / cover no-repeat;
+    background: url("../img/iconbtec.png") top center / cover no-repeat;
     background-size: cover;
 }
 .management {
@@ -168,7 +168,7 @@ body {
 /* End content1  */
 
 /* For content2  */
-.content2 {
+.content2a {
     width: 79%;
     height: 100%;
     border-radius: 5px;
@@ -176,7 +176,7 @@ body {
     float: right;
     margin: 16px 0 16px;
 }
-.content2 .content2-title {
+.content2a .content2-title {
     margin-top: 14px;
     margin-left: 10px;
     font-size: 24px;

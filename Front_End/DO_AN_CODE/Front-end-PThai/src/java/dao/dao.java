@@ -40,7 +40,7 @@ public class dao {
              p.setDescription(rs.getString(8));
              p.setCreateDay(rs.getString(13));
              p.setPostType(rs.getInt(14));
-              p.setEndDay(rs.getString(21));
+              p.setEnd_day(rs.getString(21));
             p.setRoom(rs.getInt(22));
              p.setUserId(rs.getString(23));
              p.setLocation(rs.getString(18));
@@ -54,6 +54,7 @@ public class dao {
         }
         return list;
     }
+     
      
      public ArrayList<Post> getPostById(int postid) {
         ArrayList<Post> list = new ArrayList<>();
@@ -76,7 +77,7 @@ public class dao {
              p.setDescription(rs.getString(8));
              p.setCreateDay(rs.getString(13));
              p.setPostType(rs.getInt(14));
-              p.setEndDay(rs.getString(21));
+              p.setEnd_day(rs.getString(21));
             p.setRoom(rs.getInt(22));
             p.setBath(rs.getInt(23));
              p.setUserId(rs.getString(12));
@@ -91,5 +92,76 @@ public class dao {
         }
         return list;
     }
+     
+       public ArrayList<Post> getNext6(int amount) {
+        ArrayList<Post> list = new ArrayList<>();
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT * FROM web.tbl_post ORDER BY postid LIMIT 6 OFFSET ?");
+            while (rs.next()) {
+                Post p = new Post();
+             p.setPostId(rs.getString(1));
+                p.setTitle(rs.getString(2));
+             p.setAvatar(rs.getString(3));
+             p.setArea(rs.getInt(5));
+            p.setPrice(rs.getInt(6));
+            p.setSaleRent(rs.getString(7));
+             p.setDescription(rs.getString(8));
+             p.setCreateDay(rs.getString(13));
+             p.setPostType(rs.getInt(14));
+              p.setEnd_day(rs.getString(21));
+            p.setRoom(rs.getInt(22));
+             p.setUserId(rs.getString(23));
+             p.setLocation(rs.getString(18));
+                list.add(p);
+            }
+            rs.close();
+            stm.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return list;
+    }
+         public ArrayList<Post> getPostByUserID(String userid) {
+        ArrayList<Post> list = new ArrayList<>();
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        String sql = "SELECT * FROM web.tbl_post WHERE userid = ? order by create_day";
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setString(1, userid);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+    
+                 Post p = new Post();
+             p.setPostId(rs.getString(1));
+                p.setTitle(rs.getString(2));
+             p.setAvatar(rs.getString(3));
+             p.setArea(rs.getInt(5));
+            p.setPrice(rs.getInt(6));
+            p.setSaleRent(rs.getString(7));
+             p.setDescription(rs.getString(8));
+             p.setCreateDay(rs.getString(13));
+             p.setPostType(rs.getInt(14));
+              p.setEnd_day(rs.getString(21));
+            p.setRoom(rs.getInt(22));
+            p.setBath(rs.getInt(23));
+             p.setUserId(rs.getString(12));
+             p.setLocation(rs.getString(18));
+             p.setStatus(rs.getString(15));
+                list.add(p);
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return list;
+    }
+     
 }
   
