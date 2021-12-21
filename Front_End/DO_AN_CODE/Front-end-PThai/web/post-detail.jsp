@@ -114,7 +114,7 @@
                               <h3 id="description"></h3>
                               <h4>Features</h4>
                               <ul>
-                                  <li>Living space (m2):<span id="area"></span> </li>
+                                  <li>Living space (m2):<span id="area"></span> m2 </li>
                                   <li><span id="room"></span> Rooms</li>
                                   <li><span id="bath"></span> Baths</li>
                                   <li>Kitchen</li>
@@ -506,6 +506,7 @@
                         console.log(o)
                     $('#title').text(o[0].title)
                     $('#avatar').attr('src',o[0].avatar);
+                    $('#area').text(o[0].area);
                      $('#price').text(o[0].price);
                      $('#description').text(o[0].description);
                          $('#room').text(o[0].room);
@@ -516,29 +517,6 @@
                     }
                 })
         } );
-    </script>  <script>
-        $(document).ready(function(){
-        let id = '<%=request.getParameter("postId")%>'
-        console.log(id)
-        $.ajax({
-                    url: "DController?ac=view",
-                    method: "POST",
-                    data: {get: id},
-                    success: function (data) {
-                        let o = $.parseJSON(data);
-                        console.log(o)
-                    $('#title').text(o[0].title)
-                    $('#avatar').attr('src',o[0].avatar);
-                     $('#price').text(o[0].price);
-                     $('#description').text(o[0].description);
-                         $('#room').text(o[0].room);
-                          $('#bath').text(o[0].bath);
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                })
-        } );
-    </script>
+    </script> 
 </body>
 </html>

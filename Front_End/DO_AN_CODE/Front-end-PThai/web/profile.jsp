@@ -59,7 +59,7 @@
                     data: {get: id},
                     success: function (data) {
                         let objpro = $.parseJSON(data);
-                        console.log(objpro)
+                        console.log("sdfasdfasdf"+objpro)
                         $("#fullname").val(objpro[0].fullName)
                         
                         

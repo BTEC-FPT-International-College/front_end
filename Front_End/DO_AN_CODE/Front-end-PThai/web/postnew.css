@@ -212,7 +212,7 @@
   height: 100%;
   background: #fff;
   float: left;
-  margin: 168px 0 16px;
+  margin: 16px 0 16px;
   box-shadow: 0 0 10px #ccc;
   }
   .content1-head {
@@ -376,7 +376,7 @@
 }
   .nav__content {
     position: fixed;
-    top: 198px;
+    top: 32px;
     left: 40px;
     bottom: 12px;
     overflow-x: auto;
@@ -476,8 +476,10 @@ For content 2
 For content 3
 ===================*/
 .content3 {
-    width: 90%;
+    width: 70%;
     height: 2860px;
+    margin-top: 8px;
+    transform: translateX(240px);
     margin-left: 74px !important;
     background-color: #f1f3f3;
     position: absolute;
@@ -600,12 +602,11 @@ For content 3
   float: right;
 }
 #postCost {
-  margin-left: 138px;
-  width: 36px;
+  width: 90px;
 }
 #sumDay22 {
-  margin-left: 194px;
-  width: 36px;
+  margin-left: 16px;
+  width: 120px;
 }
 
 
@@ -637,7 +638,7 @@ End of content 3
 footer
 =============== */
 #aa-footer {
-  margin-top: 2956px;
+  margin-top: 2152px !important;
 }
 
   

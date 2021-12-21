@@ -10,7 +10,7 @@ package Entity;
  * @author Admin
  */
 public class Post {
-    private String postId;
+    private int postId;
     private String title;
     private String avatar;
     private int area;
@@ -26,16 +26,19 @@ public class Post {
     private String status;
     private int readUnread;
     private String updateDay;
-    private String location;
+    private String province;
+    private String district;
+    private String ward;
+    private String detailAddress;
     private String categoryId;
     private int priod;
-    private String end_day;
+    private String endDay;
     private int room;
     private int bath;
     
     public Post() {}
 
-    public Post(String postId, String title, String avatar, int area, int price, String saleRent, String description, String phone, String email, int totalView, String userId, String createDay, int postType, String status, int readUnread, String updateDay, String location, String categoryId, int priod, String end_day, int room, int bath) {
+    public Post(int postId, String title, String avatar, int area, int price, String saleRent, String description, String phone, String email, int totalView, String userId, String createDay, int postType, String status, int readUnread, String updateDay, String province, String district, String ward, String detailAddress, String categoryId, int priod, String endDay, int room, int bath) {
         this.postId = postId;
         this.title = title;
         this.avatar = avatar;
@@ -52,23 +55,22 @@ public class Post {
         this.status = status;
         this.readUnread = readUnread;
         this.updateDay = updateDay;
-        this.location = location;
+        this.province = province;
+        this.district = district;
+        this.ward = ward;
+        this.detailAddress = detailAddress;
         this.categoryId = categoryId;
         this.priod = priod;
-        this.end_day = end_day;
+        this.endDay = endDay;
         this.room = room;
         this.bath = bath;
     }
 
-    public Post(String title) {
-        this.title = title;
-    }
-
-    public String getPostId() {
+    public int getPostId() {
         return postId;
     }
 
-    public void setPostId(String postId) {
+    public void setPostId(int postId) {
         this.postId = postId;
     }
 
@@ -192,12 +194,36 @@ public class Post {
         this.updateDay = updateDay;
     }
 
-    public String getLocation() {
-        return location;
+    public String getProvince() {
+        return province;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getWard() {
+        return ward;
+    }
+
+    public void setWard(String ward) {
+        this.ward = ward;
+    }
+
+    public String getDetailAddress() {
+        return detailAddress;
+    }
+
+    public void setDetailAddress(String detailAddress) {
+        this.detailAddress = detailAddress;
     }
 
     public String getCategoryId() {
@@ -216,12 +242,12 @@ public class Post {
         this.priod = priod;
     }
 
-    public String getEnd_day() {
-        return end_day;
+    public String getEndDay() {
+        return endDay;
     }
 
-    public void setEnd_day(String endDay) {
-        this.end_day = endDay;
+    public void setEndDay(String endDay) {
+        this.endDay = endDay;
     }
 
     public int getRoom() {
@@ -239,6 +265,7 @@ public class Post {
     public void setBath(int bath) {
         this.bath = bath;
     }
+
     
     
 }

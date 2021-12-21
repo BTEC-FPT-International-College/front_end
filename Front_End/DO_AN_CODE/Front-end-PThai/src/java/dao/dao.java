@@ -30,8 +30,8 @@ public class dao {
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery("SELECT * FROM web.tbl_post;");
             while (rs.next()) {
-                Post p = new Post();
-             p.setPostId(rs.getString(1));
+               Post p = new Post();
+           p.setPostId(rs.getInt(1));
                 p.setTitle(rs.getString(2));
              p.setAvatar(rs.getString(3));
              p.setArea(rs.getInt(5));
@@ -40,10 +40,15 @@ public class dao {
              p.setDescription(rs.getString(8));
              p.setCreateDay(rs.getString(13));
              p.setPostType(rs.getInt(14));
-              p.setEnd_day(rs.getString(21));
+              p.setEndDay(rs.getString(21));
             p.setRoom(rs.getInt(22));
-             p.setUserId(rs.getString(23));
-             p.setLocation(rs.getString(18));
+             p.setUserId(rs.getString(12));
+             p.setBath(rs.getInt(23));
+             p.setProvince(rs.getString(18));
+             p.setDistrict(rs.getString(24));
+             p.setWard(rs.getString(25));
+             p.setDetailAddress(rs.getString(26));
+             
                 list.add(p);
             }
             rs.close();
@@ -67,8 +72,8 @@ public class dao {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
     
-                 Post p = new Post();
-             p.setPostId(rs.getString(1));
+                   Post p = new Post();
+           p.setPostId(rs.getInt(1));
                 p.setTitle(rs.getString(2));
              p.setAvatar(rs.getString(3));
              p.setArea(rs.getInt(5));
@@ -77,11 +82,14 @@ public class dao {
              p.setDescription(rs.getString(8));
              p.setCreateDay(rs.getString(13));
              p.setPostType(rs.getInt(14));
-              p.setEnd_day(rs.getString(21));
+              p.setEndDay(rs.getString(21));
             p.setRoom(rs.getInt(22));
-            p.setBath(rs.getInt(23));
              p.setUserId(rs.getString(12));
-             p.setLocation(rs.getString(18));
+             p.setBath(rs.getInt(23));
+             p.setProvince(rs.getString(18));
+             p.setDistrict(rs.getString(24));
+             p.setWard(rs.getString(25));
+             p.setDetailAddress(rs.getString(26));
                 list.add(p);
             }
             rs.close();
@@ -101,8 +109,8 @@ public class dao {
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery("SELECT * FROM web.tbl_post ORDER BY postid LIMIT 6 OFFSET ?");
             while (rs.next()) {
-                Post p = new Post();
-             p.setPostId(rs.getString(1));
+                 Post p = new Post();
+           p.setPostId(rs.getInt(1));
                 p.setTitle(rs.getString(2));
              p.setAvatar(rs.getString(3));
              p.setArea(rs.getInt(5));
@@ -111,10 +119,14 @@ public class dao {
              p.setDescription(rs.getString(8));
              p.setCreateDay(rs.getString(13));
              p.setPostType(rs.getInt(14));
-              p.setEnd_day(rs.getString(21));
+              p.setEndDay(rs.getString(21));
             p.setRoom(rs.getInt(22));
-             p.setUserId(rs.getString(23));
-             p.setLocation(rs.getString(18));
+             p.setUserId(rs.getString(12));
+             p.setBath(rs.getInt(23));
+             p.setProvince(rs.getString(18));
+             p.setDistrict(rs.getString(24));
+             p.setWard(rs.getString(25));
+             p.setDetailAddress(rs.getString(26));
                 list.add(p);
             }
             rs.close();
@@ -129,7 +141,7 @@ public class dao {
         ArrayList<Post> list = new ArrayList<>();
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
-        String sql = "SELECT * FROM web.tbl_post WHERE userid = ? order by create_day";
+        String sql = "SELECT * FROM web.tbl_post WHERE userid = ? order by postid DESC";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, userid);
@@ -137,7 +149,7 @@ public class dao {
             while (rs.next()) {
     
                  Post p = new Post();
-             p.setPostId(rs.getString(1));
+           p.setPostId(rs.getInt(1));
                 p.setTitle(rs.getString(2));
              p.setAvatar(rs.getString(3));
              p.setArea(rs.getInt(5));
@@ -146,12 +158,14 @@ public class dao {
              p.setDescription(rs.getString(8));
              p.setCreateDay(rs.getString(13));
              p.setPostType(rs.getInt(14));
-              p.setEnd_day(rs.getString(21));
+              p.setEndDay(rs.getString(21));
             p.setRoom(rs.getInt(22));
-            p.setBath(rs.getInt(23));
              p.setUserId(rs.getString(12));
-             p.setLocation(rs.getString(18));
-             p.setStatus(rs.getString(15));
+             p.setBath(rs.getInt(23));
+             p.setProvince(rs.getString(18));
+             p.setDistrict(rs.getString(24));
+             p.setWard(rs.getString(25));
+             p.setDetailAddress(rs.getString(26));
                 list.add(p);
             }
             rs.close();
@@ -161,6 +175,49 @@ public class dao {
             System.err.println(ex.getMessage());
         }
         return list;
+    }
+         public boolean updatePost( String title, String avatar, int area, int price, String saleRent,
+            String province, String district, String ward, String detailAddress, String description,
+            String phone, String email, String updateDay, int postType, 
+            String endDay, int room, int bath, int postId) {
+        String sql = "UPDATE `tbl_post` SET `title` = ?, "
+                + "`avatar` = ?, `area` = ?,`price` = ?, "
+                + "`sale_rent` = ?,  `province` = ?, `district` = ?, "
+                + "`ward` = ? , `detail_address` = ? , `description` = ?,"
+                + " `phone` = ?, `email` = ?, `update_day` = ?, `post_type` = ?,"
+                + " `end_day` = ?, `room` = ?, `bath` = ? WHERE `postid`= ?";
+               
+        int result = 0;
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+//          
+            ps.setString(1, title);
+            ps.setString(2, avatar);
+            ps.setInt(3, area);
+            ps.setInt(4, price);
+           ps.setString(5, saleRent);
+            ps.setString(6, province);
+            ps.setString(7, district);
+            ps.setString(8, ward);
+            ps.setString(9, detailAddress);
+            ps.setString(10, description);
+            ps.setString(11, phone);
+            ps.setString(12, email);
+            ps.setString(13, updateDay);
+            ps.setInt(14, postType);
+            ps.setString(15, endDay);
+            ps.setInt(16, room);
+            ps.setInt(17, bath);
+            ps.setInt(18, postId);
+            result = ps.executeUpdate();
+            ps.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return result > 0;
     }
      
 }

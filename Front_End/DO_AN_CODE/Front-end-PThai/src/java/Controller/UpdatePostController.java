@@ -5,6 +5,7 @@
 package Controller;
 
 import Entity.Post;
+import Model.PostModel;
 import dao.dao;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -41,10 +42,26 @@ public class UpdatePostController extends HttpServlet {
             dao am = new dao();
             ArrayList<Post> list = am.getPostById(Integer.parseInt(op));
             Gson json = new Gson();
-            String listTrainee = json.toJson(list);
+            String post = json.toJson(list);
             response.setContentType("text/html");
-            response.getWriter().write(listTrainee);
+            response.getWriter().write(post);
         }
+         if (act.equals("update")) {
+            String op = request.getParameter("getr");
+            Gson json = new Gson();
+            Post pos = json.fromJson(op, Post.class);
+            dao am = new dao();
+              boolean a = am.updatePost(pos.getTitle(), pos.getAvatar(), 
+                      pos.getArea(), pos.getPrice(), pos.getSaleRent(),
+            pos.getProvince(), pos.getDistrict(), pos.getWard(), pos.getDetailAddress(), pos.getDescription(),
+            pos.getPhone(), pos.getEmail(), pos.getUpdateDay(), pos.getPostType(), 
+            pos.getEndDay(), pos.getRoom(), pos.getBath(), pos.getPostId());
+            String listPost = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listPost);
+           
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -11,6 +11,7 @@ import Model.PostModel;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,11 +45,21 @@ public class PostController extends HttpServlet {
             Gson json = new Gson();
             Post pos = json.fromJson(op, Post.class);
             PostModel am = new PostModel();
-            boolean a = am.addPost(pos.getTitle(), pos.getAvatar(), pos.getArea(), pos.getPrice(), pos.getSaleRent(), pos.getLocation(), pos.getDescription(), pos.getCreateDay(), pos.getPostType(), pos.getEnd_day(), pos.getRoom(), pos.getBath(), pos.getUserId());
+            boolean a = am.addPost(pos.getPostId(), pos.getTitle(), pos.getAvatar(), pos.getArea(), pos.getPrice(), pos.getSaleRent(), pos.getProvince(), pos.getDistrict(), pos.getWard(), pos.getDetailAddress(), pos.getDescription(), pos.getPhone(), pos.getEmail(), pos.getCreateDay(), pos.getPostType(), pos.getEndDay(), pos.getRoom(), pos.getBath(), pos.getUserId());
             String listPost = json.toJson(a);
             response.setContentType("text/html");
             response.getWriter().write(listPost);
            
+        }
+       
+        if (action.equals("view")) {
+            String op = request.getParameter("get");
+            PostModel am = new PostModel();
+            ArrayList<Post> list = am.getIdPosts(op);
+            Gson json = new Gson();
+            String listPost = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listPost);
         }
     }
 
