@@ -55,7 +55,7 @@ public class UpdatePostController extends HttpServlet {
                       pos.getArea(), pos.getPrice(), pos.getSaleRent(),
             pos.getProvince(), pos.getDistrict(), pos.getWard(), pos.getDetailAddress(), pos.getDescription(),
             pos.getPhone(), pos.getEmail(), pos.getUpdateDay(), pos.getPostType(), 
-            pos.getEndDay(), pos.getRoom(), pos.getBath(), pos.getPostId());
+            pos.getEndDay(), pos.getRoom(), pos.getBath(), pos.getCategoryId(), pos.getProvinceValue(), pos.getPostId());
             String listPost = json.toJson(a);
             response.setContentType("text/html");
             response.getWriter().write(listPost);

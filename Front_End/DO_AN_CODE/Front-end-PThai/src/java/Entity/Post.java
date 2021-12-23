@@ -30,15 +30,16 @@ public class Post {
     private String district;
     private String ward;
     private String detailAddress;
-    private String categoryId;
+    private int categoryId;
     private int priod;
     private String endDay;
     private int room;
     private int bath;
+    private String provinceValue;
     
     public Post() {}
 
-    public Post(int postId, String title, String avatar, int area, int price, String saleRent, String description, String phone, String email, int totalView, String userId, String createDay, int postType, String status, int readUnread, String updateDay, String province, String district, String ward, String detailAddress, String categoryId, int priod, String endDay, int room, int bath) {
+    public Post(int postId, String title, String avatar, int area, int price, String saleRent, String description, String phone, String email, int totalView, String userId, String createDay, int postType, String status, int readUnread, String updateDay, String province, String district, String ward, String detailAddress, int categoryId, int priod, String endDay, int room, int bath,String provinceValue) {
         this.postId = postId;
         this.title = title;
         this.avatar = avatar;
@@ -64,6 +65,7 @@ public class Post {
         this.endDay = endDay;
         this.room = room;
         this.bath = bath;
+        this.provinceValue =provinceValue;
     }
 
     public int getPostId() {
@@ -226,11 +228,11 @@ public class Post {
         this.detailAddress = detailAddress;
     }
 
-    public String getCategoryId() {
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -265,7 +267,13 @@ public class Post {
     public void setBath(int bath) {
         this.bath = bath;
     }
+    public String getProvinceValue() {
+        return provinceValue;
+    }
 
+    public void setProvinceValue(String provinceValue) {
+        this.provinceValue = provinceValue;
+    }
     
     
 }

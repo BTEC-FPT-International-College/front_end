@@ -37,9 +37,9 @@
     </head>
     <body class="aa-price-range ">
         <!-- Pre Loader -->
-        <!--  <div id="aa-preloader-area">
+         <div id="aa-preloader-area">
             <div class="pulse"></div>
-          </div>-->
+          </div>
         <!-- SCROLL TOP BUTTON -->
         <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
         <!-- END SCROLL TOP BUTTON -->
@@ -290,7 +290,7 @@
                                         </div>
                                         <div class="aa-properties-detial">
                                             <span class="aa-price"> $ ${p.getPrice()}</span>
-                                            <a href="<c:url value ="/detail?postId=${p.getPostId() }" />" class="aa-secondary-btn">View Details</a>
+                                            <a href="<c:url value ="/post-detail.jsp?postId=${p.getPostId() }" />" class="aa-secondary-btn">View Details</a>
                                         </div>
                                     </div>
                                 </article>
@@ -439,8 +439,9 @@
     <script>
                 function loadMore() {
                     var amount = document.getElementsByClassName("product").length;
+                    console.log("Day la so post o home page"+amount)
                     $.ajax({
-                        url: "/java-web/load",
+                        url: "LoadMoreController",
                         type: "get",
                         data: {
                             exits: amount

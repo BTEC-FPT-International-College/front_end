@@ -97,4 +97,25 @@ public class ProfileModel {
         }
         return result > 0;
     }
+     public boolean addAccount(String fullName, String email, String phone, 
+            String password) {
+        String sql = "INSERT INTO `tbl_user` (`fullname`, `email`,`phone`, `password`)  VALUES (?, ?, ?, ?) ";
+        int result = 0;
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+//          
+            ps.setString(1, fullName);
+            ps.setString(2, email);
+            ps.setString(3, phone);
+            ps.setString(4, password);
+            result = ps.executeUpdate();
+            ps.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return result > 0;
+    }
 }

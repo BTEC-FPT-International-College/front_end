@@ -41,10 +41,10 @@
 <body>
   
     <%@ include file="./header-section.jsp" %>
-
+<div id="status"></div>
   <!-- Container  -->
   <div class="container-p">
-
+      
     <%@ include file="./content1.jsp" %>
    
     <div class="row content3" style="height: 2860px;">
@@ -79,14 +79,13 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h2 class="modal-title" style="color:rgb(238, 80, 31)">Add fail!!!</h2>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span id="x" aria-hidden="true">&times;</span>
-                            </button>
+                            
                         </div>
                         <div class="modal-body">
                             <p>please recharge to continue making posts</p>
                         </div>
                         <div class="modal-footer">
+                            <a style="color: green" href="deposit-money.jsp?id=<%=request.getParameter("id")%>"><button id="chuyen" style="background: #77b7e3;" type="button" class="btn btn-warning">Recharge Now</button></a>
                             <button id="chuyenerror" type="button" class="btn btn-warning"><i class="mdi mdi-close"></i>OK</button>
                         </div>
                     </div>
@@ -101,18 +100,18 @@
               </label>
             </div> 
             <h4>Real estate type*</h4> 
-            <select class="form-control">
-              <option>Apartment</option>
-              <option>Private house, street house</option>
-              <option>Villa, adjacent houses</option>
-              <option>The ground</option>
-              <option>Residential land</option>
-              <option>Office building</option>
-              <option>Apartment condotel</option>
-              <option>Officetel apartment</option>
-              <option>Restaurant</option>
-              <option>Warehouse, factory, kiot</option>
-              <option>Other house and land</option>
+            <select class="form-control" id="categoryid">
+              <option value="1">Apartment</option>
+              <option value="2">Private house, street house</option>
+              <option value="3">Villa, adjacent houses</option>
+              <option value="4">The ground</option>
+              <option value="5">Residential land</option>
+              <option value="6">Office building</option>
+              <option value="7">Apartment condotel</option>
+              <option value="8">Officetel apartment</option>
+              <option value="9">Restaurant</option>
+              <option value="10">Warehouse, factory, kiot</option>
+              <option value="11">Other house and land</option>
             </select> 
             <h3>Address</h3>
             <h4>Province / City</h4>
@@ -145,9 +144,9 @@
             <h2>Real estate information </h2>
             <h3 style="margin-top: 10px;">Specific description</h3>
             <h4>Area*</h4>
-            <input class="form-control" type="number" id="area" placeholder="Input area (mÂ²)" required>
+            <input class="form-control" type="number" id="area" placeholder="Input area (m²)" required>
             <h4>Price*</h4>
-            <input class="form-control" type="number" id="price"  placeholder="Input price / mÂ²" required>
+            <input class="form-control" type="number" id="price"  placeholder="Input price / m²" required>
             <h4>Room</h4>
             <div class="bedroom">
               <button onclick="increment()"><h1><i class="fas fa-plus"></i></h1></button>
@@ -183,19 +182,16 @@
             <form id="drag-drop-area">
                 <script src="https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.js"></script>
                 <script>
-                    var urlImage = "";
                   var uppy = Uppy.Core()
                     .use(Uppy.Dashboard, {
                       inline: true,
                       target: '#drag-drop-area'
                     })
-                    .use(Uppy.Tus, {endpoint: 'https://master.tus.io/files/'}) //upload images
+                    .use(Uppy.Tus, {endpoint: 'https://master.tus.io/files/'}) //you can put upload URL here, where you want to upload images
 
                   uppy.on('complete', (result) => {
                     console.log('Upload complete! We?ve uploaded these files:', result.successful)
                     urlImage = result.successful[0].uploadURL
-                    console.log("day la urrrl sdfsdf==== "+urlImage)
-                   
                   })
                 </script>
             </form>
@@ -212,11 +208,11 @@
             <textarea class="form-control" placeholder="Enter address" id="address-contact"></textarea>
           </div>
         </div>
-        <div class="col l-4 content3__con2">
+                        <div class="col l-4 content3__con2" >
           <div class="content3__con2-child">
             <h4>Type of post</h4>
             <select class="form-control" id="type-post" onChange="calTypes();">
-              <option value="1">Regular post</option>
+              <option value="0">Regular post</option>
               <option value="2">Silver</option>
               <option value="3">Gold</option>
               <option value="4">Diamond</option>
@@ -310,7 +306,7 @@
               <div class="payment-title">
                 <div class="cost-day">
                   Posting cost / day
-                  <input  id="postCost" style="pointer-events: none;" onchange="sum()" />
+                  <input  id="postCost" style="pointer-events: none; margin-left: 8px;" onchange="sum()" />
                   <div class="money">
                     Coin
                   </div>
@@ -325,7 +321,7 @@
               <div class="payment-price">
                 Total prices
                 <input id="sumAll" onchange="tSum(); after();" style="pointer-events: none;
-                                                            margin-left: 12px;"/>
+                                                            margin-left: 14px; width: 128px;"/>
               </div>
             </div>
             <input id="contenttran" style="display: none;" value="New Post"/>
@@ -370,16 +366,22 @@
         })
         
         $(document).ready(function() {
-            // for floating div
-//            jQuery(function($) {
+            
+            jQuery(function($) {
             $(window).scroll(function fix_element() {
-              $('#content1').css(
-                $(window).scrollTop() > 100
-                  ? { 'position': 'fixed', 'top': '10px' }
-                  : { 'position': 'relative', 'top': 'auto' }
-              );
-              return fix_element;
-            }());
+//              $('.content1').css(
+//                $(window).scrollTop() > 100
+//                  ? { 'position': 'fixed', 'top': '64px' }
+//                  : { 'position': 'relative', 'top': 'auto' }
+//              );
+//              $('.content3__con2').css(
+//                $(window).scrollTop() > 120
+//                  ? { 'position': 'fixed', 'top': '64px' }
+//                  : { 'position': 'relative', 'top': 'auto' }
+//              );
+                    return fix_element;
+                  }());
+            });
          
             //for profile
             let id = '<%=request.getParameter("id")%>'
@@ -432,7 +434,7 @@
             $("#submit").click(function() {
 //                alert("succeess");
                 p.title = $('#title').val();
-                p.avatar = $('#drag-drop-area').val();
+                p.avatar = urlImage;
                 p.area = $('#area').val();
                 p.price = $('#price').val();
 //                p.saleRent = $('#title').val();
@@ -444,19 +446,23 @@
                 const province = $("#province option:selected").text();
                 const district = $('#district option:selected').text();
                 const ward = $('#ward option:selected').text();
+                const provinceid = $('#province option:selected').val();
                 const detail = $('#address').val();
                 p.province = province;
+                p.provinceValue = provinceid;
                 p.district = district;
                 p.ward = ward;
                 p.detailAddress = detail;
                 p.room = $('#room').val();
                 p.bath = $('#bath').val();
                 p.postType = $('#type-post option:selected').val();
+                p.categoryId = $('#categoryid option:selected').val();
                 p.createDay = $('#pick_date').val();
                 p.endDay = $('#drop_date').val();
                 p.priod = $('#sumDay2').val();
-                p.avatar = urlImage;
                 wl.surplus = $('#sumAll').val();
+                let sum = $('#sumAll').val();
+                
                 pr.rewardPoint = $('#postCost').val();
                 tr.walletID = walletid;
                 tr.content = $('#contenttran').val();
@@ -464,8 +470,6 @@
                 tr.createDay = $('#pick_date').val();
                 tr.createHour = $('#tran-hour').val();
                 tr.packet = $('#type-post option:selected').val();
-                let postid2 = "";
-                tr.postID = postid2;
                 p.userId =    '<%=request.getParameter("id")%>'
                 pr.userID =    '<%=request.getParameter("id")%>'
                 wl.userID =    '<%=request.getParameter("id")%>'
@@ -473,7 +477,7 @@
                 const prr = JSON.stringify(pr)
                 const wlt = JSON.stringify(wl)
                 console.log(po)
-                if (btecwallet > 0) {
+                if (btecwallet > sum) {
                     $.ajax({
                         url: "PostController?ac=add",
                         type: "post",
@@ -483,66 +487,77 @@
                             console.log(rs)
                             
                             if (rs) {
-                                $("#show").show();
+                                  let get_postid;
+                                  $.ajax({
+                                    url: "PostController?ac=view",
+                                    method: "POST",
+                                    data: {get: id},
+                                    success: function (data) {
+                                        let obj = $.parseJSON(data);
+                                        console.log(obj)
+                                        get_postid = obj[obj.length - 1].postId
+                                        tr.postID = get_postid;
+                                        
+                                        const trr = JSON.stringify(tr)
+                                        console.log(trr)
+                                         $.ajax({
+                                            url: "TransactionController?ac=add",
+                                            type: "post",
+                                            data: {get: trr},
+                                            success: function (data) {
+                                                let rs = $.parseJSON(data);
+                                                console.log(rs)
+                                                if (rs) {
+                                                    $.ajax({
+                                                        url: "WalletController?ac=minus",
+                                                        method: "POST",
+                                                        data: {get: wlt},
+                                                        success: function (data) {
+                                                            let obj = $.parseJSON(data);
+                                                            console.log(obj)
+                                                        },
+                                                        error: function () {
+                                                            alert("view error");
+                                                        }
+                                                    });
+
+
+                                                    $.ajax({
+                                                        url: "ProfileController?ac=updaterw",
+                                                        type: "post",
+                                                        data: {get: prr},
+                                                        success: function (data) {
+                                                            let rs = $.parseJSON(data);
+                                                            console.log(rs)
+                                                        },
+                                                        error: function () {
+                                                        }
+                                                    });
+                                                    $("#show").show();
+                                                } else {
+                                                    $("#error").show()
+                                                }
+                                            },
+                                            error: function () {
+                                            }
+                                        });
+
+                                    },
+                                    error: function () {
+                                        alert("view error");
+                                    }
+                                });
+//                                $("#show").show();
                             } else {
                                 $("#error").show()
                             }
                         },
                         error: function () {
-                        }
-                    });
-                    $.ajax({
-                        url: "PostController?ac=view",
-                        method: "POST",
-                        data: {get: id},
-                        success: function (data) {
-                            let obj = $.parseJSON(data);
-                            console.log(obj)
-                            $.each(obj, function(key, value) {
-                                postid2 = value.postId
-                                postid2 += 1
-                                console.log("postid2= "+postid2)
-                            });
-                        },
-                        error: function () {
-                            alert("view error");
                         }
                     });
                     
-                    console.log("postid 1 test"+postid2)
-                    $.ajax({
-                        url: "TransactionController?ac=add",
-                        type: "post",
-                        data: {get: po},
-                        success: function (data) {
-                            let rs = $.parseJSON(data);
-                            console.log(rs)
-                            if (rs) {
-                                $("#show").show();
-                            } else {
-                                $("#error").show()
-                            }
-                        },
-                        error: function () {
-                        }
-                    });
-                    $.ajax({
-                        url: "ProfileController?ac=updaterw",
-                        type: "post",
-                        data: {get: prr},
-                        success: function (data) {
-                            let rs = $.parseJSON(data);
-                            console.log(rs)
-                            if (rs) {
-    //                                $("#show").show();
-    //                            alert("UPDATE SUCCESSFUL")
-                            } else {
-                                $("#error").show()
-                            }
-                        },
-                        error: function () {
-                        }
-                    });
+                    
+                    
                 } else {
                     $("#errorcoin").show();               
                 }
@@ -592,7 +607,7 @@
   <!-- End of Footer  -->
 
   <!-- jQuery library -->
-  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
   <script src="js/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="js/bootstrap.js"></script>

@@ -46,9 +46,9 @@
 </head>
 <body class="aa-price-range">
 <!-- Pre Loader -->
-<!--<div id="aa-preloader-area">-->
-<!--    <div class="pulse"></div>-->
-<!--</div>-->
+<div id="aa-preloader-area">
+    <div class="pulse"></div>
+</div>
 <!-- SCROLL TOP BUTTON -->
 <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
 <!-- END SCROLL TOP BUTTON -->
@@ -65,8 +65,8 @@
                   <div class="aa-property-header-inner">
                       <h2> </h2>
                       <ol class="breadcrumb">
-                          <li><a href="index.html">HOME</a></li>
-                          <li class="active">APARTMENTS IN CIPUTRA</li>
+                          <li><a href="index.jsp">HOME</a></li>
+                          <li class="active">Post Detail</li>
                       </ol>
                   </div>
               </div>
@@ -127,10 +127,10 @@
                                   <li>Comunity Center</li>
                                   <li>Security System</li><aside></aside>
                               </ul>
-                              <h4>Property Video</h4>
+<!--                              <h4>Property Video</h4>
                               <iframe width="100%" height="480" src="https://www.youtube.com/embed/azqWcrhlITQ" frameborder="0" allowfullscreen></iframe>
                               <h4>Property Map</h4>
-                              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7445.707964188539!2d105.7971114267224!3d21.078493404858968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135aac0896ba75b%3A0xd95db140eef64eec!2zS2h1IMSRw7QgdGjhu4sgQ2lwdXRyYSwgUGjDuiBUaMaw4bujbmcsIFTDonkgSOG7kywgSGFub2ksIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1634179379716!5m2!1sen!2s" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7445.707964188539!2d105.7971114267224!3d21.078493404858968!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135aac0896ba75b%3A0xd95db140eef64eec!2zS2h1IMSRw7QgdGjhu4sgQ2lwdXRyYSwgUGjDuiBUaMaw4bujbmcsIFTDonkgSOG7kywgSGFub2ksIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1634179379716!5m2!1sen!2s" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>-->
                           </div>
                           <div class="col-md-12">
                               <div id="respond">

@@ -88,6 +88,7 @@ public class dao {
              p.setBath(rs.getInt(23));
              p.setProvince(rs.getString(18));
              p.setDistrict(rs.getString(24));
+             p.setStatus(rs.getString(15));
              p.setWard(rs.getString(25));
              p.setDetailAddress(rs.getString(26));
                 list.add(p);
@@ -105,9 +106,53 @@ public class dao {
         ArrayList<Post> list = new ArrayList<>();
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
+        
+        String sql =("SELECT * FROM web.tbl_post,tbl_user where tbl_post.userid = \n" +
+                "tbl_user.userid ORDER BY tbl_post.post_type DESC,\n" +
+                "tbl_post.postid DESC,tbl_user.reward_point DESC LIMIT 6 OFFSET ?");
         try {
             Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM web.tbl_post ORDER BY postid LIMIT 6 OFFSET ?");
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, amount);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                 Post p = new Post();
+           p.setPostId(rs.getInt(1));
+                p.setTitle(rs.getString(2));
+             p.setAvatar(rs.getString(3));
+             p.setArea(rs.getInt(5));
+            p.setPrice(rs.getInt(6));
+            p.setSaleRent(rs.getString(7));
+             p.setDescription(rs.getString(8));
+             p.setCreateDay(rs.getString(13));
+             p.setPostType(rs.getInt(14));
+              p.setEndDay(rs.getString(21));
+            p.setRoom(rs.getInt(22));
+             p.setUserId(rs.getString(12));
+             p.setBath(rs.getInt(23));
+             p.setProvince(rs.getString(18));
+             p.setDistrict(rs.getString(24));
+             p.setWard(rs.getString(25));
+             p.setDetailAddress(rs.getString(26));
+                list.add(p);
+            }
+            rs.close();
+            stm.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return list;
+    }
+       public ArrayList<Post> getTop6() {
+        ArrayList<Post> list = new ArrayList<>();
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT * FROM web.tbl_post,tbl_user where tbl_post.userid = "
+                    + "tbl_user.userid ORDER BY tbl_post.post_type DESC,"
+                    + " tbl_post.postid DESC,tbl_user.reward_point DESC LIMIT 6 ;");
             while (rs.next()) {
                  Post p = new Post();
            p.setPostId(rs.getInt(1));
@@ -158,6 +203,8 @@ public class dao {
              p.setDescription(rs.getString(8));
              p.setCreateDay(rs.getString(13));
              p.setPostType(rs.getInt(14));
+             p.setStatus(rs.getString(15));
+             p.setUpdateDay(rs.getString(17));
               p.setEndDay(rs.getString(21));
             p.setRoom(rs.getInt(22));
              p.setUserId(rs.getString(12));
@@ -166,6 +213,7 @@ public class dao {
              p.setDistrict(rs.getString(24));
              p.setWard(rs.getString(25));
              p.setDetailAddress(rs.getString(26));
+              
                 list.add(p);
             }
             rs.close();
@@ -179,13 +227,13 @@ public class dao {
          public boolean updatePost( String title, String avatar, int area, int price, String saleRent,
             String province, String district, String ward, String detailAddress, String description,
             String phone, String email, String updateDay, int postType, 
-            String endDay, int room, int bath, int postId) {
+            String endDay, int room, int bath,int categoryId, String provinceValue, int postId) {
         String sql = "UPDATE `tbl_post` SET `title` = ?, "
                 + "`avatar` = ?, `area` = ?,`price` = ?, "
                 + "`sale_rent` = ?,  `province` = ?, `district` = ?, "
                 + "`ward` = ? , `detail_address` = ? , `description` = ?,"
                 + " `phone` = ?, `email` = ?, `update_day` = ?, `post_type` = ?,"
-                + " `end_day` = ?, `room` = ?, `bath` = ? WHERE `postid`= ?";
+                + " `end_day` = ?, `room` = ?, `bath` = ? , `categoryid` = ?, `province_value` = ?WHERE `postid`= ?";
                
         int result = 0;
         GetConnection cn = new GetConnection();
@@ -210,7 +258,9 @@ public class dao {
             ps.setString(15, endDay);
             ps.setInt(16, room);
             ps.setInt(17, bath);
-            ps.setInt(18, postId);
+            ps.setInt(18, categoryId);
+            ps.setString(19,provinceValue);
+            ps.setInt(20, postId);
             result = ps.executeUpdate();
             ps.close();
             conn.close();

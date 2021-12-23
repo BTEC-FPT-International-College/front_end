@@ -35,9 +35,11 @@ public class LoadMoreController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String amount = request.getParameter("exits");
+        int iamount = Integer.parseInt(amount);
         dao dao = new dao();
        	PrintWriter out = response.getWriter();
-                List<Post> list = dao.getNext6(6); 
+                List<Post> list = dao.getNext6(iamount); 
 		for(Post p : list)
 		out.println(
 				 "<div class=\"product col-md-4\">\r\n"
@@ -59,7 +61,7 @@ public class LoadMoreController extends HttpServlet {
 				+ "</h3>\r\n"
 				+ "</div>\r\n"
 				+ "<div id=\"post-location\">\r\n"
-				+ "<i class=\"fa fa-map-marker\"> "+p.getLocation()+"</i>\r\n"
+				+ "<i class=\"fa fa-map-marker\"> "+p.getProvince()+","+p.getDistrict()+"+"+p.getWard()+"+"+p.getDetailAddress()+"</i>\r\n"
 				+ "</div>\r\n"
 				+ "<div class=\"aa-properties-detial\">\r\n"
 				+ "<span class=\"aa-price\"> $ "+p.getPrice()+"</span> <a href=\"#\"\r\n"

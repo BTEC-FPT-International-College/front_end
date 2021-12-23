@@ -58,6 +58,17 @@ public class TransactionController extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(listTransaction);
         }
+        if (act.equals("add")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Transaction tran = json.fromJson(op, Transaction.class);
+            TransactionModel am = new TransactionModel();
+            boolean a = am.addTransaction(tran.getPostID(), tran.getWalletID(), tran.getContent(), tran.getPrice(), tran.getCreateDay(), tran.getCreateHour(), tran.getPacket());
+            String listTran = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTran);
+           
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

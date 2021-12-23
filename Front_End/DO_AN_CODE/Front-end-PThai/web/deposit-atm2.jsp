@@ -303,8 +303,6 @@
                 });
                 
           </script>
-    
-          <h1 id="wallet"></h1>
           
     <a class="the-most" target="_blank" href="#">
       <img src="https://infofinance.vn/wp-content/uploads/2020/10/ng%C3%A2nhangf.jpg">

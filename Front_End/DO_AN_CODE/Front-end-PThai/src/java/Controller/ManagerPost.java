@@ -41,9 +41,9 @@ public class ManagerPost extends HttpServlet {
             dao am = new dao();
             ArrayList<Post> list = am.getPostByUserID(op);
             Gson json = new Gson();
-            String listTrainee = json.toJson(list);
+            String listpost = json.toJson(list);
             response.setContentType("text/html");
-            response.getWriter().write(listTrainee);
+            response.getWriter().write(listpost);
         }
     }
 

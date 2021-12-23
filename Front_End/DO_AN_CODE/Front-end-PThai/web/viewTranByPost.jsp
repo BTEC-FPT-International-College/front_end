@@ -63,9 +63,8 @@
                     +'</tr>')
                         
                          $('#tbody2').append('<tr>' 
-                    +"<td>"+value.location+"</td>"
+                    +"<td>"+value.detailAddress+", "+value.ward+", "+value.district+", "+value.province+"</td>"
                     +"<td>"+value.saleRent+"</td>"
-                    +"<td>"+value.status+"</td>"
                     +'</tr>')
                         });
                     },
@@ -142,7 +141,6 @@
                     <tr>
                     <th>Location</th>
                     <th>Sale_Rent</th>
-                    <th>Status</th>
                     </tr>
                     </thead>
                     <tbody id="tbody2">

@@ -68,6 +68,18 @@ public class ProfileController extends HttpServlet {
             response.getWriter().write(listProfile);
            
         }
+        if (act.equals("add")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Profile re = json.fromJson(op, Profile.class);
+            ProfileModel am = new ProfileModel();
+            boolean a = am.addAccount(re.getFullName(), re.getEmail(), re.getPhone(), re.getPassword());
+            String listPro = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listPro);
+           
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -33,14 +33,13 @@ public class TransactionModel {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Transaction acc = new Transaction();
-                acc.setPostID(rs.getString(1));
-                acc.setWalletID(rs.getString(2));
+                acc.setPostID(rs.getInt(1));
+                acc.setWalletID(rs.getInt(2));
                 acc.setPrice(rs.getInt(4));
                 acc.setCreateDay(rs.getString(5));
                 acc.setCreateHour(rs.getString(6));
-                acc.setTransactionID(rs.getString(7));
+                acc.setTransactionID(rs.getInt(7));
                 acc.setPacket(rs.getInt(8));
-                acc.setUserID(rs.getString(9));
                 list.add(acc);
             }
             rs.close();
@@ -54,7 +53,7 @@ public class TransactionModel {
    
     public ArrayList<Post> getListTransactionByPost(String id) {
         ArrayList<Post> list = new ArrayList<>();
-        String sql = "SELECT * FROM tbl_post WHERE postid = ? ";
+        String sql = "SELECT postid, title, end_day, province, district, ward, detail_address, sale_rent, status FROM tbl_post WHERE postid = ? ";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {
@@ -63,28 +62,15 @@ public class TransactionModel {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Post acc = new Post();
-                acc.setPostId(rs.getString(1));
+                acc.setPostId(rs.getInt(1));
                 acc.setTitle(rs.getString(2));
-                acc.setAvatar(rs.getString(3));
-                acc.setArea(rs.getInt(4));
-                acc.setPrice(rs.getInt(5));
-                acc.setSaleRent(rs.getString(6));
-                acc.setDescription(rs.getString(7));
-                acc.setPhone(rs.getString(8));
-                acc.setEmail(rs.getString(9));
-                acc.setTotalView(rs.getInt(10));
-                acc.setUserId(rs.getString(11));
-                acc.setCreateDay(rs.getString(12));
-                acc.setPostType(rs.getInt(13));
-                acc.setStatus(rs.getString(14));
-                acc.setReadUnread(rs.getInt(15));
-                acc.setUpdateDay(rs.getString(16));
-                acc.setLocation(rs.getString(17));
-                acc.setCategoryId(rs.getString(18));
-                acc.setPriod(rs.getInt(19));
-                acc.setEndDay(rs.getString(20));
-                acc.setRoom(rs.getInt(21));
-                acc.setBath(rs.getInt(22));
+                acc.setEndDay(rs.getString(3));
+                acc.setProvince(rs.getString(4));
+                acc.setDistrict(rs.getString(5));
+                acc.setWard(rs.getString(6));
+                acc.setDetailAddress(rs.getString(7));
+                acc.setSaleRent(rs.getString(8));
+                acc.setStatus(rs.getString(9));
                 list.add(acc);
             }
             rs.close();
@@ -94,6 +80,38 @@ public class TransactionModel {
             System.err.println(ex.getMessage());
         }
         return list;
+    }
+    
+    public boolean addTransaction(int postID, int walletID, String content, int price, String createDay, String createHour, int packet  ) {
+        String sql = ""
+                + "INSERT INTO `tbl_transaction_history`\n"
+                + "(postid,\n"
+                + "walletid,\n"
+                + "content,\n"
+                + "price,\n"
+                + "create_day,\n"
+                + "create_hour,\n"
+                + "packet)\n"
+                + "VALUES(?, ?, ?, ?, ?, ?, ?)";
+        int result = 0;
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, postID);
+            ps.setInt(2, walletID);
+            ps.setString(3, content);
+            ps.setInt(4, price);
+            ps.setString(5, createDay);
+            ps.setString(6, createHour);
+            ps.setInt(7, packet);
+            result = ps.executeUpdate();
+            ps.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return result > 0;
     }
 
     

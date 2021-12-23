@@ -41,7 +41,7 @@
 <body>
     
     <%@ include file="./header-section.jsp" %>
-    <!-- for successful add-->
+    
             <div class="modal" tabindex="-1" id="show" role="dialog">
                 <div class="modal-dialog alert-success" role="document">
                     <div class="modal-content">
@@ -56,8 +56,8 @@
                             <p>You will move to category management page</p>
                         </div>
                         <div class="modal-footer">
-                            <button id="chuyen" type="button" class="btn btn-warning"><i class="mdi mdi-close"></i>Stay</button>
-                            <a href="profile.jsp"><button id="close" type="button" class="btn btn-success" data-dismiss="modal"><i class="mdi mdi-arrow-right-bold"></i>Move</button></a>
+                           
+                            <a href="update.jsp"><button id="close" type="button" class="btn btn-success" data-dismiss="modal"><i class="mdi mdi-arrow-right-bold"></i>Ok</button></a>
                         </div>
                     </div>
                 </div>
@@ -113,36 +113,7 @@
                     </div>
                 </div>
 
-                <!-- / Advance Search -->
-
-<!--                <div class="row">-->
-<!--                    <div class="col-md-12 stretch-card">-->
-<!--                        <div class="card">-->
-<!--                            <div class="card-body">-->
-<!--                                <p class="card-title">Recent Purchases</p>-->
-<!--                                <div class="table-responsive">-->
-<!--                                    <table id="recent-purchases-listing" class="table">-->
-<!--                                        <thead>-->
-<!--                                        <tr>-->
-<!--                                            <th>Id</th>-->
-<!--                                            <th>Date</th>-->
-<!--                                            <th>Post ID</th>-->
-<!--                                            <th>User</th>-->
-<!--                                            <th>Category</th>-->
-<!--                                            <th>Packet</th>-->
-<!--                                            <th>Total Day</th>-->
-<!--                                            <th>Price</th>-->
-<!--                                        </tr>-->
-<!--                                        </thead>-->
-<!--                                        <tbody>-->
-<!--                                        </tbody>-->
-<!--                                    </table>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
+    
                 <div class="container">
                     <div class="row">
                         <div class="col-12" id="a-hover">
@@ -152,6 +123,7 @@
                                     <th scope="col">POST ID</th>
                                     <th scope="col">TITLE</th>
                                     <th scope="col">Date created</th>
+                                    <th scope="col">Update Day</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Expiration date</th>
                                     <th scope="col">Action</th>
@@ -214,40 +186,35 @@
                     data: {get: id},
                     success: function (data) {
                         let o = $.parseJSON(data);
-                        console.log("aaaaaa"+o)
+                        console.log("aaaaaa"+o[0].status)
                          $.each(o, function (key, value) {
                             $('#tbody').append('<tr><td>'+value.postId+'</td>' 
                     +"<td>"
                        +"<a href='post-detail.jsp?postId="+value.postId+"'>"+value.title+"</a>"
                     +"</td>"
                     +"<td>"+value.createDay+"</td>"
-            +"<td>"+value.status+"</td>"
-                +"<td>"+value.end_day+"</td>"
+                    +"<td>"+value.updateDay+"</td>"
+                    +"<td>"+value.status+"</td>"
+                     +"<td>"+value.endDay+"</td>"
                       +" <td>"
                                +'<a href="post-detail.jsp?postId='+value.postId+'"><button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button></a>'  
                                +' <a href="update-post.jsp?postId='+value.postId+'&&id='+id+'"><button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button></a>'     
-                                 +'       <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>'
+                                 +'       <button type="button" class="btn btn-danger" id="delete-post"><i class="fas fa-trash-alt"></i></button>'
                                     +"</td>"     
                     +'</tr>')
-//             <tr>
-//                                    <td><a href="post-detail.html">Ciputra: Industrial and modern s</a></td>
-//                                    <td>1/10/2021</td>
-//                                    <td>106,789</td>
-//                                    <td>Expired</td>
-//                                    <td>20/10/2021</td>
-//                                    <td>
-//                                       <a href="post-detail.html"><button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button></a>
-//                                      <a href="update-post.html"><button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button></a>
-//                                        <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-//                                    </td>
-//                                </tr>
+                       
                         });
                     },
                     error: function () {
                         alert("error");
                     }
                 })
+                  
         } );
+        $("#delete-post").click(function() 
+        {
+            
+        });
     </script>
 </body>
 </html>

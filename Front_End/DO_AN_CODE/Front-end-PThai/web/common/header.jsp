@@ -19,7 +19,7 @@
               </div>
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="aa-header-right">
-                  <a  class="aa-register" href="<c:url value ='/profile?action=profile' />">Register</a>
+                  <a  class="aa-register" href="<c:url value ='/login.jsp' />">Register</a>
                  <a class="aa-login" href="<c:url value ='/login.jsp' />">Login</a>
                 </div>
               </div>

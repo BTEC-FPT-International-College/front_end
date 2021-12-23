@@ -57,7 +57,7 @@
                 <div class="modal-dialog alert-success" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" style="color:green">Successful Add</h5>
+                            <h5 class="modal-title" style="color:green">Update Successful</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span id="x" aria-hidden="true">&times;</span>
                             </button>
@@ -67,7 +67,7 @@
                             <p>You will move to profile page</p>
                         </div>
                         <div class="modal-footer">
-                            <button id="chuyen" type="button" class="btn btn-warning"><i class="mdi mdi-close"></i>Stay</button>
+                         <a href="update-post.jsp?id=<%=request.getParameter("id")%>&&postId=<%=request.getParameter("postId")%>">   <button id="chuyen" type="button" class="btn btn-warning"><i class="mdi mdi-close"></i>Stay</button>
                             <a href="profile.jsp?id=<%=request.getParameter("id")%>"><button id="close" type="button" class="btn btn-success" data-dismiss="modal"><i class="mdi mdi-arrow-right-bold"></i>Move</button></a>
                         </div>
                     </div>
@@ -87,6 +87,8 @@
                             <p>please recharge to continue making posts</p>
                         </div>
                         <div class="modal-footer">
+                        <a style="color: green" href="deposit-money.jsp?id=<%=request.getParameter("id")%>"><button id="chuyen" style="background: #77b7e3;" type="button" class="btn btn-warning">Recharge Now</button></a>
+
                             <button id="chuyenerror" type="button" class="btn btn-warning"><i class="mdi mdi-close"></i>OK</button>
                         </div>
                     </div>
@@ -101,18 +103,18 @@
               </label>
             </div> 
             <h4>Real estate type*</h4> 
-            <select class="form-control">
-              <option>Apartment</option>
-              <option>Private house, street house</option>
-              <option>Villa, adjacent houses</option>
-              <option>The ground</option>
-              <option>Residential land</option>
-              <option>Office building</option>
-              <option>Apartment condotel</option>
-              <option>Officetel apartment</option>
-              <option>Restaurant</option>
-              <option>Warehouse, factory, kiot</option>
-              <option>Other house and land</option>
+            <select class="form-control" id="categoryid">
+             <option value="1">Apartment</option>
+              <option value="2">Private house, street house</option>
+              <option value="3">Villa, adjacent houses</option>
+              <option value="4">The ground</option>
+              <option value="5">Residential land</option>
+              <option value="6">Office building</option>
+              <option value="7">Apartment condotel</option>
+              <option value="8">Officetel apartment</option>
+              <option value="9">Restaurant</option>
+              <option value="10">Warehouse, factory, kiot</option>
+              <option value="11">Other house and land</option>
             </select> 
             <h3>Address</h3>
             <h4>Province / City</h4>
@@ -194,7 +196,6 @@
                   uppy.on('complete', (result) => {
                     console.log('Upload complete! We?ve uploaded these files:', result.successful)
                     urlImage = result.successful[0].uploadURL
-                    console.log("day la urrrl sdfsdf==== "+urlImage)
                    
                   })
                 </script>
@@ -221,7 +222,7 @@
               <option value="3">Gold</option>
               <option value="4">Diamond</option>
             </select>
-            <h4>Start date</h4>
+            <h4>Update date</h4>
             <div class="input-daterange input-group" style="height: 34px;" id="datepicker">
               <input data-toggle="date-picker"  class="input-sm form-control start-date" id="pick_date" onchange="fixStartDate(); cal(); calTypes();"  style="height: 34px; width:280px;font-size: 13px; z-index: 0;" name="from" placeholder="From date"/>
               <div class="todate">
@@ -330,7 +331,7 @@
             </div>
             <input id="contenttran" style="display: none;" value="New Post"/>
             <input id="tran-hour" style="display: none;" />
-            <button type="submit" value="submit" id="submit" >Next</button>
+            <button type="submit" value="submit" id="submit" >Update</button>
             <div id="currentpostid"></div>
           </div>
         <!-- </div> -->
@@ -445,20 +446,22 @@
                 const district = $('#district option:selected').text();
                 const ward = $('#ward option:selected').text();
                 const detail = $('#address').val();
+                 const provinceid = $('#province option:selected').val();
                 p.province = province;
+                p.provinceValue = provinceid;
                 p.district = district;
                 p.ward = ward;
                 p.detailAddress = detail;
                 p.room = $('#room').val();
                 p.bath = $('#bath').val();
                 p.postType = $('#type-post option:selected').val();
+                 p.categoryId = $('#categoryid option:selected').val();
                  p.updateDay = $('#pick_date').val();
                 p.endDay = $('#drop_date').val();
               //  p.priod = $('#sumDay2').val();
                 p.avatar = urlImage;
                 let aaa=  parseInt('<%=request.getParameter("postId")%>');
                 p.postId = aaa;
-                console.log(aaa+ "  aaaa bên ")
                 wl.surplus = $('#sumAll').val();
                 pr.rewardPoint = $('#postCost').val();
                 tr.walletID = walletid;
@@ -555,14 +558,12 @@
     
     $(document).ready(function() {
             let postid = '<%=request.getParameter("postId")%>'
-            console.log("aaa"+postid)
             $.ajax({
                     url: "UpdatePostController?ac=view",
                     method: "POST",
                     data: {gets: postid},
                     success: function (data) {
                         let o = $.parseJSON(data);
-                        console.log("aaaa"+o[0].province+o[0].district+o[0].ward+o[0].detailAddress)
                         
                             let c = o[0].saleRent
                         if (c === 'rent')

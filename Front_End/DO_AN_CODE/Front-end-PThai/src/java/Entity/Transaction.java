@@ -10,50 +10,58 @@ package Entity;
  * @author Admin
  */
 public class Transaction {
-    private String postID;
-    private String walletID;
-    private double price;
+   private int postID;
+    private int walletID;
+    private String content;
+    private int price;
     private String createDay;
     private String createHour;
-    private String transactionID;
+    private int transactionID;
     private int packet;
-    private String userID;
 
     public Transaction() {
     }
 
-    public Transaction(String postID, String walletID, double price, String createDay, String createHour, String transactionID, int packet, String userID) {
+    public Transaction(int postID, int walletID, String content, int price, String createDay, String createHour, int transactionID, int packet) {
         this.postID = postID;
         this.walletID = walletID;
+        this.content = content;
         this.price = price;
         this.createDay = createDay;
         this.createHour = createHour;
         this.transactionID = transactionID;
         this.packet = packet;
-        this.userID = userID;
     }
 
-    public String getPostID() {
+    public int getPostID() {
         return postID;
     }
 
-    public void setPostID(String postID) {
+    public void setPostID(int postID) {
         this.postID = postID;
     }
 
-    public String getWalletID() {
+    public int getWalletID() {
         return walletID;
     }
 
-    public void setWalletID(String walletID) {
+    public void setWalletID(int walletID) {
         this.walletID = walletID;
     }
 
-    public double getPrice() {
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -73,11 +81,11 @@ public class Transaction {
         this.createHour = createHour;
     }
 
-    public String getTransactionID() {
+    public int getTransactionID() {
         return transactionID;
     }
 
-    public void setTransactionID(String transactionID) {
+    public void setTransactionID(int transactionID) {
         this.transactionID = transactionID;
     }
 
@@ -89,13 +97,7 @@ public class Transaction {
         this.packet = packet;
     }
 
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
+    
 
     
     

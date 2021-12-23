@@ -45,17 +45,16 @@ public class PostController extends HttpServlet {
             Gson json = new Gson();
             Post pos = json.fromJson(op, Post.class);
             PostModel am = new PostModel();
-            boolean a = am.addPost(pos.getPostId(), pos.getTitle(), pos.getAvatar(), pos.getArea(), pos.getPrice(), pos.getSaleRent(), pos.getProvince(), pos.getDistrict(), pos.getWard(), pos.getDetailAddress(), pos.getDescription(), pos.getPhone(), pos.getEmail(), pos.getCreateDay(), pos.getPostType(), pos.getEndDay(), pos.getRoom(), pos.getBath(), pos.getUserId());
+            boolean a = am.addPost(pos.getTitle(), pos.getAvatar(), pos.getArea(), pos.getPrice(), pos.getSaleRent(), pos.getProvince(), pos.getDistrict(), pos.getWard(), pos.getDetailAddress(), pos.getDescription(), pos.getPhone(), pos.getEmail(), pos.getCreateDay(), pos.getPostType(), pos.getCategoryId(), pos.getEndDay(), pos.getRoom(), pos.getBath(), pos.getUserId(), pos.getProvinceValue());
             String listPost = json.toJson(a);
             response.setContentType("text/html");
             response.getWriter().write(listPost);
            
         }
-       
         if (action.equals("view")) {
             String op = request.getParameter("get");
             PostModel am = new PostModel();
-            ArrayList<Post> list = am.getIdPosts(op);
+            ArrayList<Post> list = am.getPostById(op);
             Gson json = new Gson();
             String listPost = json.toJson(list);
             response.setContentType("text/html");

@@ -38,7 +38,7 @@ public class HomeController extends HttpServlet {
         String act = request.getParameter("ac");
             if (act.equals("view")) {
                 dao am = new dao();
-            ArrayList<Post> list = am.getListPost();
+            ArrayList<Post> list = am.getTop6();
             request.setAttribute("ListP", list);
             request.getRequestDispatcher("index.jsp").forward(request, response);
         }

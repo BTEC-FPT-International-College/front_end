@@ -66,8 +66,8 @@ public class LoginController extends HttpServlet {
 
                 //request.getRequestDispatcher("Testlogin.jsp").forward(request, response);
             } else {
-                request.setAttribute("error", "Email and Password invalid !");
-                RequestDispatcher dis = request.getRequestDispatcher("index.jsp");
+                request.setAttribute("error", "Email or Password invalid !");
+                RequestDispatcher dis = request.getRequestDispatcher("login.jsp");
                 dis.forward(request, response);
             }
 
