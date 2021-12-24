@@ -31,6 +31,15 @@
         <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
         <script>
             $(document).ready(function () {
+                            <%
+            String username = (String)session.getAttribute("User");
+             if(username==null){
+//                out.print("cccc");
+                %>
+                    window.location.replace('../login.jsp')
+                        <%
+            }
+        %>
                 $(function () {
                     $('[data-toggle="popover"]').popover()
                 })

@@ -22,6 +22,17 @@
         <script>
             var img = "";
             $(document).ready(function () {
+                            <%
+            String username = (String)session.getAttribute("User");
+            if(username != null){
+                out.print("Hello"+ username);
+            }else if(username==null){
+//                out.print("cccc");
+                %>
+                    window.location.replace('../login.jsp')
+                        <%
+            }
+        %>
                 $("#cancle").hide();
                 var now = new Date().toLocaleString()
                 $('#datePicker').val(now);

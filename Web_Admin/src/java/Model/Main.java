@@ -15,8 +15,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        LoginModel l = new LoginModel();
-        System.out.println(l.checkLogin("mangnbbhaf190168@fp.vn", "anhmang123"));
+        
 
     }
 }

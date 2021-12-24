@@ -21,6 +21,17 @@
         <!-- endinject -->
         <link rel="shortcut icon" href="../images/favicon.png" />
         <script>
+                        <%
+            String username = (String)session.getAttribute("User");
+            if(username != null){
+                out.print("Hello"+ username);
+            }else if(username==null){
+//                out.print("cccc");
+                %>
+                    window.location.replace('../login.jsp')
+                        <%
+            }
+        %>
             $(document).ready(function () {
                 let select = $('#getid').text();
                 console.log(select)

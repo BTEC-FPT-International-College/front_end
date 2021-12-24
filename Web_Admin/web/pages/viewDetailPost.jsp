@@ -30,6 +30,17 @@
         <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
     </head>
     <body>
+        
+                  <%
+            String username = (String)session.getAttribute("User");
+            if(username != null){
+                out.print("Hello"+ username);
+            }else if(username==null){
+//                out.print("cccc");
+                request.setAttribute("error", "Bạn cần phải đăng nhập!");
+                response.sendRedirect("../login.jsp");
+            }
+        %>
         <div class="container-scroller">
             <%@ include file="../inc/nvarbar.jsp" %>
             <%@ include file="../inc/sidebar.jsp" %>

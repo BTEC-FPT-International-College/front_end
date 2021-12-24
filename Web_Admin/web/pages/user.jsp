@@ -5,6 +5,7 @@
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page autoFlush="true" buffer="1094kb"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,8 +31,16 @@
         <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
         <script>
+                                                    <%
+            String username = (String)session.getAttribute("User");
+          if(username==null){
+//                out.print("cccc");
+                %>
+                    window.location.replace('../login.jsp')
+                        <%
+            }
+        %>
             $(document).ready(function () {
-                
                 $('#dtOrderExample').DataTable({
                         "order": [[6, "desc"]]
                     });

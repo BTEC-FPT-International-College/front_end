@@ -32,6 +32,15 @@
 
 
         <script>
+            <%
+            String username = (String)session.getAttribute("User");
+             if(username==null){
+//                out.print("cccc");
+                %>
+                    window.location.replace('../login.jsp')
+                        <%
+            }
+        %>
             var a = {}
             $(document).ready(function () {
                 $(function () {

@@ -1,3 +1,5 @@
+package Controller;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
@@ -33,11 +35,16 @@ public class LogoutController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        // destroy session
+        try{
+                    // destroy session
         HttpSession session = request.getSession();
         session.invalidate();
-        RequestDispatcher dispatch = getServletContext().getRequestDispatcher("/login.jsp");
-        dispatch.forward(request, response);
+        RequestDispatcher dis = request.getRequestDispatcher("login.jsp");
+                dis.forward(request, response);
+        }finally{
+            out.close();
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

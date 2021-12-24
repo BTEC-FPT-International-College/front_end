@@ -33,6 +33,15 @@
 
         <script>
             $(document).ready(function () {
+                            <%
+            String username = (String)session.getAttribute("User");
+             if(username==null){
+//                out.print("cccc");
+                %>
+                    window.location.replace('../login.jsp')
+                        <%
+            }
+        %>
                 $('[data-toggle="popover"]').popover()
                 $('.popover-dismiss').popover({
                     trigger: 'focus'

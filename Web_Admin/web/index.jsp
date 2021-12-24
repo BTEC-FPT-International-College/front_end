@@ -55,6 +55,16 @@
         </script>
     </head>
     <body>
+        <%
+            String username = (String)session.getAttribute("User");
+            if(username != null){
+                out.print("Hello"+ username);
+            }else if(username==null){
+//                out.print("cccc");
+                RequestDispatcher dis = request.getRequestDispatcher("login.jsp");
+                    dis.forward(request, response);
+            }
+        %>
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex justify-content-center">
@@ -100,7 +110,7 @@
                                 <i class="mdi mdi-settings text-primary"></i>
                                 Settings
                             </a>
-                            <a class="dropdown-item">
+                            <a class="dropdown-item" href="LogoutController">
                                 <i class="mdi mdi-logout text-primary"></i>
                                 Logout
                             </a>
@@ -430,7 +440,7 @@
                 <script src="js/template.js"></script>
                 <!-- endinject -->
                 <!-- Custom js for this page-->
-                <script src="js/dashboard.js"></script>
+                <script src="../js/dashboard.js"></script>
                 <script src="js/data-table.js"></script>
                 <script src="js/jquery.dataTables.js"></script>
                 <script src="js/dataTables.bootstrap4.js"></script>

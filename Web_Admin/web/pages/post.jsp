@@ -26,6 +26,15 @@
 
         <script>
             $(document).ready(function () {
+                            <%
+            String username = (String)session.getAttribute("User");
+            if(username==null){
+//                out.print("cccc");
+                %>
+                    window.location.replace('../login.jsp')
+                        <%
+            }
+        %>
                 $(function () {
                     $('[data-toggle="popover"]').popover()
                 })
