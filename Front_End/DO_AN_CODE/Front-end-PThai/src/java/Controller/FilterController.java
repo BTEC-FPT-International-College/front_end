@@ -60,7 +60,7 @@ public class FilterController extends HttpServlet {
 				+ "</h3>\r\n"
 				+ "</div>\r\n"
 				+ "<div id=\"post-location\">\r\n"
-				+ "<i class=\"fa fa-map-marker\"> "+p.getProvince()+","+p.getDistrict()+","+p.getWard()+","+p.getDetailAddress()+"</i>\r\n"
+				+ "<i class=\"fa fa-map-marker\"> "+p.getProvince()+","+p.getWard()+","+p.getDistrict()+","+p.getDetailAddress()+"</i>\r\n"
 				+ "</div>\r\n"
 				+ "<div class=\"aa-properties-detial\">\r\n"
 				+ "<span class=\"aa-price\"> $ "+p.getPrice()+"</span>"

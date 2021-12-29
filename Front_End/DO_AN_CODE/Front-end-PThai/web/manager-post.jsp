@@ -15,7 +15,7 @@
         <!-- Font awesome -->
         <link href="css/font-awesome.css" rel="stylesheet">
         <!-- Bootstrap -->
-        <link href="css/bootstrap.css" rel="stylesheet">   
+        <link href="css/bootstrap.css" rel="stylesheet">
         <!-- slick slider -->
         <link rel="stylesheet" type="text/css" href="css/slick.css">
         <!-- price picker slider -->
@@ -162,6 +162,7 @@
                                             <th scope="col" style="width: 100px">Update Day</th>
                                             <th scope="col" style="width: 100px">Status</th>
                                             <th scope="col" style="width: 100px">Expiration date</th>
+                                            <th scope="col" style="width: 100px">View comment</th>
                                             <th scope="col" style="width: 150px" >Action</th>
                                         </tr>
                                     </thead>
@@ -248,6 +249,7 @@
                                                                                 upate,
                                                                                 "<div class='"+status+"'>" + status + "</div>",
                                                                                 value.endDay,
+                                                                                '<a href="comment.jsp?postId=' + value.postId +'&&id=' + value.userId +'">View post comment</a>',
                                                                                 '<a href="post-detail.jsp?postId=' + value.postId +'"><button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button></a>'
                                                                                 + ' <a href="update-post.jsp?postId=' + value.postId + '&&id=' + id + '"><button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button></a>'
                                                                                 + ' <button data-toggle="modal" type="submit" class="btn btn-danger delete-postt" data-target="#hellohello" ><i class="fas fa-trash-alt"></i></button>'
@@ -362,6 +364,9 @@
                                                                                 + "<td class='" + status + "'>" + status + "</td>"
                                                                                 + "<td>" + value.endDay + "</td>"
                                                                                 + " <td>"
+                                                                                +'<a href="comment.jsp?postId=' + value.postId +'&&id=' + value.userId +'">View post comment</a>'
+                                                                                + "</td>"
+                                                                                + "<td>"
                                                                                 + '<a href="post-detail.jsp?postId=' + value.postId + '&&id=' + value.userId + '"><button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button></a>'
                                                                                 + ' <a href="update-post.jsp?postId=' + value.postId + '&&id=' + userId + '"><button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button></a>'
                                                                                 + ' <button data-toggle="modal" type="submit" class="btn btn-danger delete-postt" data-target="#hellohello" ><i class="fas fa-trash-alt"></i></button>'
@@ -465,6 +470,9 @@
                                                                                 + "<td class='" + status + "'>" + status + "</td>"
                                                                                 + "<td>" + value.endDay + "</td>"
                                                                                 + " <td>"
+                                                                                +'<a href="comment.jsp?postId=' + value.postId +'&&id=' + value.userId +'">View post comment</a>'
+                                                                                + "</td>"
+                                                                                + "<td>"
                                                                                 + '<a href="post-detail.jsp?postId=' + value.postId + '&&id=' + value.userId + '"><button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button></a>'
                                                                                 + ' <a href="update-post.jsp?postId=' + value.postId + '&&id=' + userId + '"><button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button></a>'
                                                                                 + ' <button data-toggle="modal" type="submit" class="btn btn-danger delete-postt" data-target="#hellohello" ><i class="fas fa-trash-alt"></i></button>'
@@ -568,6 +576,9 @@
                                                                                 + "<td class='" + status + "'>" + status + "</td>"
                                                                                 + "<td>" + value.endDay + "</td>"
                                                                                 + " <td>"
+                                                                                +'<a href="comment.jsp?postId=' + value.postId +'&&id=' + value.userId +'">View post comment</a>'
+                                                                                + "</td>"
+                                                                                +"<td>"
                                                                                 + '<a href="post-detail.jsp?postId=' + value.postId + '&&id=' + value.userId + '"><button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button></a>'
                                                                                 + ' <a href="update-post.jsp?postId=' + value.postId + '&&id=' + userId + '"><button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button></a>'
                                                                                 + ' <button data-toggle="modal" type="submit" class="btn btn-danger delete-postt" data-target="#hellohello" ><i class="fas fa-trash-alt"></i></button>'

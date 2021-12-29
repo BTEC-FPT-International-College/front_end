@@ -5,6 +5,7 @@
  */
 package dao;
 
+import Entity.Comment;
 import Model.GetConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -104,7 +105,33 @@ public class dao {
         }
         return list;
     }
-
+public ArrayList<Comment> getCommentById(int postid) {
+        ArrayList<Comment> list = new ArrayList<>();
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        String sql = "SELECT * FROM web.tbl_comment WHERE postid = ?";
+        try {
+            PreparedStatement st = conn.prepareStatement(sql);
+            st.setInt(1, postid);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Comment p = new Comment();
+                p.setName(rs.getString(2));
+                p.setEmail(rs.getString(3));
+                p.setPhone(rs.getString(4));
+                p.setContent(rs.getString(5));
+                p.setCreate_day(rs.getString(6));
+                p.setPostid(rs.getInt(7));
+                list.add(p);
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return list;
+    }
     public ArrayList<Post> getNext6(int amount) {
         ArrayList<Post> list = new ArrayList<>();
         GetConnection cn = new GetConnection();

@@ -268,7 +268,7 @@
                                         </h3>
                                     </div>
                                     <div id="post-location">
-                                        <i class="fa fa-map-marker"> </i>${p.getProvince()},${p.getDistrict()},${p.getWard()},${p.getDetailAddress()}
+                                        <i class="fa fa-map-marker"> </i>${p.getProvince()},${p.getWard()},${p.getDistrict()},${p.getDetailAddress()}
                                     </div>
                                     <div class="aa-properties-detial">
                                         <span class="aa-price"> $ ${p.getPrice()}</span>

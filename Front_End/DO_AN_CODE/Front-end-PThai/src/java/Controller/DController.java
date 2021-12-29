@@ -44,6 +44,15 @@ public class DController extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(listPost);
         }
+        if (act.equals("viewcomment")) {
+            String op = request.getParameter("get");
+            dao am = new dao();
+            ArrayList<Comment> list = am.getCommentById(Integer.parseInt(op));
+            Gson json = new Gson();
+            String listComment = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listComment);
+        }
          if (act.equals("relatedProperti")) {
             dao am = new dao();
             ArrayList<Post> list = am.getTop6();

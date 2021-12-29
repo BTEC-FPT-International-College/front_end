@@ -24,6 +24,7 @@ public class Comment {
         this.create_day = create_day;
         this.postid = postid;
     }
+    public Comment() {}
 
     public String getName() {
         return name;
