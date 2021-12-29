@@ -47,15 +47,15 @@ public class UpdatePostController extends HttpServlet {
             response.getWriter().write(post);
         }
          if (act.equals("update")) {
-            String op = request.getParameter("getr");
+            String op = request.getParameter("get");
             Gson json = new Gson();
             Post pos = json.fromJson(op, Post.class);
             dao am = new dao();
               boolean a = am.updatePost(pos.getTitle(), pos.getAvatar(), 
-                      pos.getArea(), pos.getPrice(), pos.getSaleRent(),
+            pos.getArea(), pos.getPrice(), pos.getSaleRent(),
             pos.getProvince(), pos.getDistrict(), pos.getWard(), pos.getDetailAddress(), pos.getDescription(),
             pos.getPhone(), pos.getEmail(), pos.getUpdateDay(), pos.getPostType(), 
-            pos.getEndDay(), pos.getRoom(), pos.getBath(), pos.getCategoryId(), pos.getProvinceValue(), pos.getPostId());
+            pos.getEndDay(), pos.getRoom(), pos.getBath(), pos.getCategoryId(), pos.getProvinceValue(), pos.getImage(), pos.getPostId());
             String listPost = json.toJson(a);
             response.setContentType("text/html");
             response.getWriter().write(listPost);

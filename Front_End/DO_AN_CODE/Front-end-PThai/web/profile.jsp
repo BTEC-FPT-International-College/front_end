@@ -34,87 +34,15 @@
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>    
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-        <script>
-            // thong bao
-        $("#x").click(function () {
-            $("#show").hide()
-//            $("#form").trigger("reset");
-//            $("#add").prop('disabled', true);
-//            $("#check").hide()
-        })
-        $("#chuyen").click(function () {
-            $("#show").hide()
-//            $("#myForm").trigger("reset");
-//            $("#add").prop('disabled', true);
-//            $("#checkid").text("")
-//            $("#checkemail").text("")
-//            $("#checkphone").text("")
-        })
-        $(document).ready(function() {
-            let id = '<%=request.getParameter("id")%>'
-            console.log(id)
-            $.ajax({
-                    url: "ProfileController?ac=view",
-                    method: "POST",
-                    data: {get: id},
-                    success: function (data) {
-                        let objpro = $.parseJSON(data);
-                        console.log("sdfasdfasdf"+objpro)
-                        $("#fullname").val(objpro[0].fullName)
-                        
-                        
-                        // Các cái phone, email kia làm tương tự
-                        //lấy object phải giống trong entity user
-                        $("#phone").val(objpro[0].phone)
-                        $("#email").val(objpro[0].email)
-                        $("#address").val(objpro[0].address)
-                        $("#date").val(objpro[0].dateOfBirth)
-                        let c = objpro[0].gender
-                        if (c === '0')
-                            $('#female').attr('checked', true)
-                        else
-                            $('#male').attr('checked', true)
-                        
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
-              // for update profile
-              var p = {};
-                $("#submit-update").click(function() {
-    //                alert("succeess");
-                    p.fullName = $('#fullname').val();
-                    p.phone = $('#phone').val();
-                    p.email = $('#email').val();
-                    p.dateOfBirth = $('#date').val();
-                    p.gender = $('input[name=gender]:checked').val();
-                    p.address = $('#address').val();
-                    
-                    p.userID =    '<%=request.getParameter("id")%>'
-                    const po = JSON.stringify(p)
-                    console.log(po)
-
-                    $.ajax({
-                        url: "ProfileController?ac=update",
-                        type: "post",
-                        data: {get: po},
-                        success: function (data) {
-                            let rs = $.parseJSON(data);
-                            console.log(rs)
-                            if (rs) {
-//                                $("#show").show();
-                                alert("UPDATE SUCCESSFUL")
-                            } else {
-                                $("#error").show()
-                            }
-                        },
-                        error: function () {
-                            alert("error");
-                        }
-                    });
-                });
-});
+    <script>                                                     <%
+            String username = (String)session.getAttribute("User");
+          if(username==null){
+//                out.print("cccc");
+                %>
+                    window.location.replace('login.jsp')
+                        <%
+            }
+        %>
     </script>
 </head>
 <body>
@@ -218,7 +146,77 @@
     <!--Footer-->
     <%@ include file="./footer.jsp" %>
     
+    <script>
+            // thong bao
+        $("#x").click(function () {
+            $("#show").hide()
+        })
+        $("#chuyen").click(function () {
+            $("#show").hide()
+        })
+        $(document).ready(function() {
+            let id = '<%=request.getParameter("id")%>'
+            console.log(id)
+            $.ajax({
+                    url: "ProfileController?ac=view",
+                    method: "POST",
+                    data: {get: id},
+                    success: function (data) {
+                        let objpro = $.parseJSON(data);
+                        console.log("sdfasdfasdf"+objpro)
+                        $("#fullname").val(objpro[0].fullName)
+                        // Các cái phone, email kia làm tương tự
+                        //lấy object phải giống trong entity user
+                        $("#phone").val(objpro[0].phone)
+                        $("#email").val(objpro[0].email)
+                        $("#address").val(objpro[0].address)
+                        $("#date").val(objpro[0].dateOfBirth)
+                        let c = objpro[0].gender
+                        if (c === '0')
+                            $('#female').attr('checked', true)
+                        else
+                            $('#male').attr('checked', true)
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+              // for update profile
+              var p = {};
+                $("#submit-update").click(function() {
+    //                alert("succeess");
+                    p.fullName = $('#fullname').val();
+                    p.phone = $('#phone').val();
+                    p.email = $('#email').val();
+                    p.dateOfBirth = $('#date').val();
+                    p.gender = $('input[name=gender]:checked').val();
+                    p.address = $('#address').val();
+                    
+                    p.userID =    '<%=request.getParameter("id")%>'
+                    const po = JSON.stringify(p)
+                    console.log(po)
 
+                    $.ajax({
+                        url: "ProfileController?ac=update",
+                        type: "post",
+                        data: {get: po},
+                        success: function (data) {
+                            let rs = $.parseJSON(data);
+                            console.log(rs)
+                            if (rs) {
+//                                $("#show").show();
+                                alert("UPDATE SUCCESSFUL")
+                            } else {
+                                $("#error").show()
+                            }
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                });
+});
+    </script>
     <!-- jQuery library -->
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
     <script src="js/jquery.min.js"></script>

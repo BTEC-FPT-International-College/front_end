@@ -7,8 +7,8 @@
     <meta charset="UTF-8">
     <title>Recharge History</title>
     
-    <link rel="stylesheet" href="./grid.css">
-    <link rel="stylesheet" href="./transaction-history-recharge.css">
+    <link rel="stylesheet" href="./thaicss/grid.css">
+    <link rel="stylesheet" href="./thaicss/transaction-history-recharge.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     
     <!-- Favicon -->
@@ -31,7 +31,11 @@
     <!-- Main style sheet -->
     <link href="./css/style.css" rel="stylesheet"> 
     <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+        <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+        <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>    
@@ -44,41 +48,9 @@
     <%@ include file="./header-section.jsp" %>
     <!-- Container  -->
     <div class="container-p">
-        <script>
-            $(document).ready(function() {
-            let id = '<%=request.getParameter("id")%>'
-            $.ajax({
-                    url: "RechargeController?ac=view",
-                    method: "GET",
-                    data: {get: id},
-                    success: function (data) {
-                        let rst = $.parseJSON(data);
-                        console.log(rst)
-                        $.each(rst, function (key, value) {
-                            $('#tbody').append('<tr><td>'+value.rechargeID+'</td>\n\
-                    <td>'+value.content+'</td>\n\
-                    <td>'+value.amount+'</td>\n\
-                    <td>'+value.bank+'</td>\n\
-                    <td>'+value.bankAccount+'</td>\n\
-                    <td>'+value.createDate+'</td>\n\
-                    </tr>')
-                        });
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
-              
-            });
-        </script>
-
-
       <div class="content">
             <%@ include file="./content1.jsp" %>
             <div class="content2" id="tabs">
-                <!-- <div class="content2-title">
-                  <i class="fas fa-history"></i>
-                  Transaction History</div>-->
             <div class="content2-des"> 
                   <div class="row choose-history-rech">
                     <div class="col l-6 sm-6 choose-tran"><a href="transaction-history.jsp?id=<%=request.getParameter("id")%>">Transaction History</a></div>
@@ -109,19 +81,13 @@
                     <th>Bank</th>
                     <th>Bank Account</th>
                     <th>Date</th>
+                    <th>Recharge Hour</th>
                     </tr>
                     </thead>
                     <tbody id='tbody'>
                         
                    
-                    <tr>
-<!--                      <td style="width: 48px;">
-                                <div class="col-sm-1 text-center">
-                                    <span style="color: #76b6e1; transform: translateX(8px); font-size: 26px; height: 22px; opacity: .8;" class="glyphicon glyphicon-eye-open" aria-hidden="true">
-                                    </span>
-                                </div>
-                      </td>-->
-                    </tr>
+                   
                     
                     </tbody>
                   </table>
@@ -133,13 +99,44 @@
     </div>    
     
     <!-- End of container -->
+    <script>
+        $(document).ready(function() {
+        let id = '<%=request.getParameter("id")%>'
+        $.ajax({
+                url: "RechargeController?ac=view",
+                method: "GET",
+                data: {get: id},
+                success: function (data) {
+                    let rst = $.parseJSON(data);
+                    $('#tab1').DataTable();
+                    console.log(rst)
+                    var t = $('#tab1').DataTable();
+                        $.each(rst, function (key, value) {
+                            t.row.add([
+                                value.rechargeID,
+                                value.content,
+                                value.amount,
+                                value.bank,
+                                value.bankAccount,
+                                value.createDate,
+                                value.createHour
+                               
+                            ]).draw(false);
+                        });
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
 
+        });
+    </script>
     <!--Footer-->
     <%@ include file="./footer.jsp" %>
 
-    <!-- jQuery library -->
+<!--     jQuery library 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>-->
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.js"></script>
     <!-- slick slider -->

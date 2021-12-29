@@ -5,8 +5,8 @@
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
     <title>Create Post</title>
-    <link rel="stylesheet" href="./grid.css">
-    <link rel="stylesheet" href="./postnew.css">
+    <link rel="stylesheet" href="./thaicss/grid.css">
+    <link rel="stylesheet" href="./thaicss/postnew.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     
     <!-- Favicon -->
@@ -37,6 +37,19 @@
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>    
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!--uppy library pic--> 
+    <script src="https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.js"></script>
+    <script src="js/vietnamlocalselector.js"></script>
+     <script>                                                     <%
+            String username = (String)session.getAttribute("User");
+          if(username==null){
+//                out.print("cccc");
+                %>
+                    window.location.replace('login.jsp')
+                        <%
+            }
+        %>
+    </script>
 </head>
 <body>
   
@@ -67,8 +80,8 @@
                             <p>You will move to profile page</p>
                         </div>
                         <div class="modal-footer">
-                            <button id="chuyen" type="button" class="btn btn-warning"><i class="mdi mdi-close"></i>Stay</button>
-                            <a href="profile.jsp?id=<%=request.getParameter("id")%>"><button id="close" type="button" class="btn btn-success" data-dismiss="modal"><i class="mdi mdi-arrow-right-bold"></i>Move</button></a>
+                            <button id="chuyen" href="newpost.jsp?id=<%=request.getParameter("id")%>" type="button" class="btn btn-warning"><i class="mdi mdi-close"></i>Stay</button>
+                            <a href="manager-post.jsp?id=<%=request.getParameter("id")%>"><button id="close" type="button" class="btn btn-success" data-dismiss="modal"><i class="mdi mdi-arrow-right-bold"></i>Move</button></a>
                         </div>
                     </div>
                 </div>
@@ -120,13 +133,9 @@
             <select class="form-control" id="district" name="ls_district"></select>
             <h4>Wards</h4>
             <select class="form-control" id="ward" name="ls_ward"></select>
-            <script src="js/vietnamlocalselector.js"></script>
+            
             <script>
-              var localpicker = new LocalPicker({
-                province: "ls_province",
-                district: "ls_district",
-                ward: "ls_ward"
-                  });
+              
                   
             </script>
             <h4>Detail address</h4>
@@ -144,20 +153,15 @@
             <h2>Real estate information </h2>
             <h3 style="margin-top: 10px;">Specific description</h3>
             <h4>Area*</h4>
-            <input class="form-control" type="number" id="area" placeholder="Input area (m²)" required>
+            <input class="form-control" type="number" id="area" placeholder="Input area (mÂ²)" required>
             <h4>Price*</h4>
-            <input class="form-control" type="number" id="price"  placeholder="Input price / m²" required>
+            <input class="form-control" type="number" id="price"  placeholder="Input price / mÂ²" required>
             <h4>Room</h4>
             <div class="bedroom">
               <button onclick="increment()"><h1><i class="fas fa-plus"></i></h1></button>
               <button onclick="decrement()"><h1><i class="fas fa-minus"></i></h1></button>
               <script>
-                function increment() {
-                    document.getElementById('room').stepUp();
-                }
-                function decrement() {
-                    document.getElementById('room').stepDown();
-                }
+                
               </script>
               <input class="form-control" id="room" type="number" min=0 max=110>
             </div>
@@ -166,12 +170,7 @@
               <button onclick="incrementBr()"><h1><i class="fas fa-plus"></i></h1></button>
               <button onclick="decrementBr()"><h1><i class="fas fa-minus"></i></h1></button>
               <script>
-                function incrementBr() {
-                    document.getElementById('bath').stepUp();
-                }
-                function decrementBr() {
-                    document.getElementById('bath').stepDown();
-                }
+                
               </script>
               <input class="form-control" id="bath" type="number" min=0 max=110>
             </div>
@@ -180,20 +179,7 @@
           <div class=" content3__child content3__image">
             <h2 style="margin-bottom: 10px;">Picture</h2>
             <form id="drag-drop-area">
-                <script src="https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.js"></script>
-                <script>
-                  var uppy = Uppy.Core()
-                    .use(Uppy.Dashboard, {
-                      inline: true,
-                      target: '#drag-drop-area'
-                    })
-                    .use(Uppy.Tus, {endpoint: 'https://master.tus.io/files/'}) //you can put upload URL here, where you want to upload images
-
-                  uppy.on('complete', (result) => {
-                    console.log('Upload complete! We?ve uploaded these files:', result.successful)
-                    urlImage = result.successful[0].uploadURL
-                  })
-                </script>
+                
             </form>
           </div>
           <div class=" content3__child content3__contact">
@@ -227,7 +213,90 @@
             </div>
             
             <script type="text/javascript">
-                function fixStartDate() {
+                
+            </script>
+            <div class="total-posting-date">
+              <h4>Total posting date</h4>
+              <input type="number" class="form-control" style="pointer-events: none;" id="sumDay2" >
+            </div>
+            <div class="payment">
+              <div class="payment-title">
+                <div class="cost-day">
+                  Posting cost / day
+                  <input  id="postCost" style="pointer-events: none; margin-left: 8px;" onchange="sum()" />
+                  <div class="money">
+                    Coin
+                  </div>
+                </div> 
+                <div class="total-day">
+                  Total days<input id="sumDay22" style="pointer-events: none;" onchange="sum()"/>
+                  <div class="day">
+                    Day
+                  </div>
+                </div>
+              </div>
+              <div class="payment-price">
+                Total prices
+                <input id="sumAll" onchange="tSum(); after();" style="pointer-events: none;
+                                                            margin-left: 14px; width: 128px;"/>
+              </div>
+            </div>
+            <input id="contenttran" style="display: none;" value="New Post"/>
+            <input id="tran-hour" style="display: none;" />
+            <button type="submit" value="submit" id="submit" >Next</button>
+            <div id="currentpostid"></div>
+          </div>
+        <!-- </div> -->
+      </div>
+      
+    </div>
+   <!--</form>-->
+    <script>
+        // choose images
+         let urlImageString = "";
+            var uppy = Uppy.Core()
+                    .use(Uppy.Dashboard, {
+                      inline: true,
+                      target: '#drag-drop-area'
+                    })
+                    .use(Uppy.Tus, {endpoint: 'https://master.tus.io/files/'}) //you can put upload URL here, where you want to upload images
+
+                  uppy.on('complete', (result) => {
+                    console.log('Upload complete! We?Ze files:', result.successful)
+                    urlImage = result.successful[0].uploadURL
+//                    console.log(urlImage+"thídfasdfsdf")
+                    result.successful.forEach(function(value, index){
+                        if(index == result.successful.length-1){
+                            urlImageString += value.uploadURL
+                        }else{
+                              urlImageString += value.uploadURL +";"
+                        }              
+                    })
+                    console.log(urlImageString.split(';'))
+                  });
+        var localpicker = new LocalPicker({
+            province: "ls_province",
+            district: "ls_district",
+            ward: "ls_ward"
+        });
+        // for room number
+        function increment() {
+            document.getElementById('room').stepUp();
+        }
+        function decrement() {
+            document.getElementById('room').stepDown();
+        }
+        // for bath number 
+        function incrementBr() {
+            document.getElementById('bath').stepUp();
+        }
+        function decrementBr() {
+            document.getElementById('bath').stepDown();
+        }
+        // drag and drop pic use uppy library
+       
+//          date of post and total price 
+            function fixStartDate() {
                     var today = new Date();
                 var dd = String(today.getDate()).padStart(2, '0');
                 var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -297,45 +366,8 @@
                   console.log(after)
                   return after;
               }
-            </script>
-            <div class="total-posting-date">
-              <h4>Total posting date</h4>
-              <input type="number" class="form-control" style="pointer-events: none;" id="sumDay2" >
-            </div>
-            <div class="payment">
-              <div class="payment-title">
-                <div class="cost-day">
-                  Posting cost / day
-                  <input  id="postCost" style="pointer-events: none; margin-left: 8px;" onchange="sum()" />
-                  <div class="money">
-                    Coin
-                  </div>
-                </div> 
-                <div class="total-day">
-                  Total days<input id="sumDay22" style="pointer-events: none;" onchange="sum()"/>
-                  <div class="day">
-                    Day
-                  </div>
-                </div>
-              </div>
-              <div class="payment-price">
-                Total prices
-                <input id="sumAll" onchange="tSum(); after();" style="pointer-events: none;
-                                                            margin-left: 14px; width: 128px;"/>
-              </div>
-            </div>
-            <input id="contenttran" style="display: none;" value="New Post"/>
-            <input id="tran-hour" style="display: none;" />
-            <button type="submit" value="submit" id="submit" >Next</button>
-            <div id="currentpostid"></div>
-          </div>
-        <!-- </div> -->
-      </div>
-      
-    </div>
-   <!--</form>-->
-    <script>
-//        lay gio
+//          End of date of post and total price
+        //        lay gio
         function addZero(i) {
         if (i < 10) {i = "0" + i}
             return i;
@@ -369,16 +401,6 @@
             
             jQuery(function($) {
             $(window).scroll(function fix_element() {
-//              $('.content1').css(
-//                $(window).scrollTop() > 100
-//                  ? { 'position': 'fixed', 'top': '64px' }
-//                  : { 'position': 'relative', 'top': 'auto' }
-//              );
-//              $('.content3__con2').css(
-//                $(window).scrollTop() > 120
-//                  ? { 'position': 'fixed', 'top': '64px' }
-//                  : { 'position': 'relative', 'top': 'auto' }
-//              );
                     return fix_element;
                   }());
             });
@@ -433,6 +455,7 @@
             var tr = {};
             $("#submit").click(function() {
 //                alert("succeess");
+                p.postCost = $('#sumAll').val();
                 p.title = $('#title').val();
                 p.avatar = urlImage;
                 p.area = $('#area').val();
@@ -460,6 +483,8 @@
                 p.createDay = $('#pick_date').val();
                 p.endDay = $('#drop_date').val();
                 p.priod = $('#sumDay2').val();
+                p.image = urlImageString;
+                
                 wl.surplus = $('#sumAll').val();
                 let sum = $('#sumAll').val();
                 
@@ -478,6 +503,7 @@
                 const wlt = JSON.stringify(wl)
                 console.log(po)
                 if (btecwallet > sum) {
+                    
                     $.ajax({
                         url: "PostController?ac=add",
                         type: "post",
@@ -547,17 +573,14 @@
                                         alert("view error");
                                     }
                                 });
-//                                $("#show").show();
                             } else {
                                 $("#error").show()
                             }
                         },
                         error: function () {
+                            alert("You need to fill out all information before posting!")
                         }
                     });
-                    
-                    
-                    
                 } else {
                     $("#errorcoin").show();               
                 }

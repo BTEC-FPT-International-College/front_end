@@ -5,12 +5,10 @@
 package Controller;
 
 import Entity.Post;
-import com.google.gson.Gson;
 import dao.dao;
 import java.io.IOException;
 import java.io.PrintWriter;
-import Entity.SearchEntity;
-import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author MarkTran
  */
-@WebServlet(name = "ManagerPost", urlPatterns = {"/ManagerPost"})
-public class ManagerPost extends HttpServlet {
+@WebServlet(name = "FilterController", urlPatterns = {"/FilterController"})
+public class FilterController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,46 +34,43 @@ public class ManagerPost extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String act = request.getParameter("ac");
-        if (act.equals("view")) {
-            String op = request.getParameter("get");
-            dao am = new dao();
-            ArrayList<Post> list = am.getPostByUserID(op);
-            Gson json = new Gson();
-            String listpost = json.toJson(list);
-            response.setContentType("text/html");
-            response.getWriter().write(listpost);
-        }
-        if (act.equals("filter")) {
-             String op = request.getParameter("get");
-             Gson json = new Gson();
-             SearchEntity search = json.fromJson(op, SearchEntity.class);
-            dao am = new dao();
-            ArrayList<Post> list = am.filterPostByUserIDAndDate(search.getUserId(), search.getFromDate(), search.getToDate() );
-            String listPost = json.toJson(list);
-            response.setContentType("text/html");
-            response.getWriter().write(listPost);
-            
-            
-        }
-        if (act.equals("avaible")) {
-            String op = request.getParameter("get");
-            dao am = new dao();
-            ArrayList<Post> list = am.filterPostByAvaible(op);
-            Gson json = new Gson();
-            String listpost = json.toJson(list);
-            response.setContentType("text/html");
-            response.getWriter().write(listpost);
-        }
-        if (act.equals("expired")) {
-            String op = request.getParameter("get");
-            dao am = new dao();
-            ArrayList<Post> list = am.filterPostByExpired(op);
-            Gson json = new Gson();
-            String listpost = json.toJson(list);
-            response.setContentType("text/html");
-            response.getWriter().write(listpost);
-        }
+         String saleOrRent = request.getParameter("sale_rent");
+         
+        dao dao = new dao();
+        List<Post> list = dao.filterPost(saleOrRent);
+        PrintWriter out = response.getWriter();
+        for(Post p : list)
+            out.println(
+			"<div class=\"product col-md-4\">\r\n"
+				+ "<article class=\"aa-properties-item\">\r\n"
+				+ "<a href='post-detail.jsp?postId="+p.getPostId()+"&&id="+p.getUserId()+"'"
+				+ "class=\"aa-properties-item-img\"> <img\r\n"
+				+ "src=\""+p.getAvatar()+"\" alt=\"img\">\r\n"
+				+ "</a>\r\n"
+				+ "<div class=\"aa-tag for-"+p.getSaleRent()+"\">For\r\n"
+				+ ""+p.getSaleRent()+"</div>\r\n"
+				+ "<div class=\"aa-properties-item-content\">\r\n"
+				+ "<div class=\"aa-properties-info\">\r\n"
+				+ "<span>"+p.getRoom()+" Rooms</span> <span>"+p.getBath()+"\r\n"
+				+ "Baths</span> <span>Area: "+p.getArea()+" m²</span>\r\n"
+				+ "</div>\r\n"
+				+ "<div class=\"aa-properties-about\">\r\n"
+				+ "<h3>\r\n"
+				+ "<a href=\"post-detail.jsp?postId="+p.getPostId()+"&&id="+p.getUserId()+"\">"+p.getTitle()+"</a>\r\n"
+				+ "</h3>\r\n"
+				+ "</div>\r\n"
+				+ "<div id=\"post-location\">\r\n"
+				+ "<i class=\"fa fa-map-marker\"> "+p.getProvince()+","+p.getDistrict()+","+p.getWard()+","+p.getDetailAddress()+"</i>\r\n"
+				+ "</div>\r\n"
+				+ "<div class=\"aa-properties-detial\">\r\n"
+				+ "<span class=\"aa-price\"> $ "+p.getPrice()+"</span>"
+				+ "<a href=\"post-detail.jsp?postId="+p.getPostId()+"&&id="+p.getUserId()+"\" class=\"aa-secondary-btn\">View Details</a>"
+				+ "</div>\r\n"
+				+ "</div>\r\n"
+				+ "</article>\r\n"
+				+ "</div>"
+		
+				);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

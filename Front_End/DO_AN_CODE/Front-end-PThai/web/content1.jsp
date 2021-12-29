@@ -4,14 +4,12 @@
 <script>
         $(document).ready(function() {
             let id = '<%=request.getParameter("id")%>'
-            console.log(id)
             $.ajax({
                     url: "ProfileController?ac=view",
                     method: "POST",
                     data: {get: id},
                     success: function (data) {
                         let obj = $.parseJSON(data);
-                        console.log(obj)
                         $(".name").text(obj[0].fullName)
                         $("#pointvalue").val(obj[0].rewardPoint)
                     },
@@ -25,7 +23,6 @@
                     data: {get: id},
                     success: function (data) {
                         let obj = $.parseJSON(data);
-                        console.log(obj)
                         $("#walletvalue").val(obj[0].surplus)
                     },
                     error: function () {
@@ -80,7 +77,7 @@
                 </a>
             </div>
             <div class="management-des">
-                <a href="">
+                <a href="newpwd.jsp?id=<%=request.getParameter("id")%>">
                   <i class="fas fa-key"></i>
                 CHANGE PASSWORD
                 </a>

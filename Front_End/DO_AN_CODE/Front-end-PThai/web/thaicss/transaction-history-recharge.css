@@ -326,7 +326,7 @@ border: 1px solid #59abe3;
 left: 50%;
 background: #ccc;
 font-display: inline-block;
-background: url("./img/iconbtec.png") top center / cover no-repeat;
+background: url("../img/iconbtec.png") top center / cover no-repeat;
 background-size: cover;
 }
 .management {
@@ -371,7 +371,6 @@ cursor: pointer;
 /* For content2  */
 .content2 {
   width: 748px;
-  height: 100%;
   border-radius: 5px;
   background: #fff;
   float: right;

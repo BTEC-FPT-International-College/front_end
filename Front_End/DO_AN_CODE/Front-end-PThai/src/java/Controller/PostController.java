@@ -45,12 +45,12 @@ public class PostController extends HttpServlet {
             Gson json = new Gson();
             Post pos = json.fromJson(op, Post.class);
             PostModel am = new PostModel();
-            boolean a = am.addPost(pos.getTitle(), pos.getAvatar(), pos.getArea(), pos.getPrice(), pos.getSaleRent(), pos.getProvince(), pos.getDistrict(), pos.getWard(), pos.getDetailAddress(), pos.getDescription(), pos.getPhone(), pos.getEmail(), pos.getCreateDay(), pos.getPostType(), pos.getCategoryId(), pos.getEndDay(), pos.getRoom(), pos.getBath(), pos.getUserId(), pos.getProvinceValue());
+            boolean a = am.addPost(pos.getPostCost(), pos.getTitle(), pos.getAvatar(), pos.getArea(), pos.getPrice(), pos.getSaleRent(), pos.getProvince(), pos.getDistrict(), pos.getWard(), pos.getDetailAddress(), pos.getDescription(), pos.getPhone(), pos.getEmail(), pos.getCreateDay(), pos.getPostType(), pos.getCategoryId(), pos.getEndDay(), pos.getRoom(), pos.getBath(), pos.getUserId(), pos.getProvinceValue(), pos.getImage());
             String listPost = json.toJson(a);
             response.setContentType("text/html");
             response.getWriter().write(listPost);
-           
         }
+
         if (action.equals("view")) {
             String op = request.getParameter("get");
             PostModel am = new PostModel();
@@ -60,6 +60,16 @@ public class PostController extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(listPost);
         }
+        if (action.equals("del")) {
+            String op = request.getParameter("get");
+            PostModel am = new PostModel();
+            Boolean list = am.deletePost(op);
+            Gson json = new Gson();
+            String listPos = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listPos);
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

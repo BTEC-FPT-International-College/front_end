@@ -36,10 +36,12 @@ public class Post {
     private int room;
     private int bath;
     private String provinceValue;
+    private String image;
+    private int postCost;
     
     public Post() {}
 
-    public Post(int postId, String title, String avatar, int area, int price, String saleRent, String description, String phone, String email, int totalView, String userId, String createDay, int postType, String status, int readUnread, String updateDay, String province, String district, String ward, String detailAddress, int categoryId, int priod, String endDay, int room, int bath,String provinceValue) {
+    public Post(int postId, String title, String avatar, int area, int price, String saleRent, String description, String phone, String email, int totalView, String userId, String createDay, int postType, String status, int readUnread, String updateDay, String province, String district, String ward, String detailAddress, int categoryId, int priod, String endDay, int room, int bath,String provinceValue, String image, int postCost) {
         this.postId = postId;
         this.title = title;
         this.avatar = avatar;
@@ -66,6 +68,8 @@ public class Post {
         this.room = room;
         this.bath = bath;
         this.provinceValue =provinceValue;
+        this.image = image;
+        this.postCost = postCost;
     }
 
     public int getPostId() {
@@ -75,7 +79,16 @@ public class Post {
     public void setPostId(int postId) {
         this.postId = postId;
     }
+    
+     public int getPostCost() {
+        return postCost;
+    }
 
+    public void setPostCost(int postCost) {
+        this.postCost = postCost;
+    }
+
+    
     public String getTitle() {
         return title;
     }
@@ -273,6 +286,13 @@ public class Post {
 
     public void setProvinceValue(String provinceValue) {
         this.provinceValue = provinceValue;
+    }
+     public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
     
     

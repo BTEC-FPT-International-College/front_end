@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Entity.Comment;
 import Entity.Post;
 import com.google.gson.Gson;
 import dao.dao;
@@ -43,7 +44,25 @@ public class DController extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(listPost);
         }
-         
+         if (act.equals("relatedProperti")) {
+            dao am = new dao();
+            ArrayList<Post> list = am.getTop6();
+            Gson json = new Gson();
+            String listpost = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listpost);
+        }
+         if (act.equals("comment")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Comment cmt = json.fromJson(op, Comment.class);
+            dao am = new dao();
+            boolean a = am.setComment(cmt.getName(), cmt.getEmail(), cmt.getPhone(), cmt.getContent(), cmt.getCreate_day(), cmt.getPostid());
+            String listProfile = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listProfile);
+           
+        }
         }
  
 

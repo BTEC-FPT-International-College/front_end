@@ -10,10 +10,10 @@
             district = 'ls_district',
             ward = 'ls_ward',
             getValueBy = 'id',
-            provinceText = 'Chọn tỉnh / thành phố',
-            districtText = 'Chọn quận / huyện',
-            wardText = 'Chọn phường / xã',
-            wardNoText = 'Địa phương này không có phường / xã',
+            provinceText = 'Select province/city',
+            districtText = 'Select district',
+            wardText = 'Select ward',
+            wardNoText = 'This locality has no wards',
             emptyValue = " ",
             hideEmptyValueOption = true,
             hidePlaceHolderOption = true,
@@ -41,8 +41,7 @@
                 ws = es(ward);
                 p = document.querySelector(`select.${ps}`) || document.querySelector(`select#${ps}`) || document.querySelector(`select[name="${ps}"]`) ;
                 d = document.querySelector(`select.${ds}`) || document.querySelector(`select#${ds}`) || document.querySelector(`select[name="${ds}"]`) ;
-                w = document.querySelector(`select.${ws}`) || document.querySelector(`select#${ws}`) || document.querySelector(`select[name="${ws}"]`);
-                if(p === null || d === null || w === null) return console.error(`One or more selectors cannot be found`);
+                if(p === null || d === null) return console.error(`One or more selectors cannot be found`);
             }
             catch(e){
                 return console.error(`One or more selectors cannot be found at `+e);
@@ -51,8 +50,7 @@
             p.add(o);
             let od = document.createElement("option"); od.text=districtText; od.value=""; od.disabled = hidePlaceHolderOption; od.selected = true;od.hidden = hidePlaceHolderOption;
             d.add(od);
-            let ow = document.createElement("option"); ow.text=wardText; ow.value=""; ow.disabled = hidePlaceHolderOption; ow.selected = true;ow.hidden = hidePlaceHolderOption;
-            w.add(ow);
+           
             for (let i = 0; i < data.length-1; i++){
                 let o = document.createElement("option"); o.text= (provincePrefix ? data[i].t +" " : "") + data[i].n; o.value =data[i][s];
                 if(levelAsAttribute) o.setAttribute(levelAttributeName,data[i].t);
@@ -60,11 +58,8 @@
             }
             p.addEventListener("change",function(){
                 d.innerHTML = "";
-                w.innerHTML = "";
                 let o = document.createElement("option"); o.text=districtText; o.value=""; o.disabled = hidePlaceHolderOption; o.selected = true;o.hidden = hidePlaceHolderOption;
                 d.add(o);
-                let ow = document.createElement("option"); ow.text=wardText; ow.value=""; ow.disabled = hidePlaceHolderOption; ow.selected = true;ow.hidden = hidePlaceHolderOption;
-                w.add(ow);
                 let l = p.selectedIndex-1;
                 n = l;
                 for (let i = 0; i< data[l].c.length-1;i++){

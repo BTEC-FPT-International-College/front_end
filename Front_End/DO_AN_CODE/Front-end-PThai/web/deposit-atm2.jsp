@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Deposit Content</title>
-    <link rel="stylesheet" href="./grid.css">
-    <link rel="stylesheet" href="./transaction-history-recharge.css">
-    <link rel="stylesheet" href="./deposit-atm2.css">
+    <link rel="stylesheet" href="./thaicss/grid.css">
+    <link rel="stylesheet" href="./thaicss/transaction-history-recharge.css">
+    <link rel="stylesheet" href="./thaicss/deposit-atm2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     
     <!-- Favicon -->
@@ -182,7 +182,7 @@
           <input id="bank" value="vietcombank" style="display: none;"/>
           <input id="bank-account-number" style="display: none;"/>
           <input id="total-coin" style="display: none;"/>
-          <input id="content-depo" style="display: none;" value="Chuyen khoan"/>
+          <input id="content-depo" style="display: none;" value="Deposit coins into BtecLand Wallet"/>
           <input id="walletid" style="display: none;" />
           <div id="add-walletid"></div>
           <script>

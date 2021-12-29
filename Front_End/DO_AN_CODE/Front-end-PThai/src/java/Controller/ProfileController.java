@@ -68,13 +68,42 @@ public class ProfileController extends HttpServlet {
             response.getWriter().write(listProfile);
            
         }
+        if (act.equals("updatepass")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            Profile pro = json.fromJson(op, Profile.class);
+            ProfileModel am = new ProfileModel();
+            boolean a = am.updatePass(pro.getPassword(), pro.getUserID());
+            String listProfile = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listProfile);
+           
+        }
+
         if (act.equals("add")) {
             String op = request.getParameter("get");
             Gson json = new Gson();
             Profile re = json.fromJson(op, Profile.class);
             ProfileModel am = new ProfileModel();
-            boolean a = am.addAccount(re.getFullName(), re.getEmail(), re.getPhone(), re.getPassword());
-            String listPro = json.toJson(a);
+            int rs = 0;
+            boolean checkMail = am.checkEmail(re.getEmail());
+            if(!checkMail){
+                boolean a = am.addAccount(re.getFullName(), re.getEmail(), re.getPhone(), re.getPassword());
+                if(a){
+                    Profile pr = new Profile();
+                   pr = am.getEmail(re.getEmail(), re.getPassword());
+                   if(am.addUserToWallet(pr.getUserID())){
+                       rs = 10;
+                   }else{
+                       rs = 2;
+                   }
+                }else{
+                    rs = 1;
+                }
+            }else{
+                rs = 3;
+            }
+            String listPro = json.toJson(rs);
             response.setContentType("text/html");
             response.getWriter().write(listPro);
            

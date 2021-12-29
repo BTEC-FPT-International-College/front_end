@@ -2,7 +2,7 @@
  * Created by Khang Le on 5/14/2017.
  */
 
-(function(){
+ (function(){
     this.LocalPicker = function(){
         "use strict";
         let {
@@ -10,10 +10,10 @@
             district = 'ls_district',
             ward = 'ls_ward',
             getValueBy = 'id',
-            provinceText = 'Chọn tỉnh / thành phố',
-            districtText = 'Chọn quận / huyện',
-            wardText = 'Chọn phường / xã',
-            wardNoText = 'Địa phương này không có phường / xã',
+            provinceText = 'Province / City',
+            districtText = 'District',
+            wardText = 'Choose ward',
+            wardNoText = 'This location has no wards',
             emptyValue = " ",
             hideEmptyValueOption = true,
             hidePlaceHolderOption = true,

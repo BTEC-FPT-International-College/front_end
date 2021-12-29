@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="./thaicss/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,7 +30,7 @@
 <div class="container" id="container">
    
 	<div class="form-container sign-up-container">
-		<form action="#">
+		<form>
 			<h1>Create Account</h1>
 			<input id="namesg" type="text" placeholder="Name" required/>
 			<input id="emailsg" type="email" placeholder="Email" required/>
@@ -43,9 +43,9 @@
 	</div>
 	<div class="form-container sign-in-container">
                 ${error}
-		<form action="LoginController" method="POST">
+		<form action="LoginController?ac=login" method="POST">
 			<h1>Sign in</h1>
-			<input type="email" placeholder="Your Email" id="username" name="user" required/>
+			<input type="email" placeholder="Your Email" id="username" name="email" required/>
 			<input type="password" placeholder="Password" id="password" name="pass" required/>
 			<a href="#">Forgot your password?</a>
 			<button type="submit" value="Login">Sign In</button>
@@ -86,7 +86,8 @@
                         $("#checkphone").text("")
                     })
                     var p = {};
-                    $("#sign-up").click(function() {
+                    $("#sign-up").click(function(e) {
+                        
                         p.fullName = $('#namesg').val();
                         p.email = $('#emailsg').val();
                         p.phone = $('#phonesg').val();
@@ -106,8 +107,8 @@
                                     data: {get: pr},
                                     success: function (data) {
                                         let rs = $.parseJSON(data);
-                                        console.log(rs + "aaaaaaa");
-                                        $("#show").show();
+                                        console.log(rs)
+                                       // 
     //                                    alert("You are creating a new account successfully!")
                                     },
                                     error: function () {

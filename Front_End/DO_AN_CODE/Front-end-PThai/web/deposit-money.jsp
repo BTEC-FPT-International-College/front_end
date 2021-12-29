@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Deposit Method</title>
-    <link rel="stylesheet" href="./grid.css">
-    <link rel="stylesheet" href="./transaction-history-recharge.css">
+    <link rel="stylesheet" href="./thaicss/grid.css">
+    <link rel="stylesheet" href="./thaicss/transaction-history-recharge.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     
     <!-- Favicon -->
@@ -30,6 +30,16 @@
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>    
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+     <script>                                                     <%
+            String username = (String)session.getAttribute("User");
+          if(username==null){
+//                out.print("cccc");
+                %>
+                    window.location.replace('login.jsp')
+                        <%
+            }
+        %>
+    </script>
 </head>
 <body>
     <%@ include file="./header-section.jsp" %>

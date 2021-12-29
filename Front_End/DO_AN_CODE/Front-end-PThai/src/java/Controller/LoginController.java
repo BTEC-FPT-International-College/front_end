@@ -33,47 +33,40 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            response.setContentType("text/html;charset=UTF-8");
+        
+             String act = request.getParameter("ac");
             PrintWriter out = response.getWriter();
             try {
-            // catch du lieu tu front-end ve
-            String email = request.getParameter("user");
-            String password = request.getParameter("pass");
-            // tao Session
-            checkLogin am = new checkLogin();
-            if (am.checkLogin(email, password)) {
-                // lay thong tin role ve         
-                Profile user = am.getlogin(email, password);
-                String RoleID = user.getRoleID();
-                String UserID = user.getUserID();
-                // tao session va them cac gia tri vao trong sesstion
-                HttpSession session = request.getSession();
-                session.setAttribute("fullname", email);
-                session.setAttribute("password", password);
-                session.setAttribute("RoleID", RoleID);
-                session.setAttribute("UserID", UserID);
-                // chuyen ve tung trang home theo tung role khac nhau 
-                if ("1".equals(RoleID)) {
-                      response.sendRedirect("profile.jsp?id="+UserID);
+                if (act.equals("login")) {
+                String email = request.getParameter("email");
+                String password = request.getParameter("pass");
+                // tao Session
+                 
+                checkLogin am = new checkLogin();
+                if (am.checkLogin(email, password)) {
+                    Profile user = am.getlogin(email, password);
+                    String RoleID = user.getRoleID();
+                    String userID = user.getUserID();
+                    HttpSession session = request.getSession();
+                    session.setAttribute("User", userID);
+                    
+                    // chuyen ve tung trang home theo tung role khac nhau 
+                    if (RoleID.equals("3")) {
+//                    request.getRequestDispatcher("pages/index.jsp").forward(request, response);
+//                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MainControllers?ac=view");
+//                    dispatcher.forward(request, response);
+                        response.sendRedirect("profile.jsp?id="+userID);
+                    }
+                } else {
+                    request.setAttribute("error","Password or email is invalid");
+                    RequestDispatcher dis = request.getRequestDispatcher("login.jsp");
+                    dis.forward(request, response);
                 }
-                if ("2".equals(RoleID)) {
-                    response.sendRedirect("#");
-                }
-                if ("3".equals(RoleID)) {
-                    response.sendRedirect("#");
-                }
-                
 
-                //request.getRequestDispatcher("Testlogin.jsp").forward(request, response);
-            } else {
-                request.setAttribute("error", "Email or Password invalid !");
-                RequestDispatcher dis = request.getRequestDispatcher("login.jsp");
-                dis.forward(request, response);
             }
-
-        } finally {
+        }finally {
             out.close();
-        }
+        }           
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

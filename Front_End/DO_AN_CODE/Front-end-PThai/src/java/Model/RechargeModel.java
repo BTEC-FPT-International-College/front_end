@@ -22,7 +22,7 @@ public class RechargeModel {
         ArrayList<Recharge> list = new ArrayList<>();
         String sql = "SELECT * FROM web.tbl_recharge_transaction,user_wallet\n" +
 "where tbl_recharge_transaction.walletid = user_wallet.walletid\n" +
-"and user_wallet.userid = ? ";
+"and user_wallet.userid = ? ORDER BY rechargeid DESC";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {

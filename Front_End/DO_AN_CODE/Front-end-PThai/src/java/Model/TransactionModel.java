@@ -24,7 +24,7 @@ public class TransactionModel {
         ArrayList<Transaction> list = new ArrayList<>();
         String sql = "SELECT * FROM web.tbl_transaction_history,user_wallet\n" +
 " where tbl_transaction_history.walletid = user_wallet.walletid\n" +
-" and user_wallet.userid = ? ORDER BY create_day DESC";
+" and user_wallet.userid = ? ORDER BY create_day DESC, create_hour DESC";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {
@@ -40,6 +40,7 @@ public class TransactionModel {
                 acc.setCreateHour(rs.getString(6));
                 acc.setTransactionID(rs.getInt(7));
                 acc.setPacket(rs.getInt(8));
+                acc.setContent(rs.getString(3));
                 list.add(acc);
             }
             rs.close();

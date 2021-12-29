@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class checkLogin {
      public boolean checkLogin(String u, String p) {
         boolean result = false;
-        String sql = "SELECT * FROM tbl_user WHERE email = ? AND password = ?";
+        String sql = "SELECT * FROM web.tbl_user WHERE email = ? AND password = ?";
         // mo ket noi toi sql server
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();

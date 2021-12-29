@@ -7,8 +7,8 @@
     <meta charset="UTF-8">
     <title>Transaction History By Post</title>
     
-    <link rel="stylesheet" href="./grid.css">
-    <link rel="stylesheet" href="./transaction-history-recharge.css">
+    <link rel="stylesheet" href="./thaicss/grid.css">
+    <link rel="stylesheet" href="./thaicss/transaction-history-recharge.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     
     <!-- Favicon -->
@@ -38,45 +38,22 @@
     <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>    
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     
-    
+     <script>                                                     <%
+            String username = (String)session.getAttribute("User");
+          if(username==null){
+//                out.print("cccc");
+                %>
+                    window.location.replace('login.jsp')
+                        <%
+            }
+        %>
+    </script>
 </head>
 <body>
    
     <%@ include file="./header-section.jsp" %>
     <!-- Container  -->
     <div class="container-p">
-        <script>
-            $(document).ready(function() {
-            let idpost = '<%=request.getParameter("idpost")%>'
-            $.ajax({
-                    url: "TransactionController?ac=view3",
-                    method: "GET",
-                    data: {getpr: idpost},
-                    success: function (data) {
-                        let rst = $.parseJSON(data);
-                        console.log(rst)
-                        $.each(rst, function (key, value) {
-                            $('#tbody').append('<tr>' 
-                    +"<td>" + value.postId + " </td>"
-                    +"<td>"+value.title+"</td>"
-                    +"<td>"+value.endDay+"</td>"
-                    +'</tr>')
-                        
-                         $('#tbody2').append('<tr>' 
-                    +"<td>"+value.detailAddress+", "+value.ward+", "+value.district+", "+value.province+"</td>"
-                    +"<td>"+value.saleRent+"</td>"
-                    +'</tr>')
-                        });
-                    },
-                    error: function () {
-                        alert("error");
-                    }
-                });
-              
-            });
-        </script>
-
-
       <div class="content">
           <!--// for detail transaction history-->
           <div class='dialog overlay' id='my-dialog'>
@@ -86,24 +63,7 @@
           <!--end of detail transaction history-->
             <%@ include file="./content1.jsp" %>
             <div class="content2" id="tabs">
-<!--                 <div class="content2-title">
-                  <i class="fas fa-history"></i>
-                  Transaction History</div>-->
-                <div class="content2-des">   
-<!--                  <div class="btn-group btn-group-toggle choose" data-toggle="buttons">
-                      <label href="" class="btn btn-secondary btns active" rel="panel1" >
-                         <a href="transaction-history.jsp?id=<%=request.getParameter("id")%>" style="color: #fff; display: block; height: 48px;"> 
-                        <input type="radio" name="options" id="option1" autocomplete="off" checked> 
-                        <h3 style="display: inline; margin-top: 16px;">Transaction History</h3>
-                         </a> 
-                      </label>
-                      <label class="btn btn-secondary btns"  rel="panel2" onclick="Redirect()">
-                           <a href="recharge-history.jsp?id=<%=request.getParameter("id")%>" style="display: block; height: 48px;" > 
-                         <input type="radio" name="options" id="option2" autocomplete="off" > 
-                         <h3 style="display: inline; margin-top: 16px;">Recharge History</h3>
-                           </a> 
-                      </label>
-                  </div> -->
+                <div class="content2-des">  
                 <div class="row choose-history-tran">
                     <div class="col l-6 sm-6 choose-tran"><a href="transaction-history.jsp?id=<%=request.getParameter("id")%>"><span class="glyphicon glyphicon-arrow-left"></span>Post of Transaction</a></div>
                     <div class="col l-6 sm-6 choose-recharge"><a href="recharge-history.jsp?id=<%=request.getParameter("id")%>">Recharge History</a></div>  
@@ -155,7 +115,36 @@
     </div>
     
     <!-- End of container -->
+    <script>
+        $(document).ready(function() {
+        let idpost = '<%=request.getParameter("idpost")%>'
+        $.ajax({
+                url: "TransactionController?ac=view3",
+                method: "GET",
+                data: {getpr: idpost},
+                success: function (data) {
+                    let rst = $.parseJSON(data);
+                    console.log(rst)
+                    $.each(rst, function (key, value) {
+                        $('#tbody').append('<tr>' 
+                +"<td>" + value.postId + " </td>"
+                +"<td>"+value.title+"</td>"
+                +"<td>"+value.endDay+"</td>"
+                +'</tr>')
 
+                     $('#tbody2').append('<tr>' 
+                +"<td>"+value.detailAddress+", "+value.ward+", "+value.district+", "+value.province+"</td>"
+                +"<td>"+value.saleRent+"</td>"
+                +'</tr>')
+                    });
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+
+        });
+    </script>
     <!--Footer-->
     <%@ include file="./footer.jsp" %>
 

@@ -13,9 +13,8 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
-        TransactionModel dao = new TransactionModel();
-        System.out.println(dao.getListTransactionByUser("US000001").size());
-        
+        checkLogin c = new checkLogin();
+        System.out.println((c.checkLogin("mang@gmail.com", "1")));
     }
 }
 
