@@ -81,6 +81,7 @@
         <!-- End Proerty header  -->
 
         <!-- Start Properties  -->
+        
         <section id="aa-properties">
             <div class="container">
                 <div class="row">
@@ -268,6 +269,7 @@
         <script src="js/custom.js"></script>
         <script>
                                                     $(document).ready(function () {
+//                                                         $('#comment-successful').hide();
                                                         let id = '<%=request.getParameter("postId")%>'
                                                         let userid = '<%=request.getParameter("id")%>'
 
@@ -364,6 +366,12 @@
                                                             success: function (data) {
                                                                 let rs = $.parseJSON(data);
                                                                 console.log(rs)
+                                                                alert("Comment successful")
+                                                                $("#cmt-name").val("")
+                                                                $("#cmt-email").val("")
+                                                                $("#cmt-phone").val("")
+                                                                $("#cmt-description").val("")
+//                                                                window.location.reload();
                                                             },
                                                             error: function () {
                                                             }

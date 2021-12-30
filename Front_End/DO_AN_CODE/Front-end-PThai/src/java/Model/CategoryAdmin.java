@@ -4,6 +4,8 @@
  */
 package Model;
 
+import Entity.Category;
+import Entity.ViewDetailCate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,13 +24,13 @@ public class CategoryAdmin {
         Connection conn = cn.getConnection();
         try {
             Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT CategoryID,\n" +
-"COALESCE(Name,\"You haven't given a name yet\"),\n" +
-"coalesce(Img,\"You haven't given a image yet\"),\n" +
-"coalesce(Des,\"You haven't given a description yet\"),\n" +
-"Create_Day,\n" +
-"coalesce(Update_Day,\"It has never been updated\")\n" +
-"FROM web.tbl_category ORDER BY Create_Day DESC");
+            ResultSet rs = stm.executeQuery("SELECT categoryid,\n" +
+            "COALESCE(name,\"You haven't given a name yet\"),\n" +
+            "coalesce(image,\"You haven't given a image yet\"),\n" +
+            "coalesce(description,\"You haven't given a description yet\"),\n" +
+            "create_day,\n" +
+            "coalesce(update_day,\"It has never been updated\")\n" +
+            "FROM web.tbl_category ORDER BY create_day DESC");
             Category acc = null;
             while (rs.next()) {
                 acc = new Category();
@@ -51,7 +53,7 @@ public class CategoryAdmin {
 
     public boolean checkCateExsist(String id) {
         boolean result = false;
-        String sql = "SELECT * FROM tbl_category WHERE CategoryID = ?";
+        String sql = "SELECT * FROM tbl_category WHERE categoryid = ?";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {
@@ -69,7 +71,7 @@ public class CategoryAdmin {
     }
 
     public boolean addCategory(String id, String name, String img, String des, String CreatDay) {
-        String sql = "INSERT INTO tbl_category(CategoryID,Name,Img,Des,Create_Day) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO tbl_category(categoryid,name,image,description,create_day) VALUES(?,?,?,?,?)";
         int result = 0;
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
@@ -90,7 +92,7 @@ public class CategoryAdmin {
     }
 
     public boolean deleteCC(String id) {
-        String sql = "DELETE FROM tbl_category WHERE CategoryID = ?";
+        String sql = "DELETE FROM tbl_category WHERE categoryid = ?";
         int result = 0;
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
@@ -108,7 +110,7 @@ public class CategoryAdmin {
 
     public Category getCategory(String id) {
         Category acc = null;
-        String sql = "SELECT * FROM tbl_category WHERE CategoryID = ?";
+        String sql = "SELECT * FROM tbl_category WHERE categoryid = ?";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {
@@ -135,10 +137,10 @@ public class CategoryAdmin {
 
     public ViewDetailCate viewCateDetail(String id) {
         ViewDetailCate acc = null;
-        String sql = "SELECT tbl_post.CategoryID,COUNT(tbl_post.PostID ) AS \"So luong\", COALESCE(SUM(tbl_transaction_history.Price),0) AS \"Sum\" \n"
+        String sql = "SELECT tbl_post.categoryid,COUNT(tbl_post.postid ) AS \"So luong\", COALESCE(SUM(tbl_transaction_history.price),0) AS \"Sum\" \n"
                 + "FROM tbl_post ,tbl_transaction_history \n"
-                + "Where tbl_post.PostID = tbl_transaction_history.PostID \n"
-                + "AND tbl_post.CategoryID = ?\n"
+                + "Where tbl_post.postid = tbl_transaction_history.postid \n"
+                + "AND tbl_post.categoryid = ?\n"
                 + ";";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
@@ -161,8 +163,8 @@ public class CategoryAdmin {
     }
 
     public boolean updateCC(String id, String name, String img, String des, String UpdateDate) {
-        String sql = "UPDATE tbl_category SET Name = ?, "
-                + "Img = ?, Des = ?, Update_Day = ? WHERE CategoryID = ? ";
+        String sql = "UPDATE tbl_category SET name = ?, "
+                + "image = ?, description = ?, update_day = ? WHERE categoryid = ? ";
         int result = 0;
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();

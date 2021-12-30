@@ -389,9 +389,6 @@ var localpicker = new LocalPicker({
                         return fix_element;
                     }());
                   $(document).ready(function(){
-               
-
-                    //for profile
                     let id = '<%=request.getParameter("id")%>'
                     $.ajax({
                         url: "ProfileController?ac=view",

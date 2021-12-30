@@ -13,8 +13,8 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
-        checkLogin c = new checkLogin();
-        System.out.println((c.checkLogin("mang@gmail.com", "1")));
+         TransactionModelAdmin main = new TransactionModelAdmin();
+         System.out.println(main.searchDatebyWallet("12/11/2021", "12/22/2022", "1").size());
     }
 }
 

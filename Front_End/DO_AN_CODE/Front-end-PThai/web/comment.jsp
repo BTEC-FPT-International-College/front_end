@@ -102,6 +102,7 @@
                 </div>
             </div>
         </div>
+        
 
         <!-- Container  -->
         <div class="container-p">
@@ -215,6 +216,7 @@
 
 <script>
                                                         $(document).ready(function () {
+//                                                           
                                                             let id = '<%=request.getParameter("postId")%>'
                                                             $.ajax({
                                                                 url: "DController?ac=viewcomment",

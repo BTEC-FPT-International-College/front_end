@@ -57,6 +57,12 @@ public class LoginController extends HttpServlet {
 //                    dispatcher.forward(request, response);
                         response.sendRedirect("profile.jsp?id="+userID);
                     }
+                    if (RoleID.equals("1")) {
+//                    request.getRequestDispatcher("pages/index.jsp").forward(request, response);
+//                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/MainControllers?ac=view");
+//                    dispatcher.forward(request, response);
+                        response.sendRedirect("Admin/index.jsp");
+                    }
                 } else {
                     request.setAttribute("error","Password or email is invalid");
                     RequestDispatcher dis = request.getRequestDispatcher("login.jsp");
