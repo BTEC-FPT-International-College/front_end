@@ -56,7 +56,7 @@
                         const da = JSON.stringify(a)
                         console.log(da)
                         $.ajax({
-                            url: "../TransactionController?ac=search",
+                            url: "../../TransactionControllerAdmin?ac=search",
                             method: "POST",
                             data: {get: da},
                             success: function (data) {
@@ -89,7 +89,7 @@
                 })
                 $("#cancledate").click(function () {
                     $.ajax({
-                        url: "../TransactionController?ac=viewT",
+                        url: "../../TransactionControllerAdmin?ac=viewT",
                         method: "GET",
                         success: function (data) {
                             let rs = $.parseJSON(data);
@@ -137,7 +137,7 @@
                     const da = JSON.stringify(searh1day)
                     console.log(da)
                     $.ajax({
-                        url: "../TransactionController?ac=search1",
+                        url: "../../TransactionControllerAdmin?ac=search1",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
@@ -180,7 +180,7 @@
                     const da = JSON.stringify(searh1weeek)
                     console.log(da)
                     $.ajax({
-                        url: "../TransactionController?ac=search1",
+                        url: "../../TransactionControllerAdmin?ac=search1",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
@@ -224,7 +224,7 @@
                     const da = JSON.stringify(searh1month)
                     console.log(da)
                     $.ajax({
-                        url: "../TransactionController?ac=search1",
+                        url: "../../TransactionControllerAdmin?ac=search1",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
@@ -257,7 +257,7 @@
                 })
                 $("#refesh").click(function () {
                     $.ajax({
-                        url: "../TransactionController?ac=viewT",
+                        url: "../../TransactionControllerAdmin?ac=viewT",
                         method: "GET",
                         success: function (data) {
                             let rs = $.parseJSON(data);
@@ -289,7 +289,7 @@
                 })
                 $("#top3").click(function (event) {
                     $.ajax({
-                        url: "../TransactionController?ac=viewTop3",
+                        url: "../../TransactionControllerAdmin?ac=viewTop3",
                         method: "GET",
                         success: function (data) {
                             let rs = $.parseJSON(data);
@@ -306,7 +306,7 @@
                 })
                 $("#topPacket").mouseenter(function (event) {
                     $.ajax({
-                        url: "../TransactionController?ac=viewTopPacket",
+                        url: "../../TransactionControllerAdmin?ac=viewTopPacket",
                         method: "GET",
                         success: function (data) {
                             let rs = $.parseJSON(data);
@@ -325,7 +325,7 @@
                 })
                 $("#orther").mouseenter(function (event) {
                     $.ajax({
-                        url: "../TransactionController?ac=viewTop1PostBuy",
+                        url: "../../TransactionControllerAdmin?ac=viewTop1PostBuy",
                         method: "GET",
                         success: function (data) {
                             let rs = $.parseJSON(data);
@@ -342,7 +342,7 @@
                 })
                 $("#1hour").click(function () {
                     $.ajax({
-                        url: "../TransactionController?ac=viewTby1Hour",
+                        url: "../../TransactionControllerAdmin?ac=viewTby1Hour",
                         method: "GET",
                         success: function (data) {
                             let rs = $.parseJSON(data);
@@ -584,7 +584,7 @@
                                             </thead>
                                             <tbody>
                                                 <c:if test="${empty requestScope['listTran']}">
-                                                    <jsp:forward page = "/TransactionController?ac=view" />
+                                                    <jsp:forward page = "../../TransactionControllerAdmin?ac=view" />
                                                 </c:if>
                                                 <c:forEach items="${listTran}" var = "x" >
                                                     <tr>

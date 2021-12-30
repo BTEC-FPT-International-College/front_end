@@ -32,7 +32,7 @@
                         const da = JSON.stringify(not)
                         console.log(da)
                         $.ajax({
-                            url: "../UserController?ac=updateStatus",
+                            url: "../../UserControllerAdmin?ac=updateStatus",
                             method: "POST",
                             data: {get: da},
                             success: function (data) {
@@ -56,7 +56,7 @@
                         const da = JSON.stringify(check)
                         console.log(da)
                         $.ajax({
-                            url: "../UserController?ac=updateStatus",
+                            url: "../../UserControllerAdmin?ac=updateStatus",
                             method: "POST",
                             data: {get: da},
                             success: function (data) {
@@ -74,7 +74,7 @@
                 let select = $('#getid').text();
                 console.log(select)
                 $.ajax({
-                    url: "../UserController?ac=viewTotalPost",
+                    url: "../../UserControllerAdmin?ac=viewTotalPost",
                     method: "POST",
                     data: {get: select},
                     success: function (data) {
@@ -91,7 +91,7 @@
                     }
                 });
                 $.ajax({
-                    url: "../UserController?ac=viewPur",
+                    url: "../../UserControllerAdmin?ac=viewPur",
                     method: "POST",
                     data: {get: select},
                     success: function (data) {
@@ -109,7 +109,7 @@
                     }
                 });
                 $.ajax({
-                    url: "../UserController?ac=viewTotalRecharge",
+                    url: "../../UserControllerAdmin?ac=viewTotalRecharge",
                     method: "POST",
                     data: {get: select},
                     success: function (data) {
@@ -127,7 +127,7 @@
                     }
                 });
                 $.ajax({
-                    url: "../UserController?ac=viewWallet",
+                    url: "../../UserControllerAdmin?ac=viewWallet",
                     method: "POST",
                     data: {get: select},
                     success: function (data) {
@@ -143,7 +143,7 @@
                     }
                 });
                 $.ajax({
-                    url: "../UserController?ac=viewUser",
+                    url: "../../UserControllerAdmin?ac=viewUser",
                     method: "POST",
                     data: {get: select},
                     success: function (data) {
@@ -193,30 +193,7 @@
                         alert("error");
                     }
                 });
-                $(".delete[target='_blank']").click(function () {
-                    let select = $(this).attr("title")
-                    console.log(select)
-                    $.ajax({
-                        url: "../SupController?ac=del",
-                        method: "POST",
-                        data: {get: select},
-                        success: function (data) {
-                            let obj = $.parseJSON(data);
-                            console.log(obj)
-                            if (obj) {
-                                $("#show").show();
-                                setTimeout(function () {
-                                    location.replace("user.jsp")
-                                }, 1000);
-                            } else {
-                                $("#error").show();
-                            }
-                        },
-                        error: function () {
-                            alert("error");
-                        }
-                    });
-                })
+                
             });
         </script>
     </head>

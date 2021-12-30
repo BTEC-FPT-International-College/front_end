@@ -4,10 +4,13 @@
  */
 package Controller;
 
-import Entity.Post;
-import Entity.PostAdmin;
-import Entity.Search_Recharge;
-import Model.PostModelAdmin;
+import Entity.Category;
+import Entity.Suppervisor;
+import Entity.User;
+import Entity.UserAdmin;
+import Entity.User_Cate;
+import Model.CategoryAdmin;
+import Model.SupModelAdmin;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,8 +25,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author MarkTran
  */
-@WebServlet(name = "PostControllerAdmin", urlPatterns = {"/PostControllerAdmin"})
-public class PostControllerAdmin extends HttpServlet {
+@WebServlet(name = "SupControllerAdmin", urlPatterns = {"/SupControllerAdmin"})
+public class SupControllerAdmin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,85 +42,96 @@ public class PostControllerAdmin extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String act = request.getParameter("ac");
             if (act.equals("view")) {
-            PostModelAdmin am = new PostModelAdmin();
-            ArrayList<PostAdmin> list = am.getListPost();
-            request.setAttribute("listPost", list);
-            request.getRequestDispatcher("Admin/pages/post.jsp").forward(request, response);
+            SupModelAdmin am = new SupModelAdmin();
+            ArrayList<UserAdmin> list = am.getListSup();
+            request.setAttribute("listS", list);
+            request.getRequestDispatcher("Admin/pages/suppervisor.jsp").forward(request, response);
         }
-        if (act.equals("viewP")) {
-            Gson json = new Gson();
-            PostModelAdmin am = new PostModelAdmin();
-            ArrayList<PostAdmin> a = am.getListPost();
-            String listTrainee = json.toJson(a);
-            response.setContentType("text/html");
-            response.getWriter().write(listTrainee);
-        }
-            if (act.equals("viewPostByUser")) {
+        if (act.equals("add")) {
             String op = request.getParameter("get");
             Gson json = new Gson();
-            PostModelAdmin am = new PostModelAdmin();
-            ArrayList<PostAdmin> a = am.getListPostByUser(op);
+            UserAdmin sup = json.fromJson(op, UserAdmin.class);
+            SupModelAdmin am = new SupModelAdmin();
+            boolean a = am.addSup(sup.getUserID(),sup.getFullName(),sup.getPhone(),sup.getEmail(),sup.getAddress(),sup.getDate_of_Birth(),sup.getPassword(),0,sup.getGender(),sup.getCreateDate(),2);
             String listTrainee = json.toJson(a);
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
-        if (act.equals("viewTotalPost")) {
-            Gson json = new Gson();
-            PostModelAdmin am = new PostModelAdmin();
-            PostAdmin a = am.TotalPost();
-            String listTrainee = json.toJson(a);
-            response.setContentType("text/html");
-            response.getWriter().write(listTrainee);
-        }
-        if (act.equals("search")) {
+        if (act.equals("update")) {
             String op = request.getParameter("get");
             Gson json = new Gson();
-            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
-            PostModelAdmin am = new PostModelAdmin();
-            ArrayList<PostAdmin> a = am.searchDate(sup.getStart(), sup.getEnd());
+            UserAdmin sup = json.fromJson(op, UserAdmin.class);
+            SupModelAdmin am = new SupModelAdmin();
+            boolean a = am.updateSup(sup.getUserID(),sup.getFullName(),sup.getPhone(),sup.getEmail(),sup.getAddress(),sup.getDate_of_Birth(),sup.getPassword(),sup.getGender(),sup.getUpdateDate());
             String listTrainee = json.toJson(a);
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
-        if (act.equals("searchbyUser")) {
+        if (act.equals("updatetoCate")) {
             String op = request.getParameter("get");
             Gson json = new Gson();
-            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
-            PostModelAdmin am = new PostModelAdmin();
-            ArrayList<PostAdmin> a = am.searchDatebyU(sup.getWallet(),sup.getStart(), sup.getEnd());
+            User_Cate sup = json.fromJson(op, User_Cate.class);
+            SupModelAdmin am = new SupModelAdmin();
+            boolean a = am.updateCateandSup(sup.getUserID(),sup.getCategoryID());
             String listTrainee = json.toJson(a);
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
-        if (act.equals("search2byUser")) {
+        if (act.equals("addtoCate")) {
             String op = request.getParameter("get");
             Gson json = new Gson();
-            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
-            PostModelAdmin am = new PostModelAdmin();
-            ArrayList<PostAdmin> a = am.searchDate2byU(sup.getWallet(),sup.getStart(), sup.getEnd());
+            User_Cate sup = json.fromJson(op, User_Cate.class);
+            SupModelAdmin am = new SupModelAdmin();
+            boolean a = am.addSupandCate(sup.getUserID(),sup.getCategoryID(),0,0);
             String listTrainee = json.toJson(a);
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
-        if (act.equals("search1")) {
+        if (act.equals("del")) {
             String op = request.getParameter("get");
+            SupModelAdmin am = new SupModelAdmin();
+            Boolean list = am.deleteSup(op);
             Gson json = new Gson();
-            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
-            PostModelAdmin am = new PostModelAdmin();
-            ArrayList<PostAdmin> a = am.searchDate2(sup.getStart(), sup.getEnd());
-            String listTrainee = json.toJson(a);
+            String listTrainee = json.toJson(list);
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
-        if (act.equals("updateRead")) {
+        if (act.equals("viewCategory")) {
+            CategoryAdmin am = new CategoryAdmin();
+            ArrayList<Category> list = am.getListCategory();
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("viewSup")) {
             String op = request.getParameter("get");
+             SupModelAdmin am = new SupModelAdmin();
+            Suppervisor list = am.getSup(op);
             Gson json = new Gson();
-            PostModelAdmin am = new PostModelAdmin();
-            boolean a = am.updateRead(op);
-            String listTrainee = json.toJson(a);
+            String listTrainee = json.toJson(list);
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
+       if (act.equals("checkIDempty")) {
+            String op = request.getParameter("get");
+            SupModelAdmin am = new SupModelAdmin();
+            Boolean list = am.checkUserExist(op);
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+       if (act.equals("getLastIndexSup")) {
+            String op = request.getParameter("get");
+            SupModelAdmin am = new SupModelAdmin();
+            ArrayList<UserAdmin> list = am.getLastIndexSup();
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

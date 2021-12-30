@@ -242,7 +242,7 @@ public class RechargeModelAdmin {
         String sql = "SELECT * from user_wallet,tbl_recharge_transaction,tbl_user\n"
                 + "where  user_wallet.walletid = tbl_recharge_transaction.walletid\n"
                 + "AND user_wallet.userid = tbl_user.userid\n"
-                + "AND STR_TO_DATE(create_date,'%Y/%m/%d')between STR_TO_DATE(?,'%d/%m/%Y') and STR_TO_DATE(?,'%d/%m/%Y')\n"
+                + "AND STR_TO_DATE(create_date,'%Y/%m/%d')between STR_TO_DATE(?,'%m/%d/%Y') and STR_TO_DATE(?,'%m/%d/%Y')\n"
                 + "AND tbl_recharge_transaction.walletid = ?";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();

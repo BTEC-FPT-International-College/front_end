@@ -102,8 +102,8 @@ public class PostModelAdmin {
         return list;
     }
 
-    public boolean deletePots(String id) {
-        String sql = "DELETE FROM web.tbl_post WHERE postid = ?";
+    public boolean updateRead(String id) {
+        String sql = "UPDATE web.tbl_post set `read_unread` = 0 WHERE postid =?";
         int result = 0;
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
@@ -228,7 +228,7 @@ public class PostModelAdmin {
     public ArrayList<PostAdmin> searchDate2(String start, String end) {
         ArrayList<PostAdmin> list = new ArrayList<>();
         String sql = "SELECT *,STR_TO_DATE(create_day,'%Y/%m/%d')  FROM tbl_post\n"
-                + "WHERE STR_TO_DATE(create_day,'%Y/%m/%d')between STR_TO_DATE(?,'%d/%m/%Y') and STR_TO_DATE(?,'%d/%m/%Y');";
+                + "WHERE STR_TO_DATE(create_day,'%Y/%m/%d')between STR_TO_DATE(?,'%m/%d/%Y') and STR_TO_DATE(?,'%m/%d/%Y');";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {

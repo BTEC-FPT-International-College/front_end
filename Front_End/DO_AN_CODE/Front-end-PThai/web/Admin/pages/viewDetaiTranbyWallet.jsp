@@ -35,7 +35,7 @@
             console.log(d)
             $(document).ready(function () {
                 $.ajax({
-                            url: "../TransactionController?ac=viewTByWallet",
+                            url: "../../TransactionControllerAdmin?ac=viewTByWallet",
                             method: "POST",
                             data: {get: d},
                             success: function (data) {
@@ -77,7 +77,7 @@
                         const da = JSON.stringify(a)
                         console.log(da)
                         $.ajax({
-                            url: "../TransactionController?ac=searchbyWallet",
+                            url: "../../TransactionControllerAdmin?ac=searchbyWallet",
                             method: "POST",
                             data: {get: da},
                             success: function (data) {
@@ -110,7 +110,7 @@
                 })
                 $("#cancledate").click(function () {
                      $.ajax({
-                            url: "../TransactionController?ac=viewTByWallet",
+                            url: "../../TransactionControllerAdmin?ac=viewTByWallet",
                             method: "POST",
                             data: {get: d},
                             success: function (data) {
@@ -160,7 +160,7 @@
                     const da = JSON.stringify(searh1day)
                     console.log(da)
                     $.ajax({
-                        url: "../TransactionController?ac=search1byWallet",
+                        url: "../../TransactionControllerAdmin?ac=search1byWallet",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
@@ -204,7 +204,7 @@
                     const da = JSON.stringify(searh1weeek)
                     console.log(da)
                     $.ajax({
-                        url: "../TransactionController?ac=search1byWallet",
+                        url: "../../TransactionControllerAdmin?ac=search1byWallet",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
@@ -249,7 +249,7 @@
                     const da = JSON.stringify(searh1month)
                     console.log(da)
                     $.ajax({
-                        url: "../TransactionController?ac=search1byWallet",
+                        url: "../../TransactionControllerAdmin?ac=search1byWallet",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
@@ -282,7 +282,7 @@
                 })
                 $("#refesh").click(function () {
                     $.ajax({
-                            url: "../TransactionController?ac=viewTByWallet",
+                            url: "../../TransactionControllerAdmin?ac=viewTByWallet",
                             method: "POST",
                             data: {get: d},
                             success: function (data) {
@@ -315,7 +315,7 @@
                 })
                 $("#1hour").click(function () {
                     $.ajax({
-                            url: "../TransactionController?ac=viewTByWallet1Hour",
+                            url: "../../TransactionControllerAdmin?ac=viewTByWallet1Hour",
                             method: "POST",
                             data: {get: d},
                             success: function (data) {

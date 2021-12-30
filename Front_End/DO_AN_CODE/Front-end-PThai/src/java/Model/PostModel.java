@@ -86,7 +86,7 @@ public class PostModel {
                 + "province_value,\n"
                 + "read_unread,\n"
                 + "image)\n"
-                + "VALUES(?, ?, ?, ?, ?,   ?, ?, ?, ?, ?,   ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?,  ?, 0,?)";
+                + "VALUES(?, ?, ?, ?, ?,   ?, ?, ?, ?, ?,   ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?,  ?, 1,?)";
         int result = 0;
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();

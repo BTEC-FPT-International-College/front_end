@@ -4,10 +4,14 @@
  */
 package Controller;
 
-import Entity.Post;
-import Entity.PostAdmin;
-import Entity.Search_Recharge;
-import Model.PostModelAdmin;
+import Entity.User;
+import Entity.UserAdmin;
+import Entity.ViewTotalPost;
+import Entity.ViewTotalPurchases;
+import Entity.ViewTotalRecharge;
+import Entity.Wallet;
+import Entity.WalletAdmin;
+import Model.UserModelAdmin;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,8 +26,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author MarkTran
  */
-@WebServlet(name = "PostControllerAdmin", urlPatterns = {"/PostControllerAdmin"})
-public class PostControllerAdmin extends HttpServlet {
+@WebServlet(name = "UserControllerAdmin", urlPatterns = {"/UserControllerAdmin"})
+public class UserControllerAdmin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,83 +41,73 @@ public class PostControllerAdmin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String act = request.getParameter("ac");
-            if (act.equals("view")) {
-            PostModelAdmin am = new PostModelAdmin();
-            ArrayList<PostAdmin> list = am.getListPost();
-            request.setAttribute("listPost", list);
-            request.getRequestDispatcher("Admin/pages/post.jsp").forward(request, response);
+         String act = request.getParameter("ac");
+        if (act.equals("view")) {
+            UserModelAdmin am = new UserModelAdmin();
+            ArrayList<UserAdmin> list = am.getListUser();
+            request.setAttribute("listU", list);
+            request.getRequestDispatcher("Admin/pages/user.jsp").forward(request, response);
         }
-        if (act.equals("viewP")) {
+        if (act.equals("del")) {
+            String op = request.getParameter("get");
+            UserModelAdmin am = new UserModelAdmin();
+            Boolean list = am.deleteUser(op);
             Gson json = new Gson();
-            PostModelAdmin am = new PostModelAdmin();
-            ArrayList<PostAdmin> a = am.getListPost();
-            String listTrainee = json.toJson(a);
+            String listTrainee = json.toJson(list);
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
-            if (act.equals("viewPostByUser")) {
+        if (act.equals("viewPur")) {
             String op = request.getParameter("get");
+            UserModelAdmin am = new UserModelAdmin();
+            ViewTotalPurchases list = am.viewTotalP(op);
             Gson json = new Gson();
-            PostModelAdmin am = new PostModelAdmin();
-            ArrayList<PostAdmin> a = am.getListPostByUser(op);
-            String listTrainee = json.toJson(a);
+            String listTrainee = json.toJson(list);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("viewWallet")) {
+            String op = request.getParameter("get");
+            UserModelAdmin am = new UserModelAdmin();
+            WalletAdmin list = am.viewWallet(op);
+            Gson json = new Gson();
+            String listTrainee = json.toJson(list);
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
         if (act.equals("viewTotalPost")) {
+            String op = request.getParameter("get");
+            UserModelAdmin am = new UserModelAdmin();
+            ViewTotalPost list = am.viewTotalPost(op);
             Gson json = new Gson();
-            PostModelAdmin am = new PostModelAdmin();
-            PostAdmin a = am.TotalPost();
-            String listTrainee = json.toJson(a);
+            String listTrainee = json.toJson(list);
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
-        if (act.equals("search")) {
+        if (act.equals("viewTotalRecharge")) {
             String op = request.getParameter("get");
+            UserModelAdmin am = new UserModelAdmin();
+            ViewTotalRecharge list = am.viewTotalRecharge(op);
             Gson json = new Gson();
-            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
-            PostModelAdmin am = new PostModelAdmin();
-            ArrayList<PostAdmin> a = am.searchDate(sup.getStart(), sup.getEnd());
-            String listTrainee = json.toJson(a);
+            String listTrainee = json.toJson(list);
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
-        if (act.equals("searchbyUser")) {
+        if (act.equals("viewUser")) {
             String op = request.getParameter("get");
+            UserModelAdmin am = new UserModelAdmin();
+            UserAdmin list = am.getUser(op);
             Gson json = new Gson();
-            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
-            PostModelAdmin am = new PostModelAdmin();
-            ArrayList<PostAdmin> a = am.searchDatebyU(sup.getWallet(),sup.getStart(), sup.getEnd());
-            String listTrainee = json.toJson(a);
+            String listTrainee = json.toJson(list);
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
-        if (act.equals("search2byUser")) {
+        if (act.equals("updateStatus")) {
             String op = request.getParameter("get");
             Gson json = new Gson();
-            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
-            PostModelAdmin am = new PostModelAdmin();
-            ArrayList<PostAdmin> a = am.searchDate2byU(sup.getWallet(),sup.getStart(), sup.getEnd());
-            String listTrainee = json.toJson(a);
-            response.setContentType("text/html");
-            response.getWriter().write(listTrainee);
-        }
-        if (act.equals("search1")) {
-            String op = request.getParameter("get");
-            Gson json = new Gson();
-            Search_Recharge sup = json.fromJson(op, Search_Recharge.class);
-            PostModelAdmin am = new PostModelAdmin();
-            ArrayList<PostAdmin> a = am.searchDate2(sup.getStart(), sup.getEnd());
-            String listTrainee = json.toJson(a);
-            response.setContentType("text/html");
-            response.getWriter().write(listTrainee);
-        }
-        if (act.equals("updateRead")) {
-            String op = request.getParameter("get");
-            Gson json = new Gson();
-            PostModelAdmin am = new PostModelAdmin();
-            boolean a = am.updateRead(op);
+            UserAdmin u = json.fromJson(op, UserAdmin.class);
+            UserModelAdmin am = new UserModelAdmin();
+            boolean a = am.updateStatus(u.getUserID(), u.getStatus());
             String listTrainee = json.toJson(a);
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);

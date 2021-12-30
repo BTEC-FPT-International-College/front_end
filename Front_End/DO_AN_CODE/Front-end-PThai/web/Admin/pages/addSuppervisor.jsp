@@ -32,7 +32,7 @@
                 $('#datePicker').val(now);
                 $("#select").on("mouseover", function (event) {
                     $.ajax({
-                        url: "../SupController?ac=viewCategory",
+                        url: "../../SupControllerAdmin?ac=viewCategory",
                         method: "GET",
                         success: function (data) {
                             let rs = $.parseJSON(data);
@@ -56,7 +56,7 @@
                         $("#add").prop('disabled', true);
                     } else {
                         $.ajax({
-                            url: "../SupController?ac=checkIDempty",
+                            url: "../../SupControllerAdmin?ac=checkIDempty",
                             method: "POST",
                             data: {get: select},
                             success: function (data) {
@@ -125,25 +125,33 @@
                     d.Password = $("#pass").val()
                     d.Gender = $('input[name=membershipRadios]:checked', '#myForm').val();
                     d.CreateDate = $("#datePicker").val()
-                    c.UserID = $("#supID").val();
-                    c.CategoryID = $('#select option:selected').attr('value');
                     const da = JSON.stringify(d)
-                    const cate = JSON.stringify(c)
                     console.log(da)
-                    console.log(cate)
                     $.ajax({
-                        url: "../SupController?ac=add",
+                        url: "../../SupControllerAdmin?ac=add",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
                             let rs = $.parseJSON(data);
                             console.log(rs)
                             if (rs) {
+
                                 $.ajax({
-                                    url: "../SupController?ac=addtoCate",
-                                    method: "POST",
-                                    data: {get: cate},
+                                    url: "../../SupControllerAdmin?ac=getLastIndexSup",
+                                    method: "GET",
                                     success: function (data) {
+                                        let rs2 = $.parseJSON(data);
+                                         c.CategoryID = $('#select option:selected').attr('value');
+                                        c.UserID = rs2[0].UserID
+                                        console.log(rs2)
+                                        console.log(c)
+
+                                        const cate = JSON.stringify(c)
+                                         $.ajax({
+                                        url: "../../SupControllerAdmin?ac=addtoCate",
+                                        method: "POST",
+                                         data: {get: cate},
+                                         success: function (data) {
                                         let rs1 = $.parseJSON(data);
                                         console.log(rs1)
                                         if (rs1) {
@@ -156,6 +164,12 @@
                                         alert("error");
                                     }
                                 });
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                               
                             } else {
                                 $("#error").show()
                             }
@@ -248,7 +262,7 @@
                                         </button>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6">
+<!--                                        <div class="col-md-6">
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">ID</label>
                                                 <div class="col-sm-9">
@@ -259,8 +273,8 @@
                                                 </div>
                                             </div>
 
-                                        </div>
-                                        <div class="col-md-6">
+                                        </div>-->
+                                        <div class="col-md-12">
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">FullName</label>
                                                 <div class="col-sm-9">

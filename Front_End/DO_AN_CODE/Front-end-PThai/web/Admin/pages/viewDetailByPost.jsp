@@ -34,7 +34,7 @@
             console.log(d)
             $(document).ready(function () {
                 $.ajax({
-                            url: "../TransactionController?ac=viewTByPost",
+                            url: "../../TransactionControllerAdmin?ac=viewTByPost",
                             method: "POST",
                             data: {get: d},
                             success: function (data) {
@@ -76,7 +76,7 @@
                         const da = JSON.stringify(a)
                         console.log(da)
                         $.ajax({
-                            url: "../TransactionController?ac=searchbyPost",
+                            url: "../../TransactionControllerAdmin?ac=searchbyPost",
                             method: "POST",
                             data: {get: da},
                             success: function (data) {
@@ -109,7 +109,7 @@
                 })
                 $("#cancledate").click(function () {
                      $.ajax({
-                            url: "../TransactionController?ac=viewTByPost",
+                            url: "../../TransactionControllerAdmin?ac=viewTByPost",
                             method: "POST",
                             data: {get: d},
                             success: function (data) {
@@ -159,7 +159,7 @@
                     const da = JSON.stringify(searh1day)
                     console.log(da)
                     $.ajax({
-                        url: "../TransactionController?ac=search1byPost",
+                        url: "../../TransactionControllerAdmin?ac=search1byPost",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
@@ -203,7 +203,7 @@
                     const da = JSON.stringify(searh1weeek)
                     console.log(da)
                     $.ajax({
-                        url: "../TransactionController?ac=search1byPost",
+                        url: "../../TransactionControllerAdmin?ac=search1byPost",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
@@ -248,7 +248,7 @@
                     const da = JSON.stringify(searh1month)
                     console.log(da)
                     $.ajax({
-                        url: "../TransactionController?ac=search1byPost",
+                        url: "../../TransactionControllerAdmin?ac=search1byPost",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
@@ -281,7 +281,7 @@
                 })
                 $("#refesh").click(function () {
                     $.ajax({
-                            url: "../TransactionController?ac=viewTByPost",
+                            url: "../../TransactionControllerAdmin?ac=viewTByPost",
                             method: "POST",
                             data: {get: d},
                             success: function (data) {
@@ -316,7 +316,7 @@
                 
                 $("#1hour").click(function () {
                     $.ajax({
-                            url: "../TransactionController?ac=viewTByPost1Hour",
+                            url: "../../TransactionControllerAdmin?ac=viewTByPost1Hour",
                             method: "POST",
                             data: {get: d},
                             success: function (data) {

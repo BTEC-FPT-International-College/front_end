@@ -154,20 +154,18 @@
                                                     <th>
                                                         View detail
                                                     </th>
-                                                    <th>
-                                                        Delete
-                                                    </th>
+                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>
                                             <c:if test="${empty requestScope['listU']}">
-                                                <jsp:forward page = "/UserController?ac=view" />
+                                                <jsp:forward page = "../../UserControllerAdmin?ac=view" />
                                             </c:if>
                                             <c:forEach items="${listU}" var = "x" >
                                                 <tr class="${x.getStatus()}">
                                                     <td>${x.getUserID()}</td>
                                                     <td>${x.getFullName()}</td>
-                                                    <td>${x.getGender()}</td>
+                                                    <td class="${x.getGender()}_gender"></td>
                                                     <td>${x.getEmail()}</td>
                                                     <td>${x.getPhone()}</td>
                                                     <td>${x.getCreateDate()}</td>
@@ -179,33 +177,7 @@
                                                             <span> <strong> View</strong></span>            
                                                         </a>
                                                     </td>
-                                                    <td>
-                                                        <div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal${x.getUserID()}"><i class="mdi mdi-delete"></i>Delete</button>
-                                                            <div id="my-modal${x.getUserID()}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                                    <div class="modal-content border-0">
-                                                                        <div class="modal-body p-0">
-                                                                            <div class="card border-0 p-sm-3 p-2 justify-content-center">
-                                                                                <div class="card-header pb-0 bg-white border-0 ">
-                                                                                    <div class="row">
-                                                                                        <div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>
-                                                                                    </div>
-                                                                                    <p class="font-weight-bold mb-2"> Are you sure you wanna delete ${x.getUserID()} category ?</p>
-                                                                                    <p class="text-muted "> This change may affect other data. Be sure !!!</p>
-                                                                                </div>
-                                                                                <div class="card-body px-sm-4 mb-2 pt-1 pb-0">
-                                                                                    <div class="row justify-content-end no-gutters">
-                                                                                        <div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>
-                                                                                        <div class="col-auto"><div class="col-auto"><button title="${x.getUserID()}" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Delete</button></div></div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
+                                                    
                                                 </tr>
                                             </c:forEach>
                                             </tbody>
@@ -235,9 +207,7 @@
                                                     <th>
                                                         View detail
                                                     </th>
-                                                    <th>
-                                                        Delete
-                                                    </th>
+                                                    
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -251,5 +221,9 @@
         </div>
         </div>
     <%@ include file="../inc/plugins.jsp" %>
+    <script>
+    $(".1_gender").text("Male")
+    $(".0_gender").text("Female")
+    </script>
     </body>
 </html>

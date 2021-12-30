@@ -85,12 +85,12 @@
                                         value.EndDate,
                                         value.status,
                                         '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
-                                        "<a href='viewDetailPost.jsp?id=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
+                                        "<a href='post-detail.jsp?postId=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
                                                 + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
                                                 + '<i class="mdi mdi-eye"></i>'
                                                 + '<span> <strong> View</strong></span>'
                                                 + "</a>",
-                                        '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Delete</button>'
+                                        '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Block</button>'
                                                 + '<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
                                                 + '<div class="modal-dialog modal-dialog-centered" role="document">'
                                                 + '<div class="modal-content border-0">'
@@ -100,13 +100,12 @@
                                                 + '<div class="row">'
                                                 + '<div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>'
                                                 + '</div>'
-                                                + '<p class="font-weight-bold mb-2"> Are you sure you wanna delete' + value.PostID + 'post ?</p>'
-                                                + '<p class="text-muted "> This change may affect other data. Be sure !!!</p>'
+                                                + '<p class="font-weight-bold mb-2"> Are you sure you wanna block' + value.PostID + 'post ?</p>'
                                                 + '</div>'
                                                 + '<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
                                                 + '<div class="row justify-content-end no-gutters">'
                                                 + '<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
-                                                + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Delete</button></div></div>'
+                                                + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>'
                                                 + '</div>'
                                                 + '</div>'
                                                 + '</div>'
@@ -151,12 +150,12 @@
                                     value.EndDate,
                                     value.status,
                                     '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
-                                    "<a href='viewDetailPost.jsp?id=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
+                                    "<a href='post-detail.jsp?postId=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
                                             + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
                                             + '<i class="mdi mdi-eye"></i>'
                                             + '<span> <strong> View</strong></span>'
                                             + "</a>",
-                                    '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Delete</button>'
+                                    '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Block</button>'
                                             + '<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
                                             + '<div class="modal-dialog modal-dialog-centered" role="document">'
                                             + '<div class="modal-content border-0">'
@@ -166,13 +165,12 @@
                                             + '<div class="row">'
                                             + '<div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>'
                                             + '</div>'
-                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna delete' + value.PostID + 'post ?</p>'
-                                            + '<p class="text-muted "> This change may affect other data. Be sure !!!</p>'
+                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna block ' + value.PostID + 'post ?</p>'
                                             + '</div>'
                                             + '<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
                                             + '<div class="row justify-content-end no-gutters">'
                                             + '<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
-                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Delete</button></div></div>'
+                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>'
                                             + '</div>'
                                             + '</div>'
                                             + '</div>'
@@ -234,12 +232,12 @@
                                     value.EndDate,
                                     value.status,
                                     '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
-                                    "<a href='viewDetailPost.jsp?id=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
+                                    "<a href='post-detail.jsp?postId=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
                                             + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
                                             + '<i class="mdi mdi-eye"></i>'
                                             + '<span> <strong> View</strong></span>'
                                             + "</a>",
-                                    '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Delete</button>'
+                                    '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Block</button>'
                                             + '<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
                                             + '<div class="modal-dialog modal-dialog-centered" role="document">'
                                             + '<div class="modal-content border-0">'
@@ -249,13 +247,12 @@
                                             + '<div class="row">'
                                             + '<div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>'
                                             + '</div>'
-                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna delete' + value.PostID + 'post ?</p>'
-                                            + '<p class="text-muted "> This change may affect other data. Be sure !!!</p>'
+                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna block' + value.PostID + 'post ?</p>'
                                             + '</div>'
                                             + '<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
                                             + '<div class="row justify-content-end no-gutters">'
                                             + '<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
-                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Delete</button></div></div>'
+                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>'
                                             + '</div>'
                                             + '</div>'
                                             + '</div>'
@@ -311,12 +308,12 @@
                                     value.EndDate,
                                     value.status,
                                     '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
-                                    "<a href='viewDetailPost.jsp?id=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
+                                    "<a href='post-detail.jsp?postId=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
                                             + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
                                             + '<i class="mdi mdi-eye"></i>'
                                             + '<span> <strong> View</strong></span>'
                                             + "</a>",
-                                    '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Delete</button>'
+                                    '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Block</button>'
                                             + '<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
                                             + '<div class="modal-dialog modal-dialog-centered" role="document">'
                                             + '<div class="modal-content border-0">'
@@ -326,13 +323,12 @@
                                             + '<div class="row">'
                                             + '<div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>'
                                             + '</div>'
-                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna delete' + value.PostID + 'post ?</p>'
-                                            + '<p class="text-muted "> This change may affect other data. Be sure !!!</p>'
+                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna block' + value.PostID + 'post ?</p>'
                                             + '</div>'
                                             + '<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
                                             + '<div class="row justify-content-end no-gutters">'
                                             + '<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
-                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Delete</button></div></div>'
+                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>'
                                             + '</div>'
                                             + '</div>'
                                             + '</div>'
@@ -389,12 +385,12 @@
                                     value.EndDate,
                                     value.status,
                                     '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
-                                    "<a href='viewDetailPost.jsp?id=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
+                                    "<a href='post-detail.jsp?postId=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
                                             + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
                                             + '<i class="mdi mdi-eye"></i>'
                                             + '<span> <strong> View</strong></span>'
                                             + "</a>",
-                                    '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Delete</button>'
+                                    '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Block</button>'
                                             + '<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
                                             + '<div class="modal-dialog modal-dialog-centered" role="document">'
                                             + '<div class="modal-content border-0">'
@@ -404,13 +400,12 @@
                                             + '<div class="row">'
                                             + '<div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>'
                                             + '</div>'
-                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna delete' + value.PostID + 'post ?</p>'
-                                            + '<p class="text-muted "> This change may affect other data. Be sure !!!</p>'
+                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna block ' + value.PostID + 'post ?</p>'
                                             + '</div>'
                                             + '<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
                                             + '<div class="row justify-content-end no-gutters">'
                                             + '<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
-                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Delete</button></div></div>'
+                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>'
                                             + '</div>'
                                             + '</div>'
                                             + '</div>'
@@ -455,12 +450,12 @@
                                     value.EndDate,
                                     value.status,
                                     '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
-                                    "<a href='viewDetailPost.jsp?id=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
+                                    "<a href='post-detail.jsp?postId=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
                                             + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
                                             + '<i class="mdi mdi-eye"></i>'
                                             + '<span> <strong> View</strong></span>'
                                             + "</a>",
-                                    '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Delete</button>'
+                                    '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Block</button>'
                                             + '<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
                                             + '<div class="modal-dialog modal-dialog-centered" role="document">'
                                             + '<div class="modal-content border-0">'
@@ -470,13 +465,12 @@
                                             + '<div class="row">'
                                             + '<div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>'
                                             + '</div>'
-                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna delete' + value.PostID + 'post ?</p>'
-                                            + '<p class="text-muted "> This change may affect other data. Be sure !!!</p>'
+                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna block' + value.PostID + 'post ?</p>'
                                             + '</div>'
                                             + '<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
                                             + '<div class="row justify-content-end no-gutters">'
                                             + '<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
-                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Delete</button></div></div>'
+                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>'
                                             + '</div>'
                                             + '</div>'
                                             + '</div>'
@@ -594,7 +588,25 @@
                 $("#more").click(function () {
                     $("#filter").toggle()
                 })
+                $('.update-read').click(function(){
+                    let select = $(this).attr("title")
+                    console.log(select)
+                    $.ajax({
+                            url: "../../PostControllerAdmin?ac=updateRead",
+                            method: "POST",
+                            data: {get: select},
+                            success: function (data) {
+                                let rs = $.parseJSON(data);
+                                console.log(rs)
+                                
+                            },
+                            error: function () {
+                                alert("error");
+                            }
+                        });
+                })
             })
+            
         </script>
         <style>
             thead input {
@@ -618,7 +630,7 @@
                                         <div class="modal-dialog alert-success" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" style="color:green">Successful Delete</h5>
+                                                    <h5 class="modal-title" style="color:green">Successful Block</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -680,22 +692,17 @@
                                             View by Category:
                                             <div class="form-check form-check-primary">
                                                 <label class="form-check-label">
-                                                    <input  name="check" type="checkbox" class="form-check-input check" value="CT01" >
+                                                    <input  name="check" type="checkbox" class="form-check-input check" value="sale" >
                                                     Buy
                                                 </label>
                                             </div>
                                             <div class="form-check form-check-primary">
                                                 <label class="form-check-label">
-                                                    <input name="check" type="checkbox" class="form-check-input check" value="CT02" >
+                                                    <input name="check" type="checkbox" class="form-check-input check" value="rent" >
                                                     Rent
                                                 </label>
                                             </div>
-                                            <div class="form-check form-check-primary">
-                                                <label class="form-check-label">
-                                                    <input name="check" type="checkbox" class="form-check-input check" value="CT03" >
-                                                    Project
-                                                </label>
-                                            </div>
+                                           
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">
@@ -768,7 +775,7 @@
                                                         View detail
                                                     </th>
                                                     <th>
-                                                        Delete
+                                                        Block
                                                     </th>
                                                 </tr>
 
@@ -808,20 +815,20 @@
                                                             </div>
                                                             <!-- Modal: modalAbandonedCart-->
                                                         </td>
-                                                        <td class="${x.getCategory()}">${x.getSale_rent()}</td>
+                                                        <td class="">${x.getSale_rent()}</td>
                                                         <td>${x.getCreate_Date()}</td>
                                                         <td>${x.getEndDate()}</td>
                                                         <td>${x.getStatus()}</td>
                                                         <td class="${x.getReadUnread()}a"><label class="badge ${x.getReadUnread()}">${x.getReadUnread()}</label></td>
                                                         <td>                          
-                                                            <a href="viewDetailPost.jsp?id=${x.getPostID()}" class="btn btn-primary a-btn-slide-text">
+                                                            <a href="../../post-detail.jsp?postId=${x.getPostID()}" target="blank" title="${x.getPostID()}" class="update-read btn btn-primary a-btn-slide-text">
                                                                 <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                                                                 <i class="mdi mdi-eye"></i>
                                                                 <span> <strong> View</strong></span>            
                                                             </a>
                                                         </td>
                                                         <td>
-                                                            <div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal${x.getPostID()}"><i class="mdi mdi-delete"></i>Delete</button>
+                                                            <div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal${x.getPostID()}"><i class="mdi mdi-delete"></i>Block</button>
                                                                 <div id="my-modal${x.getPostID()}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                                         <div class="modal-content border-0">
@@ -831,13 +838,13 @@
                                                                                         <div class="row">
                                                                                             <div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>
                                                                                         </div>
-                                                                                        <p class="font-weight-bold mb-2"> Are you sure you wanna delete ${x.getPostID()} post ?</p>
-                                                                                        <p class="text-muted "> This change may affect other data. Be sure !!!</p>
+                                                                                        <p class="font-weight-bold mb-2"> Are you sure you wanna Block ${x.getPostID()} post ?</p>
+                                                                                        
                                                                                     </div>
                                                                                     <div class="card-body px-sm-4 mb-2 pt-1 pb-0">
                                                                                         <div class="row justify-content-end no-gutters">
                                                                                             <div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>
-                                                                                            <div class="col-auto"><div class="col-auto"><button title="${x.getPostID()}" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Delete</button></div></div>
+                                                                                            <div class="col-auto"><div class="col-auto"><button title="${x.getPostID()}" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -863,7 +870,7 @@
                                                         View detail
                                                     </th>
                                                     <th>
-                                                        Delete
+                                                        Block
                                                     </th>
                                                 </tr>
                                             </tfoot>

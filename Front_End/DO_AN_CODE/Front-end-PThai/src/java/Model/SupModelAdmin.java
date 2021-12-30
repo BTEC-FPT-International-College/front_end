@@ -70,7 +70,7 @@ public class SupModelAdmin {
         }
         return result;
     }
-
+    
     public boolean addSup(String id, String name, String phone, String Email, String add, String date, String pass, int point, String Gender, String CreatDay, int RoleID) {
         String sql = ""
                 + "INSERT INTO web.tbl_user\n"
@@ -249,6 +249,37 @@ public class SupModelAdmin {
             System.err.println(ex.getMessage());
         }
         return result > 0;
+    }
+    public ArrayList<UserAdmin> getLastIndexSup() {
+        ArrayList<UserAdmin> list = new ArrayList<>();
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT * FROM web.tbl_user where roleid=2 ORDER BY create_day DESC limit 1");
+            UserAdmin acc = null;
+            while (rs.next()) {
+                acc = new UserAdmin();
+                acc.setUserID(rs.getString(1));
+                acc.setFullName(rs.getString(2));
+                acc.setPhone(rs.getString(3));
+                acc.setEmail(rs.getString(4));
+                acc.setAddress(rs.getString(5));
+                acc.setDate_of_Birth(rs.getString(6));
+                acc.setPassword(rs.getString(7));
+                acc.setReward_point(rs.getInt(8));
+                acc.setGender(rs.getString(9));
+                acc.setCreateDate(rs.getString(10));
+                acc.setUpdateDate(rs.getString(11));
+                list.add(acc);
+            }
+            rs.close();
+            stm.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return list;
     }
 
 }

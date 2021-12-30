@@ -154,7 +154,7 @@ public class TransactionModelAdmin {
                 acc = new Transaction_History();
                 acc.setPostID(rs.getString(1));
                 acc.setUserID(rs.getString(2));
-                acc.setTotalPrice(rs.getInt(4));
+                acc.setTotalPrice(rs.getInt(3));
                 list.add(acc);
             }
             rs.close();
@@ -406,7 +406,7 @@ public class TransactionModelAdmin {
         ArrayList<Transaction_History> list = new ArrayList<>();
         String sql = "SELECT *,STR_TO_DATE(tbl_transaction_history.create_day,'%Y/%m/%d') FROM web.tbl_transaction_history,user_wallet\n"
                 + "WHERE tbl_transaction_history.walletid = user_wallet.walletid\n"
-                + "AND STR_TO_DATE(create_day,'%Y/%m/%d')between STR_TO_DATE(?,'%d/%m/%Y') and STR_TO_DATE(?,'%d/%m/%Y');";
+                + "AND STR_TO_DATE(create_day,'%Y/%m/%d')between STR_TO_DATE(?,'%m/%d/%Y') and STR_TO_DATE(?,'%m/%d/%Y');";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {
@@ -440,7 +440,7 @@ public class TransactionModelAdmin {
         String sql = "SELECT *,STR_TO_DATE(tbl_transaction_history.create_day,'%Y/%m/%d') FROM web.tbl_transaction_history,user_wallet\n"
                 + "WHERE tbl_transaction_history.walletid = user_wallet.walletid\n"
                 + "AND tbl_transaction_history.walletid = ?\n"
-                + "AND STR_TO_DATE(create_day,'%Y/%m/%d')between STR_TO_DATE(?,'%d/%m/%Y') and STR_TO_DATE(?,'%d/%m/%Y');";
+                + "AND STR_TO_DATE(create_day,'%Y/%m/%d')between STR_TO_DATE(?,'%m/%d/%Y') and STR_TO_DATE(?,'%m/%d/%Y');";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {
@@ -475,7 +475,7 @@ public class TransactionModelAdmin {
         String sql = "SELECT *,STR_TO_DATE(tbl_transaction_history.create_day,'%Y/%m/%d') FROM web.tbl_transaction_history,user_wallet\n"
                 + "WHERE tbl_transaction_history.walletid = user_wallet.walletid\n"
                 + "AND tbl_transaction_history.postid = ?\n"
-                + "AND STR_TO_DATE(create_day,'%Y/%m/%d')between STR_TO_DATE(?,'%d/%m/%Y') and STR_TO_DATE(?,'%d/%m/%Y');";
+                + "AND STR_TO_DATE(create_day,'%Y/%m/%d')between STR_TO_DATE(?,'%m/%d/%Y') and STR_TO_DATE(?,'%m/%d/%Y');";
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {

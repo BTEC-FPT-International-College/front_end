@@ -25,7 +25,7 @@
                 let select = $('#getid').text();
                 console.log(select)
                 $.ajax({
-                    url: "../SupController?ac=viewSup",
+                    url: "../../SupControllerAdmin?ac=viewSup",
                     method: "POST",
                     data: {get: select},
                     success: function (data) {
@@ -54,7 +54,7 @@
                     let select = $(this).attr("title")
                     console.log(select)
                     $.ajax({
-                        url: "../SupController?ac=del",
+                        url: "../../SupControllerAdmin?ac=del",
                         method: "POST",
                         data: {get: select},
                         success: function (data) {

@@ -40,7 +40,7 @@
                 });
                 $('.dataTables_length').addClass('bs-select');
                 $.ajax({
-                    url: "../RechargeController?ac=viewRechargebyWallet",
+                    url: "../../RechargeControllerAdmin?ac=viewRechargebyWallet",
                     method: "POST",
                     data: {get: d},
                     success: function (data) {
@@ -78,7 +78,7 @@
                         const da = JSON.stringify(a)
                         console.log(da)
                         $.ajax({
-                            url: "../RechargeController?ac=searchRbyWallet",
+                            url: "../../RechargeControllerAdmin?ac=searchRbyWallet",
                             method: "POST",
                             data: {get: da},
                             success: function (data) {
@@ -111,7 +111,7 @@
                 })
                 $("#cancledate").click(function () {
                     $.ajax({
-                        url: "../RechargeController?ac=viewRechargebyWallet",
+                        url: "../../RechargeControllerAdmin?ac=viewRechargebyWallet",
                         method: "POST",
                         data: {get: d},
                         success: function (data) {
@@ -147,7 +147,7 @@
                 })
                 $("#refesh").click(function () {
                     $.ajax({
-                        url: "../RechargeController?ac=viewRechargebyWallet",
+                        url: "../../RechargeControllerAdmin?ac=viewRechargebyWallet",
                         method: "POST",
                         data: {get: d},
                         success: function (data) {
@@ -199,7 +199,7 @@
                     const da = JSON.stringify(searh1day)
                     console.log(da)
                     $.ajax({
-                        url: "../RechargeController?ac=searchRbyWallet2",
+                        url: "../../RechargeControllerAdmin?ac=searchRbyWallet2",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
@@ -243,7 +243,7 @@
                     const da = JSON.stringify(searh1weeek)
                     console.log(da)
                     $.ajax({
-                        url: "../RechargeController?ac=searchRbyWallet2",
+                        url: "../../RechargeControllerAdmin?ac=searchRbyWallet2",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
@@ -288,7 +288,7 @@
                     const da = JSON.stringify(searh1month)
                     console.log(da)
                     $.ajax({
-                        url: "../RechargeController?ac=searchRbyWallet2",
+                        url: "../../RechargeControllerAdmin?ac=searchRbyWallet2",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {

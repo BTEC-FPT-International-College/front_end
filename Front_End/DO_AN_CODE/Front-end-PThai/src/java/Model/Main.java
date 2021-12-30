@@ -13,8 +13,8 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
-         TransactionModelAdmin main = new TransactionModelAdmin();
-         System.out.println(main.searchDatebyWallet("12/11/2021", "12/22/2022", "1").size());
+         SupModelAdmin sup = new SupModelAdmin();
+         System.out.println(sup.getLastIndexSup());
     }
 }
 

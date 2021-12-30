@@ -48,7 +48,7 @@
                 });
                 $('.dataTables_length').addClass('bs-select');
                 $.ajax({
-                    url: "../PostController?ac=viewPostByUser",
+                    url: "../../PostControllerAdmin?ac=viewPostByUser",
                     method: "POST",
                     data: {get: d},
                     success: function (data) {
@@ -65,7 +65,7 @@
                             t.row.add([
                                 value.PostID,
                                 "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
-                                value.Category,
+                                value.Sale_rent,
                                 value.Create_Date + " " + value.Create_Hour,
                                 value.EndDate,
                                 value.status,
@@ -125,7 +125,7 @@
                         const da = JSON.stringify(a)
                         console.log(da)
                         $.ajax({
-                            url: "../PostController?ac=searchbyUser",
+                            url: "../../PostControllerAdmin?ac=searchbyUser",
                             method: "POST",
                             data: {get: da},
                             success: function (data) {
@@ -142,7 +142,7 @@
                                     t.row.add([
                                         value.PostID,
                                         "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
-                                        value.Category,
+                                        value.Sale_rent,
                                         value.Create_Date + " " + value.Create_Hour,
                                         value.EndDate,
                                         value.status,
@@ -192,7 +192,7 @@
                 })
                 $("#cancledate").click(function () {
                     $.ajax({
-                    url: "../PostController?ac=viewPostByUser",
+                    url: "../../PostControllerAdmin?ac=viewPostByUser",
                     method: "POST",
                     data: {get: d},
                     success: function (data) {
@@ -209,7 +209,7 @@
                             t.row.add([
                                 value.PostID,
                                 "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
-                                value.Category,
+                                value.Sale_rent,
                                 value.Create_Date + " " + value.Create_Hour,
                                 value.EndDate,
                                 value.status,
@@ -276,7 +276,7 @@
                     const da = JSON.stringify(searh1day)
                     console.log(da)
                     $.ajax({
-                        url: "../PostController?ac=search2byUser",
+                        url: "../../PostControllerAdmin?ac=search2byUser",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
@@ -293,11 +293,11 @@
                                 t.row.add([
                                     value.PostID,
                                     "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
-                                    value.Category,
+                                    value.Sale_rent,
                                     value.Create_Date + " " + value.Create_Hour,
                                     value.EndDate,
                                     value.status,
-                                    '<label class="badge' + value.ReadUnread + ">" + value.ReadUnread + "</label>",
+                                    '<label class="badge ' + value.ReadUnread + '">' + value.ReadUnread + "</label>",
                                     "<a href='viewDetailPost.jsp?id=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
                                             + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
                                             + '<i class="mdi mdi-eye"></i>'
@@ -354,7 +354,7 @@
                     const da = JSON.stringify(searh1weeek)
                     console.log(da)
                     $.ajax({
-                        url: "../PostController?ac=search2byUser",
+                        url: "../../PostControllerAdmin?ac=search2byUser",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
@@ -371,11 +371,11 @@
                                 t.row.add([
                                     value.PostID,
                                     "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
-                                    value.Category,
+                                    value.Sale_rent,
                                     value.Create_Date + " " + value.Create_Hour,
                                     value.EndDate,
                                     value.status,
-                                    '<label class="badge' + value.ReadUnread + ">" + value.ReadUnread + "</label>",
+                                    '<label class="badge ' + value.ReadUnread + '">' + value.ReadUnread + "</label>",
                                     "<a href='viewDetailPost.jsp?id=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
                                             + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
                                             + '<i class="mdi mdi-eye"></i>'
@@ -433,7 +433,7 @@
                     const da = JSON.stringify(searh1month)
                     console.log(da)
                     $.ajax({
-                        url: "../PostController?ac=search2byUser",
+                        url: "../../PostControllerAdmin?ac=search2byUser",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
@@ -450,11 +450,11 @@
                                 t.row.add([
                                     value.PostID,
                                     "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
-                                    value.Category,
+                                    value.Sale_rent,
                                     value.Create_Date + " " + value.Create_Hour,
                                     value.EndDate,
                                     value.status,
-                                    '<label class="badge' + value.ReadUnread + ">" + value.ReadUnread + "</label>",
+                                    '<label class="badge ' + value.ReadUnread + '">' + value.ReadUnread + "</label>",
                                     "<a href='viewDetailPost.jsp?id=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
                                             + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
                                             + '<i class="mdi mdi-eye"></i>'
@@ -500,7 +500,7 @@
                 })
                 $("#refesh").click(function () {
                     $.ajax({
-                    url: "../PostController?ac=viewPostByUser",
+                    url: "../../PostControllerAdmin?ac=viewPostByUser",
                     method: "POST",
                     data: {get: d},
                     success: function (data) {
@@ -517,7 +517,7 @@
                             t.row.add([
                                 value.PostID,
                                 "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
-                                value.Category,
+                                value.Sale_rent,
                                 value.Create_Date + " " + value.Create_Hour,
                                 value.EndDate,
                                 value.status,
@@ -567,7 +567,7 @@
                 })
                 $("#orther").mouseenter(function (event) {
                     $.ajax({
-                        url: "../PostController?ac=viewTotalPost",
+                        url: "../../PostControllerAdmin?ac=viewTotalPost",
                         method: "GET",
                         success: function (data) {
                             let rs = $.parseJSON(data);
@@ -681,22 +681,17 @@
                                             View by Category:
                                             <div class="form-check form-check-primary">
                                                 <label class="form-check-label">
-                                                    <input name="check" type="checkbox" class="form-check-input check" value="CT01" >
+                                                    <input name="check" type="checkbox" class="form-check-input check" value="sale" >
                                                     Buy
                                                 </label>
                                             </div>
                                             <div class="form-check form-check-primary">
                                                 <label class="form-check-label">
-                                                    <input name="check" type="checkbox" class="form-check-input check" value="CT02" >
+                                                    <input name="check" type="checkbox" class="form-check-input check" value="rent" >
                                                     Rent
                                                 </label>
                                             </div>
-                                            <div class="form-check form-check-primary">
-                                                <label class="form-check-label">
-                                                    <input name="check" type="checkbox" class="form-check-input check" value="CT03" >
-                                                    Project
-                                                </label>
-                                            </div>
+                                           
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">

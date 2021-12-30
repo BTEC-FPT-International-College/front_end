@@ -41,7 +41,7 @@
                     let select = $(this).attr("title")
                     console.log(select)
                     $.ajax({
-                        url: "../SupController?ac=del",
+                        url: "../../SupControllerAdmin?ac=del",
                         method: "POST",
                         data: {get: select},
                         success: function (data) {
@@ -162,7 +162,7 @@
                                             </thead>
                                             <tbody>
                                             <c:if test="${empty requestScope['listS']}">
-                                                <jsp:forward page = "/SupController?ac=view" />
+                                                <jsp:forward page = "../../SupControllerAdmin?ac=view" />
                                             </c:if>
                                             <c:forEach items="${listS}" var = "x" >
                                                 <tr>
