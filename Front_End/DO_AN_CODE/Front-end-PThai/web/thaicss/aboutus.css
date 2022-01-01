@@ -1,0 +1,46 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jan 1, 2022, 3:01:02 PM
+    Author     : MarkTran
+*/
+
+#aa-slider .aa-slider-area .aa-top-slider .aa-top-slider-single .aa-top-slider-content {
+    left: 34% !important;
+}
+
+#aa-about-us .aa-about-us-area .aa-about-us-left img {
+    min-height: 324px;
+}
+
+#aa-service {
+    padding-top: 0 !important;
+}
+
+#aa-agents {
+    padding-top: 0!important;
+}
+
+#aa-agents .aa-agents-area .aa-agents-content .aa-agents-slider li .aa-single-agents .aa-agents-img img {
+    height: 330px;
+}
+
+#aa-client-testimonial {
+    background-attachment: fixed;
+    background-image: url(./about-us-img/backgroundcuoi.jpg) !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline;
+    float: left;
+    padding: 100px 0;
+    width: 100%;
+    position: relative;
+}
+
+.aa-client-single-brand img {
+    width: 150px;
+    height: 60px;
+}

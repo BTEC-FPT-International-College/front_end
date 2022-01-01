@@ -32,6 +32,22 @@
 
 
         <script>
+             <%
+            String username = (String)session.getAttribute("User");
+            String role = (String)session.getAttribute("Role");
+            if(username == null){
+                %>
+                 window.location.replace('../../login.jsp');
+                 <%
+            }else{
+                if(role.equals("3")){
+%>
+                     window.location.replace('../../login.jsp');
+                     <%
+                }
+                }
+            
+        %>
             var a = {}
             $(document).ready(function () {
                 $(function () {

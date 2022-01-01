@@ -23,9 +23,35 @@
 
         <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
-
+        <style>
+            .Expired{
+                background-color: #f57a7a;
+                padding : 12px
+            }
+            .Avaible{
+                background-color: #7aebab;
+                padding : 12px
+            }
+        </style>
         <script>
+             <%
+            String username = (String)session.getAttribute("User");
+            String role = (String)session.getAttribute("Role");
+            if(username == null){
+                %>
+                 window.location.replace('../../login.jsp');
+                 <%
+            }else{
+                if(role.equals("3")){
+%>
+                     window.location.replace('../../login.jsp');
+                     <%
+                }
+                }
+            
+        %>
             $(document).ready(function () {
+
                 $(function () {
                     $('[data-toggle="popover"]').popover()
                 })
@@ -75,51 +101,156 @@
                                     paging: false,
                                     "order": [[3, "desc"]]
                                 });
+
                                 var t = $('#dtOrderExample').DataTable();
                                 $.each(obj, function (key, value) {
+                                    const now = Date.now()
+                                    const end = new Date(Date.parse(value.EndDate))
+                                    const isA = end - now
+                                    console.log(isA)
+                                    let status = "";
+                                    if (isA > 0) {
+                                        status = "Avaible";
+                                    } else {
+                                        status = "Expired";
+                                    }
+                                    const isBlock = value.isBlocked
+                                let data = ""
+                                if (isBlock == 0) {
+                                    data =
+                                            '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Block</button>'
+                                            + '<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
+                                            + '<div class="modal-dialog modal-dialog-centered" role="document">'
+                                            + '<div class="modal-content border-0">'
+                                            + '<div class="modal-body p-0">'
+                                            + '<div class="card border-0 p-sm-3 p-2 justify-content-center">'
+                                            + '<div class="card-header pb-0 bg-white border-0 ">'
+                                            + '<div class="row">'
+                                            + '<div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>'
+                                            + '</div>'
+                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna block' + value.PostID + 'post ?</p>'
+                                            + '</div>'
+                                            + '<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
+                                            + '<div class="row justify-content-end no-gutters">'
+                                            + '<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
+                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                } else {
+                                    data =
+                                            '<div class="container d-flex justify-content-center"> <button class="btn btn-warning " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-border-color"></i>UnBlock</button>'
+                                            + '<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
+                                            + '<div class="modal-dialog modal-dialog-centered" role="document">'
+                                            + '<div class="modal-content border-0">'
+                                            + '<div class="modal-body p-0">'
+                                            + '<div class="card border-0 p-sm-3 p-2 justify-content-center">'
+                                            + '<div class="card-header pb-0 bg-white border-0 ">'
+                                            + '<div class="row">'
+                                            + '<div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>'
+                                            + '</div>'
+                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna block' + value.PostID + 'post ?</p>'
+                                            + '</div>'
+                                            + '<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
+                                            + '<div class="row justify-content-end no-gutters">'
+                                            + '<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
+                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-warning unblock" data-dismiss="modal"><i class="mdi mdi-border-color"></i>UnBlock</button></div></div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                }
                                     t.row.add([
                                         value.PostID,
-                                        "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                        "<a href='../../post-detail.jsp?postId=${value.getPostID()}'" + ">" + value.UserID + " </a>",
                                         value.Sale_rent,
                                         value.Create_Date + " " + value.Create_Hour,
                                         value.EndDate,
-                                        value.status,
+                                        "<div class='" + status + "'>" + status + "</div>",
                                         '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
-                                        "<a href='post-detail.jsp?postId=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
+                                        "<a href='../../post-detail.jsp?postId=" + value.PostID + "'" + 'title="'+value.PostID+'" class="update-read btn btn-primary a-btn-slide-text"' + ">"
                                                 + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
                                                 + '<i class="mdi mdi-eye"></i>'
                                                 + '<span> <strong> View</strong></span>'
                                                 + "</a>",
-                                        '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Block</button>'
-                                                + '<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
-                                                + '<div class="modal-dialog modal-dialog-centered" role="document">'
-                                                + '<div class="modal-content border-0">'
-                                                + '<div class="modal-body p-0">'
-                                                + '<div class="card border-0 p-sm-3 p-2 justify-content-center">'
-                                                + '<div class="card-header pb-0 bg-white border-0 ">'
-                                                + '<div class="row">'
-                                                + '<div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>'
-                                                + '</div>'
-                                                + '<p class="font-weight-bold mb-2"> Are you sure you wanna block' + value.PostID + 'post ?</p>'
-                                                + '</div>'
-                                                + '<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
-                                                + '<div class="row justify-content-end no-gutters">'
-                                                + '<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
-                                                + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>'
-                                                + '</div>'
-                                                + '</div>'
-                                                + '</div>'
-                                                + '</div>'
-                                                + '</div>'
-                                                + '</div>'
-                                                + '</div>'
-                                                + '</div>'
+                                                 data
+                                        
                                     ]).draw(false);
                                 })
                                 $(".1").addClass("badge-danger")
                                 $(".1").text("No")
                                 $(".0").text("Yes")
                                 $(".0").addClass("badge-success")
+                                 $('.update-read').click(function () {
+                                let select = $(this).attr("title")
+                                console.log(select)
+                                $.ajax({
+                                    url: "../../PostControllerAdmin?ac=updateRead",
+                                    method: "POST",
+                                    data: {get: select},
+                                    success: function (data) {
+                                        let rs = $.parseJSON(data);
+                                        console.log(rs)
+
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            })
+                            $('.delete').click(function () {
+
+                                let select = $(this).attr("title")
+                                console.log(select)
+                                $.ajax({
+                                    url: "../../PostControllerAdmin?ac=updateBlock",
+                                    method: "POST",
+                                    data: {get: select},
+                                    success: function (data) {
+                                        let rs = $.parseJSON(data);
+                                        console.log(rs)
+                                        if (rs) {
+                                            location.reload()
+                                        } else {
+                                            alert("Error")
+                                        }
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            })
+                            $('.unblock').click(function () {
+                                let select = $(this).attr("title")
+                                console.log(select)
+                                $.ajax({
+                                    url: "../../PostControllerAdmin?ac=updateUnBlock",
+                                    method: "POST",
+                                    data: {get: select},
+                                    success: function (data) {
+                                        let rs = $.parseJSON(data);
+                                        console.log(rs)
+                                        if (rs) {
+                                            location.reload()
+                                        } else {
+                                            alert("Error")
+                                        }
+
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            })
                             },
                             error: function () {
                                 alert("error");
@@ -142,20 +273,21 @@
                             });
                             var t = $('#dtOrderExample').DataTable();
                             $.each(rs, function (key, value) {
-                                t.row.add([
-                                    value.PostID,
-                                    "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
-                                    value.Category,
-                                    value.Create_Date + " " + value.Create_Hour,
-                                    value.EndDate,
-                                    value.status,
-                                    '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
-                                    "<a href='post-detail.jsp?postId=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
-                                            + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
-                                            + '<i class="mdi mdi-eye"></i>'
-                                            + '<span> <strong> View</strong></span>'
-                                            + "</a>",
-                                    '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Block</button>'
+                                const now = Date.now()
+                                const end = new Date(Date.parse(value.EndDate))
+                                const isA = end - now
+                                console.log(isA)
+                                let status = "";
+                                if (isA > 0) {
+                                    status = "Avaible";
+                                } else {
+                                    status = "Expired";
+                                }
+                                const isBlock = value.isBlocked
+                                let data = ""
+                                if (isBlock == 0) {
+                                    data =
+                                            '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Block</button>'
                                             + '<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
                                             + '<div class="modal-dialog modal-dialog-centered" role="document">'
                                             + '<div class="modal-content border-0">'
@@ -165,12 +297,12 @@
                                             + '<div class="row">'
                                             + '<div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>'
                                             + '</div>'
-                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna block ' + value.PostID + 'post ?</p>'
+                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna block' + value.PostID + 'post ?</p>'
                                             + '</div>'
                                             + '<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
                                             + '<div class="row justify-content-end no-gutters">'
                                             + '<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
-                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>'
+                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>'
                                             + '</div>'
                                             + '</div>'
                                             + '</div>'
@@ -179,12 +311,115 @@
                                             + '</div>'
                                             + '</div>'
                                             + '</div>'
+                                } else {
+                                    data =
+                                            '<div class="container d-flex justify-content-center"> <button class="btn btn-warning " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-border-color"></i>UnBlock</button>'
+                                            + '<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
+                                            + '<div class="modal-dialog modal-dialog-centered" role="document">'
+                                            + '<div class="modal-content border-0">'
+                                            + '<div class="modal-body p-0">'
+                                            + '<div class="card border-0 p-sm-3 p-2 justify-content-center">'
+                                            + '<div class="card-header pb-0 bg-white border-0 ">'
+                                            + '<div class="row">'
+                                            + '<div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>'
+                                            + '</div>'
+                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna block' + value.PostID + 'post ?</p>'
+                                            + '</div>'
+                                            + '<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
+                                            + '<div class="row justify-content-end no-gutters">'
+                                            + '<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
+                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-warning unblock" data-dismiss="modal"><i class="mdi mdi-border-color"></i>UnBlock</button></div></div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                }
+                                t.row.add([
+                                    value.PostID,
+                                    "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                    value.Category,
+                                    value.Create_Date + " " + value.Create_Hour,
+                                    value.EndDate,
+                                    "<div class='" + status + "'>" + status + "</div>",
+                                    '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
+                                    "<a href='../../post-detail.jsp?postId=" + value.PostID + "'" + 'title="'+value.PostID+'" class="update-read btn btn-primary a-btn-slide-text"' + ">"
+                                            + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
+                                            + '<i class="mdi mdi-eye"></i>'
+                                            + '<span> <strong> View</strong></span>'
+                                            + "</a>",
+                                            data
+                                   
                                 ]).draw(false);
                             })
                             $(".1").addClass("badge-danger")
                             $(".1").text("No")
                             $(".0").text("Yes")
                             $(".0").addClass("badge-success")
+                             $('.update-read').click(function () {
+                                let select = $(this).attr("title")
+                                console.log(select)
+                                $.ajax({
+                                    url: "../../PostControllerAdmin?ac=updateRead",
+                                    method: "POST",
+                                    data: {get: select},
+                                    success: function (data) {
+                                        let rs = $.parseJSON(data);
+                                        console.log(rs)
+
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            })
+                            $('.delete').click(function () {
+
+                                let select = $(this).attr("title")
+                                console.log(select)
+                                $.ajax({
+                                    url: "../../PostControllerAdmin?ac=updateBlock",
+                                    method: "POST",
+                                    data: {get: select},
+                                    success: function (data) {
+                                        let rs = $.parseJSON(data);
+                                        console.log(rs)
+                                        if (rs) {
+                                            location.reload()
+                                        } else {
+                                            alert("Error")
+                                        }
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            })
+                            $('.unblock').click(function () {
+                                let select = $(this).attr("title")
+                                console.log(select)
+                                $.ajax({
+                                    url: "../../PostControllerAdmin?ac=updateUnBlock",
+                                    method: "POST",
+                                    data: {get: select},
+                                    success: function (data) {
+                                        let rs = $.parseJSON(data);
+                                        console.log(rs)
+                                        if (rs) {
+                                            location.reload()
+                                        } else {
+                                            alert("Error")
+                                        }
+
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            })
                         },
                         error: function () {
                             alert("error");
@@ -224,43 +459,92 @@
                             });
                             var t = $('#dtOrderExample').DataTable();
                             $.each(obj, function (key, value) {
+                                const now = Date.now()
+                                const end = new Date(Date.parse(value.EndDate))
+                                const isA = end - now
+                                console.log(isA)
+                                let status = "";
+                                if (isA > 0) {
+                                    status = "Avaible";
+                                } else {
+                                    status = "Expired";
+                                }
+                                const isBlock = value.isBlocked
+                                let data = ""
+                                if (isBlock == 0) {
+                                    data =
+                                            `
+                                    <div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal${value.postID}"><i class="mdi mdi-delete"></i>Block</button>
+                                                                <div id="my-modal${value.postID}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                        <div class="modal-content border-0">
+                                                                            <div class="modal-body p-0">
+                                                                                <div class="card border-0 p-sm-3 p-2 justify-content-center">
+                                                                                    <div class="card-header pb-0 bg-white border-0 ">
+                                                                                        <div class="row">
+                                                                                            <div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>
+                                                                                        </div>
+                                                                                        <p class="font-weight-bold mb-2"> Are you sure you wanna Block ${value.postID} post ?</p>
+                                                                                        
+                                                                                    </div>
+                                                                                    <div class="card-body px-sm-4 mb-2 pt-1 pb-0">
+                                                                                        <div class="row justify-content-end no-gutters">
+                                                                                            <div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>
+                                                                                            <div class="col-auto"><div class="col-auto"><button title="${value.postID}" type="button" class="btn btn-danger delete" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                    `
+                                } else {
+                                    data =
+                                            `
+                                    <div class="container d-flex justify-content-center"> <button class="btn btn-warning " data-toggle="modal" data-target="#my-modal${value.postID}block"><i class="mdi mdi-border-color"></i>UnBlock</button>
+                                                                <div id="my-modal${value.postID}block" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                        <div class="modal-content border-0">
+                                                                            <div class="modal-body p-0">
+                                                                                <div class="card border-0 p-sm-3 p-2 justify-content-center">
+                                                                                    <div class="card-header pb-0 bg-white border-0 ">
+                                                                                        <div class="row">
+                                                                                            <div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>
+                                                                                        </div>
+                                                                                        <p class="font-weight-bold mb-2"> Are you sure you wanna Unblock ${value.postID} post ?</p>
+                                                                                        
+                                                                                    </div>
+                                                                                    <div class="card-body px-sm-4 mb-2 pt-1 pb-0">
+                                                                                        <div class="row justify-content-end no-gutters">
+                                                                                            <div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>
+                                                                                            <div class="col-auto"><div class="col-auto"><button title="${value.postID}" type="button" class="btn btn-warning unblock" data-dismiss="modal"><i class="mdi mdi-border-color"></i>Unblock</button></div></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                    `
+                                }
                                 t.row.add([
                                     value.PostID,
                                     "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
                                     value.Category,
                                     value.Create_Date + " " + value.Create_Hour,
                                     value.EndDate,
-                                    value.status,
+                                    "<div class='" + status + "'>" + status + "</div>",
                                     '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
-                                    "<a href='post-detail.jsp?postId=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
+                                    "<a href='../../post-detail.jsp?postId=" + value.PostID + "'" + 'title="'+value.PostID+'" class="update-read btn btn-primary a-btn-slide-text"' + ">"
                                             + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
                                             + '<i class="mdi mdi-eye"></i>'
                                             + '<span> <strong> View</strong></span>'
                                             + "</a>",
-                                    '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Block</button>'
-                                            + '<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
-                                            + '<div class="modal-dialog modal-dialog-centered" role="document">'
-                                            + '<div class="modal-content border-0">'
-                                            + '<div class="modal-body p-0">'
-                                            + '<div class="card border-0 p-sm-3 p-2 justify-content-center">'
-                                            + '<div class="card-header pb-0 bg-white border-0 ">'
-                                            + '<div class="row">'
-                                            + '<div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>'
-                                            + '</div>'
-                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna block' + value.PostID + 'post ?</p>'
-                                            + '</div>'
-                                            + '<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
-                                            + '<div class="row justify-content-end no-gutters">'
-                                            + '<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
-                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>'
-                                            + '</div>'
-                                            + '</div>'
-                                            + '</div>'
-                                            + '</div>'
-                                            + '</div>'
-                                            + '</div>'
-                                            + '</div>'
-                                            + '</div>'
+                                    data
+
                                 ]).draw(false);
                             })
                             $(".1").addClass("badge-danger")
@@ -268,6 +552,67 @@
                             $(".0").text("Yes")
                             $(".0").addClass("badge-success")
                             $("#refesh").show()
+                             $('.update-read').click(function () {
+                                let select = $(this).attr("title")
+                                console.log(select)
+                                $.ajax({
+                                    url: "../../PostControllerAdmin?ac=updateRead",
+                                    method: "POST",
+                                    data: {get: select},
+                                    success: function (data) {
+                                        let rs = $.parseJSON(data);
+                                        console.log(rs)
+
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            })
+                            $('.delete').click(function () {
+
+                                let select = $(this).attr("title")
+                                console.log(select)
+                                $.ajax({
+                                    url: "../../PostControllerAdmin?ac=updateBlock",
+                                    method: "POST",
+                                    data: {get: select},
+                                    success: function (data) {
+                                        let rs = $.parseJSON(data);
+                                        console.log(rs)
+                                        if (rs) {
+                                            location.reload()
+                                        } else {
+                                            alert("Error")
+                                        }
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            })
+                            $('.unblock').click(function () {
+                                let select = $(this).attr("title")
+                                console.log(select)
+                                $.ajax({
+                                    url: "../../PostControllerAdmin?ac=updateUnBlock",
+                                    method: "POST",
+                                    data: {get: select},
+                                    success: function (data) {
+                                        let rs = $.parseJSON(data);
+                                        console.log(rs)
+                                        if (rs) {
+                                            location.reload()
+                                        } else {
+                                            alert("Error")
+                                        }
+
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            })
                         },
                         error: function () {
                             alert("error");
@@ -300,20 +645,21 @@
                             });
                             var t = $('#dtOrderExample').DataTable();
                             $.each(obj, function (key, value) {
-                                t.row.add([
-                                    value.PostID,
-                                    "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
-                                    value.Category,
-                                    value.Create_Date + " " + value.Create_Hour,
-                                    value.EndDate,
-                                    value.status,
-                                    '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
-                                    "<a href='post-detail.jsp?postId=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
-                                            + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
-                                            + '<i class="mdi mdi-eye"></i>'
-                                            + '<span> <strong> View</strong></span>'
-                                            + "</a>",
-                                    '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Block</button>'
+                                const now = Date.now()
+                                const end = new Date(Date.parse(value.EndDate))
+                                const isA = end - now
+                                console.log(isA)
+                                let status = "";
+                                if (isA > 0) {
+                                    status = "Avaible";
+                                } else {
+                                    status = "Expired";
+                                }
+                                const isBlock = value.isBlocked
+                                let data = ""
+                                if (isBlock == 0) {
+                                    data =
+                                            '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Block</button>'
                                             + '<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
                                             + '<div class="modal-dialog modal-dialog-centered" role="document">'
                                             + '<div class="modal-content border-0">'
@@ -328,7 +674,7 @@
                                             + '<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
                                             + '<div class="row justify-content-end no-gutters">'
                                             + '<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
-                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>'
+                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>'
                                             + '</div>'
                                             + '</div>'
                                             + '</div>'
@@ -337,6 +683,48 @@
                                             + '</div>'
                                             + '</div>'
                                             + '</div>'
+                                } else {
+                                    data =
+                                            '<div class="container d-flex justify-content-center"> <button class="btn btn-warning " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-border-color"></i>UnBlock</button>'
+                                            + '<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
+                                            + '<div class="modal-dialog modal-dialog-centered" role="document">'
+                                            + '<div class="modal-content border-0">'
+                                            + '<div class="modal-body p-0">'
+                                            + '<div class="card border-0 p-sm-3 p-2 justify-content-center">'
+                                            + '<div class="card-header pb-0 bg-white border-0 ">'
+                                            + '<div class="row">'
+                                            + '<div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>'
+                                            + '</div>'
+                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna block' + value.PostID + 'post ?</p>'
+                                            + '</div>'
+                                            + '<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
+                                            + '<div class="row justify-content-end no-gutters">'
+                                            + '<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
+                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-warning unblock" data-dismiss="modal"><i class="mdi mdi-border-color"></i>UnBlock</button></div></div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                }
+                                t.row.add([
+                                    value.PostID,
+                                    "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                    value.Category,
+                                    value.Create_Date + " " + value.Create_Hour,
+                                    value.EndDate,
+                                    "<div class='" + status + "'>" + status + "</div>",
+                                    '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
+                                    "<a href='../../post-detail.jsp?postId=" + value.PostID + "'" + 'title="'+value.PostID+'" class="update-read btn btn-primary a-btn-slide-text"' + ">"
+                                            + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
+                                            + '<i class="mdi mdi-eye"></i>'
+                                            + '<span> <strong> View</strong></span>'
+                                            + "</a>",
+                                            data
+                                    
                                 ]).draw(false);
                             })
                             $(".1").addClass("badge-danger")
@@ -344,6 +732,67 @@
                             $(".0").text("Yes")
                             $(".0").addClass("badge-success")
                             $("#refesh").show()
+                             $('.update-read').click(function () {
+                                let select = $(this).attr("title")
+                                console.log(select)
+                                $.ajax({
+                                    url: "../../PostControllerAdmin?ac=updateRead",
+                                    method: "POST",
+                                    data: {get: select},
+                                    success: function (data) {
+                                        let rs = $.parseJSON(data);
+                                        console.log(rs)
+
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            })
+                            $('.delete').click(function () {
+
+                                let select = $(this).attr("title")
+                                console.log(select)
+                                $.ajax({
+                                    url: "../../PostControllerAdmin?ac=updateBlock",
+                                    method: "POST",
+                                    data: {get: select},
+                                    success: function (data) {
+                                        let rs = $.parseJSON(data);
+                                        console.log(rs)
+                                        if (rs) {
+                                            location.reload()
+                                        } else {
+                                            alert("Error")
+                                        }
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            })
+                            $('.unblock').click(function () {
+                                let select = $(this).attr("title")
+                                console.log(select)
+                                $.ajax({
+                                    url: "../../PostControllerAdmin?ac=updateUnBlock",
+                                    method: "POST",
+                                    data: {get: select},
+                                    success: function (data) {
+                                        let rs = $.parseJSON(data);
+                                        console.log(rs)
+                                        if (rs) {
+                                            location.reload()
+                                        } else {
+                                            alert("Error")
+                                        }
+
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            })
                         },
                         error: function () {
                             alert("error");
@@ -367,6 +816,7 @@
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
+
                             let obj = $.parseJSON(data);
                             console.log(obj)
                             $("#dtOrderExample").DataTable().clear().destroy();
@@ -377,20 +827,21 @@
                             });
                             var t = $('#dtOrderExample').DataTable();
                             $.each(obj, function (key, value) {
-                                t.row.add([
-                                    value.PostID,
-                                    "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
-                                    value.Category,
-                                    value.Create_Date + " " + value.Create_Hour,
-                                    value.EndDate,
-                                    value.status,
-                                    '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
-                                    "<a href='post-detail.jsp?postId=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
-                                            + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
-                                            + '<i class="mdi mdi-eye"></i>'
-                                            + '<span> <strong> View</strong></span>'
-                                            + "</a>",
-                                    '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Block</button>'
+                                const now = Date.now()
+                                const end = new Date(Date.parse(value.EndDate))
+                                const isA = end - now
+                                console.log(isA)
+                                let status = "";
+                                if (isA > 0) {
+                                    status = "Avaible";
+                                } else {
+                                    status = "Expired";
+                                }
+                                const isBlock = value.isBlocked
+                                let data = ""
+                                if (isBlock == 0) {
+                                    data =
+                                            '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Block</button>'
                                             + '<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
                                             + '<div class="modal-dialog modal-dialog-centered" role="document">'
                                             + '<div class="modal-content border-0">'
@@ -400,12 +851,12 @@
                                             + '<div class="row">'
                                             + '<div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>'
                                             + '</div>'
-                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna block ' + value.PostID + 'post ?</p>'
+                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna block' + value.PostID + 'post ?</p>'
                                             + '</div>'
                                             + '<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
                                             + '<div class="row justify-content-end no-gutters">'
                                             + '<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
-                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>'
+                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>'
                                             + '</div>'
                                             + '</div>'
                                             + '</div>'
@@ -414,6 +865,48 @@
                                             + '</div>'
                                             + '</div>'
                                             + '</div>'
+                                } else {
+                                    data =
+                                            '<div class="container d-flex justify-content-center"> <button class="btn btn-warning " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-border-color"></i>UnBlock</button>'
+                                            + '<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
+                                            + '<div class="modal-dialog modal-dialog-centered" role="document">'
+                                            + '<div class="modal-content border-0">'
+                                            + '<div class="modal-body p-0">'
+                                            + '<div class="card border-0 p-sm-3 p-2 justify-content-center">'
+                                            + '<div class="card-header pb-0 bg-white border-0 ">'
+                                            + '<div class="row">'
+                                            + '<div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>'
+                                            + '</div>'
+                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna block' + value.PostID + 'post ?</p>'
+                                            + '</div>'
+                                            + '<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
+                                            + '<div class="row justify-content-end no-gutters">'
+                                            + '<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
+                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-warning unblock" data-dismiss="modal"><i class="mdi mdi-border-color"></i>UnBlock</button></div></div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                }
+                                t.row.add([
+                                    value.PostID,
+                                    "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                    value.Category,
+                                    value.Create_Date + " " + value.Create_Hour,
+                                    value.EndDate,
+                                    "<div class='" + status + "'>" + status + "</div>",
+                                    '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
+                                    "<a href='../../post-detail.jsp?postId=" + value.PostID + "'" + 'title="'+value.PostID+'" class="update-read btn btn-primary a-btn-slide-text"' + ">"
+                                            + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
+                                            + '<i class="mdi mdi-eye"></i>'
+                                            + '<span> <strong> View</strong></span>'
+                                            + "</a>",
+                                    data
+
                                 ]).draw(false);
                             })
                             $(".1").addClass("badge-danger")
@@ -421,6 +914,67 @@
                             $(".0").text("Yes")
                             $(".0").addClass("badge-success")
                             $("#refesh").show()
+                            $('.update-read').click(function () {
+                                let select = $(this).attr("title")
+                                console.log(select)
+                                $.ajax({
+                                    url: "../../PostControllerAdmin?ac=updateRead",
+                                    method: "POST",
+                                    data: {get: select},
+                                    success: function (data) {
+                                        let rs = $.parseJSON(data);
+                                        console.log(rs)
+
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            })
+                            $('.delete').click(function () {
+
+                                let select = $(this).attr("title")
+                                console.log(select)
+                                $.ajax({
+                                    url: "../../PostControllerAdmin?ac=updateBlock",
+                                    method: "POST",
+                                    data: {get: select},
+                                    success: function (data) {
+                                        let rs = $.parseJSON(data);
+                                        console.log(rs)
+                                        if (rs) {
+                                            location.reload()
+                                        } else {
+                                            alert("Error")
+                                        }
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            })
+                            $('.unblock').click(function () {
+                                let select = $(this).attr("title")
+                                console.log(select)
+                                $.ajax({
+                                    url: "../../PostControllerAdmin?ac=updateUnBlock",
+                                    method: "POST",
+                                    data: {get: select},
+                                    success: function (data) {
+                                        let rs = $.parseJSON(data);
+                                        console.log(rs)
+                                        if (rs) {
+                                            location.reload()
+                                        } else {
+                                            alert("Error")
+                                        }
+
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            })
                         },
                         error: function () {
                             alert("error");
@@ -442,20 +996,21 @@
                             });
                             var t = $('#dtOrderExample').DataTable();
                             $.each(rs, function (key, value) {
-                                t.row.add([
-                                    value.PostID,
-                                    "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
-                                    value.Category,
-                                    value.Create_Date + " " + value.Create_Hour,
-                                    value.EndDate,
-                                    value.status,
-                                    '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
-                                    "<a href='post-detail.jsp?postId=" + value.PostID + "'" + 'class="btn btn-primary a-btn-slide-text"' + ">"
-                                            + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
-                                            + '<i class="mdi mdi-eye"></i>'
-                                            + '<span> <strong> View</strong></span>'
-                                            + "</a>",
-                                    '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Block</button>'
+                                const now = Date.now()
+                                const end = new Date(Date.parse(value.EndDate))
+                                const isA = end - now
+                                console.log(isA)
+                                let status = "";
+                                if (isA > 0) {
+                                    status = "Avaible";
+                                } else {
+                                    status = "Expired";
+                                }
+                                const isBlock = value.isBlocked
+                                let data = ""
+                                if (isBlock == 0) {
+                                    data =
+                                            '<div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-delete"></i>Block</button>'
                                             + '<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
                                             + '<div class="modal-dialog modal-dialog-centered" role="document">'
                                             + '<div class="modal-content border-0">'
@@ -470,7 +1025,7 @@
                                             + '<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
                                             + '<div class="row justify-content-end no-gutters">'
                                             + '<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
-                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>'
+                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-danger delete" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>'
                                             + '</div>'
                                             + '</div>'
                                             + '</div>'
@@ -479,6 +1034,48 @@
                                             + '</div>'
                                             + '</div>'
                                             + '</div>'
+                                } else {
+                                    data =
+                                            '<div class="container d-flex justify-content-center"> <button class="btn btn-warning " data-toggle="modal" data-target="#my-modal' + value.PostID + '">' + '<i class="mdi mdi-border-color"></i>UnBlock</button>'
+                                            + '<div id="my-modal' + value.PostID + '" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">'
+                                            + '<div class="modal-dialog modal-dialog-centered" role="document">'
+                                            + '<div class="modal-content border-0">'
+                                            + '<div class="modal-body p-0">'
+                                            + '<div class="card border-0 p-sm-3 p-2 justify-content-center">'
+                                            + '<div class="card-header pb-0 bg-white border-0 ">'
+                                            + '<div class="row">'
+                                            + '<div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>'
+                                            + '</div>'
+                                            + '<p class="font-weight-bold mb-2"> Are you sure you wanna block' + value.PostID + 'post ?</p>'
+                                            + '</div>'
+                                            + '<div class="card-body px-sm-4 mb-2 pt-1 pb-0">'
+                                            + '<div class="row justify-content-end no-gutters">'
+                                            + '<div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>'
+                                            + '<div class="col-auto"><div class="col-auto"><button title="' + value.PostID + '" type="button" class="btn btn-warning unblock" data-dismiss="modal"><i class="mdi mdi-border-color"></i>UnBlock</button></div></div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                            + '</div>'
+                                }
+                                t.row.add([
+                                    value.PostID,
+                                    "<a href='viewDetailUser.jsp?id=" + value.UserID + "'" + ">" + value.UserID + " </a>",
+                                    value.Category,
+                                    value.Create_Date + " " + value.Create_Hour,
+                                    value.EndDate,
+                                    "<div class='" + status + "'>" + status + "</div>",
+                                    '<lable class=" badge ' + value.ReadUnread + '"' + ">" + value.ReadUnread + " </lable>",
+                                    "<a href='../../post-detail.jsp?postId=" + value.PostID + "'" + 'title="'+value.PostID+'" class="update-read btn btn-primary a-btn-slide-text"' + ">"
+                                            + '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'
+                                            + '<i class="mdi mdi-eye"></i>'
+                                            + '<span> <strong> View</strong></span>'
+                                            + "</a>",
+                                              data
+                                    
                                 ]).draw(false);
                             })
                             $(".1").addClass("badge-danger")
@@ -486,6 +1083,67 @@
                             $(".0").text("Yes")
                             $(".0").addClass("badge-success")
                             $("#refesh").hide()
+                             $('.update-read').click(function () {
+                                let select = $(this).attr("title")
+                                console.log(select)
+                                $.ajax({
+                                    url: "../../PostControllerAdmin?ac=updateRead",
+                                    method: "POST",
+                                    data: {get: select},
+                                    success: function (data) {
+                                        let rs = $.parseJSON(data);
+                                        console.log(rs)
+
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            })
+                            $('.delete').click(function () {
+
+                                let select = $(this).attr("title")
+                                console.log(select)
+                                $.ajax({
+                                    url: "../../PostControllerAdmin?ac=updateBlock",
+                                    method: "POST",
+                                    data: {get: select},
+                                    success: function (data) {
+                                        let rs = $.parseJSON(data);
+                                        console.log(rs)
+                                        if (rs) {
+                                            location.reload()
+                                        } else {
+                                            alert("Error")
+                                        }
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            })
+                            $('.unblock').click(function () {
+                                let select = $(this).attr("title")
+                                console.log(select)
+                                $.ajax({
+                                    url: "../../PostControllerAdmin?ac=updateUnBlock",
+                                    method: "POST",
+                                    data: {get: select},
+                                    success: function (data) {
+                                        let rs = $.parseJSON(data);
+                                        console.log(rs)
+                                        if (rs) {
+                                            location.reload()
+                                        } else {
+                                            alert("Error")
+                                        }
+
+                                    },
+                                    error: function () {
+                                        alert("error");
+                                    }
+                                });
+                            })
                         },
                         error: function () {
                             alert("error");
@@ -588,25 +1246,10 @@
                 $("#more").click(function () {
                     $("#filter").toggle()
                 })
-                $('.update-read').click(function(){
-                    let select = $(this).attr("title")
-                    console.log(select)
-                    $.ajax({
-                            url: "../../PostControllerAdmin?ac=updateRead",
-                            method: "POST",
-                            data: {get: select},
-                            success: function (data) {
-                                let rs = $.parseJSON(data);
-                                console.log(rs)
-                                
-                            },
-                            error: function () {
-                                alert("error");
-                            }
-                        });
-                })
+
             })
-            
+
+
         </script>
         <style>
             thead input {
@@ -702,7 +1345,7 @@
                                                     Rent
                                                 </label>
                                             </div>
-                                           
+
                                         </div>
                                         <div class="col-md-6">
                                             <div class="row">
@@ -814,11 +1457,21 @@
                                                                 </div>
                                                             </div>
                                                             <!-- Modal: modalAbandonedCart-->
+
                                                         </td>
                                                         <td class="">${x.getSale_rent()}</td>
                                                         <td>${x.getCreate_Date()}</td>
                                                         <td>${x.getEndDate()}</td>
-                                                        <td>${x.getStatus()}</td>
+
+                                                        <c:if test = "${x.getStatus() >= 0}"><td style="background-color: #7aebab">
+                                                                <c:out  value="Avaible"/>
+                                                            </td>
+                                                        </c:if>    
+
+                                                        <c:if test = "${x.getStatus() < 0}"><td style="background-color: #f57a7a">
+                                                                <c:out  value="Het Han"/>
+                                                            </td>
+                                                        </c:if>
                                                         <td class="${x.getReadUnread()}a"><label class="badge ${x.getReadUnread()}">${x.getReadUnread()}</label></td>
                                                         <td>                          
                                                             <a href="../../post-detail.jsp?postId=${x.getPostID()}" target="blank" title="${x.getPostID()}" class="update-read btn btn-primary a-btn-slide-text">
@@ -827,24 +1480,25 @@
                                                                 <span> <strong> View</strong></span>            
                                                             </a>
                                                         </td>
-                                                        <td>
-                                                            <div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal${x.getPostID()}"><i class="mdi mdi-delete"></i>Block</button>
-                                                                <div id="my-modal${x.getPostID()}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                                        <div class="modal-content border-0">
-                                                                            <div class="modal-body p-0">
-                                                                                <div class="card border-0 p-sm-3 p-2 justify-content-center">
-                                                                                    <div class="card-header pb-0 bg-white border-0 ">
-                                                                                        <div class="row">
-                                                                                            <div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>
+                                                        <c:if test = "${x.getIsBlocked() == 0}"><td>
+                                                                <div class="container d-flex justify-content-center"> <button class="btn btn-danger " data-toggle="modal" data-target="#my-modal${x.getPostID()}"><i class="mdi mdi-delete"></i>Block</button>
+                                                                    <div id="my-modal${x.getPostID()}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                            <div class="modal-content border-0">
+                                                                                <div class="modal-body p-0">
+                                                                                    <div class="card border-0 p-sm-3 p-2 justify-content-center">
+                                                                                        <div class="card-header pb-0 bg-white border-0 ">
+                                                                                            <div class="row">
+                                                                                                <div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>
+                                                                                            </div>
+                                                                                            <p class="font-weight-bold mb-2"> Are you sure you wanna Block ${x.getPostID()} post ?</p>
+
                                                                                         </div>
-                                                                                        <p class="font-weight-bold mb-2"> Are you sure you wanna Block ${x.getPostID()} post ?</p>
-                                                                                        
-                                                                                    </div>
-                                                                                    <div class="card-body px-sm-4 mb-2 pt-1 pb-0">
-                                                                                        <div class="row justify-content-end no-gutters">
-                                                                                            <div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>
-                                                                                            <div class="col-auto"><div class="col-auto"><button title="${x.getPostID()}" type="button" class="btn btn-danger delete" target="_blank" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>
+                                                                                        <div class="card-body px-sm-4 mb-2 pt-1 pb-0">
+                                                                                            <div class="row justify-content-end no-gutters">
+                                                                                                <div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>
+                                                                                                <div class="col-auto"><div class="col-auto"><button title="${x.getPostID()}" type="button" class="btn btn-danger delete" data-dismiss="modal"><i class="mdi mdi-delete"></i>Block</button></div></div>
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -852,8 +1506,37 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </td>
+                                                            </td>
+                                                        </c:if>
+                                                        <c:if test = "${x.getIsBlocked() == 1}"><td>
+                                                                <div class="container d-flex justify-content-center"> <button class="btn btn-warning " data-toggle="modal" data-target="#my-modal${x.getPostID()}block"><i class="mdi mdi-border-color"></i>UnBlock</button>
+                                                                    <div id="my-modal${x.getPostID()}block" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                            <div class="modal-content border-0">
+                                                                                <div class="modal-body p-0">
+                                                                                    <div class="card border-0 p-sm-3 p-2 justify-content-center">
+                                                                                        <div class="card-header pb-0 bg-white border-0 ">
+                                                                                            <div class="row">
+                                                                                                <div class="col ml-auto"><button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div>
+                                                                                            </div>
+                                                                                            <p class="font-weight-bold mb-2"> Are you sure you wanna Unblock ${x.getPostID()} post ?</p>
+
+                                                                                        </div>
+                                                                                        <div class="card-body px-sm-4 mb-2 pt-1 pb-0">
+                                                                                            <div class="row justify-content-end no-gutters">
+                                                                                                <div class="col-auto"><button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="mdi mdi-close-box-outline"></i>Cancel</button></div>
+                                                                                                <div class="col-auto"><div class="col-auto"><button title="${x.getPostID()}" type="button" class="btn btn-warning unblock" data-dismiss="modal"><i class="mdi mdi-border-color"></i>Unblock</button></div></div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </c:if>
+
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
@@ -885,5 +1568,67 @@
             </div>
         </div>
         <%@ include file="../inc/plugins.jsp" %>
+        <script>
+            $('.update-read').click(function () {
+                let select = $(this).attr("title")
+                console.log(select)
+                $.ajax({
+                    url: "../../PostControllerAdmin?ac=updateRead",
+                    method: "POST",
+                    data: {get: select},
+                    success: function (data) {
+                        let rs = $.parseJSON(data);
+                        console.log(rs)
+
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            })
+            $('.delete').click(function () {
+                let select = $(this).attr("title")
+                console.log(select)
+                $.ajax({
+                    url: "../../PostControllerAdmin?ac=updateBlock",
+                    method: "POST",
+                    data: {get: select},
+                    success: function (data) {
+                        let rs = $.parseJSON(data);
+                        console.log(rs)
+                        if (rs) {
+                            location.reload()
+                        } else {
+                            alert("Error")
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            })
+            $('.unblock').click(function () {
+                let select = $(this).attr("title")
+                console.log(select)
+                $.ajax({
+                    url: "../../PostControllerAdmin?ac=updateUnBlock",
+                    method: "POST",
+                    data: {get: select},
+                    success: function (data) {
+                        let rs = $.parseJSON(data);
+                        console.log(rs)
+                        if (rs) {
+                            location.reload()
+                        } else {
+                            alert("Error")
+                        }
+
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            })
+        </script>
     </body>
 </html>

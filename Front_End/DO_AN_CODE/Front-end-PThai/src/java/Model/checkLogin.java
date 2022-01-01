@@ -46,7 +46,7 @@ public class checkLogin {
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT email, roleid,userid FROM tbl_user WHERE email = ? AND   password = ?");
+            PreparedStatement ps = conn.prepareStatement("SELECT email, roleid,userid,status FROM tbl_user WHERE email = ? AND   password = ? ");
             ps.setString(1, email);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
@@ -55,6 +55,7 @@ public class checkLogin {
                 acc.setUserID(rs.getString(3));
                 acc.setEmail(rs.getString(1));
                 acc.setRoleID(rs.getString(2));
+                acc.setStatus(rs.getInt(4));
             }
             rs.close();
             ps.close();

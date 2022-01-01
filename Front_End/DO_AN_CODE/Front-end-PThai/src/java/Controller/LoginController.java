@@ -47,8 +47,15 @@ public class LoginController extends HttpServlet {
                     Profile user = am.getlogin(email, password);
                     String RoleID = user.getRoleID();
                     String userID = user.getUserID();
-                    HttpSession session = request.getSession();
+                    int status = user.getStatus();
+                    if(status == 1){
+                    request.setAttribute("error","Your accout have blocked");
+                    RequestDispatcher dis = request.getRequestDispatcher("login.jsp");
+                    dis.forward(request, response);
+                    }else{
+                         HttpSession session = request.getSession();
                     session.setAttribute("User", userID);
+                    session.setAttribute("Role", RoleID);
                     
                     // chuyen ve tung trang home theo tung role khac nhau 
                     if (RoleID.equals("3")) {
@@ -63,6 +70,8 @@ public class LoginController extends HttpServlet {
 //                    dispatcher.forward(request, response);
                         response.sendRedirect("Admin/index.jsp");
                     }
+                    }
+                   
                 } else {
                     request.setAttribute("error","Password or email is invalid");
                     RequestDispatcher dis = request.getRequestDispatcher("login.jsp");

@@ -23,6 +23,22 @@
         <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
         <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
         <script>
+             <%
+            String username = (String)session.getAttribute("User");
+            String role = (String)session.getAttribute("Role");
+            if(username == null){
+                %>
+                 window.location.replace('../../login.jsp');
+                 <%
+            }else{
+                if(role.equals("3")){
+%>
+                     window.location.replace('../../login.jsp');
+                     <%
+                }
+                }
+            
+        %>
             $(document).ready(function () {
                 var now = new Date().toLocaleString();
                 $('#datePicker').val(now);

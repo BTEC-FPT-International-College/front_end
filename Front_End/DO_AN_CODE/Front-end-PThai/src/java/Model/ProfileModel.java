@@ -164,7 +164,7 @@ public class ProfileModel {
      public boolean  addAccount(String fullName, String email, String phone, 
             String password) {
 
-        String sql = "INSERT INTO `tbl_user` (`fullname`, `email`,`phone`, `password`,  `roleid`)  VALUES (?, ?, ?, ?, 3) ";
+        String sql = "INSERT INTO `tbl_user` (`fullname`, `email`,`phone`, `password`, `roleid`, `status`)  VALUES (?, ?, ?, ?, 3, 0) ";
         int result = 0;
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();

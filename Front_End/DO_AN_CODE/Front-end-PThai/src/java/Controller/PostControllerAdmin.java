@@ -118,6 +118,24 @@ public class PostControllerAdmin extends HttpServlet {
             response.setContentType("text/html");
             response.getWriter().write(listTrainee);
         }
+        if (act.equals("updateBlock")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            PostModelAdmin am = new PostModelAdmin();
+            boolean a = am.updateBlock(op);
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
+        if (act.equals("updateUnBlock")) {
+            String op = request.getParameter("get");
+            Gson json = new Gson();
+            PostModelAdmin am = new PostModelAdmin();
+            boolean a = am.updateUnBlock(op);
+            String listTrainee = json.toJson(a);
+            response.setContentType("text/html");
+            response.getWriter().write(listTrainee);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -124,50 +124,18 @@
                     <li class="#"><a href="index.jsp">HOME</a></li>
                     <li class="dropdown">
                       <a class="dropdown-toggle" data-toggle="dropdown">BUY</a>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="gallery.html">APARTMENT</a></li>
-                        <li><a href="gallery.html">PRIVATE HOUSE, STREET HOUSE</a></li>
-                        <li><a href="gallery.html">VILLA, ADJACENT HOUSES</a></li>
-                        <li><a href="gallery.html">THE GROUND</a></li>
-                        <li><a href="gallery.html">RESIDENTIAL LAND</a></li>
-                        <li><a href="gallery.html">OFFICE BUILDING</a></li>
-                        <li><a href="gallery.html">APARTMENT CONDOTEL</a></li>
-                        <li><a href="gallery.html">OFFICETEL APARTMENT</a></li>
-                        <li><a href="gallery.html">RESTAURANT</a></li>
-                        <li><a href="gallery.html">WAREHOUSE, FACTORY, KIOT</a></li>
-                        <li><a href="gallery.html">OTHER HOUSE AND LAND </a></li>
-                      </ul>
+                      
                     </li>
                     <li class="dropdown">
                       <a class="dropdown-toggle" data-toggle="dropdown">RENT</a>
                       <ul class="dropdown-menu" role="menu">
-                        <li><a href="gallery.html">APARTMENT</a></li>
-                        <li><a href="gallery.html">OFFICE</a></li>
-                        <li><a href="gallery.html">PRIVATE HOUSE, STREET HOUSE</a></li>
-                        <li><a href="gallery.html">APARTMENT CONDOTEL</a></li>
-                        <li><a href="gallery.html">OFFICETEL APARTMENT</a></li>
-                        <li><a href="gallery.html">RESTAURANT</a></li>
-                        <li><a href="gallery.html">WAREHOUSE, FACTORY</a></li>
-                        <li><a href="gallery.html">OTHER HOUSE AND LAND </a></li>
+                        
                       </ul>
                     </li>
 
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="blog-archive.html">PROJECT</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="blog-archive.html">APARTMENT</a></li>
-                            <li><a href="blog-archive.html">VILLA, ADJACENT HOUSES</a></li>
-                            <li><a href="blog-archive.html">THE GROUND</a></li>
-                            <li><a href="blog-archive.html">NEW URBAND AREAS</a></li>
-                            <li><a href="blog-archive.html">COMPLEX AREAS</a></li>
-                            <li><a href="blog-archive.html">RESORT</a></li>
-                            <li><a href="blog-archive.html">CONDOTEL</a></li>
-                            <li><a href="blog-archive.html">SOCIAL HOUSING</a></li>
-                            <li><a href="blog-archive.html">COMMERCIAL MEDIUM</a></li>
-                            <li><a href="blog-archive.html">OFFICE BUILDING</a></li>
-                            <li><a href="blog-archive.html">INDUSTRIAL AREA</a></li>
-                            <li><a href="blog-archive.html">DIFFERENT</a></li>
-                        </ul>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="aboutUs.jsp">About US</a>
+                        
                     </li>
 
                     <li style="background-color: #ac2925"><a href="newpost.jsp?id=<%=request.getParameter("id")%>" class="post-button">CREATE POST <i

@@ -30,7 +30,7 @@ public class dao {
         Connection conn = cn.getConnection();
         try {
             Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM web.tbl_post;");
+            ResultSet rs = stm.executeQuery("SELECT * FROM web.tbl_post WHere status = 0");
             while (rs.next()) {
                 Post p = new Post();
                 p.setPostId(rs.getInt(1));
@@ -137,12 +137,13 @@ public ArrayList<Comment> getCommentById(int postid) {
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
 
-        String sql = ("SELECT * FROM web.tbl_post,tbl_user \n"
-                + "where tbl_post.userid = tbl_user.userid \n"
-                + "AND Date(tbl_post.end_day) - current_date() > 0\n"
-                + "ORDER BY tbl_post.post_type DESC,\n"
-                + "tbl_post.postid DESC,\n"
-                + "tbl_user.reward_point DESC LIMIT 6 OFFSET ?");
+        String sql = ("SELECT * FROM web.tbl_post,tbl_user\n" +
+"                where tbl_post.userid = tbl_user.userid\n" +
+"                AND Date(tbl_post.end_day) - current_date() > 0 \n" +
+"                AND tbl_post.status = 0\n" +
+"                ORDER BY tbl_post.post_type DESC,\n" +
+"                tbl_post.postid DESC,\n" +
+"                tbl_user.reward_point DESC LIMIT 6 OFFSET ?");
         try {
             Statement stm = conn.createStatement();
             PreparedStatement st = conn.prepareStatement(sql);
@@ -187,6 +188,7 @@ public ArrayList<Comment> getCommentById(int postid) {
             ResultSet rs = stm.executeQuery("SELECT * FROM web.tbl_post,tbl_user \n"
                     + "where tbl_post.userid = tbl_user.userid \n"
                     + "AND Date(tbl_post.end_day) - current_date() > 0\n"
+                   + "                AND tbl_post.status = 0\n" 
                     + "ORDER BY tbl_post.post_type DESC,\n"
                     + "tbl_post.postid DESC,tbl_user.reward_point DESC LIMIT 6 ;");
             while (rs.next()) {
@@ -366,6 +368,7 @@ public ArrayList<Comment> getCommentById(int postid) {
                 + "where tbl_post.userid = tbl_user.userid\n"
                 + " and province = ? and district = ? \n"
                 + "AND Date(tbl_post.end_day) - current_date() > 0\n"
+                +"                AND tbl_post.status = 0\n" 
                 + "	  and sale_rent= ? ORDER BY tbl_post.post_type DESC,\n"
                 + "	tbl_post.postid DESC,tbl_user.reward_point DESC LIMIT 6";
         try {

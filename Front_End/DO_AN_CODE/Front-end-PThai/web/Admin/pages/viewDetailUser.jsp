@@ -21,6 +21,22 @@
         <!-- endinject -->
         <link rel="shortcut icon" href="../images/favicon.png" />
         <script>
+             <%
+            String username = (String)session.getAttribute("User");
+            String role = (String)session.getAttribute("Role");
+            if(username == null){
+                %>
+                 window.location.replace('../../login.jsp');
+                 <%
+            }else{
+                if(role.equals("3")){
+%>
+                     window.location.replace('../../login.jsp');
+                     <%
+                }
+                }
+            
+        %>
             $(document).ready(function () {
                 $("#checkS").change(function () {
                     if ($("#checkS").attr('checked') === 'checked') {

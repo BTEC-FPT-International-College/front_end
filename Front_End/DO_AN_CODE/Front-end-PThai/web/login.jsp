@@ -87,7 +87,7 @@
                     })
                     var p = {};
                     $("#sign-up").click(function(e) {
-                        
+                        e.preventDefault();
                         p.fullName = $('#namesg').val();
                         p.email = $('#emailsg').val();
                         p.phone = $('#phonesg').val();
@@ -108,8 +108,19 @@
                                     success: function (data) {
                                         let rs = $.parseJSON(data);
                                         console.log(rs)
+                                         if(rs === 3){
+                                            alert("Your email already exists.");
+                                        }
+                                        if(rs === 1){
+                                            alert("Registration failed");
+                                        }
+                                        if(rs === 2){
+                                            alert("Registration failed");
+                                        }
+                                        if ( rs === 10){
+                                        alert("You are creating a new account successfully!");
+                                        }
                                        // 
-    //                                    alert("You are creating a new account successfully!")
                                     },
                                     error: function () {
                                         alert("error");

@@ -23,18 +23,19 @@ public class PostAdmin {
     private String Create_Hour;
     private String Update_Date;
     private int PostType;
-    private String status;
+    private int status;
     private int ReadUnread;
     private String Location;
     private String Category;
     private int Priod;
     private String EndDate;
     private String Sale_rent;
+    private int isBlocked;
 
     public PostAdmin() {
     }
 
-    public PostAdmin(String PostID, String Title, String avartar, double price, double area, String Description, String phone, String Email, String UserID, int Total_View, String Create_Date, String Create_Hour, String Update_Date, int PostType, String status, int ReadUnread, String Location, String Category, int Priod, String EndDate, String Sale_rent) {
+    public PostAdmin(String PostID, String Title, String avartar, double price, double area, String Description, String phone, String Email, String UserID, int Total_View, String Create_Date, String Create_Hour, String Update_Date, int PostType, int status, int ReadUnread, String Location, String Category, int Priod, String EndDate, String Sale_rent, int isBlocked) {
         this.PostID = PostID;
         this.Title = Title;
         this.avartar = avartar;
@@ -56,6 +57,15 @@ public class PostAdmin {
         this.Priod = Priod;
         this.EndDate = EndDate;
         this.Sale_rent = Sale_rent;
+        this.isBlocked = isBlocked;
+    }
+
+    public int getIsBlocked() {
+        return isBlocked;
+    }
+
+    public void setIsBlocked(int isBlocked) {
+        this.isBlocked = isBlocked;
     }
     
     
@@ -179,11 +189,11 @@ public class PostAdmin {
         this.PostType = PostType;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

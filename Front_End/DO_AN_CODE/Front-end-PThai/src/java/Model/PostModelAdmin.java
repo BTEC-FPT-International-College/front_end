@@ -25,7 +25,7 @@ public class PostModelAdmin {
         Connection conn = cn.getConnection();
         try {
             Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT *,STR_TO_DATE(create_day,'%Y/%m/%d') FROM web.tbl_post");
+            ResultSet rs = stm.executeQuery("SELECT *,STR_TO_DATE(create_day,'%Y/%m/%d'),date(end_day) - current_date() as 'stt' FROM web.tbl_post ");
             PostAdmin acc = null;
             while (rs.next()) {
                 acc = new PostAdmin();
@@ -42,12 +42,14 @@ public class PostModelAdmin {
                 acc.setUserID(rs.getString(12));
                 acc.setCreate_Date(rs.getString(13));
                 acc.setPostType(rs.getInt(14));
-                acc.setStatus(rs.getString(15));
+               
                 acc.setReadUnread(rs.getInt(16));
                 acc.setUpdate_Date(rs.getString(17));
                 acc.setCategory(rs.getString(19));
                 acc.setPriod(rs.getInt(20));
                 acc.setEndDate(rs.getString(21));
+                 acc.setStatus(rs.getInt(30));
+                 acc.setIsBlocked(rs.getInt(15));
                 list.add(acc);
             }
             rs.close();
@@ -85,7 +87,6 @@ public class PostModelAdmin {
                 acc.setUserID(rs.getString(12));
                 acc.setCreate_Date(rs.getString(13));
                 acc.setPostType(rs.getInt(14));
-                acc.setStatus(rs.getString(15));
                 acc.setReadUnread(rs.getInt(16));
                 acc.setUpdate_Date(rs.getString(17));
                 acc.setCategory(rs.getString(19));
@@ -104,6 +105,38 @@ public class PostModelAdmin {
 
     public boolean updateRead(String id) {
         String sql = "UPDATE web.tbl_post set `read_unread` = 0 WHERE postid =?";
+        int result = 0;
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            result = ps.executeUpdate();
+            ps.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return result > 0;
+    }
+    public boolean updateBlock(String id) {
+        String sql = "UPDATE web.tbl_post set `status` = 1 WHERE postid =?";
+        int result = 0;
+        GetConnection cn = new GetConnection();
+        Connection conn = cn.getConnection();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            result = ps.executeUpdate();
+            ps.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return result > 0;
+    }
+    public boolean updateUnBlock(String id) {
+        String sql = "UPDATE web.tbl_post set `status` = 0 WHERE postid =?";
         int result = 0;
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
@@ -145,7 +178,6 @@ public class PostModelAdmin {
                 acc.setUserID(rs.getString(12));
                 acc.setCreate_Date(rs.getString(13));
                 acc.setPostType(rs.getInt(14));
-                acc.setStatus(rs.getString(15));
                 acc.setReadUnread(rs.getInt(16));
                 acc.setUpdate_Date(rs.getString(17));
                 acc.setCategory(rs.getString(19));
@@ -208,7 +240,6 @@ public class PostModelAdmin {
                 acc.setUserID(rs.getString(12));
                 acc.setCreate_Date(rs.getString(13));
                 acc.setPostType(rs.getInt(14));
-                acc.setStatus(rs.getString(15));
                 acc.setReadUnread(rs.getInt(16));
                 acc.setUpdate_Date(rs.getString(17));
                 acc.setCategory(rs.getString(19));
@@ -252,7 +283,6 @@ public class PostModelAdmin {
                 acc.setUserID(rs.getString(12));
                 acc.setCreate_Date(rs.getString(13));
                 acc.setPostType(rs.getInt(14));
-                acc.setStatus(rs.getString(15));
                 acc.setReadUnread(rs.getInt(16));
                 acc.setUpdate_Date(rs.getString(17));
                 acc.setCategory(rs.getString(19));
@@ -298,7 +328,6 @@ public class PostModelAdmin {
                 acc.setUserID(rs.getString(12));
                 acc.setCreate_Date(rs.getString(13));
                 acc.setPostType(rs.getInt(14));
-                acc.setStatus(rs.getString(15));
                 acc.setReadUnread(rs.getInt(16));
                 acc.setUpdate_Date(rs.getString(17));
                 acc.setCategory(rs.getString(19));
@@ -344,7 +373,6 @@ public class PostModelAdmin {
                 acc.setUserID(rs.getString(12));
                 acc.setCreate_Date(rs.getString(13));
                 acc.setPostType(rs.getInt(14));
-                acc.setStatus(rs.getString(15));
                 acc.setReadUnread(rs.getInt(16));
                 acc.setUpdate_Date(rs.getString(17));
                 acc.setCategory(rs.getString(19));

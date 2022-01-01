@@ -84,9 +84,11 @@ public class PostModel {
                 + "bath,\n"
                 + "userid,\n"
                 + "province_value,\n"
+                
                 + "read_unread,\n"
+                + "status,\n"
                 + "image)\n"
-                + "VALUES(?, ?, ?, ?, ?,   ?, ?, ?, ?, ?,   ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?,  ?, 1,?)";
+                + "VALUES(?, ?, ?, ?, ?,   ?, ?, ?, ?, ?,   ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?,  ?, 1,0,?)";
         int result = 0;
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
@@ -115,6 +117,7 @@ public class PostModel {
             ps.setString(20, userId);
             ps.setString(21, provinceValue);
             ps.setString(22, Image);
+            
             result = ps.executeUpdate();
             ps.close();
             conn.close();

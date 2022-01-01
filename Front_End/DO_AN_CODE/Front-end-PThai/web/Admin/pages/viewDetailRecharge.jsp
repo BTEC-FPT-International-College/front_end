@@ -32,6 +32,22 @@
         <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
 
         <script>
+             <%
+            String username = (String)session.getAttribute("User");
+            String role = (String)session.getAttribute("Role");
+            if(username == null){
+                %>
+                 window.location.replace('../../login.jsp');
+                 <%
+            }else{
+                if(role.equals("3")){
+%>
+                     window.location.replace('../../login.jsp');
+                     <%
+                }
+                }
+            
+        %>
             var d = "<%=request.getParameter("id")%>"
             var a = {}
             $(document).ready(function () {
