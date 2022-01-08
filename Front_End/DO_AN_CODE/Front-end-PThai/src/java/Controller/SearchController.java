@@ -39,8 +39,9 @@ public class SearchController extends HttpServlet {
          String districttxt = request.getParameter("diachi2");
       //   String districttxt = request.getParameter("diachi");
          String saleOrRent = request.getParameter("sale_rent");
+         String category = request.getParameter("Category");
         dao dao = new dao();
-        List<Post> list = dao.searchPost(provincetxt, districttxt, saleOrRent);
+        List<Post> list = dao.searchPost(provincetxt, districttxt, saleOrRent, category);
         PrintWriter out = response.getWriter();
         for(Post p : list)
             out.println(

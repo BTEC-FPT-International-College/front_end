@@ -138,7 +138,7 @@ public class SupModelAdmin {
     }
 
     public boolean deleteSup(String id) {
-        String sql = "DELETE FROM web.tbl_user WHERE userid = ?";
+        String sql = "DELETE * FROM web.tbl_user WHERE userid = ?";
         int result = 0;
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
@@ -256,7 +256,7 @@ public class SupModelAdmin {
         Connection conn = cn.getConnection();
         try {
             Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM web.tbl_user where roleid=2 ORDER BY create_day DESC limit 1");
+            ResultSet rs = stm.executeQuery("SELECT * FROM web.tbl_user where roleid=2 ORDER BY userid DESC limit 1");
             UserAdmin acc = null;
             while (rs.next()) {
                 acc = new UserAdmin();

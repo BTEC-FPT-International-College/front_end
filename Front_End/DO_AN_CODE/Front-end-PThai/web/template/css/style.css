@@ -665,7 +665,7 @@ img {
   display: inline;
   float: left;
   width: 100%;
-  margin-left: 20px;
+  margin-left: 0px;
 }
 #aa-advance-search .aa-advance-search-area .aa-advance-search-top .aa-single-advance-search input[type="text"] {
   margin-left: 40px;

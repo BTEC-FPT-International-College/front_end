@@ -38,10 +38,11 @@ public class Post {
     private String provinceValue;
     private String image;
     private int postCost;
+    private String category;
     
     public Post() {}
 
-    public Post(int postId, String title, String avatar, int area, int price, String saleRent, String description, String phone, String email, int totalView, String userId, String createDay, int postType, String status, int readUnread, String updateDay, String province, String district, String ward, String detailAddress, int categoryId, int priod, String endDay, int room, int bath,String provinceValue, String image, int postCost) {
+    public Post(int postId, String title, String avatar, int area, int price, String saleRent, String description, String phone, String email, int totalView, String userId, String createDay, int postType, String status, int readUnread, String updateDay, String province, String district, String ward, String detailAddress, int categoryId, int priod, String endDay, int room, int bath,String provinceValue, String image, int postCost,String category) {
         this.postId = postId;
         this.title = title;
         this.avatar = avatar;
@@ -70,6 +71,15 @@ public class Post {
         this.provinceValue =provinceValue;
         this.image = image;
         this.postCost = postCost;
+        this.category = category;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public int getPostId() {

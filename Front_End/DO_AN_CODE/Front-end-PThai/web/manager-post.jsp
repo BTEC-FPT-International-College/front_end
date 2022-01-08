@@ -222,7 +222,9 @@
                                                                 data: {get: id},
                                                                 success: function (data) {
                                                                     let o = $.parseJSON(data);
-                                                                    $('#table-update-form').DataTable();
+                                                                    $('#table-update-form').DataTable({
+                                                                        "order": [[0, "desc"]]
+                                                                    });
                                                                     var t = $('#table-update-form').DataTable();
                                                                      $.each(o, function (key, value) {
                                                                           

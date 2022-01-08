@@ -152,9 +152,13 @@
                             <li><a href="blog-archive.html">DIFFERENT</a></li>
                         </ul>
                     </li>-->
-
+                <li class="dropdown">
+                        <a class="dropdown-toggle" href="aboutUs.jsp">About US</a>
+                        
+                    </li>
                     <li style="background-color: #ac2925"><a href="newpost.jsp?id=<% out.print(username);%>" class="post-button">CREATE POST <i
                           style="color: #59abe3;" class="fa fa-pencil-square-o" aria-hidden="true"></i> </a></li>
+                          
                   </ul>
                 </div>
                 <!-- end of navbar  -->

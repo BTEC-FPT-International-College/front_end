@@ -1,16 +1,14 @@
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
-    <title>Home Property | Home</title>
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" href="./thaicss/style-profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     
     <!-- Favicon -->
     <link rel="shortcut icon" href="img/iconbtec.png" type="image/x-icon">
-
     <!-- Font awesome -->
     <link href="css/font-awesome.css" rel="stylesheet">
     <!-- Bootstrap -->
@@ -22,140 +20,64 @@
     <!-- Fancybox slider -->
     <link rel="stylesheet" href="css/jquery.fancybox.css" type="text/css" media="screen" /> 
     <!-- Theme color -->
-    <link id="switcher" href="css/theme-color/default-theme.css" rel="stylesheet">     
+    <link id="switcher" href="css/theme-color/default-theme.css" rel="stylesheet">  
+    
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Main style sheet -->
-    <link href="thaicss/aboutus.css" rel="stylesheet">    
     <link href="css/style.css" rel="stylesheet">    
+    <link href="./thaicss/aboutus.css" rel="stylesheet">
+    
+    <!--aos library--> 
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
    
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>    
     <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     
+</head>
+<body>
+    
+     <%
+      String username = (String) session.getAttribute("User");
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-  </head>
-  <body class="aa-price-range">  
-  <!-- Pre Loader -->
-  <div id="aa-preloader-area">
-    <div class="pulse"></div>
-  </div>
-  <!-- SCROLL TOP BUTTON -->
-    <a class="scrollToTop" href="#"><i class="fa fa-angle-double-up"></i></a>
-  <!-- END SCROLL TOP BUTTON -->
-
-  <!-- Start header section -->
-  <header id="aa-header">  
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="aa-header-area">
-            <div class="row">
-              <div class="col-md-6 col-sm-6 col-xs-6">
-                <div class="aa-header-left">
-                  <div class="aa-telephone-no">
-                    <span class="fa fa-phone"></span>
-                    1-900-523-3564
-                  </div>
-                  <div class="aa-email hidden-xs">
-                    <span class="fa fa-envelope-o"></span> info@markups.com
-                  </div>
-                </div>              
-              </div>
-              <div class="col-md-6 col-sm-6 col-xs-6">
-                <div class="aa-header-right">
-                  <a href="register.html" class="aa-register">Register</a>
-                  <a href="signin.html" class="aa-login">Login</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-  <!-- End header section -->
-
-  <!-- Start menu section -->
-  <section id="aa-menu-area">
-    <nav class="navbar navbar-default main-navbar" role="navigation">  
-      <div class="container">
-        <div class="navbar-header">
-          <!-- FOR MOBILE VIEW COLLAPSED BUTTON -->
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <!-- LOGO -->                                               
-          <!-- Text based logo -->
-           <a class="navbar-brand aa-logo" href="index.html"> Home <span>Property</span></a>
-           <!-- Image based logo -->
-           <!-- <a class="navbar-brand aa-logo-img" href="index.html"><img src="img/logo.png" alt="logo"></a> -->
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul id="top-menu" class="nav navbar-nav navbar-right aa-main-nav">
-            <li class="active"><a href="index.html">HOME</a></li>
-             <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="properties.html">PROPERTIES <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">                
-                <li><a href="properties.html">PROPERTIES</a></li>
-                <li><a href="properties-detail.html">PROPERTIES DETAIL</a></li>                                            
-              </ul>
-            </li>
-            <li><a href="gallery.html">GALLERY</a></li>                                         
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="blog-archive.html">BLOG <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">                
-                <li><a href="blog-archive.html">BLOG</a></li>
-                <li><a href="blog-single.html">BLOG DETAILS</a></li>                                            
-              </ul>
-            </li>
-            <li><a href="contact.html">CONTACT</a></li>
-           <li><a href="404.html">404 PAGE</a></li>
-          </ul>                            
-        </div><!--/.nav-collapse -->       
-      </div>          
-    </nav> 
-  </section>
-  <!-- End menu section -->
-
-  <!-- Start slider  -->
+      if (username != null) {%>
+        <%@include file="header-section-home.jsp" %>
+        <%
+        } else if (username == null) {
+        %>
+        <%@include file="common/header.jsp" %>
+        <%
+            }
+        %>
+    <!-- Start slider  -->
   <section id="aa-slider">
     <div class="aa-slider-area"> 
       <!-- Top slider -->
-      <div class="aa-top-slider">
-        <!-- Top slider single slide -->
-        <div class="aa-top-slider-single">
-          <img src="./about-us-img/background.jpg" alt="img">
-          <!-- Top slider content -->
-          <div class="aa-top-slider-content">
-            <span class="aa-top-slider-catg">BTECLAND</span>
-            <h2 class="aa-top-slider-title">TEAM WORK</h2>
-            <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>Hanoi (Vietnam)</p>
-            <span class="aa-top-slider-off">We build a professional website system with useful features for users</span>
-            <p class="aa-top-slider-price">$$$ Estimate</p>
-            <a href="#" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
+        <div class="aa-top-slider">
+          <!-- Top slider single slide -->
+          <div class="aa-top-slider-single">
+            <img src="img/about-us-img/background.jpg" alt="img">
+            <!-- Top slider content -->
+            <div class="aa-top-slider-content">
+              <span class="aa-top-slider-catg">BTECLAND</span>
+              <h2 class="aa-top-slider-title">TEAM WORK</h2>
+              <p class="aa-top-slider-location"><i class="fa fa-map-marker"></i>Hanoi (Vietnam)</p>
+              <span class="aa-top-slider-off">We build a professional website system with useful features for users</span>
+              <p class="aa-top-slider-price">$$$ Estimate</p>
+              <a href="#" class="aa-top-slider-btn">Read More <span class="fa fa-angle-double-right"></span></a>
+            </div>
+            <!-- / Top slider content -->
           </div>
-          <!-- / Top slider content -->
+          <!-- / Top slider single slide -->
+
         </div>
-        <!-- / Top slider single slide -->
-        
-      </div>
     </div>
   </section>
   <!-- End slider  -->
-
-  
-
   <!-- About us -->
   <section id="aa-about-us">
     <div class="container">
@@ -165,7 +87,12 @@
             <div class="row">
               <div class="col-md-5">
                 <div class="aa-about-us-left">
-                  <img src="about-us-img/laudai.jpg" alt="image">
+                  
+                  <div data-aos="fade-right"
+                    data-aos-offset="300"
+                    data-aos-easing="ease-in-sine">
+                        <img src="about-us-img/laudai.jpg" alt="image">
+                  </div>
                 </div>
               </div>
               <div class="col-md-7">
@@ -342,72 +269,89 @@
             <div class="aa-agents-content">
               <ul class="aa-agents-slider">
                 <li>
-                  <div class="aa-single-agents">
-                    <div class="aa-agents-img">
-                      <img src="about-us-img/mang.jpg" alt="agent member image">
+                    <div data-aos="fade-right"
+                        data-aos-offset="400"
+                        data-aos-easing="ease-in-sine">
+                        <div class="aa-single-agents">
+                            <div class="aa-agents-img">
+                              <img src="about-us-img/mang.jpg" alt="agent member image">
+                            </div>
+                            <div class="aa-agetns-info">
+                              <h4><a href="#">Ba Mang</a></h4>
+                              <span>Team Leader</span>
+                              <div class="aa-agent-social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                              </div>
+                            </div>
+                         </div>
                     </div>
-                    <div class="aa-agetns-info">
-                      <h4><a href="#">Ba Mang</a></h4>
-                      <span>Team Leader</span>
-                      <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                </li>
+                <li>
+                    <div data-aos="fade-right"
+                    data-aos-offset="300"
+                    data-aos-easing="ease-in-sine">
+                        <div class="aa-single-agents">
+                            <div class="aa-agents-img">
+                              <img src="about-us-img/manh.jpg" alt="agent member image">
+                            </div>
+                            <div class="aa-agetns-info">
+                              <h4><a href="#">Manh Tran</a></h4>
+                              <span>Coder</span>
+                              <div class="aa-agent-social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                              </div>
+                            </div>
+                         </div>
+                    </div>
+                  
+                </li>
+                <li>
+                  <div data-aos="fade-left"
+                    data-aos-offset="300"
+                    data-aos-easing="ease-in-sine">
+                      <div class="aa-single-agents">
+                        <div class="aa-agents-img">
+                          <img src="about-us-img/linh.jpg" alt="agent member image">
+                        </div>
+                        <div class="aa-agetns-info">
+                          <h4><a href="#">Yen Linh</a></h4>
+                          <span>Designer</span>
+                          <div class="aa-agent-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-linkedin"></i></a>
+                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                          </div>
+                        </div>
                       </div>
-                    </div>
                   </div>
                 </li>
                 <li>
-                  <div class="aa-single-agents">
-                    <div class="aa-agents-img">
-                      <img src="about-us-img/manh.jpg" alt="agent member image">
+                    <div data-aos="fade-left"
+                    data-aos-offset="400"
+                    data-aos-easing="ease-in-sine">
+                        <div class="aa-single-agents">
+                          <div class="aa-agents-img">
+                            <img src="about-us-img/thai.jpg" alt="agent member image">
+                          </div>
+                          <div class="aa-agetns-info">
+                            <h4><a href="#">Phan Thai</a></h4>
+                            <span>Frontend Developer</span>
+                            <div class="aa-agent-social">
+                              <a href="#"><i class="fa fa-facebook"></i></a>
+                              <a href="#"><i class="fa fa-twitter"></i></a>
+                              <a href="#"><i class="fa fa-linkedin"></i></a>
+                              <a href="#"><i class="fa fa-google-plus"></i></a>
+                            </div>
+                          </div>
+                        </div>
                     </div>
-                    <div class="aa-agetns-info">
-                      <h4><a href="#">Manh Tran</a></h4>
-                      <span>Coder</span>
-                      <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="aa-single-agents">
-                    <div class="aa-agents-img">
-                      <img src="about-us-img/linh.jpg" alt="agent member image">
-                    </div>
-                    <div class="aa-agetns-info">
-                      <h4><a href="#">Yen Linh</a></h4>
-                      <span>Designer</span>
-                      <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="aa-single-agents">
-                    <div class="aa-agents-img">
-                      <img src="about-us-img/thai.jpg" alt="agent member image">
-                    </div>
-                    <div class="aa-agetns-info">
-                      <h4><a href="#">Phan Thai</a></h4>
-                      <span>Frontend Developer</span>
-                      <div class="aa-agent-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                        <a href="#"><i class="fa fa-google-plus"></i></a>
-                      </div>
-                    </div>
-                  </div>
                 </li>
               </ul>
             </div>
@@ -548,62 +492,28 @@
     </div>
   </section>
   <!-- / Client brand -->
+    
+    <!--Footer-->
+    <%@ include file="./footer.jsp" %>
+    <script>
+            AOS.init();
+    </script>
+    <!-- jQuery library -->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.js"></script>
+    <!-- slick slider -->
+    <script type="text/javascript" src="js/slick.js"></script>
+    <!-- Price picker slider -->
+    <script type="text/javascript" src="js/nouislider.js"></script>
+    <!-- mixit slider -->
+    <script type="text/javascript" src="js/jquery.mixitup.js"></script>
+    <!-- Add fancyBox -->
+    <script type="text/javascript" src="js/jquery.fancybox.pack.js"></script>
+    <!-- Custom js -->
+    <script src="js/custom.js"></script>
 
- 
-  <!-- Footer -->
-  <footer id="aa-footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-        <div class="aa-footer-area">
-          <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="aa-footer-left">
-               <p>Designed by <a rel="nofollow" href="http://www.markups.io/">MarkUps.io</a></p>
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-              <div class="aa-footer-middle">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-google-plus"></i></a>
-                <a href="#"><i class="fa fa-youtube"></i></a>
-              </div>
-            </div>
-            <div class="col-md-6 col-sm-12 col-xs-12">
-              <div class="aa-footer-right">
-                <a href="#">Home</a>
-                <a href="#">Support</a>
-                <a href="#">License</a>
-                <a href="#">FAQ</a>
-                <a href="#">Privacy & Term</a>
-              </div>
-            </div>            
-          </div>
-        </div>
-      </div>
-      </div>
-    </div>
-  </footer>
-  <!-- / Footer -->
-
- 
-  
-  <!-- jQuery library -->
-  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
-  <script src="js/jquery.min.js"></script>   
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="js/bootstrap.js"></script>   
-  <!-- slick slider -->
-  <script type="text/javascript" src="js/slick.js"></script>
-  <!-- Price picker slider -->
-  <script type="text/javascript" src="js/nouislider.js"></script>
-   <!-- mixit slider -->
-  <script type="text/javascript" src="js/jquery.mixitup.js"></script>
-  <!-- Add fancyBox -->        
-  <script type="text/javascript" src="js/jquery.fancybox.pack.js"></script>
-  <!-- Custom js -->
-  <script src="js/custom.js"></script> 
-
-  </body>
+    
+</body>
 </html>

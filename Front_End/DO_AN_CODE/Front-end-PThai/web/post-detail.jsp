@@ -180,7 +180,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="aa-properties-single-sidebar">
+<!--                            <div class="aa-properties-single-sidebar">
                                 <h3>Properties Search</h3>
                                 <form action="">
                                     <div class="aa-single-advance-search">
@@ -233,7 +233,7 @@
                                         <input type="submit" value="Search" class="aa-search-btn">
                                     </div>
                                 </form>
-                            </div>
+                            </div>-->
                             <!-- Start Single properties sidebar -->
                             <div style="font-weight: 600;">Popular Properties:</div>
                             <div class="aa-properties-single-sidebar" id="popularProperties">
@@ -333,7 +333,7 @@
                                                     });
 
                                                     function repaleAvatar() {
-                                                        var imgPath = $('.imgSlider').prop('src');
+                                                        var imgPath = $('.imgSlider').attr('src');
                                                         console.log("success " + imgPath)
                                                         $('#avatar').attr('src', imgPath);
 

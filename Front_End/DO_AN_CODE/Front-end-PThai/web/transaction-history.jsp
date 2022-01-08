@@ -73,7 +73,7 @@ window.location.replace('login.jsp')
                             <div class="col l-6 sm-6 choose-tran"><a href="transaction-history.jsp?id=<%=request.getParameter("id")%>">Transaction History</a></div>
                             <div class="col l-6 sm-6 choose-recharge"><a href="recharge-history.jsp?id=<%=request.getParameter("id")%>">Recharge History</a></div>  
                         </div>
-                        <div class="row" style="margin-bottom: 12px;">
+                   <!--     <div class="row" style="margin-bottom: 12px;">
                             <div class="col l-4" style="padding-left: 16px;">
                                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search hear..." class="form-control" >
                             </div>
@@ -88,6 +88,7 @@ window.location.replace('login.jsp')
                                 <h4 id="button-search"><i class="fas fa-search"></i></h4>
                             </div>
                         </div>
+                        -->
                         <table class="table table-bordered" id="tab1">
                             <thead>
                                 <tr>

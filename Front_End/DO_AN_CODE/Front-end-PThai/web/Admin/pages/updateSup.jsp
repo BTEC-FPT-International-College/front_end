@@ -44,7 +44,7 @@
                 $('#datePicker').val(now);
                 $("#select").on("mouseover", function (event) {
                     $.ajax({
-                        url: "../SupController?ac=viewCategory",
+                        url: "../../SupControllerAdmin?ac=viewCategory",
                         method: "GET",
                         success: function (data) {
                             let rs = $.parseJSON(data);
@@ -62,7 +62,7 @@
                 let select = $('#getid').text();
                 console.log(select)
                 $.ajax({
-                    url: "../SupController?ac=viewSup",
+                    url: "../../SupControllerAdmin?ac=viewSup",
                     method: "POST",
                     data: {get: select},
                     success: function (data) {
@@ -150,7 +150,7 @@
                     console.log(da)
                     console.log(cate)
                     $.ajax({
-                        url: "../SupController?ac=update",
+                        url: "../../SupController?ac=update",
                         method: "POST",
                         data: {get: da},
                         success: function (data) {
@@ -158,7 +158,7 @@
                             console.log(rs)
                             if (rs) {
                                 $.ajax({
-                                    url: "../SupController?ac=updatetoCate",
+                                    url: "../../SupControllerAdmin?ac=updatetoCate",
                                     method: "POST",
                                     data: {get: cate},
                                     success: function (data) {

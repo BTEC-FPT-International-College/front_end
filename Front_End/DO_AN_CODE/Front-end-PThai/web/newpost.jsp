@@ -259,10 +259,9 @@
                       inline: true,
                       target: '#drag-drop-area'
                     })
-                    .use(Uppy.Tus, {endpoint: 'https://master.tus.io/files/'}) //you can put upload URL here, where you want to upload images
+                    .use(Uppy.Tus, {endpoint: 'https://tusd.tusdemo.net/files/'}) //you can put upload URL here, where you want to upload images
 
                   uppy.on('complete', (result) => {
-                    console.log('Upload complete! We?Ze files:', result.successful)
                     urlImage = result.successful[0].uploadURL
 //                    console.log(urlImage+"thídfasdfsdf")
                     result.successful.forEach(function(value, index){

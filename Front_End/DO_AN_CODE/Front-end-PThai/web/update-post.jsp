@@ -456,6 +456,11 @@ var localpicker = new LocalPicker({
                                 text: o[0].province,
                                 selected: true
                             }));
+                             $('#categoryid').append($('<option>', {
+                                value: o[0].categoryId,
+                                text: o[0].category,
+                                selected: true
+                            }));
 
 
                             $('#district').append($('<option>', {

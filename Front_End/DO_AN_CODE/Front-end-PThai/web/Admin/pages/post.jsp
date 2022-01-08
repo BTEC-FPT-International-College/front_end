@@ -1469,7 +1469,7 @@
                                                         </c:if>    
 
                                                         <c:if test = "${x.getStatus() < 0}"><td style="background-color: #f57a7a">
-                                                                <c:out  value="Het Han"/>
+                                                                <c:out  value="Expired"/>
                                                             </td>
                                                         </c:if>
                                                         <td class="${x.getReadUnread()}a"><label class="badge ${x.getReadUnread()}">${x.getReadUnread()}</label></td>

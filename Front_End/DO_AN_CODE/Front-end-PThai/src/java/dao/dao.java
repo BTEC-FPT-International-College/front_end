@@ -66,7 +66,7 @@ public class dao {
         ArrayList<Post> list = new ArrayList<>();
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
-        String sql = "SELECT * FROM web.tbl_post WHERE postid = ?";
+        String sql = "SELECT * FROM web.tbl_post, web.tbl_category WHERE postid = ? and tbl_post.categoryid = tbl_category.categoryid";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setInt(1, postid);
@@ -94,6 +94,7 @@ public class dao {
                 p.setDetailAddress(rs.getString(26));
                 p.setImage(rs.getString(4));
                 p.setCategoryId(rs.getInt(19));
+                p.setCategory(rs.getString(30));
 
                 list.add(p);
             }
@@ -360,7 +361,7 @@ public ArrayList<Comment> getCommentById(int postid) {
         return result > 0;
     }
 
-    public List<Post> searchPost(String provincetxt, String districttxt, String saleOrRent) {
+    public List<Post> searchPost(String provincetxt, String districttxt, String saleOrRent, String category) {
         ArrayList<Post> list = new ArrayList<>();
         GetConnection cn = new GetConnection();
         Connection conn = cn.getConnection();
@@ -369,13 +370,14 @@ public ArrayList<Comment> getCommentById(int postid) {
                 + " and province = ? and district = ? \n"
                 + "AND Date(tbl_post.end_day) - current_date() > 0\n"
                 +"                AND tbl_post.status = 0\n" 
-                + "	  and sale_rent= ? ORDER BY tbl_post.post_type DESC,\n"
+                + "	  and sale_rent= ? and categoryid = ? ORDER BY tbl_post.post_type DESC,\n"
                 + "	tbl_post.postid DESC,tbl_user.reward_point DESC LIMIT 6";
         try {
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, provincetxt);
             st.setString(2, districttxt);
             st.setString(3, saleOrRent);
+            st.setString(4, category);
 
             ResultSet rs = st.executeQuery();
             while (rs.next()) {

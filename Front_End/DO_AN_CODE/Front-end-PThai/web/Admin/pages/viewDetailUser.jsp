@@ -21,7 +21,7 @@
         <!-- endinject -->
         <link rel="shortcut icon" href="../images/favicon.png" />
         <script>
-             <%
+            <%
             String username = (String)session.getAttribute("User");
             String role = (String)session.getAttribute("Role");
             if(username == null){
@@ -209,11 +209,35 @@
                         alert("error");
                     }
                 });
-                
+                $(".delete[target='_blank']").click(function () {
+                    let select = $(this).attr("title")
+                    console.log(select)
+                    $.ajax({
+                        url: "../../SupControllerAdmin?ac=del",
+                        method: "POST",
+                        data: {get: select},
+                        success: function (data) {
+                            let obj = $.parseJSON(data);
+                            console.log(obj)
+                            if (obj) {
+                                $("#show").show();
+                                setTimeout(function () {
+                                    location.replace("user.jsp")
+                                }, 1000);
+                            } else {
+                                $("#error").show();
+                            }
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    });
+                })
             });
         </script>
     </head>
     <body>
+               
         <div class="container-scroller">
             <%@ include file="../inc/nvarbar.jsp" %>
             <%@ include file="../inc/sidebar.jsp" %>
@@ -339,7 +363,7 @@
                                     </label>
                                 </div>
                             </div>
-                            <div style="padding-bottom: 50px" class="text-right"><button class="btn btn-danger profile-button" type="button">Delete</button></div>
+                            <div style="padding-bottom: 50px" class="text-right"><button class="delete btn btn-danger profile-button" type="button">Delete</button></div>
                         </div>
                     </div>
             </div>

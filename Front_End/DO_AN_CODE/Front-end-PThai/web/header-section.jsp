@@ -134,7 +134,7 @@
                     </li>
 
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="aboutUs.jsp">About US</a>
+                        <a class="dropdown-toggle" href="aboutUs.jsp">About US</a>
                         
                     </li>
 

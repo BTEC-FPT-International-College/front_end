@@ -191,7 +191,7 @@
             <div class="form">
                 <div class="aa-advance-search-top">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-3" style="width: 23%">
 
                             <div class="aa-single-advance-search">
                                 <select class="form-control" id="province" name="ls_province"></select>
@@ -219,8 +219,26 @@
                                 </select>
                             </div>
                         </div>
+                        
+                        <div class="col-md-3 search-type">
+                            <div class="aa-single-advance-search">
+                                 <select class="form-control" id="categoryid">
+                            <option value="1">Apartment</option>
+                            <option value="2">Private house, street house</option>
+                            <option value="3">Villa, adjacent houses</option>
+                            <option value="4">The ground</option>
+                            <option value="5">Residential land</option>
+                            <option value="6">Office building</option>
+                            <option value="7">Apartment condotel</option>
+                            <option value="8">Officetel apartment</option>
+                            <option value="9">Restaurant</option>
+                            <option value="10">Warehouse, factory, kiot</option>
+                            <option value="11">Other house and land</option>
+                        </select> 
+                            </div>
+                        </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="aa-single-advance-search">
                                 <button onclick="rearch_post()" class="aa-search-btn">Search</button>
                             </div>
@@ -441,6 +459,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                         var district = $('#district option:selected').text();
                         var provinceid = $('#province option:selected').val();
                         var saleRent = $('#post_type option:selected').val();
+                        var category = $('#categoryid option:selected').val();
 
                         $.ajax({
                             url: "SearchController",
@@ -449,7 +468,8 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                                 diachi: province,
                                 diachi2: district,
                                 diavhivalue: provinceid,
-                                sale_rent: saleRent
+                                sale_rent: saleRent,
+                                Category: category
                             },
                             success: function (data) {
                                 var row = document.getElementById("content");
